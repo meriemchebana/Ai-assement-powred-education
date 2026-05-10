@@ -1,7 +1,0 @@
-docling
-instructor
-openai>=1.0
-pydantic>=2.0
-# Optional providers (install the one you use):
-# anthropic          # for Claude
-# google-generativeai  # for Gemini
