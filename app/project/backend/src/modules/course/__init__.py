@@ -1,0 +1,1 @@
+from src.modules.course.model import Course

@@ -1,0 +1,203 @@
+\begin{thebibliography}{23}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi: #1}\else
+  \providecommand{\doi}{doi: \begingroup \urlstyle{rm}\Url}\fi
+
+\bibitem[Anderson et~al.(2001)Anderson, Krathwohl, et~al.]{bloom2001}
+L.~W. Anderson, D.~R. Krathwohl, et~al.
+\newblock \emph{A Taxonomy for Learning, Teaching, and Assessing: A Revision of
+  Bloom's Taxonomy of Educational Objectives}.
+\newblock Longman, New York, 2001.
+
+\bibitem[Antoun et~al.(2020)Antoun, Baly, and Hajj]{antoun2020arabert}
+Wissam Antoun, Fady Baly, and Hazem Hajj.
+\newblock {AraBERT}: Transformer-based model for arabic language understanding.
+\newblock In \emph{Proc.\ LREC Workshop on Language Models and their
+  Applications}, pages 9--15, 2020.
+
+\bibitem[{Artifex Software}(2023)]{pymupdf2023}
+{Artifex Software}.
+\newblock {PyMuPDF}: {Python} bindings for {MuPDF}.
+\newblock \url{https://pymupdf.readthedocs.io}, 2023.
+
+\bibitem[Auer et~al.(2024)Auer, Dolfi, Fransen, Hartmann, Kumar, Lysak, Nassar,
+  Staar, and Thamasudheeran]{docling2024}
+Christoph Auer, Maxime Dolfi, Annika Fransen, Jean-Marc Hartmann, P.~H. Kumar,
+  Dmitry Lysak, Nikos Nassar, Peter Staar, and Yusuf Thamasudheeran.
+\newblock Docling: An efficient open-source toolkit for {AI}-based document
+  conversion.
+\newblock \emph{arXiv preprint arXiv:2408.09869}, 2024.
+
+\bibitem[Cormack et~al.(2009)Cormack, Clarke, and Buettcher]{cormack2009rrf}
+Gordon~V. Cormack, Charles L~A Clarke, and Stefan Buettcher.
+\newblock Reciprocal rank fusion outperforms condorcet and individual rank
+  learning methods.
+\newblock In \emph{Proceedings of the 32nd International ACM SIGIR Conference
+  on Research and Development in Information Retrieval}, SIGIR '09, page
+  758–759, New York, NY, USA, 2009. Association for Computing Machinery.
+\newblock ISBN 9781605584836.
+\newblock \doi{10.1145/1571941.1572114}.
+\newblock URL \url{https://doi.org/10.1145/1571941.1572114}.
+
+\bibitem[DeepSeek-AI et~al.(2024)DeepSeek-AI, Liu, Feng, Wang, Wang, Liu, Zhao,
+  Dengr, Ruan, Dai, Guo, Yang, Chen, Ji, Li, Lin, Luo, Hao, Chen, Li, Zhang,
+  Xu, Yang, Zhang, Ding, Xin, Gao, Li, Qu, Cai, Liang, Guo, Ni, Li, Chen, Yuan,
+  Qiu, Song, Dong, Gao, Guan, Wang, Zhang, Xu, Xia, Zhao, Zhang, Li, Wang,
+  Zhang, Zhang, Tang, Li, Tian, Huang, Wang, Zhang, Zhu, Chen, Du, Chen, Jin,
+  Ge, Pan, Xu, Chen, Li, Lu, Zhou, Chen, Wu, Ye, Ma, Wang, Zhou, Yu, Zhou,
+  Zheng, Wang, Pei, Yuan, Sun, Xiao, Zeng, An, Liu, Liang, Gao, Zhang, Li, Jin,
+  Wang, Bi, Liu, Wang, Shen, Chen, Chen, Nie, Sun, Wang, Liu, Xie, Yu, Song,
+  Zhou, Yang, Lu, Su, Wu, Li, Wei, Zhu, Xu, Huang, Li, Zhao, Sun, Li, Wang,
+  Zheng, Zhang, Xiong, Zhao, He, Tang, Piao, Dong, Tan, Liu, Wang, Guo, Zhu,
+  Wang, Zou, Zha, Ma, Yan, You, Liu, Ren, Ren, Sha, Fu, Huang, Zhang, Xie, Hao,
+  Shao, Wen, Xu, Zhang, Li, Wang, Gu, Li, and Xie]{deepseek2024}
+DeepSeek-AI, Aixin Liu, Bei Feng, Bin Wang, Bingxuan Wang, Bo~Liu, Chenggang
+  Zhao, Chengqi Dengr, Chong Ruan, Damai Dai, Daya Guo, Dejian Yang, Deli Chen,
+  Dongjie Ji, Erhang Li, Fangyun Lin, Fuli Luo, Guangbo Hao, Guanting Chen,
+  Guowei Li, H.~Zhang, Hanwei Xu, Hao Yang, Haowei Zhang, Honghui Ding, Huajian
+  Xin, Huazuo Gao, Hui Li, Hui Qu, J.~L. Cai, Jian Liang, Jianzhong Guo, Jiaqi
+  Ni, Jiashi Li, Jin Chen, Jingyang Yuan, Junjie Qiu, Junxiao Song, Kai Dong,
+  Kaige Gao, Kang Guan, Lean Wang, Lecong Zhang, Lei Xu, Leyi Xia, Liang Zhao,
+  Liyue Zhang, Meng Li, Miaojun Wang, Mingchuan Zhang, Minghua Zhang, Minghui
+  Tang, Mingming Li, Ning Tian, Panpan Huang, Peiyi Wang, Peng Zhang, Qihao
+  Zhu, Qinyu Chen, Qiushi Du, R.~J. Chen, R.~L. Jin, Ruiqi Ge, Ruizhe Pan,
+  Runxin Xu, Ruyi Chen, S.~S. Li, Shanghao Lu, Shangyan Zhou, Shanhuang Chen,
+  Shaoqing Wu, Shengfeng Ye, Shirong Ma, Shiyu Wang, Shuang Zhou, Shuiping Yu,
+  Shunfeng Zhou, Size Zheng, T.~Wang, Tian Pei, Tian Yuan, Tianyu Sun, W.~L.
+  Xiao, Wangding Zeng, Wei An, Wen Liu, Wenfeng Liang, Wenjun Gao, Wentao
+  Zhang, X.~Q. Li, Xiangyue Jin, Xianzu Wang, Xiao Bi, Xiaodong Liu, Xiaohan
+  Wang, Xiaojin Shen, Xiaokang Chen, Xiaosha Chen, Xiaotao Nie, Xiaowen Sun,
+  Xiaoxiang Wang, Xin Liu, Xin Xie, Xingkai Yu, Xinnan Song, Xinyi Zhou, Xinyu
+  Yang, Xuan Lu, Xuecheng Su, Y.~Wu, Y.~K. Li, Y.~X. Wei, Y.~X. Zhu, Yanhong
+  Xu, Yanping Huang, Yao Li, Yao Zhao, Yaofeng Sun, Yaohui Li, Yaohui Wang,
+  Yi~Zheng, Yichao Zhang, Yiliang Xiong, Yilong Zhao, Ying He, Ying Tang, Yishi
+  Piao, Yixin Dong, Yixuan Tan, Yiyuan Liu, Yongji Wang, Yongqiang Guo, Yuchen
+  Zhu, Yuduan Wang, Yuheng Zou, Yukun Zha, Yunxian Ma, Yuting Yan, Yuxiang You,
+  Yuxuan Liu, Z.~Z. Ren, Zehui Ren, Zhangli Sha, Zhe Fu, Zhen Huang, Zhen
+  Zhang, Zhenda Xie, Zhewen Hao, Zhihong Shao, Zhiniu Wen, Zhipeng Xu, Zhongyu
+  Zhang, Zhuoshu Li, Zihan Wang, Zihui Gu, Zilin Li, and Ziwei Xie.
+\newblock Deepseek-v2: A strong, economical, and efficient mixture-of-experts
+  language model.
+\newblock 2024.
+\newblock URL \url{https://arxiv.org/abs/2405.04434}.
+
+\bibitem[{Google DeepMind}(2024)]{google2024gemini}
+{Google DeepMind}.
+\newblock Gemini 2.0 flash technical report.
+\newblock Technical report, Google DeepMind, 2024.
+
+\bibitem[Heilman and Smith(2010)]{heilman2010good}
+Michael Heilman and Noah~A. Smith.
+\newblock Good question! statistical ranking for question generation.
+\newblock In \emph{Proc.\ HLT-NAACL}, pages 609--617, 2010.
+
+\bibitem[Isley et~al.(2025)Isley, Gilbert, Kassos, Kocher, Nie, Brunskill,
+  Domingue, Hofman, Legewie, Svoronos, Tuminelli, and Goel]{isley2025quality}
+C.~Isley, J.~Gilbert, E.~Kassos, M.~Kocher, A.~Nie, E.~Brunskill, B.~Domingue,
+  J.~Hofman, J.~Legewie, T.~Svoronos, C.~Tuminelli, and S.~Goel.
+\newblock Assessing the quality of {AI}-generated exams: A large-scale field
+  study.
+\newblock \emph{arXiv preprint arXiv:2508.08314}, 2025.
+
+\bibitem[Johnson et~al.(2017)Johnson, Douze, and Jégou]{faiss2019}
+Jeff Johnson, Matthijs Douze, and Hervé Jégou.
+\newblock Billion-scale similarity search with gpus.
+\newblock 2017.
+\newblock URL \url{https://arxiv.org/abs/1702.08734}.
+
+\bibitem[Kane(2024)]{pgvector2024}
+Andrew Kane.
+\newblock pgvector: Open-source vector similarity search for {PostgreSQL}.
+\newblock \url{https://github.com/pgvector/pgvector}, 2024.
+
+\bibitem[Lewis et~al.(2021)Lewis, Perez, Piktus, Petroni, Karpukhin, Goyal,
+  Küttler, Lewis, tau Yih, Rocktäschel, Riedel, and Kiela]{lewis2020rag}
+Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir
+  Karpukhin, Naman Goyal, Heinrich Küttler, Mike Lewis, Wen tau Yih, Tim
+  Rocktäschel, Sebastian Riedel, and Douwe Kiela.
+\newblock Retrieval-augmented generation for knowledge-intensive nlp tasks.
+\newblock 2021.
+\newblock URL \url{https://arxiv.org/abs/2005.11401}.
+
+\bibitem[Liu(2023)]{instructor2023}
+Jason Liu.
+\newblock Instructor: Structured outputs for {LLMs}.
+\newblock \url{https://github.com/instructor-ai/instructor}, 2023.
+
+\bibitem[Ma et~al.(2021)Ma, Sun, Pradeep, and Lin]{ma2021replication}
+Xueguang Ma, Kai Sun, Ronak Pradeep, and Jimmy Lin.
+\newblock A replication study of dense passage retriever.
+\newblock 2021.
+\newblock URL \url{https://arxiv.org/abs/2104.05740}.
+
+\bibitem[Meissner et~al.(2024)Meissner, Pögelt, Ihsberner, Grüttmüller,
+  Tornack, Thor, Pengel, Wollersheim, and Hardt]{meissner2024itemforge}
+Roy Meissner, Alexander Pögelt, Katja Ihsberner, Martin Grüttmüller, Silvana
+  Tornack, Andreas Thor, Norbert Pengel, Heinz-Werner Wollersheim, and Wolfram
+  Hardt.
+\newblock Llm-generated competence-based e-assessment items for higher
+  education mathematics: methodology and evaluation.
+\newblock \emph{Frontiers in Education}, Volume 9 - 2024, 2024.
+\newblock ISSN 2504-284X.
+\newblock \doi{10.3389/feduc.2024.1427502}.
+\newblock URL
+  \url{https://www.frontiersin.org/journals/education/articles/10.3389/feduc.2024.1427502}.
+
+\bibitem[Morris et~al.(2024)Morris, Choi, Holmes, Gupta, and
+  Crossley]{morris2024aqg}
+Wesley Morris, Joon~Sik Choi, Logan Holmes, Vikesh Gupta, and Scott Crossley.
+\newblock Automatic question generation and constructed response scoring in
+  intelligent texts.
+\newblock In \emph{Proc.\ L3MNGET Workshop}, 2024.
+
+\bibitem[Mucciaccia et~al.(2025)Mucciaccia, Paix{\~a}o, Mutz, De~Souza, Badue,
+  and Oliveira-Santos]{mucciaccia2025mcq}
+S.~S. Mucciaccia, T.~M. Paix{\~a}o, F.~Mutz, A.~F. De~Souza, C.~S. Badue, and
+  T.~Oliveira-Santos.
+\newblock Automatic multiple-choice question generation and evaluation systems
+  based on {LLM}: A study case with university resolutions.
+\newblock In \emph{Proc.\ 31st International Conference on Computational
+  Linguistics (COLING)}, pages 2246--2260, 2025.
+
+\bibitem[{Qwen Team}(2025)]{qwen2025vl}
+{Qwen Team}.
+\newblock {Qwen2.5-VL}: Versatile multimodal foundation model for vision and
+  language.
+\newblock \emph{arXiv preprint arXiv:2502.13923}, 2025.
+
+\bibitem[Rajpurkar et~al.(2016)Rajpurkar, Zhang, Lopyrev, and
+  Liang]{rajpurkar2016squad}
+Pranav Rajpurkar, Jian Zhang, Konstantin Lopyrev, and Percy Liang.
+\newblock Squad: 100,000+ questions for machine comprehension of text.
+\newblock 2016.
+\newblock URL \url{https://arxiv.org/abs/1606.05250}.
+
+\bibitem[Ram{\'i}rez(2019)]{fastapi2019}
+Sebasti{\'a}n Ram{\'i}rez.
+\newblock {FastAPI}: Modern, fast web framework for building {APIs} with
+  {Python}.
+\newblock \url{https://fastapi.tiangolo.com}, 2019.
+
+\bibitem[Reimers and Gurevych(2019)]{reimers2019sentence}
+Nils Reimers and Iryna Gurevych.
+\newblock Sentence-bert: Sentence embeddings using siamese bert-networks.
+\newblock 2019.
+\newblock URL \url{https://arxiv.org/abs/1908.10084}.
+
+\bibitem[Robertson and Zaragoza(2009)]{robertson2009bm25}
+Stephen Robertson and Hugo Zaragoza.
+\newblock The probabilistic relevance framework: Bm25 and beyond.
+\newblock \emph{Found. Trends Inf. Retr.}, 3\penalty0 (4):\penalty0 333–389,
+  April 2009.
+\newblock ISSN 1554-0669.
+\newblock \doi{10.1561/1500000019}.
+\newblock URL \url{https://doi.org/10.1561/1500000019}.
+
+\bibitem[{Supabase Inc.}(2023)]{supabase2023}
+{Supabase Inc.}
+\newblock Supabase: The open source firebase alternative.
+\newblock \url{https://supabase.com}, 2023.
+
+\end{thebibliography}

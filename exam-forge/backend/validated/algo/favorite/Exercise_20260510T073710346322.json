@@ -1,0 +1,59 @@
+{
+  "subject": "algo",
+  "type": "Exercise",
+  "status": "favorite",
+  "data": {
+    "id": "ex03",
+    "title": "Parcours et transformation d'un arbre binaire",
+    "total_exercise_points": 6,
+    "introduction_context": "Soit l'arbre binaire suivant (les valeurs sont des entiers) :\n\n        15\n       /  \\\n      10   20\n     /  \\    \\\n    8   12   25\n   /\n  6\n\nOn suppose que l'arbre est représenté en Pascal par le type suivant :\n  Type TArbre = ^TNoeud;\n  TNoeud = Record\n    Valeur : Integer;\n    Gauche, Droit : TArbre;\n  End;\n\nOn dispose également de la fonction suivante :\n  Function Hauteur(A : TArbre) : Integer;\n  Begin\n    If A = Nil Then Hauteur := 0\n    Else Hauteur := 1 + Max(Hauteur(A^.Gauche), Hauteur(A^.Droit));\n  End;\n\noù Max est une fonction qui retourne le plus grand de deux entiers.",
+    "questions": [
+      {
+        "id": "ex03_q1",
+        "type": "FREE",
+        "question_text": "1. Donner le parcours préfixe (racine, gauche, droite) de l'arbre ci-dessus.",
+        "solution": {
+          "text": "15, 10, 8, 6, 12, 20, 25",
+          "rubric": [
+            "Ordre correct des nœuds (15, 10, 8, 6, 12, 20, 25)",
+            "Pas de nœud oublié ni ajouté",
+            "Séparation claire des valeurs (liste ou suite)"
+          ]
+        },
+        "points": 2,
+        "topic": "Arbres binaires, parcours, hauteur, ABR"
+      },
+      {
+        "id": "ex03_q2",
+        "type": "FREE",
+        "question_text": "2. En utilisant le parcours préfixe obtenu en Q1, construire un nouvel arbre binaire de recherche (ABR) en insérant successivement les valeurs dans l'ordre de ce parcours. Dessiner l'ABR final. (Rappel : dans un ABR, pour chaque nœud, toutes les valeurs du sous-arbre gauche sont inférieures à la valeur du nœud, et toutes celles du sous-arbre droit lui sont supérieures.)",
+        "solution": {
+          "text": "L'ABR obtenu est :\n        15\n       /  \\\n      10   20\n     /  \\    \\\n    8   12   25\n   /\n  6\n(C'est exactement l'arbre initial, car l'arbre initial est déjà un ABR.)",
+          "rubric": [
+            "Insertion dans l'ordre du parcours préfixe (15, 10, 8, 6, 12, 20, 25)",
+            "Respect des règles de l'ABR (gauche < racine < droite)",
+            "Arbre final correct (identique à l'original)"
+          ]
+        },
+        "points": 2,
+        "topic": "Arbres binaires, parcours, hauteur, ABR"
+      },
+      {
+        "id": "ex03_q3",
+        "type": "FREE",
+        "question_text": "3. En utilisant la fonction Hauteur donnée, calculer la hauteur de l'arbre initial. Donner ensuite le nombre de nœuds de l'arbre, puis en déduire si cet arbre est équilibré (on dit qu'un arbre binaire est équilibré si, pour tout nœud, la différence de hauteur entre ses deux sous-arbres est au plus 1).Justifier brièvement.",
+        "solution": {
+          "text": "Hauteur de l'arbre = 4 (chemin 15-10-8-6). Nombre de nœuds = 7. L'arbre n'est pas équilibré car au nœud 10, la hauteur du sous-arbre gauche est 3 (8-6) et celle du sous-arbre droit est 1 (12). La différence est 2 > 1.",
+          "rubric": [
+            "Hauteur calculée correctement (4)",
+            "Nombre de nœuds correct (7)",
+            "Justification de l'absence d'équilibre (différence de hauteur > 1 à au moins un nœud, exemple au nœud 10)"
+          ]
+        },
+        "points": 2,
+        "topic": "Arbres binaires, parcours, hauteur, ABR"
+      }
+    ],
+    "level": "Procedural"
+  }
+}

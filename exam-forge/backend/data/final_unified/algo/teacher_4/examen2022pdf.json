@@ -1,0 +1,185 @@
+{
+  "metadata": {
+    "module": "Algorithmique et Structures de données",
+    "duration": "08:00-09:00",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_1",
+      "title": "Exercice 1 : Listes linéaires chaînées",
+      "total_exercise_points": "13 Pts",
+      "introduction_context": "La repr´esentation des nombres entiers dans les langages de programmation est toujours limit´ee `a quelques octets. On souhaite surmonter ce probl`eme en proposant une repr´esentation des entiers quelque soit leur taille en utilisant les listes lin´eaires chain´ees. Un nombre entier est repr´esent´e par une liste lin´eaire chaˆın´ee o`u chaque chiffre du nombre est repr´esent´ee par un maillon de la liste. Le chiffre du poids faible est rang´e `a la tˆete. ",
+      "diagram": {
+        "preceding_text": "Exemple : Le nombre 236799 est représenté par :",
+        "description": "Linked list representing the number 236799. Structure: Tete ⟼ [9] ⟼ [9] ⟼ [7] ⟼ [6] ⟼ [3] ⟼ [2] ⟼ Nil",
+        "precise_location": "Page 1 - Top after context"
+      },
+      "Question": [
+        {
+          "id": "1.1",
+          "points": "1 pt",
+          "level": "Procedural",
+          "question_text": "1. Donner la déclaration permettant de représenter en mémoire de telles listes.",
+          "Solution": [
+            "Type TMaillon = Structure",
+            "  Valeur : entier ;",
+            "  Suivant : Pointeur(TMaillon) ;",
+            "Fin ;",
+            "Var Tete : Pointeur(TMaillon) ;"
+          ]
+        },
+        {
+          "id": "1.2",
+          "points": "5 pts total",
+          "level": "Procedural",
+          "question_text": "2. Soit la procédure f suivante :",
+          "question_code": [
+            "Procédure f(var L : Poniteur(TMaillon));",
+            "var p : Poniteur(TMaillon);",
+            "Début",
+            "  Si (L=Nil) Alors",
+            "    Allouer(p); Aff_val(p,1); Aff_adr(p,L); L ← p;",
+            "  Sinon",
+            "    Si (Valeur(L)=9) Alors",
+            "      Aff_val(L,0); f(Suivant(L));",
+            "    Sinon",
+            "      Aff_val(L,Valeur(L)+1);",
+            "    Fin Si;",
+            "  Fin Si;",
+            "Fin;"
+          ],
+          "subquestions": [
+            {
+              "id": "1.2.a",
+              "level": "Factual",
+              "question_text": "(a) Donner la liste de l’exemple ci-dessus après l’appel de la procédure f(Tete).",
+              "Solution": {
+                "description": "The linked list after f(Tete) represents 236800. Structure: Tete ⟼ [0] ⟼ [0] ⟼ [8] ⟼ [6] ⟼ [3] ⟼ [2] ⟼ Nil"
+              }
+            },
+            {
+              "id": "1.2.b",
+              "level": "Conceptual",
+              "question_text": "(b) Que fait la procédure f sur un nombre entier représenté par une liste linéaire chaînée ?",
+              "Solution": "La procédure f ajoute 1 au nombre entier représenté par la liste."
+            },
+            {
+              "id": "1.2.c",
+              "level": "Procedural",
+              "question_text": "(c) Calculer la complexité de la procédure f en fonction de la longueur n de la liste  pass´ee en param`etre.",
+              "Solution": "Le temps T(n) d’exécution de la fonction : T(n) = { a si n = 0 (P = Nil) ; T(n − 1) + b sinon (si P ≠ Nil : n ≠ 0) } – La constante a englobe le temps du test (n ≠ Nil) et le temps de l’affectation (f ← 0) – La constante b englobe : * le temps du test (P = Nil), * le temps de l’opération + entre f(Suivant(P)) et 1 l’affectation à x. * et le temps de l’opération × entre Valeur(P) et x et l’affectation au résultat final. T(n) = T(n − 1) + b = [b + T(n − 2)] + b = T(n − 2) + 2b = [b + T(n − 3)] + 2b = ... = T(n − i) + ib = ... = T(0) + nb = a + nb T(n) = nb + a Donc la complexité est en O(n) car a et b sont des constantes positives"
+            }
+          ]
+        },
+        {
+          "id": "1.3",
+          "points": "3 pts",
+          "level": "Procedural",
+          "question_text": "3. Écrire la procédure Div10 suivante : Proc´edure Div10( var L : pointeur(TMaillon)) ; permettant de diviser le nombre entier représenté dans L par 10.",
+          "Solution": [
+            "Procédure Div10(var L : Pointeur(TMaillon));",
+            "var p : Pointeur(TMaillon);",
+            "Début",
+            "  Si (L ≠ Nil) Alors",
+            "    p ← L; L ← Suivant(L); Libérer(p);",
+            "  Fin Si;",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "1.4",
+          "points": "4 pts",
+          "level": "Procedural",
+          "question_text": "4. Écrire la fonction récursive Multi3 suivante : Fonction Multi3(L : pointeur(TMaillon)) :bool´een ; permettant de retourner vrai si le nombre repr´esent´e par L est un multiple de 3, sachant qu’un nombre entier est multiple de 3 si la somme des chiffres le repr´esentant est un multiple de 3. Par exemple, le nombre 236799 de l’exemple pr´ec´edent est un multiple de 3 puisque 2 + 3 + 6 + 7 + 9 + 9 = 36 et 36 est un multiple de 3. ",
+          "Solution": [
+            "Fonction Mult3(L : Pointeur(TMaillon)) : booléen;",
+            "Procédure LibererListe(var L : Pointeur(TMaillon));",
+            "var q : Pointeur(TMaillon);",
+            "Début",
+            "  Tant que (L ≠ Nil) faire",
+            "    q ← L;",
+            "    L ← Suivant(L);",
+            "    Libérer(q);",
+            "  Fin TantQue;",
+            "Fin;",
+            "var ListeSomme : Pointeur(TMaillon);",
+            "p : Pointeur(TMaillon);",
+            "Début",
+            "  ListeSomme ← Nil;",
+            "  p ← L;",
+            "  Tant que (p ≠ Nil) faire",
+            "    Pour i de 1 à Valeur(p) faire",
+            "      P(ListeSomme);",
+            "    Fin Pour;",
+            "  Fin TantQue;",
+            "  Si (ListeSomme = Nil) Alors",
+            "    Mult3 ← Vrai;",
+            "  Sinon",
+            "    Si (Suivant(ListeSomme) = Nil) Alors",
+            "      Si (Valeur(ListeSomme) mod 3 = 0) Alors",
+            "        Mult3 ← Vrai;",
+            "      Sinon",
+            "        Mult3 ← Faux;",
+            "      Fin Si;",
+            "    Sinon",
+            "      Mult3 ← Mult3(ListeSomme);",
+            "      LibererListe(ListeSomme);",
+            "    Fin Si;",
+            "  Fin Si;",
+            "Fin;"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_2",
+      "title": "Exercice 2 : Arbres",
+      "total_exercise_points": "7 Pts",
+      "introduction_context": "Soit les nombres entiers suivants donnés dans l’ordre : 13, 22, 6, 15, 4, 2, 11, 17",
+      "Question": [
+        {
+          "id": "2.1",
+          "points": "2 pts",
+          "level": "Procedural",
+          "question_text": "1. Donner l’arbre binaire de recherche obtenu en insérant ces nombres dans l’ordre.",
+          "Solution": {
+            "description": " 1. l’arbre binaire de recherche obtenu en ins´erant ces nombres dans l’ordre :  BST Structure: Root 13. Left: 6 (children 4, 11). Right: 22 (child 15). Node 4 has left child 2. Node 15 has right child 17.",
+            "precise_location": "Page 5 - Top"
+          }
+        },
+        {
+          "id": "2.2",
+          "points": "2 pts",
+          "level": "Procedural",
+          "question_text": "2. Soit la proc´edure g suivante : Qu’affiche la procédure g en l’exécutant sur la racine de l’arbre précédent ?",
+          "question_code": [
+            "Procédure g( N : Poniteur(TNoeud));",
+            "Début",
+            "  Si (N=Nil) Alors Ecrire(\"l'arbre est vide\");",
+            "  Sinon Tant que (FG(N)≠ Nil ) faire N ←FG(N); Fin TQ; Ecrire(Valeur(N));",
+            "  Fin Si; Fin;"
+          ],
+          "Solution": "La procédure affiche : 2 (le minimum de l'arbre)."
+        },
+        {
+          "id": "2.3",
+          "points": "2 pts",
+          "level": "Procedural",
+          "question_text": "3. Donner le tas dynamique construit en insérant dans l’ordre ces nombres.",
+          "Solution": {
+            "description": "Max-Heap Tree: Root 22. Level 1: [17, 11]. Level 2: [15, 4, 2, 6]. Level 3: [13] (child of 15).",
+            "precise_location": "Page 5 - Middle"
+          }
+        },
+        {
+          "id": "2.4",
+          "points": "1 pt",
+          "level": "Conceptual",
+          "question_text": "4. En déduire le tas statique.",
+          "Solution": "Représentation en tableau : [ 22 | 17 | 11 | 15 | 4 | 2 | 6 | 13 ]"
+        }
+      ]
+    }
+  ]
+}

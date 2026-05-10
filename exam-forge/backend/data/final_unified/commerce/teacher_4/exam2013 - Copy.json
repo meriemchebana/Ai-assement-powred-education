@@ -1,0 +1,207 @@
+{
+  "metadata": {
+    "module": "الاستدلال الإحصائي",
+    "duration": "",
+    "language": "arabic"
+  },
+  "exercises": [
+    {
+      "id": "التمرين_الأول",
+      "title": "التمرين الأول (5 نقاط)",
+      "total_exercise_points": "5",
+      "introduction_context": "لتكن {X₁, X₂} عينة عشوائية بسيطة مسحوبة من مجتمع طبيعي N(μ, σ=2).",
+      "note": null,
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "(3ن) أفترض أن μ=0 ولتكن S² = Σᵢ₌₁² (Xᵢ - X̄)². احسب الاحتمالات التالية: P((X₁>1)∪(X₂<2))، P(X₁/X₂ > 2)، P(X₁² + X₂² ≤ 23.96)، P(X̄ > 1.5)، P(X̄ < 9S)، P(S² > 10.84).",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "(1ن) بين أن المقدر X̂ = λX₁ + (1-λ)X₂، 0 ≤ λ ≤ 1، غير متحيز بالنسبة للمعلمة μ.",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "3",
+          "question_text": "(1ن) بين أن المقدر X̂ = (1/4)X₁ + (3/4)X₂ أفضل من المقدر X̄ = (1/2)X₁ + (1/2)X₂ بالنسبة لـ μ.",
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "id": "التمرين_الثاني",
+      "title": "التمرين الثاني (9 نقاط)",
+      "total_exercise_points": "9",
+      "introduction_context": "نعتبر مجتمعا دالة كثافته الاحتمالية معطاة بالصيغة الآتية: f(x,θ) = { 2x/θ² إذا x∈[0,θ] ، 0 إذا x∉[0,θ] }، حيث θ > 0 معلمة مجهولة يراد تقديرها. نسحب عينة عشوائية بسيطة {X₁, X₂, ..., Xₙ} بحجم n من هذا المجتمع.",
+      "note": null,
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "(0.5ن) بين أن: E(X) = 2θ/3 و V(X) = θ²/18.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "(1ن) استعمل طريقة العزوم للحصول على مقدر θ̂₁ للمعلمة θ.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "question_text": "(1ن) بين أن θ̂₁ غير متحيز ومتسق (متقارب).",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "4",
+          "question_text": "(1ن) أكتب دالة الترجيح.",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "5",
+          "question_text": "(1ن) بين أن θ̂₂ = max Xᵢ هو مقدر الترجيح الأعظم للمعلمة θ.",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "6",
+          "question_text": "(1ن) بين أن دالة الكثافة الاحتمالية لـ θ̂₂ هي: g(x,θ) = { 2nx^(2n-1)/θ^(2n) إذا x∈[0,θ] ، 0 إذا x∉[0,θ] }.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "7",
+          "question_text": "(1ن) هل المقدر θ̂₂ غير متحيز؟ غير متحيز بالتقارب؟",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "8",
+          "question_text": "(1ن) تحقق أن: V(θ̂₂) = nθ²/((n+1)(2n+1)) ثم قارن بين المقدرين θ̂₁ و θ̂₂.",
+          "Solution": null,
+          "level": "Metacognitive"
+        },
+        {
+          "id": "9",
+          "question_text": "(1.5ن) باستعمال نظرية النهاية المركزية، عين التوزيع التقاربي للمقدر θ̂₁ عندما يكون n كبيرا بما فيه الكفاية. استنتج مجال ثقة حول المعلمة θ بدرجة ثقة 95% في حالة n=100 و Σᵢ₌₁¹⁰⁰ Xᵢ = 65.29.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "التمرين_الثالث",
+      "title": "التمرين الثالث (8 نقاط)",
+      "total_exercise_points": "8",
+      "introduction_context": "لغرض دراسة مردودية عمال ورشات إنتاج قطاع غيار في الشركة ABC، قام مسؤول الإنتاج بأخذ عينة عشوائية بسيطة {X₁, X₂, X₃, X₄} = {6, 5, 3, 2} بحيث Xᵢ يعبر على عدد القطع المنتجة من طرف عامل i خلال ساعة واحدة. (نفترض أن المجتمع طبيعي تقريبا).",
+      "note": "درجة الثقة في كل المجالات هي 95% ودقة الحسابات تكون برقمين بعد الفاصلة.",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "أعط مجال ثقة حول المردودية المتوسطة في هذه الشركة.",
+          "sub_questions": [
+            {
+              "id": "1.a",
+              "question_text": "(1ن/أ) إذا كانت حالة تباين المردودية مجهول.",
+              "Solution": null,
+              "level": "Conceptual"
+            },
+            {
+              "id": "1.b",
+              "question_text": "(1ن/ب) إذا كانت حالة تباين المردودية معلوم بحيث σ²=4.",
+              "Solution": null,
+              "level": "Factual"
+            }
+          ],
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "للمسؤول إمكانية استعمال معطيات خاصة بعينة عشوائية ثانية مستقلة عن الأولى بحيث n₂=5، X̄₂=3، S₂²=1.5.",
+          "sub_questions": [
+            {
+              "id": "2.a",
+              "question_text": "(0.5ن/أ) بين أن Sₚ² = ((n₁-1)S₁² + (n₂-1)S₂²) / (n₁+n₂-2) مقدر غير متحيز لتباين المردودية.",
+              "Solution": null,
+              "level": "Conceptual"
+            },
+            {
+              "id": "2.b",
+              "question_text": "(1ن/ب) بين أن الدالة π(X̄,μ) = ((X̄-μ)√(n₁+n₂)) / Sₚ بحيث X̄ = (n₁X̄₁ + n₂X̄₂)/(n₁+n₂) تتبع توزيع Student.",
+              "Solution": null,
+              "level": "Conceptual"
+            },
+            {
+              "id": "2.c",
+              "question_text": "(1ن/ج) استنتج من الإجابتين السابقتين مجال ثقة حول المردودية المتوسطة.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "2.d",
+              "question_text": "(1.5ن/د) إذا كان للمسؤول إمكانية الحصول على الملاحظات الفردية للعينة الثانية {X₁, X₂, X₃, X₄, X₅} = {4, 3, 3, 4, 1}، هل تنصحه باستعمال مجال ثقة آخر؟ ناقش.",
+              "Solution": null,
+              "level": "Metacognitive"
+            }
+          ],
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "question_text": "أعط مجال ثقة حول تباين مردودية عمال الشركة ABC.",
+          "sub_questions": [
+            {
+              "id": "3.a",
+              "question_text": "(1ن/أ) إذا كان متوسط المردودية مجهول.",
+              "Solution": null,
+              "level": "Conceptual"
+            },
+            {
+              "id": "3.b",
+              "question_text": "(1ن/ب) إذا كان متوسط المردودية معلوم μ=3.",
+              "Solution": null,
+              "level": "Factual"
+            }
+          ],
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "التمرين_الرابع",
+      "title": "التمرين الرابع (4 نقاط)",
+      "total_exercise_points": "4",
+      "introduction_context": "نسحب عينة عشوائية بسيطة {X₁, X₂, ..., Xₙ} بحجم n من مجتمع B(1,θ). نريد اختبار: H₀ : θ = 1/2 ضد H₁ : θ = θ₁ < 1/2.",
+      "note": null,
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "(2ن) بين باستعمال نظرية Neyman Pearson أن المنطقة الحرجة الأقوى بحجم α (α ≤ 5%) معطاة على الشكل: W = { (X₁, X₂, ..., Xₙ) / Σᵢ₌₁ⁿ Xᵢ ≤ k }.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "(1ن) أوجد قيمة k إذا علمت أن n=9.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "question_text": "(1ن) أوجد قيمة k إذا علمت أن n=36.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    }
+  ]
+}

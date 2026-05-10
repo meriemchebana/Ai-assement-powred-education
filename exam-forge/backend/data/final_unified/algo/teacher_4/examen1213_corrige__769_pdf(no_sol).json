@@ -1,0 +1,265 @@
+{
+  "metadata": {
+    "module": "Algorithmique et Structures de données",
+    "duration": "10:00-11:30",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_1",
+      "title": "Exercice 1 : LLCs",
+      "total_exercise_points": "8.5 pts",
+      "introduction_context": "Le code morse a été inventé par Samuel Morse, peintre et physicien Américain. C’est un code permettant de transmettre un texte à l’aide de séries d’impulsions courtes et longues. Il a été longtemps utilisé pour effectuer des liaisons longue distance. En informatique, et plus particulièrement dans les textes, une impulsion longue est représentée par un tiret ’-’ et une impulsion courte par un point ’.’. Chaque caractère de l’alphabet est présené par un code morse",
+      "diagram_1": {
+        "description": [
+          {
+            "Lettre": "A",
+            "Code": ".-"
+          },
+          {
+            "Lettre": "B",
+            "Code": "-..."
+          },
+          {
+            "Lettre": "C",
+            "Code": "-.-."
+          },
+          {
+            "Lettre": "D",
+            "Code": "-.."
+          },
+          {
+            "Lettre": "E",
+            "Code": "."
+          },
+          {
+            "Lettre": "F",
+            "Code": "..-."
+          },
+          {
+            "Lettre": "G",
+            "Code": "--."
+          },
+          {
+            "Lettre": "H",
+            "Code": "...."
+          },
+          {
+            "Lettre": "I",
+            "Code": ".."
+          },
+          {
+            "Lettre": "J",
+            "Code": ".---"
+          },
+          {
+            "Lettre": "K",
+            "Code": "-.-"
+          },
+          {
+            "Lettre": "L",
+            "Code": ".-.."
+          },
+          {
+            "Lettre": "M",
+            "Code": "--"
+          },
+          {
+            "Lettre": "N",
+            "Code": "-."
+          },
+          {
+            "Lettre": "O",
+            "Code": "---"
+          },
+          {
+            "Lettre": "P",
+            "Code": ".--."
+          },
+          {
+            "Lettre": "Q",
+            "Code": "--.-"
+          },
+          {
+            "Lettre": "R",
+            "Code": ".-."
+          },
+          {
+            "Lettre": "S",
+            "Code": "..."
+          },
+          {
+            "Lettre": "T",
+            "Code": "-"
+          },
+          {
+            "Lettre": "U",
+            "Code": "..-"
+          },
+          {
+            "Lettre": "V",
+            "Code": "...-"
+          },
+          {
+            "Lettre": "W",
+            "Code": ".--"
+          },
+          {
+            "Lettre": "X",
+            "Code": "-..-"
+          },
+          {
+            "Lettre": "Y",
+            "Code": "-.--"
+          },
+          {
+            "Lettre": "Z",
+            "Code": "--.."
+          }
+        ],
+        "precise_location": "Page 1 - Bottom left after the context paragraph"
+      },
+      "diagram_2": {
+        "description": "Linked List representing Morse codes. Structure: Tete ⟼ [A | .-] ⟼ [B | -...] ⟼ [F | ..-.] ⟼ [T | -] ⟼ Nil. Each node contains a character and its Morse string.",
+        "precise_location": "Page 1 - Bottom left"
+      },
+      "Question": [
+        {
+          "id": "1.1",
+          "points": "0.5 pt",
+          "level": "Conceptual",
+          "question_text": "1. Donner les structures de données nécessaires à la représentation de la liste des codes morse.",
+          "Solution": [
+            "Type TMaillon = Structure",
+            "    Car : caractère ;",
+            "    Code : chaine[4] ;",
+            "    Suivant : Pointeur(TMaillon) ;",
+            "Fin ;",
+            "Var Tete : Pointeur(TMaillon) ;"
+          ]
+        },
+        {
+          "id": "1.2",
+          "points": "1.5 pt",
+          "level": "Procedural",
+          "question_text": "2. Ecrire la procédure AjouterCode(Tete, car, cde) permettant d'ajouter la lettre car avec son code cde à la liste des codes.",
+          "Solution": [
+            "Procédure AjouterCode( Var Tete : Pointeur(TMaillon), Car : caractère, Cde : Chaine[4]);",
+            "Var P : Pointeur(TMaillon) ;",
+            "Début",
+            "    P ← Tete ;",
+            "    Tant que (P ≠ Nil et Val_Car(P) ≠ Car et Val_Code(P) ≠ Cde) faire",
+            "        P ← Suivant(P) ;",
+            "    Fin TQ;",
+            "    Si (P ≠ Nil) Alors",
+            "        Ecrire('Le code existe déjà')",
+            "    Sinon",
+            "        Allouer(P) ;",
+            "        Aff_Car(P, Car) ;",
+            "        Aff_Code(P, Cde) ;",
+            "        Aff_Adr(P, Tete) ;",
+            "        Tete ← P ;",
+            "    Fin Si;",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "1.3",
+          "points": "1.5 pt",
+          "level": "Procedural",
+          "question_text": "3. Ecrire la procédure RetirerCar(Tete, car) permettant de supprimer le caractère car de la liste des codes.",
+          "Solution": null
+        },
+        {
+          "id": "1.4",
+          "points": "2 pts",
+          "level": "Procedural",
+          "question_text": "4. Ecrire la fonction Coder(Tete, Ch) permettant de retourner le code morse de la chaine de caractères Ch. Les codes morse de deux caractères sont séparés par un espace, tandis que les codes morses de deux mots sont séparés par deux espaces  (blancs).",
+          "Solution": null
+        },
+        {
+          "id": "1.5",
+          "points": "2 pts",
+          "level": "Procedural",
+          "question_text": "5. Ecrire la fonction Decoder(Tete, ChMorse) permettant de retourner la chainه de caractères codée dans la chainه morse ChMorse.",
+          "Solution": null
+        },
+        {
+          "id": "1.6",
+          "points": "1 pt",
+          "level": "Procedural",
+          "question_text": "6. Calculer la complexité des fonctions Coder et Décoder.",
+          "Solution": null
+        }
+      ]
+    },
+    {
+      "id": "Exercice_2",
+      "title": "Exercice 2 : ARB",
+      "total_exercise_points": "9.5 pts",
+      "introduction_context": "On souhaite représenter la liste des codes morse présentée dans l’exercice précédent par un arbre de recherche binaire, où l’orientation vers un fils gauche signifie un ’.’ et l’orientation vers un fils droit signifie un ’-’",
+      "diagram": {
+        "description": "Binary tree logic for Morse. Root ⟼ left(.) to 'E', right(-) to 'T'. From 'E' ⟼ left to 'I', right to 'A'. From 'T' ⟼ left to 'N', right to 'M'.",
+        "precise_location": "Page 1 - Bottom right"
+      },
+      "Question": [
+        {
+          "id": "2.1",
+          "points": "0.5 pt",
+          "level": "Conceptual",
+          "question_text": "1. Donner les structures de données nécessaires à la représentation de l'arbre des codes morse.",
+          "Solution": null
+        },
+        {
+          "id": "2.2",
+          "points": "3 pts",
+          "level": "Procedural",
+          "question_text": "2. Ecrire la procédure AjouterCode(Racine, car, cde) permettant d’ajouter la lettre car avec son code cde à l’arbre des codes. ",
+          "Solution": null
+        },
+        {
+          "id": "2.3",
+          "points": "2 pts",
+          "level": "Procedural",
+          "question_text": "3. Ecrire la fonction CoderARB(Racine, Ch) permettant de retourner le code morse de la chaine  de caractères Ch. Les codes morse de deux caractères sont séparés par un espace, tandis que les codes morses de deux mots sont séparés par deux espaces (blancs).",
+          "Solution": null
+        },
+        {
+          "id": "2.4",
+          "points": "3 pts",
+          "level": "Procedural",
+          "question_text": "4. Ecrire la fonction DecoderARB(Racine, ChMorse) permettant de retourner la chaine de caractères codée dans la chaine morse ChMorse.",
+          "Solution": null
+        },
+        {
+          "id": "2.5",
+          "points": "1 pt",
+          "level": "Metacognitive",
+          "question_text": "5. Calculer la complexité des fonctions Coder et Décoder. Que peuton conclure par rapport à l’exercice précédent .",
+          "Solution": null
+        }
+      ]
+    },
+    {
+      "id": "Exercice_3",
+      "title": "Exercice 3 : Tas",
+      "total_exercise_points": "2 pts",
+      "Question": [
+        {
+          "id": "3.1",
+          "points": "1.5 pt",
+          "level": "Procedural",
+          "question_text": "1. Donner le tas statique obtenu après l'insertion dans l'ordre des clés suivantes : 12, 3, 5, 14, 15, 8, 1, 6.",
+          "Solution": null
+        },
+        {
+          "id": "3.2",
+          "points": "0.5 pt",
+          "level": "Procedural",
+          "question_text": "2. Donner le tas après deux retraits.",
+          "Solution": null
+        }
+      ]
+    }
+  ]
+}

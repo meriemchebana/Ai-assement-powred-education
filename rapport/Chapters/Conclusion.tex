@@ -1,0 +1,109 @@
+\newpage
+\section*{\textsc{General Conclusion}}
+\addcontentsline{toc}{section}{General Conclusion}
+\rhead{\itshape General Conclusion}
+\lhead{}
+\cfoot{\thepage}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0.4pt}
+
+\subsection*{Summary of Contributions}
+
+This report presented \textbf{ExamGen}, an end-to-end bilingual exam generation
+platform developed in response to a concrete problem in Algerian higher education:
+instructors managing bilingual (French--Arabic), unstructured PDF archives with no
+machine-readable indexing and no automated quality assurance for generated questions.
+
+The thesis argued that a \textit{schema-enforced, RAG-augmented pipeline} combining
+intelligent document processing, language-aware hybrid retrieval, and an independent
+post-generation quality evaluator can produce examination questions that are
+factually grounded, cognitively calibrated, and stylistically consistent with
+historical practice --- without requiring model fine-tuning.
+The experimental evaluation on a real corpus of 137 documents across five subjects
+confirms this thesis on all four dimensions:
+
+\begin{enumerate}
+  \item \textbf{Bilingual IDP.}
+  \texttt{docParser}'s five-stage pipeline (Docling, LLM extraction, grounding
+  validation, Bloom classification, VLM diagram transcription) successfully processed
+  90.5\% of documents, producing 86 validated Exam JSON files and 704 Bloom-labelled
+  questions. The 24.1\% rejection rate is explainable: 21 answer-key sheets (no
+  question text) and 12 low-resolution scans (below minimum OCR quality).
+
+  \item \textbf{Language-aware hybrid RAG.}
+  Routing Arabic Law queries to AraBERT and French queries to multilingual MiniLM,
+  combined with BM25 and Reciprocal Rank Fusion, achieved 83.8\% overall retrieval
+  effectiveness --- a 10-point improvement over the non-routed baseline on Arabic
+  queries. This confirms the necessity of dedicated Arabic embeddings for low-resource
+  Algerian legal content.
+
+  \item \textbf{Schema-enforced generation.}
+  The \texttt{instructor}-enforced structured output, combined with a dual-prompt
+  architecture (style-anchor separation from RAG content), achieved 87.5\% factual
+  accuracy across all five subjects --- consistent with the upper range reported by
+  \citet{mucciaccia2025mcq} for prompt-engineered systems with retrieval augmentation.
+
+  \item \textbf{Independent quality evaluation.}
+  The 4-axis post-generation evaluator (factual grounding, Bloom alignment, quality
+  verdict, difficulty calibration) confirmed 79.2\% cognitive-level accuracy,
+  motivating the independent Stage-4 Bloom classifier rather than trusting the
+  generator's self-reported level --- as recommended by \citet{meissner2024itemforge}.
+\end{enumerate}
+
+\subsection*{Lessons from Iterative Development}
+
+The iterative design process was itself a methodological contribution.
+Three concrete prototype failures --- absent structured-output enforcement, low
+instruction-following fidelity on free-tier LLMs, and topic-blending from
+dense-only retrieval --- each led directly to a documented architectural decision
+(the \texttt{instructor} library, the DeepSeek-V4-Flash upgrade, and hybrid RRF
+retrieval respectively). This failure-driven iteration mirrors the approach
+advocated by \citet{isley2025quality}: continuous refinement guided by measurable
+quality metrics.
+
+\subsection*{Limitations}
+
+Three limitations bound the scope of the current results:
+
+\begin{enumerate}
+  \item \textbf{Law corpus sparsity.}
+  The Arabic Law corpus (11 JSON files, 66 questions) is the smallest in the dataset.
+  This explains Law's lowest scores across all four evaluation axes.
+  Expanding the corpus --- through additional lecturer contributions or data
+  augmentation --- is the most direct path to closing this gap.
+
+  \item \textbf{No human-labelled ground truth.}
+  Factual accuracy and Bloom alignment are judged by the LLM evaluator, not by
+  human subject-matter experts. This makes the 87.5\% factual accuracy figure an
+  upper-bound estimate; \citet{isley2025quality}'s IRT-based validation against
+  real student cohorts would provide a lower-bound ground truth.
+
+  \item \textbf{API dependency.}
+  The generation and evaluation stages rely on cloud LLM APIs
+  (DeepSeek-V4-Flash, Gemini-2.0-Flash, GPT-OSS-120B).
+  Connectivity or pricing changes could disrupt production use in a
+  university environment with restricted internet access.
+\end{enumerate}
+
+\subsection*{Future Work}
+
+Three directions would substantially extend this work:
+
+\paragraph{(1) Unconditional OCR for low-resolution scans.}
+The 12 rejected low-resolution PDFs could be recovered by activating Tesseract
+or PaddleOCR unconditionally, at an estimated cost of 3--5~minutes per page on
+CPU. A quality threshold on the OCR confidence score would gate whether the
+result feeds into Stage~2.
+
+\paragraph{(2) IRT-based psychometric validation.}
+Deploying the generated exams in real examination sessions would enable
+Item Response Theory calibration \cite{isley2025quality}: difficulty and
+discrimination parameters estimated from student response vectors provide
+an objective, human-grounded quality signal currently absent from the evaluation.
+
+\paragraph{(3) On-device fine-tuned model.}
+Fine-tuning a compact model (7B parameters, e.g.\ Qwen2.5-7B or Mistral-7B)
+on the 704-question ExamGen dataset would eliminate API dependency and enable
+offline operation --- a practical requirement for Algerian university networks.
+The existing 4-axis evaluator provides ready-made preference signal for
+DPO or RLHF alignment.

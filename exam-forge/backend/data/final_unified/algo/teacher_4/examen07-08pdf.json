@@ -1,0 +1,318 @@
+{
+  "metadata": {
+    "module": "Algorithmique et Structures de données",
+    "duration": "14h-15h30",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_1",
+      "title": "Exercice 1 (10 pts)",
+      "total_exercise_points": "10 pts",
+      "introduction_context": "On vous demande d’écrire les procédures et fonctions suivantes :",
+      "diagram": {
+        "description": "Schéma d'une liste de listes. Une liste principale verticale (Catégories) : [Algorithmique | 2 | Ptr1] ⟼ [Architecture | 2 | Ptr2] ⟼ [Revues | 0 | Nil] ⟼ [Système d’exploitation | 1 | Ptr3] ⟼ Symbole de fin. Des listes horizontales (Livres) : Ptr1 pointe vers [Algorithmique et structures de données | A. Aho] ⟼ [Introduction to algorithms | H. Cormen] ⟼ Nil. Ptr2 pointe vers [Architecture des ordinateurs | Tenanbum] ⟼ [Structure des ordinateurs | M. Koudil] ⟼ Nil. Ptr3 pointe vers [S.E : mécanismes de base | A. Belkhir] ⟼ Nil.",
+        "precise_location": "Page 1 - Milieu gauche"
+      },
+      "Question": [
+        {
+          "id": "1",
+          "points": "1.5",
+          "level": "Procedural",
+          "question_text": "1. Donner la déclaration des structures de données nécessaires à l’implémentation de cette bibliothèque ainsi que la procédure d’initialisation de ces structures.",
+          "Solution": [
+            "Type TLivre = Structure",
+            "  Titre, Auteur : chaine ;",
+            "  Suivant : Pointeur ( TLivre )",
+            "Fin ;",
+            "Type TCategorie = Structure",
+            "  NomCateg : chaine ;",
+            "  NbLivre : entier ;",
+            "  TeteListeLivres : Pointeur ( TLivre )",
+            "  Suivant : Pointeur ( TCategorie ) ;",
+            "Fin ;",
+            "Var Bibliotheque : Pointeur ( TCategorie ) ;",
+            "Procedure Initialisation ;",
+            "Debut",
+            "  Bibliotheque ← Nil ;",
+            "Fin ;"
+          ]
+        },
+        {
+          "id": "2",
+          "points": "1.5",
+          "level": "Procedural",
+          "question_text": "2. Ecrire la procédure d’ajout d’une nouvelle catégorie (l’ajout se fait toujours à la fin de la liste).",
+          "Solution": [
+            "Procedure AjouterCategorie ( NCateg : chaine) ;",
+            "Var P, PP, Q : Pointeur (TCategorie) ;",
+            "Debut",
+            "  P ← Bibliotheque ;",
+            "  PP ← Nil ;",
+            "  TQ P ≠ Nil et NomCteg(P) ≠ NCateg Faire",
+            "    PP ← P ;",
+            "    P ← Suivant ( P ) ;",
+            "  FTQ ;",
+            "  Si P ≠ Nil alors Ecrire ( ‘Cette categorie existe déjà’ ) ;",
+            "  Sinon",
+            "    Allouer ( Q ) ;",
+            "    Aff_Val (Q, NCateg, 0, Nil) ;",
+            "    Aff_Adr (Q, Nil) ;",
+            "    Si PP = Nil alors Bibliotheque ← Q",
+            "    Sinon Aff_Adr (PP, Q) ;",
+            "    FSi ;",
+            "  FSi ;",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "3",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "3. Ecrire la procédure d’insertion d’un nouveau livre (l’ajout se fait au début de la liste)",
+          "Solution": [
+            "Procedure AjouterLivre(NCateg, NTitre, NAuteur : chaine) ;",
+            "Var P : Pointeur (TCategorie) ;",
+            "    Q : Pointeur (TLivre) ;",
+            "Debut",
+            "  P ← Bibliotheque ;",
+            "  TQ P ≠ Nil et NomCateg(P) ≠ NCateg Faire",
+            "    P ← Suivant ( P ) ;",
+            "  FTQ ;",
+            "  Si P = Nil alors Ecrire( ‘Cette catégorie n’existe pas’)",
+            "  Sinon",
+            "    Allouer (Q) ;",
+            "    Aff_Adr(Q, TeteListeLivre(P)) ;",
+            "    Aff_Val(Q, NTitre, NAuteur) ;",
+            "    Aff_Val(P, NomCateg (P), NbLivre(P) + 1, Q) ;",
+            "  FSi",
+            "Fin ;"
+          ]
+        },
+        {
+          "id": "4",
+          "points": "1.5",
+          "level": "Procedural",
+          "question_text": "4. Ecrite la procédure qui permette d’afficher les livres d’une catégorie donnée.",
+          "Solution": [
+            "Procedure Afficher ( NCateg : chaine) ;",
+            "Var P : Pointeur (TCategorie) ;",
+            "    Q : Pointeur (TLivre) ;",
+            "Debut",
+            "  P ← Bibliotheque ;",
+            "  TQ P ≠ Nil et NomCateg(P) ≠ NCateg Faire",
+            "    P ← Suivant ( P ) ;",
+            "  FTQ ;",
+            "  Si P = Nil alors Ecrire( ‘Cette catégorie n’existe pas’)",
+            "  Sinon",
+            "    Q ← TeteListeLibre(P) ;",
+            "    TQ Q ≠ Nil Faire",
+            "      Ecrite (Titre(Q), Auteur(Q)) ;",
+            "      Q ← Suivant (Q) ;",
+            "    FTQ ;",
+            "  FSi",
+            "Fin ;"
+          ]
+        },
+        {
+          "id": "5",
+          "points": "1",
+          "level": "Procedural",
+          "question_text": "5. Ecrire la fonction qui retourne le nombre total de livre dans la bibliothèque.",
+          "Solution": [
+            "Fonction NbreLivre :Entier ;",
+            "Var P : Pointeur (TCategorie) ;",
+            "    Nb : entier ;",
+            "Debut",
+            "  Nb ← 0 ;",
+            "  P ← Bibliotheque ;",
+            "  TQ P ≠ Nil Faire",
+            "    Nb ← Nb + NbLivres(P) ;",
+            "    P ← Suivant (P) ;",
+            "  Fin ;",
+            "  NbreLivre ← Nb ;",
+            "Fin ;"
+          ]
+        },
+        {
+          "id": "6",
+          "points": "2.5",
+          "level": "Procedural",
+          "question_text": "6. Ecrire la procédure qui permette de supprimer une catégorie avec tous ses livres",
+          "Solution": [
+            "Procedure SupprimerCategorie ( NCateg : chaine) ;",
+            "Var P, PP, Q, Q1 : Pointeur ;",
+            "Debut",
+            "  P ← Bibliotheque ;",
+            "  PP ← Nil ;",
+            "  TQ P ≠ Nil et NomCateg(P) ≠ NCateg Faire",
+            "    Pp ← Pil.",
+            "    P ← Suivant ( P ) ;",
+            "  FTQ ;",
+            "  Si P = Nil alors Ecrire( ‘Cette catégorie n’existe pas’)",
+            "  Sinon",
+            "    Q ← TeteListeLivre(P) ;",
+            "    TQ Q ≠ Nil Faire",
+            "      Q1 ← Q ;",
+            "      Q ← Suivant(Q) ;",
+            "      Liberer (Q1) ;",
+            "    FTQ ;",
+            "    Aff_Adr(PP, Suivant(P)) ;",
+            "    Liberer (P) ;",
+            "  FSi",
+            "Fin ;"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_2",
+      "title": "Exercice 2 (5 pts)",
+      "Question": [
+        {
+          "id": "2.1",
+          "points": "1",
+          "level": "Procedural",
+          "question_text": "1. Les listes (1, 6, 1, 6, 7, 9, 1, 10, 6) et (1, 3, 1, 4, 3, 2, 1, 4, 2) peuvent elles représenter un tas statique ? Si non, quels échanges faut–il effectuer pour obtenir un tas ?",
+          "Solution": "Le tableau (1,6,1,6,7,9,1,10,6) n’est pas un tas ; pour obtenir un tas : (10,7,9,6,6,6,1,1,1). Le tableau (1,3,1,4,3,2,1,4,2) n’est pas un tas ; pour obtenir un tas : (4,4,2,3,3,1,1,2)"
+        },
+        {
+          "id": "2.2",
+          "points": "0.5",
+          "level": "Conceptual",
+          "question_text": "2. Un tableau trié en ordre décroissant représente-t-il un tas ?",
+          "Solution": "Oui un tableau trié dans l’ordre décroissant représente un tas."
+        },
+        {
+          "id": "2.3",
+          "points": "3.5",
+          "level": "Procedural",
+          "question_text": "3. On veut réaliser une procédure qui purge une pile de toutes les occurrences d’un entier donné (1 dans l’exemple) :",
+          "diagram": {
+            "description": "Schéma de deux piles. Pile 'AVANT' : [3, 1, 4, 1, 5, 9]. Pile 'APRÈS' : [3, 4, 5, 9]. La valeur '1' a été filtrée.",
+            "precise_location": "Page 1 - Bas droite"
+          },
+          "subquestions": [
+            {
+              "id": "2.3.a",
+              "question_text": "a. Réaliser cette procédure en utilisant une deuxième pile.",
+              "level": "Procedural",
+              "Solution": [
+                "Procedure Purger ( P : Pile, n : entier) ;",
+                "Var P1 : Pile ; x : entier ;",
+                "Debut",
+                "  InitPile(P1) ;",
+                "  TQ non Pile_Vide (P) Faire",
+                "    Depiler ( P, x) ;",
+                "    Si x ≠ n alors Empiler (P1 , x ) ;",
+                "  FTQ ;",
+                "  TQ non Pile_Vide(P1) Faire",
+                "    Depiler ( P1 , x ) ;",
+                "    Empiler ( P, x ) ;",
+                "  FTQ ;",
+                "Fin ;"
+              ]
+            },
+            {
+              "id": "2.3.b",
+              "question_text": "b. Réaliser cette procédure d’une manière récursive sans utiliser aucune autre structure (ni pile ni file)",
+              "level": "Procedural",
+              "Solution": [
+                "Procedure Purger( P : Pile, n : entier ) ;",
+                "Var x : entier ;",
+                "Debut",
+                "  Si non Pile_Vide(P) alors",
+                "    Depiler ( P, x ) ;",
+                "    Purger (P, n) ;",
+                "    Si x ≠ n alors Empiler ( P, x) ;",
+                "  FSi",
+                "Fin ;"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_3",
+      "title": "Exercice 3 (6 Pts)",
+      "introduction_context": "Exemple : Soit l’image suivante (Grille 4x4). L’arbre représentant cette image est le suivant :",
+      "diagram": {
+        "description": "Pictogrammes : Carré noir ⟼ (N). Carré blanc ⟼ (B). Carré quadrants [1, 2 | 3, 4] ⟼ Nœud (C) fils 1, 2, 3, 4.",
+        "precise_location": "Page 2 - Haut gauche"
+      },
+      "example_diagram": {
+        "description": "Image matricielle 4x4 (Grille 1). Ligne 1: [Blanc, Blanc, Noir, Noir]. Ligne 2: [Blanc, Blanc, Noir, Noir]. Ligne 3: [Blanc, Blanc, Noir, Blanc]. Ligne 4: [Blanc, Blanc, Noir, Noir].",
+        "precise_location": "Page 2 - Milieu gauche"
+      },
+      "tree_diagram": {
+        "description": "Arbre Quadtree. Racine (C). Fils 1: (N). Fils 2: (C) avec fils [B, B, B, N]. Fils 3: (B). Fils 4: (B).",
+        "precise_location": "Page 2 - Bas gauche"
+      },
+      "Question": [
+        {
+          "id": "3.1",
+          "points": "1",
+          "level": "Procedural",
+          "question_text": "1. Donner les déclarations des structures de données nécessaires à l’implémentation de ce modèle.",
+          "Solution": [
+            "Type TNoeud = structure",
+            "  Couleur : caractère ;",
+            "  Fils : Tableau [1..4] de Pointeur (TNoeud) ;",
+            "Fin ;",
+            "Var Image : Pointeur (TNoeud) ;"
+          ]
+        },
+        {
+          "id": "3.2",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "2. Soit la procédure Traiter. Donner l’image correspondant à l’arbre précédent après l’appel Traiter ( Image ) ;",
+          "question_code": [
+            "Procedure Traiter (Racine : Pointeur(TNoeud)) ;",
+            "Var P : Pointeur(TNoeud) ; I : entier ;",
+            "Debut",
+            "  Si Racine ≠ Nil et Valeur(Racine) = ’C’ alors",
+            "    P ← Fils1 ( Racine ) ;",
+            "    Aff_Fils1 ( Racine , Fils3 ( Racine ) ) ;",
+            "    Aff_Fils3 ( Racine , Fils4 ( Racine ) ) ;",
+            "    Aff_Fils4 ( Racine , Fils2 ( Racine ) ) ;",
+            "    Aff_Fils2 ( Racine , P ) ;",
+            "    Pour I=1 à 4 faire Traiter ( Filsi (Racine) ) ; FPour ;",
+            "  FSi",
+            "Fin ;"
+          ],
+          "Solution": {
+            "description": "Grille 4x4 (Grille de sortie après rotation). La grille résultante est une rotation de 90° de la grille d'entrée. Ligne 1: [Blanc, Blanc, Blanc, Blanc]. Ligne 2: [Blanc, Blanc, Blanc, Blanc]. Ligne 3: [Noir, Noir, Noir, Noir]. Ligne 4: [Noir, Blanc, Noir, Noir].",
+            "precise_location": "Page 5 - Droite"
+          }
+        },
+        {
+          "id": "3.3",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "3. Ecrire la procédure permettant de tourner verticalement une image représentée par un arbre.",
+          "diagram": {
+            "description": "Schéma de symétrie horizontale montrant l'inversion des lignes haut/bas des quadrants.",
+            "precise_location": "Page 2 - Bas droite"
+          },
+          "Solution": [
+            "Procedure Traiter (Racine : Pointeur(TNoeud)) ;",
+            "Var P : Pointeur(TNoeud) ; I : entier ;",
+            "Debut",
+            "  Si Racine ≠ Nil et Valeur(Racine) = ’C’ alors",
+            "    P ← Fils1 ( Racine ) ;",
+            "    Aff_Fils1 ( Racine , Fils3 ( Racine ) ) ;",
+            "    Aff_Fils3 ( Racine , P ) ;",
+            "    P ← Fils2 ( Racine ) ;",
+            "    Aff_Fils2 ( Racine , Fils4 ( Racine ) ) ;",
+            "    Aff_Fils4 (Racine, P) ;",
+            "    Pour I=1 à 4 faire Traiter ( Filsi (Racine) ) ; FPour ;",
+            "  FSi",
+            "Fin ;"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "metadata": {
+    "module": "Algorithmique et Structures de données",
+    "duration": "08:00-09:00",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_Unique",
+      "title": "Traitement des listes linéaires chaînées",
+      "total_exercise_points": "20 Pts",
+      "introduction_context": "On souhaite dans cet exercice traiter des listes linéaires chainées de nombres entiers.",
+      "diagram": {
+        "preceding_text": "Exemple :",
+        "description": "A visual representation of a singly linked list: Tete ⟼ [4] ⟼ [1] ⟼ [2] ⟼ [1] ⟼ [3] ⟼ Nil",
+        "precise_location": "Page 1 - Top"
+      },
+      "Question": [
+        {
+          "id": "1",
+          "points": "1.5 pt",
+          "level": "Factual",
+          "question_text": "Donner les déclarations permettant d’utiliser de telles listes.",
+          "Solution": [
+            "Type TMaillon = Structure",
+            "  Valeur : entier ;",
+            "  Suivant : Pointeur(TMaillon) ;",
+            "Fin ;",
+            "Var Tete : Pointeur(TMaillon) ;"
+          ]
+        },
+        {
+          "id": "2",
+          "points": "2.5 pts",
+          "level": "Factual",
+          "question_text": "Soit la fonction f suivante :",
+          "question_code": [
+            "Fonction f( P : Poniteur(TMaillon)) : entier;",
+            "var x : entier;",
+            "Début",
+            "  Si (P=Nil) Alors",
+            "    f ← 0;",
+            "  Sinon",
+            "    x ← f(Suivant(P)) + 1;",
+            "    f ← Valeur(P) × x;",
+            "  Fin Si;",
+            "Fin;"
+          ],
+          "subquestions": [
+            {
+              "id": "2.a",
+              "level": "Factual",
+              "question_text": "Donner la valeur retournée par l’appel de la fonction f sur la liste de l’exemple ci-dessus.",
+              "Solution": "Valeur retournée par l'appel de la fonction f sur la liste de l'exemple = 48"
+            },
+            {
+              "id": "2.b",
+              "level": "Procedural",
+              "question_text": "Calculer la complexité de la fonction f en fonction de la longueur n de la liste passée en paramètre.",
+              "Solution": "Le temps T(n) d’exécution de la fonction : T(n) = { a si n = 0 (P = Nil) ; T(n − 1) + b sinon (si P ≠ Nil : n ≠ 0) } – La constante a englobe le temps du test (n ≠ Nil) et le temps de l’affectation (f ← 0) – La constante b englobe : * le temps du test (P = Nil), * le temps de l’opération + entre f(Suivant(P)) et 1 l’affectation à x. * et le temps de l’opération × entre Valeur(P) et x et l’affectation au résultat final. T(n) = T(n − 1) + b = [b + T(n − 2)] + b = T(n − 2) + 2b = [b + T(n − 3)] + 2b = ... = T(n − i) + ib = ... = T(0) + nb = a + nb T(n) = nb + a Donc la complexité est en O(n) car a et b sont des constantes positives"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "points": "3 pts",
+          "level": "Procedural",
+          "question_text": "Écrire la fonction récursive : Fonction Triée(L : pointeur(TMaillon)) :booléen; permettant de retourner vrai si la liste L est triée dans l’ordre croissant et faux sinon.",
+          "Solution": [
+            "Fonction Triée(L : Poniteur(TMaillon)) : booléen;",
+            "Début",
+            "  Si (L=Nil ou Suivant(L)=Nil ) Alors",
+            "    | Triée ← Vrai ;",
+            "  Sinon",
+            "    Si (Valeur(L)>Valeur(Suivant(L)) ) Alors",
+            "      | Triée ← Faux ;",
+            "    Sinon",
+            "      | Triée ← Triée(Suivant(L)) ;",
+            "    Fin Si;",
+            "  Fin Si;",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "4",
+          "points": "3 pts",
+          "level": "Procedural",
+          "question_text": "Écrire la procédure : Procédure Inverser(L : pointeur(TMaillon)); permettant d’inverser la liste L sans créer de nouveaux éléments.",
+          "Solution": [
+            "Procédure Inverser( Var L : Pointeur(TMaillon));",
+            "var NouvelleL, P : Pointeur(TMaillon);",
+            "Début",
+            "  NouvelleL ← Nil;",
+            "  Tant que ((L ≠ Nil) ) faire",
+            "    P ← L;",
+            "    L ← Suivant(L);",
+            "    Aff_adr(P, NouvelleL);",
+            "    NouvelleL ← P;",
+            "  Fin TQ;",
+            "  L ← NouvelleL;",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "5",
+          "points": "3 pts",
+          "level": "Procedural",
+          "question_text": "Écrire la procédure Procédure Trier(L : pointeur(TMaillon)); permettant de trier la liste d’entiers L en utilisant la méthode par Bulle.",
+          "Solution": [
+            "Procédure Trier( L : Pointeur(TMaillon));",
+            "var P, fin : Pointeur(TMaillon);",
+            "    x : entier;",
+            "Début",
+            "  fin ← Nil;",
+            "  Tant que ((L ≠ fin)) faire",
+            "    P ← L;",
+            "    Tant que ((P ≠ fin) et (Suivant(P) ≠ fin) ) faire",
+            "      Si (Valeur(P) > Valeur(Suivant(P))) Alors",
+            "        x ← Valeur(P);",
+            "        Aff_val(P, Valeur(Suivant(P)));",
+            "        Aff_val(Suivant(P), x);",
+            "      Fin Si;",
+            "      P ← Suivant(P);",
+            "    Fin TQ;",
+            "    fin ← P;",
+            "  Fin TQ;",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "6",
+          "points": "4 pts",
+          "level": "Procedural",
+          "question_text": "Donner l’arbre binaire de recherche obtenu en insérant dans l’ordre les clés suivantes : 18, 25, 22, 9, 19, 4, 31, 14.",
+          "Solution": {
+            "description": "Binary Search Tree (BST). Root: 18. Left: 9 (children 4, 14). Right: 25 (children 22, 31). Node 22 has left child 19.",
+            "precise_location": "Page 3 - Bottom"
+          }
+        }
+      ]
+    }
+  ]
+}

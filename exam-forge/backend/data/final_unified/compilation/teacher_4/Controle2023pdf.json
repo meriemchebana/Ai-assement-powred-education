@@ -1,0 +1,248 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h30m",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (04 pts)",
+      "total_exercise_points": "4",
+      "introduction_context": "Soit le code Lex suivant :",
+      "lex_code": [
+        "%%",
+        "aa        { printf(\"1\"); }",
+        "b?a+b?    { printf(\"2\"); }",
+        "b?a*b?    { printf(\"3\"); }",
+        ".|\\ n    { printf(\"4\"); }"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "points": "2",
+          "question_text": "Donnez un exemple d'une entrée de ce fichier qui produira 123 en sortie, ou expliquez pourquoi il n'en existe pas.",
+          "Solution": "Aucune entrée de ce type n'existe. Pour que l'entrée produise 1 au début, les deux premiers caractères doivent être \"aa\". Considérons maintenant le personnage suivant. Si c'est un 'a', alors, en utilisant la chaine maximale, le scanner correspondrait à la règle 2 sur la règle 1, donc 1 ne serait pas imprimé. Si c'est un 'b', c'est la même chose. Si c'est autre chose, alors la règle 1 correspondra à \"aa\", mais le caractère suivant ne correspondra à aucune des règles précédentes, donc un 4 sera imprimé au lieu d'un 2.",
+          "level": "Metacognitive"
+        },
+        {
+          "id": "2",
+          "points": "2",
+          "question_text": "Donnez un exemple d'entrée à ce fichier qui produira 321 comme sortie, ou expliquez pourquoi il n'en existe pas.",
+          "Solution": "Une seule chaine qui est :: bbbabaa",
+          "solution_example": "bbbabaa",
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "Soit la grammaire sur l'alphabet {a b ( ) + *} :",
+      "grammar": [
+        "R → RR | R+R | R* | (R) | a | b",
+        "avec + l'opérateur binaire (ou)"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "points": "1",
+          "question_text": "Montrer que cette grammaire est ambigüe.",
+          "Solution": "Deux arbres syntaxiques différents pour la même chaîne.",
+          "level": "Conceptual"
+        },
+        {
+          "id": "2",
+          "points": "1.5",
+          "question_text": "Construire une grammaire équivalente de type LL(1), avec les règles de priorité suivantes : * est le plus prioritaire (associatif à gauche), la concaténation a la seconde priorité (associatif à gauche), + est le moins prioritaire (associatif à gauche).",
+          "priority_rules": [
+            "L'opérateur de répétition * est le plus prioritaire et est associatif à gauche.",
+            "L'opérateur de concaténation a la seconde plus haute priorité, il est associatif à gauche.",
+            "L'opérateur d'alternative + est le moins prioritaire et est associatif à gauche."
+          ],
+          "solution_grammar_intermediate": [
+            "R → R+T | TF",
+            "T → TF | ε",
+            "F → Z* | Z",
+            "Z → (R) | a | b"
+          ],
+          "solution_elimination": {
+            "note": "Cette grammaire contient deux cas de récursivité à gauche et un cas de factorisation, il faut les éliminer.",
+            "steps": [
+              "R → R+T | TF  →  R → TFR'  ,  R' → +TR' | ε",
+              "T → TF | ε    →  T → FT | ε",
+              "F → Z* | Z    →  F → ZF'   ,  F' → *F' | ε"
+            ]
+          },
+          "solution_grammar_final": [
+            "Alors la nouvelle grammaire G’ est comme suit :",
+            "R  → TFR'",
+            "R' → +TR' | ε",
+            "T  → FT | ε",
+            "F  → ZF'",
+            "F' → *F' | ε",
+            "Z  → (R) | a | b"
+          ],
+          "level": "Metacognitive"
+        },
+        {
+          "id": "3",
+          "points": "2",
+          "question_text": "Construire la table d'analyse pour la nouvelle grammaire.",
+          "solution_premiers_suivants": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "R",
+                "( a b",
+                "$ )"
+              ],
+              [
+                "R'",
+                "+, ε",
+                "$ )"
+              ],
+              [
+                "T",
+                "( a b, ε",
+                "+ $ )"
+              ],
+              [
+                "F",
+                "( a b",
+                "( a b + $ )"
+              ],
+              [
+                "F'",
+                "*, ε",
+                "( a b + $ )"
+              ],
+              [
+                "Z",
+                "( a b",
+                "* ( a b + $ )"
+              ]
+            ]
+          },
+          "solution_ll1_table": {
+            "type": "table",
+            "headers": [
+              "",
+              "a",
+              "b",
+              "(",
+              ")",
+              "+",
+              "*",
+              "$"
+            ],
+            "rows": [
+              [
+                "R",
+                "TFR'",
+                "TFR'",
+                "TFR'",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "R'",
+                "",
+                "",
+                "",
+                "ε",
+                "+TR'",
+                "",
+                "ε"
+              ],
+              [
+                "T",
+                "FT",
+                "FT",
+                "FT",
+                "ε",
+                "ε",
+                "",
+                "ε"
+              ],
+              [
+                "F",
+                "ZF'",
+                "ZF'",
+                "ZF'",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "F'",
+                "ε",
+                "ε",
+                "ε",
+                "ε",
+                "ε",
+                "*F'",
+                "ε"
+              ],
+              [
+                "Z",
+                "a",
+                "b",
+                "(R)",
+                "",
+                "",
+                "",
+                ""
+              ]
+            ]
+          },
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 03 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "Soit la grammaire suivante :",
+      "grammar": [
+        "S → cS | T",
+        "T → aCa | bCb | aDb | bDa",
+        "C → z",
+        "D → z"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "points": null,
+          "question_text": "Donnez l'automate LR(1) de la grammaire G.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "points": null,
+          "question_text": "Cette grammaire est-elle LR(0) ? Est-elle LALR(1) ? Justifier vos réponses.",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "3",
+          "points": null,
+          "question_text": "Donnez la table de l'analyseur LR(1) pour cette grammaire, et simulez en le fonctionnement sur la chaîne cccazb.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="/src/assets/logo.png" />
+  <title>ExamGen · AI-Powered Exam Builder</title>
+
+  <!-- Fonts handled via @font-face in global.css -->
+
+  <!-- Tailwind CDN with custom colors matching user palette -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Share Tech', 'sans-serif'],
+          },
+          colors: {
+            light: {
+              bg:      '#ecfeff',
+              surface: '#ffffff',
+              primary: '#0891b2',
+              secondary:'#0284c7',
+              text:    '#164e63',
+              muted:   '#475569',
+              border:  '#cffafe',
+              accent:  '#06b6d4'
+            },
+            dark: {
+              bg:      '#00053B',
+              surface: '#020840',
+              surface2:'#0A1260',
+              primary: '#0A36F7',
+              secondary:'#247AFF',
+              text:    '#ffffff',
+              muted:   '#dde3ec',
+              border:  '#1a2260',
+              accent:  '#92F8FF'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style type="text/tailwindcss">
+    @layer base {
+      body {
+        @apply font-sans antialiased text-light-text bg-light-bg transition-colors duration-300 min-h-screen;
+      }
+      .dark body {
+        @apply text-dark-text bg-gradient-to-br from-dark-bg via-[#020840] to-[#00053B] min-h-screen;
+      }
+    }
+
+    @layer components {
+      .glass-card {
+        @apply bg-white/80 backdrop-blur-xl border border-white/40 shadow-xl rounded-3xl transition-all duration-300;
+      }
+      .dark .glass-card {
+        @apply bg-dark-surface/40 backdrop-blur-xl border border-white/5 shadow-2xl shadow-black/40 rounded-3xl transition-all duration-300;
+      }
+
+      .btn-primary {
+        @apply px-6 py-3 rounded-2xl font-bold transition-all duration-300
+               bg-gradient-to-r from-light-primary to-light-secondary text-white
+               hover:shadow-lg hover:shadow-light-primary/30 hover:-translate-y-0.5;
+      }
+      .dark .btn-primary {
+        @apply bg-gradient-to-r from-dark-primary to-dark-secondary text-white
+               hover:shadow-lg hover:shadow-dark-primary/30 hover:opacity-90;
+      }
+
+      .btn-secondary {
+        @apply px-6 py-3 rounded-2xl font-bold transition-all duration-300
+               bg-white border border-light-border text-light-text
+               hover:bg-gray-50 hover:shadow-md;
+      }
+      .dark .btn-secondary {
+        @apply bg-dark-surface2/50 border-white/15 text-white
+               hover:bg-white/5 hover:shadow-md hover:border-white/25;
+      }
+
+      .input-field {
+        @apply w-full px-5 py-3.5 rounded-2xl border transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2
+               bg-white border-light-border text-light-text placeholder-light-muted
+               focus:ring-light-primary focus:border-transparent focus:ring-offset-white;
+      }
+      .dark .input-field {
+        @apply bg-black/20 border-white/15 text-white placeholder-white/50
+               focus:ring-dark-primary focus:ring-offset-[#020840];
+      }
+    }
+
+    @layer utilities {
+      @keyframes blob {
+        0%,100% { border-radius:60% 40% 30% 70%/60% 30% 70% 40%; }
+        50%      { border-radius:30% 60% 70% 40%/50% 60% 30% 60%; }
+      }
+      .animate-blob { animation: blob 8s ease-in-out infinite; }
+      .animation-delay-2000 { animation-delay: 2s; }
+    }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module" src="/src/main.jsx"></script>
+</body>
+</html>

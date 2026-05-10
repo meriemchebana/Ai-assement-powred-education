@@ -1,0 +1,188 @@
+{
+  "metadata": {
+    "module": "Systèmes d'exploitation 2",
+    "duration": "",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Question_de_cours",
+      "title": "Question de cours (6 points)",
+      "total_exercise_points": "6",
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": null,
+          "question_text": "Rappeler en détail la définition d'un moniteur de synchronisation.",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "Partie_2",
+          "points": null,
+          "question_text": "Donner en bref les différentes étapes de son implémentation.",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "Partie_3",
+          "points": null,
+          "question_text": "Expliquer le problème posé lors de l'exécution de la primitive signal dans les moniteurs de Hoare.",
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 1 (7 points)",
+      "total_exercise_points": "7",
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": "7",
+          "introduction_context": "nchronisez au moyen de sémaphores l’enchaînement des opérations de fabrication de stylos à bille. Chaque stylo est formé d’un corps, d’une cartouche, d’un bouchon arrière et d’un capuchon. Les opérations à effectuer sont les suivantes : ",
+          "operations": [
+            "Remplissage de la cartouche avec l'encre (opération RC)",
+            "Assemblage du bouchon arrière et du corps (opération BO)",
+            "Assemblage de la cartouche avec le corps et le capuchon (opération AS)",
+            "Emballage (opération EM)"
+          ],
+          "constraints": "Chaque opération est effectuée par une machine spécialisée (mRC, mBO, mAS, mEM). Les stocks de pièces détachées et d’encre sont supposés disponibles quand la machine est disponible. Les opérations RC et BO se font en parallèle. L’opération AS doit être effectuée, après ces deux opérations, en prélevant directement les éléments sur les machines mRC et mBO. Le produit assemblé est déposé dans un stock en attente de l’opération EM. L’opération EM se fait donc après AS, à partir du stock. Le stock est supposé de taille N et de discipline FIFO.",
+          "Question": null,
+          "Solution": null
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 2 (3+4 points)",
+      "total_exercise_points": "7",
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": "3",
+          "introduction_context": "Dans un système, on numérote arbitrairement les types de ressources de 1 à N (exemple : port usb=1, processeur=2, imprimante=3, …). On impose que chaque processus demande les ressources dont il a besoin dans l'ordre numérique croissant des ressources. Par exemple, un processus qui a besoin d'une imprimante et d'un processeur, doit d'abord demander le processeur (n° 2) et ensuite l'imprimante (n° 3). ",
+          "question_text": "Est-ce qu'il y a un risque d'interblocage suivant cette technique ? Justifiez.",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "Partie_2",
+          "points": "4",
+          "introduction_context": "Soit un système à un instant t0 :",
+          "banker_table": {
+            "description": "Tableau de l'algorithme du banquier avec 5 tâches (T0 à T4) et 4 types de ressources (A, B, C, D).",
+            "headers": [
+              "",
+              "Allocation A",
+              "Allocation B",
+              "Allocation C",
+              "Allocation D",
+              "Max A",
+              "Max B",
+              "Max C",
+              "Max D",
+              "Disponible A",
+              "Disponible B",
+              "Disponible C",
+              "Disponible D"
+            ],
+            "rows": [
+              [
+                "T0",
+                "0",
+                "0",
+                "1",
+                "2",
+                "0",
+                "0",
+                "1",
+                "2",
+                "1",
+                "5",
+                "2",
+                "0"
+              ],
+              [
+                "T1",
+                "1",
+                "0",
+                "0",
+                "0",
+                "1",
+                "7",
+                "5",
+                "0",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "T2",
+                "1",
+                "3",
+                "5",
+                "4",
+                "2",
+                "3",
+                "5",
+                "6",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "T3",
+                "0",
+                "6",
+                "3",
+                "2",
+                "0",
+                "6",
+                "5",
+                "2",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "T4",
+                "0",
+                "0",
+                "1",
+                "4",
+                "0",
+                "6",
+                "5",
+                "6",
+                "",
+                "",
+                "",
+                ""
+              ]
+            ],
+            "note": "Le vecteur Disponible est donné uniquement pour T0 : [1, 5, 2, 0]."
+          },
+          "Question": [
+            {
+              "id": "1",
+              "question_text": "En utilisant l'algorithme du banquier donner le contenu de la matrice Besoin et le vecteur E. Le système est-il dans un état sain ? Expliquer en détail.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "2",
+              "question_text": "Si la tâche T1 émet la requête (0,4,2,0), peut-elle être honorée immédiatement ?",
+              "Solution": null,
+              "level": "Conceptual"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

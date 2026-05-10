@@ -1,0 +1,42 @@
+{
+  "metadata": {
+    "module": "مصادر الالتزام",
+    "duration": "",
+    "language": "arabic"
+  },
+  "exercises": [
+    {
+      "id": "الأسئلة",
+      "title": "أجب عن الأسئلة التالية معللاً باختصار",
+      "total_exercise_points": null,
+      "introduction_context": null,
+      "note": null,
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "إذا أخطأ المتعاقد في شخص المتعاقد معه هل يؤثر ذلك على صحة العقد مطلقاً؟",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "2",
+          "question_text": "متى يجوز للمتعاقد إنهاء العقد بإرادته المنفردة؟",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "3",
+          "question_text": "هل يجوز للقاضي تعديل العقد؟",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "4",
+          "question_text": "الالتزام ببذل عناية هل يتعلق بكل أنواع الالتزامات؟",
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    }
+  ]
+}

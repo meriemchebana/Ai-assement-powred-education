@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "",
+    "language": "french"
+  },
+  "id": "Interrogation",
+  "title": "Interrogation (30 minutes)",
+  "total_exercise_points": null,
+  "introduction_context": "",
+  "exercises": [
+    {
+      "id": "Exercice_Int_01",
+      "title": "Exercice 1",
+      "introduction_context": "Eliminer la récursivité à gauche de la grammaire suivante :",
+      "grammar": [
+        "S → Ta | SaSb",
+        "T → Sb | Tb | b"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "question_text": "Eliminer la récursivité à gauche de la grammaire suivante : S → Ta | SaSb, T → Sb | Tb | b.",
+          "solution_grammar": null
+        }
+      ]
+    },
+    {
+      "id": "Exercice_Int_02",
+      "title": "Exercice 2",
+      "introduction_context": "Soit la grammaire suivante, d'axiome S sur l'alphabet terminal A = {a, b, c, d} et non terminal {S, X, Y, W} :",
+      "grammar": [
+        "S → Xa | ε",
+        "X → bX | YW",
+        "Y → aX | ε",
+        "W → c | d"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "question_text": "Construire la table d'analyse LL(1).",
+          "solution_premiers_suivants": null,
+          "solution_ll1_table": null
+        },
+        {
+          "id": "2",
+          "level": "Metacognitive",
+          "question_text": "La grammaire est-elle LL(1) ? Justifier votre réponse.",
+          "Solution": null
+        },
+        {
+          "id": "3",
+          "level": "Procedural",
+          "question_text": "Simuler l'analyse prédictive de : abcda$",
+          "solution_table": {
+            "type": "table",
+            "headers": [
+              "Chaine",
+              "Pile",
+              "Action"
+            ],
+            "rows": null
+          }
+        },
+        {
+          "id": "4",
+          "level": "Procedural",
+          "question_text": "Construire l'arbre de dérivation correspondant.",
+          "Solution": null
+        }
+      ]
+    }
+  ]
+}

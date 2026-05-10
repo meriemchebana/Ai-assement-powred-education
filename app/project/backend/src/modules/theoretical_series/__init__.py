@@ -1,0 +1,1 @@
+from src.modules.theoretical_series.model import TheoreticalSeries

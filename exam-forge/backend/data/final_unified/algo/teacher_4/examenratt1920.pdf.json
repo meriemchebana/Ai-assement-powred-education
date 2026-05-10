@@ -1,0 +1,271 @@
+{
+  "metadata": {
+    "module": "Algorithmique et Structures de données",
+    "duration": "16:30-18:30",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_1",
+      "title": "Exercice 1 Listes linéaires chaînées",
+      "total_exercise_points": "6 pts (2 + 2 + 2)",
+      "introduction_context": "On souhaite dans cet exercice traiter des listes représentant le concept mathématique d'ensemble. chaque ensemble est représenté par une liste linéaire chaînée.",
+      "diagram": {
+        "preceding_text": "Exemple : l'ensemble {1, 3, 9, 0, 6} est représenté par la liste de la figure suivante :",
+        "description": "A horizontal singly linked list showing nodes [1] -> [3] -> [9] -> [0] -> [6] -> Nil.",
+        "precise_location": "Page 1 - Centered below introduction"
+      },
+      "Question": [
+        {
+          "id": "1.1",
+          "points": "2",
+          "level": "Procedural",
+          "introduction_context": "On vous demande d’´ecrire les proc´edures et fonctions suivantes :",
+          "question_text": "1. Fonction Appartient(E :pointeur(TMaillon), x :entier) :Boolean ;\nUne fonction récursive qui vérifie si l'élément x appartient à l'ensemble E ou non. Elle retourne Vrai si x appartient à E Faux sinon.",
+          "Solution": [
+            "Fonction Appartient( L : pointeur(TMaillon), x : réel) : booléen;",
+            "Début",
+            "  Si (E=Nil) Alors",
+            "     Appartient←Faux ;",
+            "  Sinon",
+            "    Si (x = Valeur(E)) Alors",
+            "       Appartient←Vrai ;",
+            "    Sinon",
+            "       Appartient←Appartient(Suivant(E),x) ;",
+            "    Fin Si;",
+            "  Fin Si;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.2",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "2. Procédure Retirer(E1 :pointeur(TMaillon), var E2 :pointeur(TMaillon))\nUne procédure itérative permettant de retirer tous les élément de l'ensemble E1 de l'ensemble E2.",
+          "Solution": [
+            "Procédure Retirer( E1 : pointeur(TMaillon), var E2 : pointeur(TMaillon));",
+            "var P1, P2, PP2 : Pointeur(TMaillon) ;",
+            "Début",
+            "  P2 ← E2; PP2 ← Nil;",
+            "  Tant que ((P2 ≠ Nil)) faire",
+            "    P1 ← E1;",
+            "    Tant que ((P1 ≠ Nil) et (Valeur(P1) ≠ Valeur(P2))) faire",
+            "       P1 ← Suivant(P1) ;",
+            "    Fin TQ;",
+            "    Si ( P1 ≠ Nil) Alors",
+            "      Si (PP2 ≠ Nil) Alors",
+            "         Aff_Adr(PP2,Suivant(P2)) ;",
+            "         Libérer(P2) ;",
+            "         P2 ← Suivant(PP2) ;",
+            "      Sinon",
+            "         E2 ← Suivant(E2)) ;",
+            "         Libérer(P2) ;",
+            "         P2 ← Suivant(E2) ;",
+            "      Fin Si;",
+            "    Sinon",
+            "       PP2 ← P2 ;",
+            "       P2 ← Suivant(P2))",
+            "    Fin Si;",
+            "  Fin TQ;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.3",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "3. Procédure Intersect(E1, E2 :pointeur(TMaillon), var E :pointeur(TMaillon))\nUne procédure itérative permettant de créer l'ensemble E contenant l'intersection des deux ensembles E1 et E2.",
+          "Solution": [
+            "Procédure Intersect( E1, E2 : pointeur(TMaillon), var E : pointeur(TMaillon));",
+            "var P, P1, P2 : Pointeur(TMaillon) ;",
+            "Début",
+            "    P1 ← E1 ;",
+            "    E ← Nil ;",
+            "    Tant que ((P1 ≠ Nil)) faire",
+            "        P2 ← E2 ;",
+            "        Tant que ((P2 ≠ Nil) et (Valeur(P2) ≠ Valeur(P1))) faire",
+            "            P2 ← Suivant(P2) ;",
+            "        Fin TQ;",
+            "        Si ( P2 ≠ Nil) Alors",
+            "            Allouer(P) ;",
+            "            Aff_Valuer(P,Valeur(P2)) ;",
+            "            Aff_Adr(P,E) ;",
+            "            E ← P ;",
+            "        Fin Si;",
+            "    Fin TQ;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        }
+      ]
+    },
+    {
+      "id": "Exercice_2",
+      "title": "Exercice 2 Arbres de recherche binaires",
+      "total_exercise_points": "8.5 pts (3 + 2.5 + 3)",
+      "introduction_context": "Nous nous intéressons dans cet exercice aux arbres de recherche binaires d'entiers :",
+      "diagram": {
+        "description": "A binary search tree structure with root 15, left child 12 (8, 14) and right child 20 (16, 21).",
+        "precise_location": "Page 1 - Below introduction"
+      },
+      "Question": [
+        {
+          "id": "2.1",
+          "points": "3",
+          "level": "Procedural",
+          "introduction_context": "Ecrire les proc´edures et fonctions suivantes sur les arbres binaires de recherches d’entiers. ´",
+          "question_text": "1. Fonction ARB(R :Pointeur(TNoeud)) :booléen ;\nPermettant de retourner Vrai si l'arbre de recherche binaire d'entiers de racine R est correct (respectه les caractéristiques d'un ARB) et Faux sinon.",
+          "Solution": [
+            "Fonction ARB( R : pointeur(TNoeud)) : booléen;",
+            "Début",
+            "    Si (R=Nil) Alors",
+            "        ARB ← Vrai ;",
+            "    Sinon",
+            "        Si ( (FG(R) ≠ NIL) et (Valeur(R) < Valeur(FG(R))) ou (FD(R) ≠ NIL) et (Valeur(R) > Valeur(FD(R))) ) Alors",
+            "            ARB ← Faux ;",
+            "        Sinon",
+            "            ARB ← ARB(FG(R)) et ARB(FD(R)) ;",
+            "        Fin Si;",
+            "    Fin Si;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "2.2",
+          "points": "2.5",
+          "level": "Procedural",
+          "question_text": "2. Fonction Frere(R :Pointeur(TNoeud), x :entier) :Pointeur(TNoeud) ;\nPermettant de retourner le pointeur sur le frère de x dans l'arbre de racine R. par exemple, dans la figure le frère de 8 est 14 et le frère de 20 est 12 tandis que 13 et 17 n'ont pas de frères.",
+          "Solution": [
+            "Fonction Frere( R : pointeur(TNoeud), x : entier) : pointeur(TNoeud);",
+            "var PN, N : Pointeur(TNoeud);",
+            "Début",
+            "    PN ← Nil;",
+            "    N ← R;",
+            "    Tant que ((N ≠ Nil) et Valeur(N) ≠ x ) faire",
+            "        PN ← N;",
+            "        Si ( Valeur(N) > x ) Alors",
+            "            N ← FG(N);",
+            "        Sinon",
+            "            N ← FD(N);",
+            "        Fin Si;",
+            "    Fin TQ;",
+            "    Si ( N = Nil ou PN = Nil ) Alors",
+            "        Frere← Nil;",
+            "    Sinon",
+            "        Si ( Valeur(N)>Valeur(PN) ) Alors",
+            "            Frere← FG(PN);",
+            "        Sinon",
+            "            Frere← FD(PN);",
+            "        Fin Si;",
+            "    Fin Si;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "2.3",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "3. Fonction Rang(R :Pointeur(TNoeud), x :entier) : entier ;\nPermettant de retourner le rang de x dans l'arbre de recherche binaire de racine R. La rang de x dans R est le nombre de nœuds de valeur inférieure à x.\nPar exemple, le rang de 14 est 4 (12, 8, 10, 13), le rang de 17 est 7.",
+          "Solution": [
+            "Fonction Rang( R : pointeur(TNoeud), x : entier) : entier;",
+            "var PN, N : Pointeur(TNoeud);",
+            "Début",
+            "    Si (R = Nil) Alors",
+            "        Rang ← 0;",
+            "    Sinon",
+            "        Si (Valeur(R) ≥ x ) Alors",
+            "            Rang ← Rang(FG(R),x);",
+            "        Sinon",
+            "            Rang ← 1 + Rang(FG(R),x) + Rang(FD(R),x) ;",
+            "        Fin Si;",
+            "    Fin Si;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        }
+      ]
+    },
+    {
+      "id": "Exercice_3",
+      "title": "Exercice 3 Graphes",
+      "total_exercise_points": "5.5 pts (1.5 + 3 + 1)",
+      "introduction_context": "On souhaite représenter un graphe orienté étiqueté en mémoire sous forme de liste d'adjacences comme suit :",
+      "diagram": {
+        "description": "A weighted directed graph and its corresponding adjacency list data structure mapping circular nodes to linked list nodes.",
+        "precise_location": "Page 2 - Middle"
+      },
+      "Question": [
+        {
+          "id": "3.1",
+          "points": "1.5",
+          "level": "Procedural",
+          "question_text": "1. Donner la déclaration des structures de données nécessaires à la représentation d'un tel graphe en mémoire.",
+          "Solution": [
+            "Type TMaillon = Structure",
+            "    Successeur : entier ;",
+            "    Pois : réel ;",
+            "    Suivant : Pointeur(TMaillon) ;",
+            "Fin ;",
+            "Var Graphe : Tableau[1..n] de Pointeur(TMaillon) ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "3.2",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "2. Écrire la Procédure DFS(i :entier) permettant d'afficher tous les nœuds qu'on peut atteindre à partir du nœود i.",
+          "Solution": [
+            "Var Visité : Tableau[1..n] de booleen ; // initialisé à faux avant l'appel",
+            "Procédure DFS(i : entier ;) ;",
+            "var P : Pointeur(TMaillon) ;",
+            "Début",
+            "    Visité[i] ← Vrai ;",
+            "    Ecrire(i) ;",
+            "    P ← Graphe[i] ;",
+            "    Tant que (P ≠ Nil) faire",
+            "        Si (non Visité[Successeur(P)]) Alors",
+            "            DFS(Successeur(P))",
+            "        Fin Si ;",
+            "        P ← Suivant(P) ;",
+            "    Fin TQ ;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "3.3",
+          "points": "1",
+          "level": "Procedural",
+          "question_text": "3. Ecrire la Fonction Chemin(i, j : entier) permettant de retourner Vrai si un chemin existe entre les deux nœuds i et j.",
+          "Solution": [
+            "Fonction Chemin(i, j : entier) : entier ;",
+            "var s : entier ;",
+            "Début",
+            "    Pour s de 1 à n faire",
+            "        Visité[s] ← Faux ;",
+            "    Fin Pour ;",
+            "    DFS(i) ;",
+            "    Chemin ← Visité[j] ;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        }
+      ],
+      "footer_note": "★★★ Bonne chance ★★★"
+    }
+  ]
+}

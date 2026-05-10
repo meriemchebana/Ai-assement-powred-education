@@ -1,0 +1,155 @@
+{
+  "metadata": {
+    "module": "Systèmes d'exploitation 2",
+    "duration": "",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 1 (9 points)",
+      "total_exercise_points": "9",
+      "parts": [
+        {
+          "id": "Partie_A",
+          "points": "3",
+          "Question": [
+            {
+              "id": "A.1",
+              "question_text": "Quels sont les inconvénients des sémaphores, et comment les moniteurs résolvent ces limites.",
+              "Solution": "Les sémaphores possèdent certains inconvénients : a. Mécanisme de bas niveau qui demande une discipline sévère dans leur utilisation, sous peine d'erreurs. b. Mécanisme sans localité : un sémaphore doit être connu et accessible par tous les processus qui pourraient l'utiliser doit être une variable globale tout le programme doit être examiné pour voir où et comment il est utilisé. c. Le rôle d'une opération V ou P (exclusion mutuelle ? Synchronisation conditionnelle ?) dépend du type de sémaphore, de la façon dont il est initialisé et manipulé par les divers processus → pas explicite. Les moniteurs sont des objets plus évolués que les sémaphores. Un moniteur est composé de plusieurs procédures ou fonctions et de variables locales.",
+              "level": "Conceptual"
+            },
+            {
+              "id": "A.2",
+              "question_text": "Expliquer comment les moniteurs assurent l'exclusion mutuelle entre les processus.",
+              "Solution": "Seul un processus peut être actif à un moment donné à l'intérieur du moniteur (implémenté à l'aide d'une file d'attente globale), la demande d'entrée dans un moniteur (ou d'exécution d'une primitive du moniteur) sera bloquante tant qu'il y aura un processus actif à l'intérieur du moniteur. L'accès à un moniteur construit donc implicitement une exclusion mutuelle.",
+              "level": "Conceptual"
+            }
+          ]
+        },
+        {
+          "id": "Partie_B",
+          "points": "6",
+          "introduction_context": "On décide d'utiliser les moniteurs pour contrôler les accès à une base de données, selon le modèle « lecteurs-rédacteurs ». On veut donc permettre des accès multiples en lecture tout en assurant un accès exclusif en écriture. Pour cela, on utilise le moniteur AccesBD ci-dessous. Ce moniteur est composé de quatre fonctions getR, getW, endR, et endW. Les fonctions getR et getW sont respectivement appelées pour demander des accès en lecture et en écriture à une base de données. Elles bloquent tout appelant tant que celui-ci n'a pas obtenu l'accès demandé. Les appelants bloqués sont mis en attente dans une même file. Les fonctions endR et endW sont respectivement appelées pour libérer les accès en lecture et en écriture.Pour cela, on utilise le moniteur AccesBD ci-dessous. Ce moniteur est composé de quatre fonctions getR, getW, endR, et endW. Les fonctions getR et getW sont respectivement appelées pour demander des accès en lecture et en écriture à une base de données. Elles bloquent tout appelant tant que celui-ci n’a pas obtenu l’accès demandé. Les appelants bloqués sont mis en attente dans une même file. Les fonctions endR et endW sont respectivement appelées pour libérer les accès en lecture et en écriture",
+          "pseudocode": {
+            "declarations": [],
+            "processes": [
+              {
+                "name": "Moniteur AccesBD()",
+                "code": [
+                  "{ ...",
+                  "void getR() { ... }",
+                  "void endR ( ) { ... }",
+                  "void getW() { ... }",
+                  "void endW ( ) { ... }",
+                  "}"
+                ]
+              }
+            ]
+          },
+          "question_text": "Complétez le moniteur AccesBD pour gérer les accès aux bases de données.",
+          "Solution": "Moniteur AccesBD() { int nbl=0 ; bool libre=true ; condition wa ; void getR() { while (nbl==0 && libre==false) wait(wa) ; if(nbl==0) libre= false ; nbl++ ; } void endR() { nbl--; if(nbl==0) {libre=true; signal(wa); } } void getW() { while (libre==false) wait(wa) ; libre=false ; } void endW() { libre=true; signal(wa); } }",
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 2 (11 points)",
+      "total_exercise_points": "11",
+      "parts": [
+        {
+          "id": "Partie_A",
+          "points": "4",
+          "Question": [
+            {
+              "id": "A.a",
+              "question_text": "Définir le problème d'interblocage, quelles sont les conditions qui doivent être réunis pour qu'il apparaisse.",
+              "Solution": "Problème d'interblocage : un ensemble de processus est en interblocage si tous les processus de l'ensemble sont bloqués dans l'attente d'un évènement (gestion de ressource) qui ne peut être produit que par un élément de l'ensemble. Les conditions : Exclusion Mutuelle, Détention et d'Attente, Pas de Réquisition, Attente Circulaire.",
+              "level": "Factual"
+            },
+            {
+              "id": "A.b",
+              "question_text": "Quelles sont les catégories de méthodes qui permettent le traitement de ce phénomène. Expliquer en vous aidant d’un exemple la méthode d’évitement en utilisant l’allocation des ressources par ordre croissant",
+              "Solution": "Les catégories : Ignorer les problèmes « Politique de l'autruche », Détecter les interblocages et y remédier, Éviter des interblocages en allouant les ressources avec précaution, Prévenir en empêchant l'apparition d'une des 4 conditions.",
+              "level": "Conceptual"
+            }
+          ]
+        },
+        {
+          "id": "Partie_B",
+          "points": "7",
+          "introduction_context": "Considérez un système d'exploitation doté de 6 types de ressources (R1, R2 ... R6), une seule de chaque type, partagées en exclusion mutuelle par 3 processus P1, P2 et P3. Ces processus exécutent les codes suivants : La fonction « prendre » permet d’allouer une ressource au processus appelant, si cette dernière est libre. Dans le cas contraire, elle bloque le processus appelant jusqu’à l’obtention de la ressource demandée. Une ressource allouée est libérée par le processus détenteur lorsqu’il invoquera la fonction « liberer » ",
+          "pseudocode": {
+            "declarations": [],
+            "processes": [
+              {
+                "name": "P1()",
+                "code": [
+                  "while(1){",
+                  "prendre (R4);",
+                  "prendre (R5);",
+                  "prendre (R3);",
+                  "// Utiliser R4, R5, R3",
+                  "liberer(R4);",
+                  "liberer(R5);",
+                  "liberer(R3);",
+                  "}"
+                ]
+              },
+              {
+                "name": "P2()",
+                "code": [
+                  "while(1){",
+                  "prendre (R3);",
+                  "prendre (R2);",
+                  "prendre (R6);",
+                  "//Utiliser R3, R2, R6",
+                  "liberer(R6);",
+                  "liberer(R2);",
+                  "liberer(R3);",
+                  "}"
+                ]
+              },
+              {
+                "name": "P3()",
+                "code": [
+                  "while(1){",
+                  "prendre (R1);",
+                  "prendre (R2);",
+                  "prendre (R5);",
+                  "// Utiliser R1, R2, R5",
+                  "liberer(R5);",
+                  "liberer(R2);",
+                  "liberer(R1);",
+                  "}"
+                ]
+              }
+            ]
+          },
+          "Question": [
+            {
+              "id": "B.1",
+              "question_text": "Donnez une séquence d'execution des instructions de P1, P2 et P3 qui mène vers un interblocage.",
+              "Solution": "P1 : prendre(R4) ; P1 : prendre(R5) ; P2 : prendre(R3) ; P3 : prendre(R1) ; P3 : prendre(R2) ; P3 : prendre(R5) ; → va bloquer P3. P2 : prendre(R2) ; → va bloquer P2. P1 : prendre(R3) ; → va bloquer P1.",
+              "level": "Procedural"
+            },
+            {
+              "id": "B.2",
+              "question_text": "Peut-on prévenir les interblocages en modifiant l'ordre des demandes de ressources ? Justifiez.",
+              "Solution": "Oui on peut prévenir les interblocages, il suffit d'associer un ordre aux ressources (R1 < R2 < …< R6) et si un processus a besoin de deux ressources Ri et Rj avec Ri < Rj, il doit d'abord demander Ri avant Rj.",
+              "level": "Conceptual"
+            },
+            {
+              "id": "B.3",
+              "question_text": ". On veut éviter les interblocages en utilisant l’algorithme du banquier. Doit-on modifier la fonction « prendre » ? Si oui, expliquez comment. Supposez que le système est dans l’état où P1 détient les ressources R4 et R5, et P3 détient les ressources R1 et R2. Le processus P2 demande la ressource R3. Le système va-t-il satisfaire cette demande ? Justifiez votre réponse",
+              "Solution": "Oui, il faut modifier la fonction prendre pour boucler sur une attente active ou alternée par des pauses bornées, tant que la demande mène vers un état non sûr. Si on accorde R3 à P2, l'état obtenu n'est pas sûr car aucune des relations Req(P1) <= A, Req(P2) <= A et Req(P3) <= A n'est vraie. La demande sera donc rejetée.",
+              "level": "Conceptual"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

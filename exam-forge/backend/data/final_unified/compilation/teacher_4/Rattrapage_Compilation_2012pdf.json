@@ -1,0 +1,509 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h30m",
+    "language": "french"
+  },
+  "exam_header": {
+    "raw_text": "Université Mohamed Khider – Biskra. Module: Compilation. Niveau : 3ème Licence. Année universitaire: 2011/2012. Département d'Informatique Documents non autorisés. Rattrapage Date : 14/03/2012 Durée : 1h30m",
+    "language": "French"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (04 pts)",
+      "total_exercise_points": "4",
+      "introduction_context": "On souhaite écrire un analyseur lexical pour le langage de commandes suivant : – une commande est composée d’un nom de commande, suivi d’une liste optionnelle d’arguments, suivie d’une liste facultative d’options ; – une liste d’arguments est une suite d’arguments ; – une liste d’options est une suite non vide d’options encadrée par [ et ], à l’intérieur de laquelle les options sont séparées par virgule « , » ; – une option est un caractère précédé d’un tiret ; – un argument est un identificateur, de même qu’un nom de commande. Par exemple : macom arg1 arg2 [-a,-b] est une commande, ainsi que macom [-f] et macom.",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Factual",
+          "question_text": "1. Quelles sont les unités lexicales nécessaires à la description d’une commande ?",
+          "Solution": "Les unités lexicales nécessaires à la description d’une commande sont : Identificateurs, lettre, [ , ], -, ‘,’ (01 pts)"
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "2. Avec un fichier Lex donner une description régulière qui la définit.",
+          "Solution": [
+            "%{",
+            "#include <string.h>",
+            "#include <stdlib.h>",
+            "#include <stdio.h>",
+            "%}",
+            "Lettre [a-zA-Z]",
+            "Id {Lettre}{Lettre}*",
+            "%%",
+            "id(\\ id)*(\\[\\-{lettre}(« , »\\-{lettre})*\\] ) ? {return (commentaire) ;}",
+            "%%"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "Soit la grammaire G( {S,L},{a,b,c},S) : S  aLb | ab | c , L  S | L S",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Factual",
+          "question_text": "1. Quelle est la forme générale des phrases engendrée par cette grammaire ?",
+          "Solution": "Non, G n’est pas de type LL(1) parce que il y a la récursivité à gauche et nécessite la factorisation à gauche (0.5 pts)."
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "2. G est-elle LL(1) ? justifier votre réponse. Sinon la transformer pour qu'elle le soit (grammaire G’).",
+          "Solution": [
+            "S → aS’ | c",
+            "S’ → Lb | b",
+            "L → SL’",
+            "L’ → LSL’ | ԑ"
+          ]
+        },
+        {
+          "id": "3",
+          "level": "Procedural",
+          "question_text": "3. Construire la table d'analyse",
+          "solution_first_follow": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "S",
+                "a, c",
+                "$, a, c, b"
+              ],
+              [
+                "S’",
+                "a, c, b",
+                "$, a, c, b"
+              ],
+              [
+                "L",
+                "a, c",
+                "b"
+              ],
+              [
+                "L’",
+                "a, c, ԑ",
+                "b"
+              ]
+            ]
+          },
+          "solution_table": {
+            "type": "table",
+            "headers": [
+              "",
+              "a",
+              "b",
+              "c"
+            ],
+            "rows": [
+              [
+                "S",
+                "aS’",
+                "",
+                "c"
+              ],
+              [
+                "S’",
+                "Lb",
+                "b",
+                "Lb"
+              ],
+              [
+                "L",
+                "SL’",
+                "",
+                "SL’"
+              ],
+              [
+                "L’",
+                "LSL’",
+                "ԑ",
+                "LSL’"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "5",
+          "level": "Conceptual",
+          "question_text": "4. Analyser la chaine « accaaccabb »",
+          "solution_simulation": {
+            "type": "table",
+            "headers": [
+              "Pile",
+              "Chaine",
+              "Action"
+            ],
+            "rows": [
+              [
+                "$S",
+                "accaaccabb$",
+                "SaS’"
+              ],
+              [
+                "$S’a",
+                "accaaccabb$",
+                "Dépiler, Avancer"
+              ],
+              [
+                "$S’",
+                "ccaaccabb$",
+                "S’Lb"
+              ],
+              [
+                "$bL",
+                "ccaaccabb$",
+                "LSL’"
+              ],
+              [
+                "$bL’S",
+                "ccaaccabb$",
+                "Sc"
+              ],
+              [
+                "$bL’c",
+                "ccaaccabb$",
+                "Dépiler, Avancer"
+              ],
+              [
+                "$bL’",
+                "caaccabb$",
+                "LSL’"
+              ],
+              [
+                "$bL’L’S",
+                "caaccabb$",
+                "Sc"
+              ],
+              [
+                "$bL’L’c",
+                "caaccabb$",
+                "Dépiler, Avancer"
+              ],
+              [
+                "$bL’L’",
+                "aaccabb$",
+                "L’LSL’"
+              ],
+              [
+                "$bL’L’SL",
+                "aaccabb$",
+                "LSL’"
+              ],
+              [
+                "$bL’L’SL’S",
+                "aaccabb$",
+                "SaS’"
+              ],
+              [
+                "$bL’L’SL’S’a",
+                "aaccabb$",
+                "Dépiler, Avancer"
+              ],
+              [
+                "$bL’L’SL’S’",
+                "accabb$",
+                "S’Lb"
+              ],
+              [
+                "$bL’L’SL’bL",
+                "accabb$",
+                "LSL’"
+              ],
+              [
+                "$bL’L’SL’bL’S",
+                "accabb$",
+                "SaS’"
+              ],
+              [
+                "$bL’L’SL’bL’S’a",
+                "accabb$",
+                "Dépiler, Avancer"
+              ],
+              [
+                "$bL’L’SL’bL’S’",
+                "ccabb$",
+                "S’Lb"
+              ],
+              [
+                "$bL’L’SL’bL’bL",
+                "ccabb$",
+                "LSL’"
+              ],
+              [
+                "$bL’L’SL’bL’bL’S",
+                "ccabb$",
+                "Sc"
+              ],
+              [
+                "$bL’L’SL’bL’bL’c",
+                "ccabb$",
+                "Dépiler, Avancer"
+              ],
+              [
+                "$bL’L’SL’bL’bL’",
+                "cabb$",
+                "L’LSL’"
+              ],
+              [
+                "$bL’L’SL’bL’bL’SL",
+                "cabb$",
+                "LSL’"
+              ],
+              [
+                "$bL’L’SL’bL’bL’SL’S",
+                "cabb$",
+                "Sc"
+              ],
+              [
+                "$bL’L’SL’bL’bL’SL’c",
+                "cabb$",
+                "Dépiler, Avancer"
+              ],
+              [
+                "$bL’L’SL’bL’bL’SL’",
+                "abb$",
+                "L’LSL’"
+              ],
+              [
+                "$bL’L’SL’bL’bL’SL’SL",
+                "abb$",
+                "LSL’"
+              ],
+              [
+                "$bL’L’SL’bL’bL’SL’SL’S",
+                "abb$",
+                "SaS’"
+              ],
+              [
+                "$bL’L’SL’bL’bL’SL’SL’S’a",
+                "abb$",
+                "Dépiler, Avancer"
+              ],
+              [
+                "$bL’L’SL’bL’bL’SL’SL’S’",
+                "bb$",
+                "S’b"
+              ],
+              [
+                "$bL’L’SL’bL’bL’SL’SL’b",
+                "bb$",
+                "Dépiler, Avancer"
+              ],
+              [
+                "$bL’L’SL’bL’bL’SL’SL’",
+                "b$",
+                "L’ ԑ"
+              ],
+              [
+                "$bL’L’SL’bL’bL’SL’S",
+                "b$",
+                "erreur"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "4",
+          "level": "Metacognitive",
+          "question_text": "5. Construire la la table d'analyse LR (0) de G. G est-elle LR(0) ? justifier votre réponse.",
+          "Solution": "G est de type LR(0) parcequ’il n’y a aucun cas de conflit (0.5 pts).",
+          "solution_table": {
+            "headers": [
+              "",
+              "a",
+              "b",
+              "c",
+              "$",
+              "S",
+              "L"
+            ],
+            "rows": [
+              [
+                "0",
+                "d3",
+                "",
+                "d2",
+                "",
+                "1",
+                ""
+              ],
+              [
+                "1",
+                "",
+                "",
+                "",
+                "ACC",
+                "",
+                ""
+              ],
+              [
+                "2",
+                "R:S->c",
+                "R:S->c",
+                "R:S->c",
+                "R:S->c",
+                "",
+                ""
+              ],
+              [
+                "3",
+                "d3",
+                "d5",
+                "d2",
+                "",
+                "4",
+                "6"
+              ],
+              [
+                "4",
+                "R:L->S",
+                "R:L->S",
+                "R:L->S",
+                "R:L->S",
+                "",
+                ""
+              ],
+              [
+                "5",
+                "R:S->ab",
+                "R:S->ab",
+                "R:S->ab",
+                "R:S->ab",
+                "",
+                ""
+              ],
+              [
+                "6",
+                "d3",
+                "d7",
+                "d2",
+                "",
+                "8",
+                ""
+              ],
+              [
+                "7",
+                "R:S->aLb",
+                "R:S->aLb",
+                "R:S->aLb",
+                "R:S->aLb",
+                "",
+                ""
+              ],
+              [
+                "8",
+                "R:L->LS",
+                "R:L->LS",
+                "R:L->LS",
+                "R:L->LS",
+                "",
+                ""
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 03 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "Dans certain langage, ABS (Exp) est introduit comme une fonction mathématique et rend la valeur valeur absolue d’une expression E. Par exemple : ABS(-19 + 2*7) = ABS(-5)=5. On veut introduire ce ABS() dans le MiniLangage comme un opérateur unaire. ",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "question_text": "1. Ecrire la fonction CréerABS qui permet de créer l'arbre abstrait de cette expression.",
+          "Solution": [
+            "EXPR_ARBRE CreerBin (char op, EXPR_ARBRE u) {",
+            "  EXPR_ARBRE aux = (EXPR_ARBRE)malloc(sizeof (struct _EXPR_ARBRE));",
+            "  aux->type = UNAIRE;",
+            "  aux->forme.bin.op = op;",
+            "  aux->forme.bin.opU = U;",
+            "  return(aux);",
+            "}"
+          ]
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "2. Modifier les fichiers d’entrée pour Lex et Yacc (vues précédemment) pour accepter ce nouvel opérateur binaire et pour construire l’arbre correspondant.",
+          "Solution": [
+            "// Lex",
+            "abs {yylval.caractere = yytext[0];return(TOKEN_Abs;}",
+            "// Yacc",
+            "F : TOKEN_Abs’(‘E’)’ {$$ = CreerUnaire($1,$3);};"
+          ]
+        },
+        {
+          "id": "3",
+          "level": "Metacognitive",
+          "question_text": "3. Proposer un modèle de code MIPS pour ce nouvel opérateur.",
+          "Solution": [
+            "Code l’exp1 résultat $8",
+            "Li $9,0",
+            "BLT $8,$9,E101",
+            "J E102;",
+            "E101 :li $10,-1",
+            "Multi $8,$8,$9",
+            "E102 : nop"
+          ]
+        },
+        {
+          "id": "4",
+          "level": "Procedural",
+          "question_text": "4. Construire l’arbre et donner le code MIPS complet correspondant au code MNL suivant : Var a,b,c ; Lire a ; b=2-a*4; If(a<0) a=ABS(a) ; if(b<0) b=abs(b) ; c=b*a ; ecrire c .",
+          "Solution": [
+            ".data",
+            "MEM: .space 12",
+            ".text",
+            "main: la $30, MEM",
+            "li $2, 5",
+            "syscall",
+            "sw $2,0($30)",
+            "li $8,2",
+            "lw $9,0($30)",
+            "li $10,4",
+            "Mult $9,$9,$10",
+            "ADD $8,$8,$9",
+            "sw $2,4($30)",
+            "lw $8, 0($30)",
+            "Li $9,0",
+            "BLT $8,$9,E101",
+            "J E102;",
+            "E101 :li $10,-1",
+            "Multi $8,$8,$9",
+            "E102 : nop",
+            "lw $8, 0($30)",
+            "Li $9,0",
+            "BLT $8,$9,E103",
+            "J E104;",
+            "E103 :li $10,-1",
+            "Multi $8,$8,$9",
+            "E104 : nop",
+            "lw $8, 0($30)",
+            "lw $9, 4($30)",
+            "mult $8,$8,$9",
+            "sw $8, 8(30)",
+            "lw $4, 8($30)",
+            "li $2, 4",
+            "syscall",
+            "li $2,10",
+            "syscall"
+          ]
+        }
+      ]
+    }
+  ]
+}

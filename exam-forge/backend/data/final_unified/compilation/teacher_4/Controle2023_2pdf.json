@@ -1,0 +1,222 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h30",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (04 pts)",
+      "total_exercise_points": "4",
+      "introduction_context": "Sur l'alphabet {a, b, c}, donner, lorsque c'est possible, une expression régulière pour chacun des langages suivants :",
+      "Question": [
+        {
+          "id": "a",
+          "question_text": "Ensemble des mots w ne contenant trois occurrences successives de a.",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "b",
+          "question_text": "Chaînes dans lesquelles chaque a est immédiatement suivi d'au moins deux b.",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "c",
+          "question_text": "Chaînes dans lequel aucun a n'apparaît après le premier b (s'il en existe un).",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "d",
+          "question_text": "Chaînes qui commencent et se terminent par des symboles différents.",
+          "Solution": null,
+          "level": "Factual"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "Soit la grammaire G :",
+      "grammar": [
+        "S → bAb | bBa",
+        "A → aS | CB",
+        "B → b | BC",
+        "C → c | cC"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "points": null,
+          "question_text": "Montrer que cette grammaire est ambigüe.",
+          "Solution": "La grammaire est ambiguë : la chaîne bbcca admet deux dérivations les plus à gauche différentes :",
+          "solution_derivations": [
+            "S → bBa → bBCa → bbCa → bbcCa → bbcca",
+            "S → bBa → bBCa → bBCCa → bbCCa → bbcCa → bbcca"
+          ],
+          "level": "Conceptual"
+        },
+        {
+          "id": "2",
+          "points": null,
+          "question_text": "Transformez-la pour qu'elle devienne LL(1) ?",
+          "Solution": "La factorisation à gauche des non-terminaux S et C est simple. Le nonterminal B était la source à la fois des problèmes de récursivité à gauche et d'ambiguïté, et les deux problèmes sont résolus en générant un seul b, puis zéro ou plusieurs c (via un nouveau non-terminal D). La nouvelle grammaire sera comme suit 2 :",
+          "solution_grammar_final": [
+            "S → bT",
+            "T → Ab | Ba",
+            "A → aS | CB",
+            "B → bD",
+            "C → cD",
+            "D → cD | ε"
+          ],
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "points": null,
+          "question_text": "Construire la table d'analyse LL(1) de la nouvelle grammaire.",
+          "solution_premiers_suivants": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "S",
+                "b",
+                "$ , b"
+              ],
+              [
+                "T",
+                "a, b, c",
+                "$ , b"
+              ],
+              [
+                "A",
+                "a, c, b",
+                "b"
+              ],
+              [
+                "B",
+                "b",
+                "a, b"
+              ],
+              [
+                "C",
+                "c",
+                "b"
+              ],
+              [
+                "D",
+                "c, ε",
+                "a, b"
+              ]
+            ]
+          },
+          "solution_ll1_table": {
+            "type": "table",
+            "headers": [
+              "",
+              "a",
+              "b",
+              "c",
+              "$"
+            ],
+            "rows": [
+              [
+                "S",
+                "",
+                "bT",
+                "",
+                ""
+              ],
+              [
+                "T",
+                "Ab",
+                "Ba",
+                "Ab",
+                ""
+              ],
+              [
+                "A",
+                "aS",
+                "",
+                "CB",
+                ""
+              ],
+              [
+                "B",
+                "",
+                "bD",
+                "",
+                ""
+              ],
+              [
+                "C",
+                "",
+                "",
+                "cD",
+                ""
+              ],
+              [
+                "D",
+                "ε",
+                "ε",
+                "cD",
+                ""
+              ]
+            ]
+          },
+          "level": "Procedural"
+        },
+        {
+          "id": "4",
+          "points": null,
+          "question_text": "Analyser la chaîne « babccca$ ».",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 03 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "Soit la grammaire G :",
+      "grammar": [
+        "S → Aa | SaSb",
+        "A → Ba | Sb | b",
+        "B → aBb | Bba | a"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "points": null,
+          "question_text": "Donnez l'automate LR(1) de la grammaire G.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "points": null,
+          "question_text": "Construire la table LR(1) de G ? G est-elle LR(1) ? Justifier vos réponses.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "points": null,
+          "question_text": "G est-elle LALR(1) ? Justifier vos réponses.",
+          "Solution": null,
+          "level": "Metacognitive"
+        }
+      ]
+    }
+  ]
+}

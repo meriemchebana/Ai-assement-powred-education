@@ -1,0 +1,31 @@
+[project]
+name = "exam-forge-backend"
+version = "0.1.0"
+description = "MCQ exam generator that learns a professor's style from labeled past exams."
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.30",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.5",
+    "instructor>=1.6",
+    "openai>=1.54",
+    "python-dotenv>=1.0",
+    "httpx>=0.27",
+    "requests>=2.31",
+    # RAG stack (no torch — pure numpy + FAISS)
+    "pymupdf>=1.24.0",
+    "faiss-cpu>=1.8.0",
+    "rank-bm25>=0.2.2",
+    "numpy>=1.26.0",
+    # Cloud RAG (Supabase)
+    "supabase>=2.0.0",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["app*"]

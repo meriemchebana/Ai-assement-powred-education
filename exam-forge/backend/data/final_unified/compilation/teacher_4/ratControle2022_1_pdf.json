@@ -1,0 +1,335 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "Écrire les expressions régulières acceptant les langages :",
+      "Question": [
+        {
+          "id": "1",
+          "points": "3",
+          "question_text": "Ensemble des nombres dont il existe des espaces entre les milliers : une espace apparaît uniquement entre les groupes de 3 nombres. Vérifier que «12 345,456 7» et «12,45» sont reconnus chacun comme un seul nombre mais que « 123 45 » et « 5,4 567 » sont reconnus chacun comme deux nombres.",
+          "verification": {
+            "single_number": [
+              "12 345,456 7",
+              "12,45"
+            ],
+            "two_numbers": [
+              "123 45",
+              "5,4 567"
+            ]
+          },
+          "Solution": "([0-9]{1,3})(\\ [0-9]{3})*\\.([0-9]{3}\\ )*([0-9]{1,3})",
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "points": "2",
+          "question_text": "L'ensemble des chaînes composées de lettres, de chiffres et de tirets. Elles ne peuvent ni commencer, ni finir par un tiret et ne contiennent pas deux tirets consécutifs.",
+          "Solution": "([0-9a-zA-Z])+(\\-?[0-9a-zA-Z]+)*",
+          "level": "Conceptual"
+        },
+        {
+          "id": "3",
+          "points": "1.5",
+          "question_text": "L'ensemble de toutes les chaînes de 0 et de 1 telles que chaque 0 soit immédiatement suivi par au plus trois 1.",
+          "Solution": "1*|(01?1?1?)*",
+          "level": "Conceptual"
+        },
+        {
+          "id": "4",
+          "points": "1.5",
+          "question_text": "Tous les mots non vides ne contenant pas plus que trois 0 consécutifs.",
+          "Solution": "(0?0?0?|[1-9])+|(00?0?)",
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (04 pts)",
+      "total_exercise_points": "4",
+      "introduction_context": "Soit la grammaire G :",
+      "grammar": [
+        "S → A | B",
+        "A → Ba | a",
+        "B → Ab | b"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "points": "2",
+          "question_text": "Décrivez le langage L(G1) engendré par la grammaire G1 c-à-d. quels types de mots sont acceptés/rejetés par G1 ?",
+          "Solution": "L = {ensemble des mots w ne contenant ni deux a consécutifs ni deux b consécutifs}.",
+          "level": "Conceptual"
+        },
+        {
+          "id": "2",
+          "points": "2",
+          "question_text": "La grammaire G1 est récursive à gauche. Écrire une grammaire G1' sans récursivité gauche directe ni indirecte équivalente à G1.",
+          "solution_elimination": {
+            "steps": [
+              {
+                "step": "Pour i=0",
+                "detail": "S → A | B : il n'y a pas de RG."
+              },
+              {
+                "step": "Pour i=1, j=0",
+                "detail": "A → Ba | a : il n'y a pas de règle à remplacer. Pas de RG."
+              },
+              {
+                "step": "Pour i=2, j=0",
+                "detail": "B → Ab | b : il n'y a pas de règle à remplacer."
+              },
+              {
+                "step": "Pour i=2, j=1",
+                "detail": "Il faut remplacer A par (Ba | a) → B → (Ba | a)b | b → B → Bab | ab | b. Il y a une RG, il faut l'éliminer.",
+                "result": [
+                  "B → (ab | b)B'",
+                  "B' → abB' | ε"
+                ]
+              }
+            ],
+            "new_grammar": [
+              "S  → A | B",
+              "A  → Ba | a",
+              "B  → (ab | b)B'",
+              "B' → abB' | ε"
+            ]
+          },
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 03 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "La grammaire G2 ci-dessous décrit un nombre N.",
+      "grammar": [
+        "N   → OM LC OF OE",
+        "OM  → -",
+        "OM  → ε",
+        "LC  → c LCB",
+        "LCB → c LCB",
+        "LCB → ε",
+        "OF  → , LC",
+        "OF  → ε",
+        "OE  → E OM LC",
+        "OE  → ε"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "points": "3",
+          "question_text": "Calculez les ensembles Premier et Suivant pour les symboles non terminaux de la grammaire G2.",
+          "solution_premiers_suivants": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "N",
+                "-, c",
+                "$"
+              ],
+              [
+                "OM",
+                "-, ε",
+                "c"
+              ],
+              [
+                "LC",
+                "c",
+                ", E $"
+              ],
+              [
+                "LCB",
+                "c, ε",
+                ", E $"
+              ],
+              [
+                "OF",
+                ", ε",
+                "E $"
+              ],
+              [
+                "OE",
+                "E, ε",
+                "$"
+              ]
+            ]
+          },
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "points": "2.5",
+          "question_text": "Construisez la table d'analyse LL(1) de la grammaire G2.",
+          "solution_ll1_table": {
+            "type": "table",
+            "headers": [
+              "",
+              "c",
+              "E",
+              "-",
+              ",",
+              "$"
+            ],
+            "rows": [
+              [
+                "N",
+                "OM LC OF OE",
+                "OM LC OF OE",
+                "",
+                "",
+                ""
+              ],
+              [
+                "OM",
+                "ε",
+                "",
+                "-",
+                "",
+                "ε"
+              ],
+              [
+                "LC",
+                "c LCB",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "LCB",
+                "c LCB",
+                "ε",
+                "",
+                "ε",
+                "ε"
+              ],
+              [
+                "OF",
+                "ε",
+                "ε",
+                "",
+                ", LC",
+                "ε"
+              ],
+              [
+                "OE",
+                "",
+                "E OM LC",
+                "",
+                "",
+                "ε"
+              ]
+            ]
+          },
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "points": "2.5",
+          "question_text": "Analysez le mot c,cE-E$",
+          "solution_table": {
+            "type": "table",
+            "headers": [
+              "Chaîne",
+              "Pile",
+              "Action"
+            ],
+            "rows": [
+              [
+                "c,cE-E$",
+                "$E",
+                "dépiler, Empiler OE OF LC OM"
+              ],
+              [
+                "c,cE-E$",
+                "$OE OF LC OM",
+                "dépiler, Empiler ε"
+              ],
+              [
+                "c,cE-E$",
+                "$OE OF LC",
+                "dépiler, Empiler LCB c"
+              ],
+              [
+                "c,cE-E$",
+                "$OE OF LCB c",
+                "dépiler, Avancer"
+              ],
+              [
+                ",cE-E$",
+                "$OE OF LCB",
+                "dépiler, Empiler ε"
+              ],
+              [
+                ",cE-E$",
+                "$OE OF",
+                "dépiler, Empiler LC ,"
+              ],
+              [
+                ",cE-E$",
+                "$OE LC ,",
+                "dépiler, Avancer"
+              ],
+              [
+                "cE-E$",
+                "$OE LC",
+                "dépiler, Empiler LCB c"
+              ],
+              [
+                "cE-E$",
+                "$OE LCB c",
+                "dépiler, Avancer"
+              ],
+              [
+                "E-E$",
+                "$OE LCB",
+                "dépiler, Empiler ε"
+              ],
+              [
+                "E-E$",
+                "$OE",
+                "dépiler, Empiler LC OM E"
+              ],
+              [
+                "E-E$",
+                "$LC OM E",
+                "dépiler, Avancer"
+              ],
+              [
+                "-E$",
+                "$LC OM",
+                "dépiler, Empiler -"
+              ],
+              [
+                "-E$",
+                "$LC -",
+                "dépiler, Avancer"
+              ],
+              [
+                "E$",
+                "$LC",
+                "Erreur !!!"
+              ]
+            ]
+          },
+          "level": "Conceptual"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "metadata": {
+    "module": "ALGO1",
+    "duration": "08h-09h30",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_1",
+      "title": "Exercice 1",
+      "total_exercise_points": "7 pts",
+      "introduction_context": "On souhaite représenter les nombres entiers par des listes linéaires chaînées de caractères où chaque chiffre d’un nombre est rangé dans un maillon de la liste sous forme d’un caractère:",
+      "diagram": {
+        "preceding_text": "Exemple : Le nombre \"678903\" est représentée par la liste suivante :",
+        "description": "A visual representation of a singly linked list with digits '6', '7', '8', '9', '0', '3'.",
+        "precise_location": "Page 1 - Middle"
+      },
+      "preamble_functions": "On donne les fonctions: CarVersEnt(C :caractère) : donne la valeur entière du caractère C CarVersEnt(‘8’) = 8 , EntVersCar(I :Entier) : donne le caractère correspondant au chiffre I. EntVersCar(8) = ‘8’",
+      "Question": [
+        {
+          "id": "1.1",
+          "points": "1",
+          "level": "Procedural",
+          "introduction_context": "Il est demandé d’écrire en langage algorithmique vu dans le cours les fonctions suivantes ",
+          "question_text": "1. Fonction Pair (L :Pointeur(TMaillon)) : Booleen\nQui retourne Vrai si le nombre représenté par L est pair, et Faux sinon.",
+          "Solution": [
+            "Fonction Pair (L :Pointeur(TMaillon)) : Booleen",
+            "Var P : Pointeur(TMaillon) ;",
+            "Debut",
+            "    P ← L ;",
+            "    Si P=Nil alors Pair ← Vrai",
+            "    Sinon",
+            "        TQ Suivant(P) ≠ Nil Faire",
+            "            P ← Suivant(P) ;",
+            "        FTQ ;",
+            "        Si CarVersEnt(Valeur(P)) mod 2 = 0 alors Pair ← Vrai",
+            "        Sinon",
+            "            Pair ← Faux ;",
+            "        FSi",
+            "    FSi",
+            "Fin ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.2",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "2. Fonction Mult100(L: Pointeur(TMaillon)) : Pointeur(TMaillon) ;\nQui retourne une nouvelle liste représentant le nombre représenté par L multiplié par 100.",
+          "Solution": [
+            "Fonction Mult100(L: Pointeur(TMaillon)) : Pointeur(TMaillon) ;",
+            "Var P,P1,Q,Tete : Pointeur(TMaillon) ;",
+            "Debut",
+            "    P ← L ; Tete ← Nil ;",
+            "    TQ P ≠ Nil Faire",
+            "        Allouer (P1) ; Aff_Val(P1, Valeur(P)) ; Aff_Adr(P1,Nil) ;",
+            "        Si Tete=Nil alors Tete ← P1",
+            "        Sinon Aff_Adr(Q,P1)",
+            "        FSi;",
+            "        Q← P1 ; P ←Suivant(P) ;",
+            "    FTQ ;",
+            "    Si Tete ≠ Nil alors",
+            "        Allouer(P) ; Aff_Val(P,'0') ; Aff_Adr(Q,P) ; Q ← P;",
+            "        Allouer(P) ; Aff_Val(P,'0') ; Aff_Adr(Q,P) ; Aff_Adr(P, Nil);",
+            "    FSi",
+            "    Mult100 ← Tete ;",
+            "Fin ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.3",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "3. Fonction Div100(L:Pointeur(TMaillon)):Pointeur(TMaillon);\nQui retourne une nouvelle liste représentant le nombre représenté par L divisé par 100.",
+          "Solution": [
+            "Fonction Div100(L:Pointeur(TMaillon)):Pointeur(TMaillon);",
+            "Var P,P1, Q,Tete : Pointeur(TMaillon) ;",
+            "Debut",
+            "    P ← L ; Tete ← Nil ;",
+            "    TQ (P ≠ Nil et Suivant(P) ≠ Nil et Suivant(Suivant(P)) ≠ Nil) Faire",
+            "        Allouer (P1) ; Aff_Val(P1, Valeur(P)) ; Aff_Adr(P1,Nil) ;",
+            "        Si Tete=Nil alors Tete ← P1",
+            "        Sinon Aff_Adr(Q,P1)",
+            "        FSi;",
+            "        Q← P1 ; P ←Suivant(P) ;",
+            "    FTQ ;",
+            "    Div100 ← Tete ;",
+            "Fin ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.4",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "4. Fonction Mod100(L: Pointeur(TMaillon)):Pointeur(TMaillon);\nQui retourne une nouvelle liste représentant le reste de division du nombre représenté par L par 100.",
+          "Solution": [
+            "Fonction Mod100(L: Pointeur(TMaillon)):Pointeur(TMaillon);",
+            "Var P,P1, Q,Tete : Pointeur(TMaillon) ;",
+            "Debut",
+            "    P ← L ; Tete ← Nil ;",
+            "    TQ (P ≠ Nil et Suivant(P) ≠ Nil et Suivant(Suivant(P)) ≠ Nil) Faire",
+            "        P ←Suivant(P) ;",
+            "    FTQ ;",
+            "    Tete ← Nil ;",
+            "    TQ P ≠ Nil Faire",
+            "        Si Valeur(P) ≠ '0' ou Q ≠ Nil alors",
+            "            Allouer (P1) ; Aff_Val(P1, Valeur(P)) ; Aff_Adr(P1,Nil) ;",
+            "            Si Tete=Nil alors Tete ← P1",
+            "            Sinon Aff_Adr(Q,P1)",
+            "            FSi;",
+            "            Q← P1 ;",
+            "        FSi",
+            "        P ←Suivant(P) ;",
+            "    FTQ ;",
+            "    Mod100 ← Tete ;",
+            "Fin ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        }
+      ]
+    },
+    {
+      "id": "Exercice_2",
+      "title": "Exercice 2",
+      "points": "8 pts (1.5 + 2 + 2 + 2.5)",
+      "introduction_context": "Soit les valeurs des clés triées selon l’ordre d’arrivé : 14, 23, 4, 9, 17, 11, 28, 16, 3, 7",
+      "Question": [
+        {
+          "id": "2.0a",
+          "points": "1.5",
+          "level": "Procedural",
+          "question_text": "- Dessiner l’arbre binaire de recherche obtenu en insérant ces clés dans l’ordre d’arrivé",
+          "solution_diagram_description": "A Binary Search Tree with root 14, left child 4 (3, 9->7,11) and right child 23 (17->16, 28).",
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "2.0b",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "- Dessiner l’arbre après la suppression des clés : 11, 17, 23, 14",
+          "solution_diagram_description": "The BST after removals. Root is 16, children are 4 (3, 9->7) and 28.",
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "2.1",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "1. Fonction NbrePairs (Racine: Pointeur(TNoeud)):entier ;\nQui retourne le nombre de clés paires dans l’arbre.",
+          "Solution": [
+            "Fonction NbrePairs (Racine: Pointeur(TNoeud)):entier ;",
+            "Debut",
+            "   Si Racine = Nil alors NbrePairs ← 0",
+            "   Sinon",
+            "      NbrePairs ← ((Clé(Racine) +1) mod 2) + NbrePairs(FG(Racine)) + NbrePairs(FD(Racine)) ;",
+            "   FSi ;",
+            "Fin ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "2.2",
+          "points": "2.5",
+          "level": "Procedural",
+          "question_text": "2. Fonction SommeInterne (Racine: Pointeur(TNoeud)):entier ;\nQui retourne la somme des clés non feuilles dans l’arbre.",
+          "Solution": [
+            "Fonction SommeInterne (Racine: Pointeur(TNoeud)):entier ;",
+            "Debut",
+            "   Si Racine = Nil ou (FG(Racine)=Nil et FD(Racine)=Nil) alors",
+            "      SommeInterne ← 0",
+            "   Sinon",
+            "      SommeInterne ← (Clé(Racine) + SommeInterne(FG(Racine)) + SommeInterne(FD(Racine)) ;",
+            "   FSi ;",
+            "Fin ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        }
+      ]
+    },
+    {
+      "id": "Exercice_3",
+      "title": "Exercice 3",
+      "points": "5 pts (3 + 1 + 1)",
+      "Question": [
+        {
+          "id": "3.1",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "- Dessiner l’arbre représentant le tas construit après l’insertion dans l’ordre des clés suivants : 14, 23, 4, 9, 17, 11, 28, 16, 3, 7",
+          "solution_diagram_description": "A Max-Heap binary tree with root 28, children 17 (16->9,3, 14->7) and 23 (4, 11).",
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "3.2",
+          "points": "1",
+          "level": "Procedural",
+          "question_text": "- Donner le tas statique correspondant",
+          "Solution": "Static heap array: 28, 17, 23, 16, 14, 4, 11, 9, 3, 7.",
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "3.3",
+          "points": "1",
+          "level": "Procedural",
+          "question_text": "- Donner le tas (arbre) après un retrait",
+          "solution_diagram_description": "Max-Heap after removal of 28: Root 23, children 17 (16->9,3, 14) and 11 (4, 7).",
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        }
+      ]
+    }
+  ]
+}

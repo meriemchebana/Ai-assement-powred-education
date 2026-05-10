@@ -1,0 +1,146 @@
+{
+  "metadata": {
+    "module": "الاستدلال الاحصائي",
+    "duration": "",
+    "language": "arabic"
+  },
+  "exercises": [
+    {
+      "id": "التمرين_الأول",
+      "title": "التمرين الأول (5 نقاط)",
+      "total_exercise_points": "5",
+      "introduction_context": "نعتبر مجتمع X طبيعي متوسطه μ=0 و تباينه σ²=1/9. نسحب منه عينة عشوائية بسيطة حجمها n=4. أوجد توزيع المعاينة للإحصائيات التالية :",
+      "note": "حيث X̄ متوسط العينة و S² تباين العينة",
+      "Question": [
+        {
+          "id": "a",
+          "question_text": "U = 3X̄",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "b",
+          "question_text": "V = X₂ + X₃ + X₄",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "c",
+          "question_text": "W = 3V²",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "d",
+          "question_text": "R = 3X₁² / (X₂² + X₃² + X₄²)",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "التمرين_الثاني",
+      "title": "التمرين الثاني (7 نقاط)",
+      "total_exercise_points": "7",
+      "introduction_context": "X متغير عشوائي له دالة كثافة احتمالية f_θ(x) = (x/θ) exp(-x²/2θ) من أجل x > 0 و 0 في الحالة العكسية مع θ > 0. تم سحب عينة عشوائية مستقلة بحجم n من هذا المجتمع {X₁, X₂, ..., Xₙ}.",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "تحقق أن المتغير Y = X²/θ له توزيع أسي (0.5) (أي التوزيع χ²(2)).",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "2",
+          "question_text": "بين أن T = (1/2n) Σᵢ Xᵢ² هو مقدر الترجيح الأعظم للمعلمة θ. تحقق أن الاحصائية 2nT/θ لها توزيع χ²(2n).",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "3",
+          "question_text": "هل المقدر T غير متحيز؟ فعال؟",
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "id": "التمرين_الثالث",
+      "title": "التمرين الثالث (8 نقاط)",
+      "total_exercise_points": "8",
+      "introduction_context": null,
+      "Question": [
+        {
+          "id": "I",
+          "question_text": "ليكن مجتمع X له التوزيع الطبيعي N(μ, σ²=2). نسحب منه عينة عشوائية بسيطة حجمها n=50.",
+          "sub_questions": [
+            {
+              "id": "I.1",
+              "question_text": "عين مجال ثقة حول المعلمة μ بدرجة ثقة 95%.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "I.2",
+              "question_text": "نريد اختبار الفرضيتين التاليتين : H₀ : μ=10 ضد H₁ : μ=12 بمستوى الدلالة 5%. نعتبر قاعدة القرار التالية : d(x̄) = { a₀ : x̄ < c , a₁ : x̄ ≥ c }",
+              "sub_questions": [
+                {
+                  "id": "I.2.a",
+                  "question_text": "عين القيمة c.",
+                  "Solution": null,
+                  "level": "Procedural"
+                },
+                {
+                  "id": "I.2.b",
+                  "question_text": "أحسب احتمال ارتكاب الخطأ من الصنف 2 (β) ثم استنتج قوة هذا الاختبار.",
+                  "Solution": null,
+                  "level": "Procedural"
+                },
+                {
+                  "id": "I.2.c",
+                  "question_text": "إذا علمت أن العينة المسحوبة أعطت النتيجة التالية : X̄ = 10.20، ما هو قرارك؟",
+                  "Solution": null,
+                  "level": "Procedural"
+                }
+              ],
+              "Solution": null,
+              "level": "Procedural"
+            }
+          ],
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "II",
+          "introduction_context": "يهتم باحث بدراسة التكاليف الشهرية لصيانة الحافلات في شركة ما، فأخذ عينتين عشوائيتين: الأولى من بين الحافلات التي تسير في المدينة و الثانية من خارج المدينة مستقلة عن الأولى.",
+          "table": {
+            "headers": [
+              "",
+              "الحجم",
+              "التباين",
+              "الوسط"
+            ],
+            "rows": [
+              [
+                "العينة الأولى",
+                "6",
+                "3.21",
+                "6.8"
+              ],
+              [
+                "العينة الثانية",
+                "4",
+                "4.17",
+                "5.15"
+              ]
+            ]
+          },
+          "note": "نفرض أن الصيانة تتبع التوزيع الطبيعي N(μ₁,σ) في المدينة و N(μ₂,σ) في خارج المدينة.",
+          "question_text": "هل مكان سير الحافلات له تأثير على تكلفة صيانتها؟ استعمل الاختبار المناسب بمستوى الدلالة 5%.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,709 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h30m",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (04 pts)",
+      "total_exercise_points": "4",
+      "introduction_context": "Donner les expressions régulières pour Lex permettant de lire les mots suivants donnés en entrée :",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Factual",
+          "question_text": "1. les mots non vides indiquant la longitude en degrés, minutes et secondes : -180*00'00\", 180*00'00\", 179*5'59\", … sont des mots acceptés. 180*, 180*00', 180*00'10\", 179*00'60\", 00'00\", … ne sont pas acceptés.",
+          "Solution": "\\-?(180\\*00\\'00\\\"|(0?[0-9]|1[0-7])?[0-9]\\*[0-5]?[0-9]\\'[0-5]?[0-9]\\\")"
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "2. les mots non vides : – composés de lettres minuscules de l'alphabet, – où a, b et c apparaissent au plus une fois ( 0 ou 1 fois), – si a est présent, il n'y aura pas b ni c à sa gauche de près ou de loin, – si b est présent, il n'y aura pas c à sa gauche de près ou de loin. a, b, c, abde, btgcf, xaxbefc, ... sont des mots acceptés, aeaf, ebdag, acbde, ... ne sont pas acceptés",
+          "Solution": "[d-z]+|([d-z]*a[d-z]*b?[d-z]*c?[d-z]*)|([d-z]*a?[d-z]*b[d-z]*c?[d-z]*)|([d-z]*a?[d-z]*b?[d-z]*c[d-z]*)"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "Soit G la grammaire suivante pour des blocs Java (simplifiés) : bloc → '{' inst_l '}', inst_l → inst_l inst | ε, inst → decl | exp | bloc .decl et exp sont ici des unités lexicales terminales pour les déclarations et les expressions.",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "question_text": "1. Il est évident que cette grammaire n'est pas LL(1) : pourquoi (en détail)? Transformez-la en Grammaire G1 de type LL(1).",
+          "Solution": "Cette grammaire n'est pas LL(1) parce qu'il y a une récursivité à gauche dans la règle : IL → IL inst | ε (0,5 pts) Après la suppression de la récursivité à gauche, la grammaire G1 soit comme suit : B → { IL } IL→ inst IL| ε inst → decl | exp | B",
+          "solution_table": {
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "B",
+                "{",
+                "decl, exp, {, }, $"
+              ],
+              [
+                "IL",
+                "decl, exp, {, ε",
+                "}"
+              ],
+              [
+                "inst",
+                "decl, exp, {",
+                "decl, exp, {, }"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "2. Construire la table d'analyse LL(1) pour G1.",
+          "solution_table": {
+            "type": "table",
+            "headers": [
+              "",
+              "{",
+              "}",
+              "decl",
+              "exp",
+              "$"
+            ],
+            "rows": [
+              [
+                "B",
+                "B → { IL }",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "IL",
+                "IL → inst IL",
+                "IL → ε",
+                "IL → inst IL",
+                "IL → inst IL",
+                ""
+              ],
+              [
+                "inst",
+                "inst → B",
+                "",
+                "inst → decl",
+                "inst → exp",
+                ""
+              ]
+            ]
+          }
+        },
+        {
+          "id": "3",
+          "level": "Procedural",
+          "question_text": "3. Analyser le mot « { d1 {} e1}» par un analyseur LL(1).",
+          "solution_table": {
+            "type": "table",
+            "headers": [
+              "Pile",
+              "Chaine",
+              "Action"
+            ],
+            "rows": [
+              [
+                "$B",
+                "{ d1 {} e1}$",
+                "dépiler, empiler }IL{ "
+              ],
+              [
+                "$}IL{",
+                "{ d1 {} e1}$",
+                "dépiler, Avancer"
+              ],
+              [
+                "$}IL",
+                "d1 {} e1}$",
+                "dépiler, empiler IL inst"
+              ],
+              [
+                "$}IL inst",
+                "d1 {} e1}$",
+                "dépiler, empiler decl"
+              ],
+              [
+                "$}IL decl",
+                "d1 {} e1}$",
+                "dépiler, Avancer"
+              ],
+              [
+                "$}IL",
+                "{} e1}$",
+                "dépiler, empiler IL inst"
+              ],
+              [
+                "$}IL inst",
+                "{} e1}$",
+                "dépiler, empiler B"
+              ],
+              [
+                "$}IL B",
+                "{} e1}$",
+                "dépiler, empiler }IL{"
+              ],
+              [
+                "$}IL}IL{",
+                "{} e1}$",
+                "dépiler, Avancer"
+              ],
+              [
+                "$}",
+                "$",
+                "Accepter"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "4",
+          "level": "Procedural",
+          "question_text": "4. Construire l'automate LR pour G.",
+          "Solution": {
+            "states_content": [
+              "I0: { E -> .S$ , S -> .TU , T -> .aTc , T -> .b }",
+              "I1: { E -> S.$ }",
+              "I2: { S -> T.U , U -> .cU , U -> .d }",
+              "I3: { T -> a.Tc , T -> .aTc , T -> .b }",
+              "I4: { T -> b. }",
+              "I5: { S -> TU. }",
+              "I6: { U -> c.U , U -> .cU , U -> .d }",
+              "I7: { T -> aT.c }",
+              "I8: { U -> cU. }",
+              "I9: { U -> d. }",
+              "I10: { T -> aTc. }"
+            ],
+            "precise_location": "Corrigé Page 3"
+          }
+        },
+        {
+          "id": "5",
+          "level": "Conceptual",
+          "question_text": "5. G est-elle LR(0) ? SLR(1) ? Justifier rigoureusement.",
+          "Solution": "LR(0)? oui il n'y a aucun cas de conflit. SLR(1)? oui il n'y a aucun cas de conflit.",
+          "solution_lr0_table": {
+            "type": "table",
+            "points": "01 pts",
+            "headers": [
+              "",
+              "{",
+              "}",
+              "decl",
+              "exp",
+              "$",
+              "B",
+              "IL",
+              "Inst"
+            ],
+            "rows": [
+              [
+                "0",
+                "d2",
+                "",
+                "",
+                "",
+                "",
+                "1",
+                "",
+                ""
+              ],
+              [
+                "1",
+                "",
+                "",
+                "",
+                "",
+                "Accepter",
+                "",
+                "",
+                ""
+              ],
+              [
+                "2",
+                "",
+                "Réduire 3",
+                "",
+                "",
+                "",
+                "",
+                "3",
+                ""
+              ],
+              [
+                "3",
+                "d2",
+                "d5",
+                "d7",
+                "d8",
+                "",
+                "4",
+                "",
+                "6"
+              ],
+              [
+                "4",
+                "Réduire 6",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "5",
+                "Réduire 1",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "6",
+                "",
+                "Réduire 2",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "7",
+                "Réduire 4",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "8",
+                "Réduire 5",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ]
+            ]
+          },
+          "solution_slr1_table": {
+            "type": "table",
+            "headers": [
+              "SLR(1)",
+              "{",
+              "}",
+              "decl",
+              "exp",
+              "$",
+              "B",
+              "LI",
+              "Inst"
+            ],
+            "rows": [
+              [
+                "0",
+                "d2",
+                "",
+                "",
+                "",
+                "",
+                "1",
+                "",
+                ""
+              ],
+              [
+                "1",
+                "",
+                "",
+                "",
+                "",
+                "Acc",
+                "",
+                "",
+                ""
+              ],
+              [
+                "2",
+                "",
+                "r3",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "3"
+              ],
+              [
+                "3",
+                "d2",
+                "d5",
+                "d7",
+                "d8",
+                "",
+                "4",
+                "",
+                "6"
+              ],
+              [
+                "4",
+                "r6",
+                "r6",
+                "r6",
+                "r6",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "5",
+                "r1",
+                "r1",
+                "r1",
+                "r1",
+                "r1",
+                "",
+                "",
+                ""
+              ],
+              [
+                "6",
+                "",
+                "r2",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "7",
+                "r4",
+                "r4",
+                "r4",
+                "r4",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "8",
+                "r5",
+                "r5",
+                "r5",
+                "r5",
+                "",
+                "",
+                "",
+                ""
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 03 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "On souhaite ajouter aux expressions arithmétiques traditionnelles, les opérateurs binaires : a) <, <=, > et >= opérateurs de comparaison, binaire, associativité de gauche à droite, moins prioritaires que les + et -, mais plus que ?:. b) == et != opérateurs de comparaison, binaire, associativité de gauche à droite, moins prioritaires que les précédents, mais plus que ?: c) << et >> (décalage de bits vers la droite et vers la gauche) ayant associativité gauche à droite, moins prioritaire que les + et -, mais plus prioritaire que les comparateurs : < , <=, > et >=",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "question_text": "1. Compléter le ou les fichiers d'entrée (Lex et/ou Yacc) pour accepter ces nouveaux opérateurs binaires.et pour construire l'arbre correspondant",
+          "solution_lex_code": [
+            "\">=\" | \">\" | \"<=\" | \"<\" { yylval.chaine = strcpy((char *) malloc(yyleng+1), yytext); return(TOKEN_EGDIFF); }",
+            "\"==\"|\"!=\" { yylval.chaine = strcpy((char *) malloc(yyleng+1), yytext); return(TOKEN_SUPINF); }",
+            "\">>\"|\"<<\" { yylval.chaine = strcpy((char *) malloc(yyleng+1), yytext); return(TOKEN_DECL); }",
+            "\"+\"|\"--\" { yylval.caractere = yytext[0]; return(TOKEN_INC_DEC); }",
+            "[?:=] { return(yytext[0]); }",
+            "<<EOF>> { return(0); }"
+          ],
+          "solution_yacc_code": [
+            "%token <caractere> TOKEN_PLUS_MOINS TOKEN_MULT_DIV TOKEN_INC_DEC TOKEN_EGDIFF TOKEN_SUPINF TOKEN_DECL",
+            "%token TOKEN_FIN",
+            "%type <arbre> EE E T F G V C M N D",
+            "%start EE",
+            "%%",
+            "EE : C {a = $1;};",
+            "C : M '?' C ':' C { $$ = CreerTer($1, $3, $5); }",
+            "  | M { };",
+            "M : M TOKEN_EGDIFF N { $$ = CreerBin2($2, $1, $3); }",
+            "  | N { };",
+            "N : N TOKEN_SUPINF D { $$ = CreerBin2($2, $1, $3); }",
+            "  | D { };",
+            "D : D TOKEN_DECL E { $$ = CreerBin2($2, $1, $3); }",
+            "  | E { };",
+            "E : E TOKEN_PLUS_MOINS T { $$ = CreerBin($2, $1, $3); }",
+            "  | T { };",
+            "%%"
+          ]
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "Proposer un modèle de code (d'instructions) MIPS pour l'opérateur de décalage.",
+          "Solution": [
+            "Code calculant l'expression G -> $n",
+            "Code calculant l'expression D -> $n+1",
+            "if( !strcmp(aux->forme.bin2.op, \" >> \") )",
+            "  fprintf(sortie,\"srl $%d, $%d, $%d\",n,n,n+1);",
+            "else",
+            "  fprintf(sortie,\"sll $%d, $%d, $%d\",n,n,n+1);"
+          ]
+        },
+        {
+          "id": "3",
+          "level": "Procedural",
+          "question_text": "3. Construire l'arbre et donner le code MIPS complet correspondant au code MNL suivant (registre de départ c'est $8) :",
+          "question_code": [
+            "var a,b,c,d,e,f ;",
+            "lire a ;",
+            "lire b ;",
+            "lire c ;",
+            "lire d ;",
+            "lire e ;",
+            "lire f ;",
+            "ecrire a+b*c << d+e >> f ;"
+          ],
+          "reference_mips_syntax_table": {
+            "type": "table",
+            "headers": [
+              "Syntaxe",
+              "Effet",
+              "Syntaxe",
+              "Effet"
+            ],
+            "rows": [
+              [
+                "move r1, r2",
+                "r1 ← r2",
+                "lw r1, o (r2)",
+                "r1 → tas (r2 + o)"
+              ],
+              [
+                "add r1, r2, o",
+                "r1 ← o + r2",
+                "sw r1, o (r2)",
+                "tas.(r2 + o) ← r1"
+              ],
+              [
+                "sub r1, r2, o",
+                "r1 ← r2 - o",
+                "slt r1, r2, o",
+                "r1 ← r2 < o"
+              ],
+              [
+                "mul r1, r2, o",
+                "r1 ← r2 × o",
+                "sle r1, r2, o",
+                "r1 ← r2 <= o"
+              ],
+              [
+                "div r1, r2, o",
+                "r1 ← r2 ÷ o",
+                "seq r1, r2, o",
+                "r1 ← r2 = o"
+              ],
+              [
+                "and r1, r2, o",
+                "r1 ← r2 and o",
+                "sne r1, r2, o",
+                "r1 ← r2!= o"
+              ],
+              [
+                "or r1, r2, o",
+                "r1 ← r2 or o",
+                "j o",
+                "pc ← o"
+              ],
+              [
+                "xor r1, r2, o",
+                "r1 ← r2 xor o",
+                "jal o",
+                "ra ← pc+1 et pc ← o"
+              ],
+              [
+                "sll r1, r2, o",
+                "r1 ← r2 sl o",
+                "beq r, o, a",
+                "pc← a si r = o"
+              ],
+              [
+                "srl r1, r2, o",
+                "r1 ← r2 sr o",
+                "bne r, o, a",
+                "pc← a si r <> o"
+              ],
+              [
+                "li r1, n",
+                "r1 ← n",
+                "syscall",
+                "appel système"
+              ],
+              [
+                "la r1, a",
+                "r1 ← a",
+                "nop",
+                "ne fait rien"
+              ]
+            ]
+          },
+          "reference_syscall_table": {
+            "type": "table",
+            "headers": [
+              "Nom",
+              "N°",
+              "Effet"
+            ],
+            "rows": [
+              [
+                "print_int",
+                "1",
+                "imprime l'entier contenu dans a0"
+              ],
+              [
+                "print_string",
+                "4",
+                "imprime la chaîne en a0 jusqu'à '\\000'"
+              ],
+              [
+                "read_int",
+                "5",
+                "lit un entier et le place dans v0"
+              ],
+              [
+                "sbrk",
+                "9",
+                "alloue a0 bytes dans le tas, retourne l'adresse du début dans v0"
+              ],
+              [
+                "exit",
+                "10",
+                "arrêt du programme en cours d'exécution"
+              ]
+            ]
+          },
+          "reference_lex_code": [
+            "%}",
+            "ER_ENTIER -?[0-9]+",
+            "ER_VARIABLE [a-zA-Z][0-9a-zA-Z]*",
+            "ER_SEPARATEUR [ \\n\\t]",
+            "%%",
+            "{ER_SEPARATEUR}+ {}",
+            "{ER_ENTIER} { yylval.entier = atoi(yytext); return(TOKEN_ENTIER); }",
+            "{ER_VARIABLE} { yylval.chaine = strcpy((char *)malloc(yyleng+1), yytext); return(TOKEN_VARIABLE); }",
+            "[\\+\\-] { yylval.caractere = yytext[0]; return(TOKEN_PLUS_MOINS); }",
+            "[\\*\\/\\%] { yylval.caractere = yytext[0]; return(TOKEN_MULT_DIV); }",
+            "[\\(\\)] { return(yytext[0]); }",
+            "\"+\"|\"--\" { yylval.caractere = yytext[0]; return(TOKEN_INC_DEC); }",
+            "[?:=] { return(yytext[0]); }",
+            "<<EOF>> { return(0); }"
+          ],
+          "reference_yacc_code": [
+            "%{",
+            "…",
+            "EXPR_ARBRE a;",
+            "%}",
+            "%union { EXPR_ARBRE arbre; char *chaine; int entier; char caractere; }",
+            "%token <chaine> TOKEN_VARIABLE",
+            "%token <entier> TOKEN_ENTIER",
+            "%token <caractere> TOKEN_PLUS_MOINS TOKEN_MULT_DIV TOKEN_INC_DEC",
+            "%token TOKEN_FIN",
+            "%type <arbre> EE E T F G V C",
+            "%start EE",
+            "%%",
+            "EE : C {a = $1;};",
+            "C : E '?' C ':' C { $$ = CreerTer($1, $3, $5); }",
+            "  | E { };",
+            "E : E TOKEN_PLUS_MOINS T { $$ = CreerBin($2, $1, $3); }",
+            "  | T { };",
+            "T : T TOKEN_MULT_DIV G { $$ = CreerBin($2, $1, $3); }",
+            "  | G { };",
+            "F : '(' C ')' { $$ = $2; }",
+            "  | TOKEN_VARIABLE { $$ = CreerVariable($1); }",
+            "  | TOKEN_ENTIER { $$ = CreerConstante($1); };",
+            "G : TOKEN_INC_DEC V { $$ = CreerUn($1, $2); }",
+            "  | F { };",
+            "V : '(' TOKEN_VARIABLE ')' { $$ = CreerVariable($2); }",
+            "  | TOKEN_VARIABLE { $$ = CreerVariable($1); };",
+            "%%"
+          ],
+          "Solution": {
+            "type": "image",
+            "description": "Abstract Syntax Tree (AST) montrant une séquence d'instructions. 'ecrire' est le parent d'un décalage droit '>>' qui a pour fils droit 'f' et pour fils gauche un décalage gauche '<<'. '<<' a pour fils deux additions. La structure complète représente : ecrire (((a+(b*c)) << (d+e)) >> f).",
+            "precise_location": "Corrigé Page 5"
+          },
+          "solution_mips_code": [
+            ".data",
+            "MEM: .space 24",
+            ".text",
+            "main: la $30, MEM",
+            "li $2,5; syscall; sw $2, 0($30) # lire a",
+            "li $2,5; syscall; sw $2, 4($30) # lire b",
+            "li $2,5; syscall; sw $2, 8($30) # lire c",
+            "li $2,5; syscall; sw $2, 12($30) # lire d",
+            "li $2,5; syscall; sw $2, 16($30) # lire e",
+            "li $2,5; syscall; sw $2, 20($30) # lire f",
+            "lw $8, 0($30); lw $9, 4($30); lw $10, 8($30); mult $9,$10; mflo $9; add $8,$8,$9",
+            "lw $9, 12($30); lw $10, 16($30); add $9,$9,$10",
+            "sll $8, $8, $9",
+            "lw $9, 20($30); srl $8, $8, $9",
+            "move $4,$8; li $2,1; syscall; li $2,10; syscall"
+          ],
+          "solution_data_structures": [
+            "enum EXPR_TYPE { CONSTANTE, VARIABLE, BINAIRE, UNAIRE, TERNAIRE };",
+            "typedef struct _EXPR_ARBRE {",
+            "  enum EXPR_TYPE type;",
+            "  union {",
+            "    …",
+            "    struct {",
+            "      char *op;",
+            "      struct _EXPR_ARBRE *opg;",
+            "      struct _EXPR_ARBRE *opd;",
+            "    } bin2;",
+            "    …",
+            "  } forme;",
+            "} *EXPR_ARBRE;",
+            "",
+            "EXPR_ARBRE CreerBin2 (char *op, EXPR_ARBRE g, EXPR_ARBRE d) {",
+            "  EXPR_ARBRE aux = (EXPR_ARBRE)malloc(sizeof (struct _EXPR_ARBRE));",
+            "  aux->type = BINAIRE;",
+            "  aux->forme.bin2.op = strcpy(malloc(sizeof (strlen(op)+1)), op);",
+            "  aux->forme.bin2.opg = g;",
+            "  aux->forme.bin2.opd = d;",
+            "  return aux;",
+            "}"
+          ]
+        }
+      ]
+    }
+  ]
+}

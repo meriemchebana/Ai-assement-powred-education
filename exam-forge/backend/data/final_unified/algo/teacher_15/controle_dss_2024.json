@@ -1,0 +1,102 @@
+{
+  "metadata": {
+    "module": "Examen",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "title": "Questions",
+      "introduction_context": "",
+      "Question": [
+        {
+          "question_text": "Dans quels cas est-il préférable d'utiliser des éléments plutôt que des attributs dans la conception d'un document XML (02 raisons) ?",
+          "Solution": "Il préférable d'utiliser des éléments plutôt que des attributs dans la conception d'un document XML parce que:\n- les attributs ne peuvent pas contenir plusieurs valeurs (les éléments le peuvent)\n- les attributs ne peuvent pas contenir de structures arborescentes (les éléments le peuvent)\n- les attributs ne sont pas facilement extensibles (pour les changements futurs)",
+          "level": "Conceptual"
+        },
+        {
+          "question_text": "Citer quelques avantages de Schéma XML par rapport la DTD (plus de trois avantages)",
+          "Solution": "Avantages de Schéma XML par rapport la DTD:\n- Prise en charge des éspaces de noms\n- Capable de créer un type de données complexe\n- Plus de types de données\n- Héritage par extension ou restriction",
+          "level": "Factual"
+        },
+        {
+          "question_text": "Pourquoi CSS ne peut pas remplacer XSL dans la mise en forme des document XML ? A votre avis comment peut-on contourner ces limitations ?",
+          "Solution": "CSS ne peut pas remplacer XSL dans la mise en forme des document XML parce que CSS fournit un formatage « statique ». Le formatage est basé sur les balises/attributs, pas sur l'organisation.\nOn peut contourner ces limitations par l'utilisation de javascript/DOM",
+          "level": "Metacognitive"
+        }
+      ]
+    },
+    {
+      "title": "Exercice 01",
+      "introduction_context": "On décrit un ensemble d'animaux de manière simplifiée sous le format suivant:\n<animaux auteur=\"Matthias Colin\" date=\"2011-06-27\"> <mammifere nom=\"girafe\" id=\"a1\" locomotion=\"marche\" /> <mammifere nom=\"ours\" id=\"a2\" locomotion=\"marche\" > <mange ref=\"a3\" /> </mammifere> <poisson nom=\"saumon\" id=\"a3\" locomotion=\"nage\" /> <mammifere nom=\"dauphin\" id=\"a4\" locomotion=\"nage\" /> <oiseau nom=\"aigle royal\" id=\"a5\" locomotion=\"vol\" > <mange ref=\"a7\" /> <mange ref=\"a8\" /> </oiseau> <reptile nom=\"crocodile\" id=\"a6\" locomotion=\"nage\"/> <reptile nom=\"couleuvre\" id=\"a7\" locomotion=\"reptation\"/> <mammifere nom=\"marmotte\" id=\"a8\" locomotion=\"marche\" /> <mammifere nom=\"lion\" locomotion=\"marche\" > <mange ref=\"a1\" /> </mammifere> </animaux>",
+      "Question": [
+        {
+          "question_text": "Ecrire une DTD animaux.dtd qui décrit un document tel que celui proposé",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "question_text": "Ecrire un schéma XSD animaux.xsd qui décrit un document tel que celui proposé. On vérifiera que:\na) Les noms d'animaux et d'auteur ne contiennent que des caractères alphabétiques et espaces (on ne tient pas compte des caractères accentués, tirets ou apostrophes)\nb) La date de la description correspond à un projet scolaire qui se déroule entre le 4 mai 2011 et le 6 juillet 2011",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "question_text": "Ecrire une template XSL permettant d'écrire la liste des animaux dans un tableau HTML selon le modèle suivant",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "question_text": "Donnez une requête XQuery permettant de construire un document XML suivant la DTD qui suit",
+          "Solution": "",
+          "level": "Procedural"
+        },
+        {
+          "question_text": "Transformer le document XML suivant en document json équivalent",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "title": "Rattrapage Questions",
+      "introduction_context": "",
+      "Question": [
+        {
+          "question_text": "Quelles sont les règles de nommage des éléments et des attributs en XML (citer 04 règles)?",
+          "Solution": "Les règles de nommage des éléments et des attributs en XML sont:",
+          "level": "Factual"
+        },
+        {
+          "question_text": "C'est quoi les parseurs XML ? Quand devrions-nous utiliser SAX ? Quand devrions-nous utiliser un autre parseur ?",
+          "Solution": "An XML parser is a software library or package that provides interfaces for client applications to work with an XML document.\nQuand devrions-nous utiliser SAX ?\n- Large documents\n- Memory constrained devices\nQuand devrions-nous utiliser un autre parseur ?\n- If you need to modify the document\n- SAX doesn't remember previous events unless you write explicit code to do so.",
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "title": "Exercice",
+      "introduction_context": "On considère des fichiers XML qui contiennent des informations sur la quantité (ou proportion) d'aliments de chaque catégorie alimentaire qu'il est recommandé de consommer chaque jour pour avoir une alimentation équilibrée. Pour chaque catégorie d'aliments, des exemples d'aliments sont éventuellement mentionnés.",
+      "Question": [
+        {
+          "question_text": "Proposer une DTD externe à ce document",
+          "Solution": null,
+          "level": "Metacognitive"
+        },
+        {
+          "question_text": "Proposer un schéma xml à ce document",
+          "Solution": null,
+          "level": "Metacognitive"
+        },
+        {
+          "question_text": "Exprimez-en XPath les requêtes suivantes:\na) La quantité de \"fruits et légumes\" qu'il est recommandé de manger chaque jour ?\nb) Les catégories des aliments dont au moins 2 aliments sont mentionnés ?\nc) L'identifiant du deuxième aliment dans la catégorie \"céréales\" ?\nd) Les nœuds <aliment> qui appartiennent aux catégories \"fruits et légumes\" ou \"céréales\" ?",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "question_text": "Ecrire la feuille XSL permettant de transformer le document XML pyramide.xml en un autre document XML contenant tout d'abord les catégories d'aliments (avec notamment un attribut IDAS contenant une liste de références vers des identifiants d'aliments appartenant à cette catégorie), puis les nœuds <aliment>. Le document résultat doit suivre la DTD",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    }
+  ]
+}

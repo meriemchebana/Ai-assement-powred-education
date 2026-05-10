@@ -1,0 +1,186 @@
+{
+  "metadata": {
+    "module": "الاستدلال الإحصائي",
+    "duration": "",
+    "language": "arabic"
+  },
+  "exercises": [
+    {
+      "id": "التمرين_الأول",
+      "title": "التمرين 1",
+      "total_exercise_points": null,
+      "introduction_context": "سحبت العينتان العشوائيتان المستقلتان {X₁, X₂, ..., Xₘ₁} و {Y₁, Y₂, ..., Yₙ₂} من المجتمعين X ~ N(μ,1) و Y ~ N(0,σ²).",
+      "note": null,
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "ما هو توزيع ومعالم X̄ + Ȳ و X̄ - Ȳ.",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "2",
+          "question_text": "ما هو توزيع ومعالم W₁ = Σᵢ₌₁ᵐ¹ (Xᵢ - μ)² و W₂ = (1/σ²) Σᵢ₌₁ⁿ² Yᵢ².",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "3",
+          "question_text": "ما هو توزيع ومعالم θ̂₁ = n₂W₁/(n₁W₂) و θ̂₂ = Y₁√n₁/(σ√W₁).",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "4",
+          "question_text": "احسب الاحتمالات التالية إذا كانت n₂=2n₁=10: P(W₁ < 12.8) * P(θ̂₁ > 3.33) * P(θ̂₂ < 0.92).",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "التمرين_الثاني",
+      "title": "التمرين 2",
+      "total_exercise_points": null,
+      "introduction_context": "نعتبر مجتمعا دالة كثافته الاحتمالية معطاة بالصيغة الآتية: f(x;θ) = { (1/θ)·exp(-(1/θ)(x-2)) إذا x ≥ 2 ، 0 إذا x < 2 }، حيث θ > 0 معلمة مجهولة يراد تقديرها. نسحب عينة عشوائية مستقلة {X₁, X₂, ..., Xₙ} بحجم n من هذا المجتمع.",
+      "note": null,
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "أوجد E(X).",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "استعمل طريقة العزوم للحصول على المقدر θ̂₁ للمعلمة θ.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "question_text": "استعمل طريقة الترجيح الأعظم للحصول على المقدر θ̂₂ للمعلمة θ.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "4",
+          "question_text": "قارن بين النتيجتين السابقتين ثم أدرس عدم التحيز والاتساق (التقارب).",
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "id": "التمرين_الثالث",
+      "title": "التمرين 3",
+      "total_exercise_points": null,
+      "introduction_context": "نسحب عينة عشوائية {X₁, X₂, ..., Xₙ} من المجتمع X ~ N(μ,σ²) (المعلمتان مجهولتان) ونلخص معلومات العينة بالإحصائيتين X̄ و S² = (1/(n-1))·Σ(Xᵢ - X̄)².",
+      "note": null,
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "أنشئ مجال ثقة حول μ بدرجة ثقة 1-α.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "إذا علمت أن μ=σ (أصبح لدينا مجتمع طبيعي ذي معلمة واحدة μ مجهولة) أنشئ مجال ثقة حول μ بدرجة ثقة 1-α باستعمال الإحصائية X̄ وبدون استعمال الإحصائية S².",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "question_text": "أعطت عينة عشوائية بحجم n=16 النتائج X̄=2.81 و S=3.02. أوجد مجالي الثقة حول μ السابقين بدرجة ثقة 95% ثم قارن بينهما.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "التمرين_الرابع",
+      "title": "التمرين 4",
+      "total_exercise_points": null,
+      "introduction_context": "يهتم باحث بدراسة ظاهرة التسرب المدرسي.",
+      "note": null,
+      "Question": [
+        {
+          "id": "A",
+          "question_text": "أ/ أخذ الباحث عينة عشوائية بسيطة حجمها 100 عائلة ووجد أن 10 منها لها ابن أو أكثر انقطع عن الدراسة قبل نهاية الطور الابتدائي.",
+          "sub_questions": [
+            {
+              "id": "A.1",
+              "question_text": "أعط مجال ثقة حول النسبة الحقيقية للعائلات التي تعاني من هذه الظاهرة.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "A.2",
+              "question_text": "إذا علمت أن عدد العائلات المستهدفة بالدراسة هو 6 ملايين عائلة فأعطِ مجال ثقة حول العدد الحقيقي للعائلات التي تعاني من هذه الظاهرة. α = 5%.",
+              "Solution": null,
+              "level": "Procedural"
+            }
+          ],
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "B",
+          "question_text": "ب/ نفترض الآن أن عينة عشوائية ثانية (حجمها n كبير بما فيه الكفاية) مستقلة عن الأولى وليكن P̄ = aP̄₁ + bP̄₂ حيث P̄₁ و P̄₂ نسب التسرب في العينتين الأولى والثانية على التوالي و a و b ثوابت. نعلم أن P̄₁ و P̄₂ مقدّران للنسبة الحقيقية p غير متحيزين ولهما أدنى تباين.",
+          "sub_questions": [
+            {
+              "id": "B.3",
+              "question_text": "ما هو الشرط حول الثوابت a و b الذي يجعل P̄ مقدرا غير متحيز.",
+              "Solution": null,
+              "level": "Conceptual"
+            },
+            {
+              "id": "B.4",
+              "question_text": "ما هو الشرط حول الثوابت a و b الذي يجعل P̄ ذي أدنى تباين من بين صنف المقدرات الغير متحيزة.",
+              "Solution": null,
+              "level": "Conceptual"
+            }
+          ],
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "id": "التمرين_الخامس",
+      "title": "التمرين 5",
+      "total_exercise_points": null,
+      "introduction_context": "ليكن مجتمع X يتبع التوزيع الطبيعي بالمعلمتين μ و σ². نسحب منه العينة العشوائية البسيطة {X₁, X₂, ..., X₂₀}. نعتبر الإحصائيتين: S = Σᵢ₌₁²⁰ Xᵢ و SC = Σᵢ₌₁²⁰ Xᵢ². أجب اختياريا على السؤال (أ) أو السؤال (ب).",
+      "note": null,
+      "Question": [
+        {
+          "id": "A",
+          "question_text": "أ/ أفترض μ=0.",
+          "sub_questions": [
+            {
+              "id": "A.1",
+              "question_text": "أنشئ مجال ثقة حول σ² بدرجة ثقة 95%.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "A.2",
+              "question_text": "اشرح كيف يمكنك الحصول على مجال ثقة أقصر.",
+              "Solution": null,
+              "level": "Conceptual"
+            }
+          ],
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "B",
+          "question_text": "ب/ أفترض σ²=1. نريد إجراء اختبار الفرضيات التالي: H₀: μ=10 ضد H₁: μ=9. حدّد المنطقة الحرجة الأقوى باستعمال نظرية Neyman-Pearson لمستوى دلالة α=5%.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    }
+  ]
+}

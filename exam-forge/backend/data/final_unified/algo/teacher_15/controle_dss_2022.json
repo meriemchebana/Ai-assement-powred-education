@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "module": "Examen",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "title": "Exercice 1",
+      "introduction_context": "Soit la DTD suivante :\n\n```\n<!ELEMENT entete (titre, date, auteur+, motscles*, resume?)>\n<!ELEMENT titre (#PCDATA)>\n<!ELEMENT date (#PCDATA)>\n<!ELEMENT auteur (#PCDATA)>\n<!ELEMENT motscles (#PCDATA)>\n<!ELEMENT resume (paragraphe+)>\n<!ELEMENT paragraphe (#PCDATA)>\n```",
+      "Question": [
+        {
+          "question_text": "Produire un document XML valide par rapport à cette DTD.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "question_text": "Le document suivant est-il valide par rapport à la DTD ? Justifier.\n\n```\n<?xml version=\"1.0\"?>\n<!DOCTYPE entete SYSTEM \"entete.dtd\">\n<entete>\n<titre>Document de test</titre>\n<date>2 décembre 2009</date>\n<auteur>Stéphane Crozat</auteur>\n</entete>\n<?xml version=\"1.0\"?>\n```",
+          "Solution": "Oui.",
+          "level": "Conceptual"
+        },
+        {
+          "question_text": "Produire le plus petit document XML valide par rapport à cette DTD.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "question_text": "Produire un document XML utilisant toutes les balises de la DTD.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "title": "Exercice 2",
+      "introduction_context": "On veut encoder un arbre généalogique dans un format XML. La racine est gene, elle a pour fils des éléments personne. On autorise une généalogie vide. L'élément personne a un attribut facultatif id de type ID et un attribut obligatoire genre pouvant prendre au choix les valeurs h et f. Il a un fils nom, obligatoire, contenant uniquement du texte et un fils parents, facultatif, vide. L'ordre est important. L'élément parents possède un attribut ref, de type IDREFS, obligatoire.\n\nÉcrivez la DTD correspondant à cette description, et insérez-là en tant que DTD interne d'un document XML décrivant la généalogie suivante:\n\n- « Bob a deux parents, Marie et Henry. Henry a deux parents, Jean et Françoise . »\n\nDans l'arbre XML, vous pouvez utiliser p en place de personne.",
+      "Question": [
+        {
+          "question_text": "Écrivez la DTD correspondant à cette description, et insérez-là en tant que DTD interne d'un document XML décrivant la généalogie suivante:\n\n- « Bob a deux parents, Marie et Henry. Henry a deux parents, Jean et Françoise . »\n\nDans l'arbre XML, vous pouvez utiliser p en place de personne.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "title": "Exercice 3",
+      "introduction_context": "Soit le document company.xml suivant\n\n```\n<Company>\n<Address xsi:type=\"US-Address\">\n<Name>Main office</Name>\n<Street>Grosvenor Bvld.</Street>\n<City>Los Angeles</City>\n<State>California</State>\n<Zip>3141</Zip>\n</Address>\n<Division>\n<Division-Name>Sales</Division-Name>\n<Location>Washington</Location>\n<Person Manager=\"true\" Degree=\"MA\">\n<First>Allison</First>\n<Last>Andersen</Last>\n<PhoneExt>111</PhoneExt>\n<EMail>Andersen@work.com</EMail>\n</Person>\n<Person Manager=\"false\" Degree=\"BA\">\n<First>Bruce</First>\n<Last>Burrwinkle</Last>\n<PhoneExt>222</PhoneExt>\n<EMail>Burrwinkle@work.com</EMail>\n</Person>\n</Division>\n<Division>\n.......\n</Division>\n</Company>\n```",
+      "Question": [
+        {
+          "question_text": "La valeur de degree est soit MA soit BA",
+          "Solution": "Uniquement avec un schéma en utilisant la facet énumération",
+          "level": "Factual"
+        },
+        {
+          "question_text": "Une adresse e-mail doit être de la forme « string.string@string »",
+          "Solution": "Uniquement avec un schéma en utilisant la facet pattern pour les strings",
+          "level": "Factual"
+        },
+        {
+          "question_text": "US-Adress est une extension de Address à laquelle on ajoute les éléments state et zip",
+          "Solution": "Uniquement avec un schéma en utilisant l'extension des types complex",
+          "level": "Factual"
+        },
+        {
+          "question_text": "L'élément zip a une valeur comprise entre 1000 et 4000",
+          "Solution": "Uniquement avec un schéma en utilisant la facet mininclusive et maxinclusive",
+          "level": "Factual"
+        },
+        {
+          "question_text": "Les personnes, dans les instances xml, doivent être ordonnées par ordre alphabétique",
+          "Solution": "Pas possible ni avec DTD ni schéma",
+          "level": "Factual"
+        }
+      ]
+    }
+  ]
+}

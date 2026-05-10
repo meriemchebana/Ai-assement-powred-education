@@ -1,0 +1,46 @@
+{
+  "name": "school-generator-desktop",
+  "version": "1.0.0",
+  "description": "School Generator Desktop App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "concurrently \"cd ../web && npm run dev\" \"wait-on http://localhost:5173 && electron .\"",
+    "build": "cd ../web && npm run build && cd ../desktop && electron-builder",
+    "build:linux": "cd ../web && npm run build && cd ../desktop && electron-builder --linux",
+    "build:mac": "cd ../web && npm run build && cd ../desktop && electron-builder --mac",
+    "build:win": "cd ../web && npm run build && cd ../desktop && electron-builder --win"
+  },
+  "build": {
+    "appId": "com.schoolgenerator.app",
+    "productName": "School Generator",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "../web/dist/**/*"
+    ],
+    "linux": {
+      "target": ["AppImage", "deb"],
+      "icon": "icon.png",
+      "category": "Education"
+    },
+    "mac": {
+      "target": ["dmg"],
+      "icon": "icon.png",
+      "category": "public.app-category.education"
+    },
+    "win": {
+      "target": ["nsis"],
+      "icon": "icon.png"
+    }
+  },
+  "devDependencies": {
+    "concurrently": "^8.0.0",
+    "electron": "^28.0.0",
+    "electron-builder": "^24.0.0",
+    "wait-on": "^7.0.0"
+  }
+}

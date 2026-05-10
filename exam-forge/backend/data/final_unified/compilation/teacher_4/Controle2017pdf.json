@@ -1,0 +1,637 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h30m",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (04 pts)",
+      "total_exercise_points": "4",
+      "introduction_context": "",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "1. Donner l'ER définissant le langage composé de tous les mots non vides, sur l'alphabet {0,1}, qui ne contiennent pas la sous chaine 11.",
+          "Solution": "(0|1)(01|0)*",
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "2. Donner l'ER définissant le langage composé de tous les mots non vides sur {a, b} qui contiennent un nombre de a divisible par 3.",
+          "Solution": "bb*|(b*ab* ab* ab*)(b*ab* ab* ab*)*",
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "question_text": "3. Donner l'ER acceptant les nombres entiers dont la valeur est strictement inférieure à 167 et ne commençant pas par des 0 inutiles.",
+          "Solution": "[0-9]| [1-9][0-9] |1[0-5][0-9]| 16[0-6]",
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (06 pts)",
+      "total_exercise_points": "6",
+      "introduction_context": "Nous considérerons dans la suite qu'un tableau en html est défini comme suit : Le tableau est encadré par les balises <TABLE> et </TABLE>. Chaque ligne est encadrée par les balises <TR> et </TR>. Les cellules de valeur sont encadrées par les balises <TD> et </TD>. Certaines parties du fichier peuvent être des commentaires. Les commentaires html sont encadrés par <!-- et -->.",
+      "example_code": [
+        "<TABLE>",
+        "<TR>",
+        "<TD> Valeur 11 </TD>",
+        "<TD> Valeur 12 </TD>",
+        "<TD> Valeur 13 </TD>",
+        "</TR>",
+        "<TR>",
+        "<TD> Valeur 11 </TD>",
+        "<TD> Valeur 12 </TD>",
+        "<TD> Valeur 13 </TD>",
+        "</TR> ",
+        "</TABLE>"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "Ecrivez un programme Lex qui prend en entrée un programme HTML que l'on supposera bien structuré et qui pour chaque tableau, écrit la phrase : \"le tableau commence à la ligne i et contient k lignes\" où i est le numéro de la ligne du code HTML où commence le tableau et k est le nombre de lignes dans ce tableau. Cependant vous ne devrez pas comptabiliser les lignes en commentaires, ni produire un affichage pour des tableaux qui seraient entièrement en commentaires.",
+          "solution_lex_code": [
+            "%{",
+            "  int i = 0, nbl = 0, k = 0;",
+            "%}",
+            "%%",
+            "\"<table>\"       { i = nbl; }",
+            "\"<tr>\"          { k++; }",
+            "\"</table>\"      { printf(\"le tableau commence à la ligne %d et contient %d lignes\", i, k); k = 0; }",
+            "\\<!\\-\\-(.|\n)*\\-\\->  {}",
+            "\"\\n\"            { nbl++; }",
+            ".               {}",
+            "%%",
+            "int main(int argc, char *argv[])",
+            "{",
+            "  yyin = fopen(argv[1], \"r\");",
+            "  yylex();",
+            "  fclose(yyin);",
+            "}"
+          ],
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 03 (05 pts)",
+      "total_exercise_points": "5",
+      "introduction_context": "Soit G la grammaire suivante : S → X | Yc ; X → Xa | ε ; Y → Yb | d",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "1. Cette grammaire n'est pas LL(1) : pourquoi ?",
+          "Solution": "Parce qu'il existe deux cas de récursivité à gauche : X → Xa | ε et Y → Yb | d. (0,5 pt)",
+          "level": "Conceptual"
+        },
+        {
+          "id": "2",
+          "question_text": "2. Quel est le langage décrit par cette grammaire ?",
+          "Solution": "a* | db*c (01 pt)",
+          "level": "Conceptual"
+        },
+        {
+          "id": "3",
+          "question_text": "3. Donner une grammaire G1 qui décrit le même langage. Justifier en utilisant la table d'analyse que G1 est une grammaire LL(1).",
+          "solution_grammar": [
+            "S  → X | Yc",
+            "X  → aX | ε",
+            "Y  → dY'",
+            "Y' → bY' | ε"
+          ],
+          "solution_premiers_suivants": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "S",
+                "a, d, ε",
+                "$"
+              ],
+              [
+                "X",
+                "a, ε",
+                "$"
+              ],
+              [
+                "Y",
+                "d",
+                "c"
+              ],
+              [
+                "Y'",
+                "b, ε",
+                "c"
+              ]
+            ]
+          },
+          "solution_table": {
+            "type": "table",
+            "headers": [
+              "",
+              "a",
+              "b",
+              "c",
+              "d",
+              "$"
+            ],
+            "rows": [
+              [
+                "S",
+                "S → X",
+                "",
+                "",
+                "S → Yc",
+                "S → X"
+              ],
+              [
+                "X",
+                "X → aX",
+                "",
+                "",
+                "",
+                "X → ε"
+              ],
+              [
+                "Y",
+                "",
+                "",
+                "",
+                "Y → dY'",
+                ""
+              ],
+              [
+                "Y'",
+                "",
+                "Y' → bY'",
+                "Y' → ε",
+                "",
+                ""
+              ]
+            ]
+          },
+          "level": "Metacognitive"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_04",
+      "title": "Exercice 04 (05 pts)",
+      "total_exercise_points": "5",
+      "introduction_context": "Soit G la grammaire : S → Ab | Bb ; A → Ca | Cae | ε ; B → f | g ; C → dA",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "Construction de l'automate LR pour G (1.5 pts).",
+          "Solution": {
+            "type": "LR(0)",
+            "states_content": [
+              "I0:  { E→.S$ , S→.Ab , S→.Bb , A→.Ca , A→.Cae , A→. , C→.dA , B→.f , B→.g }",
+              "I1:  { E→S.$ }",
+              "I2:  { S→A.b }",
+              "I3:  { S→B.b }",
+              "I4:  { C→d.A , A→.Ca , A→.Cae , A→. , C→.dA }",
+              "I5:  { A→C.a , A→C.ae }",
+              "I6:  { B→f. }",
+              "I7:  { B→g. }",
+              "I8:  { S→Ab. }",
+              "I9:  { S→Bb. }",
+              "I10: { C→dA. }",
+              "I11: { A→Ca. , A→Ca.e }",
+              "I12: { A→Cae. }"
+            ],
+            "transitions": [
+              {
+                "from": "I0",
+                "symbol": "S",
+                "to": "I1"
+              },
+              {
+                "from": "I0",
+                "symbol": "A",
+                "to": "I2"
+              },
+              {
+                "from": "I0",
+                "symbol": "B",
+                "to": "I3"
+              },
+              {
+                "from": "I0",
+                "symbol": "d",
+                "to": "I4"
+              },
+              {
+                "from": "I0",
+                "symbol": "f",
+                "to": "I6"
+              },
+              {
+                "from": "I0",
+                "symbol": "g",
+                "to": "I7"
+              },
+              {
+                "from": "I1",
+                "symbol": "$",
+                "to": "Acc"
+              },
+              {
+                "from": "I2",
+                "symbol": "b",
+                "to": "I8"
+              },
+              {
+                "from": "I3",
+                "symbol": "b",
+                "to": "I9"
+              },
+              {
+                "from": "I4",
+                "symbol": "A",
+                "to": "I10"
+              },
+              {
+                "from": "I4",
+                "symbol": "C",
+                "to": "I5"
+              },
+              {
+                "from": "I4",
+                "symbol": "d",
+                "to": "I4"
+              },
+              {
+                "from": "I5",
+                "symbol": "a",
+                "to": "I11"
+              },
+              {
+                "from": "I11",
+                "symbol": "e",
+                "to": "I12"
+              }
+            ]
+          },
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "G est-elle SLR(1) ? Justifier (1 pt + 1,5 pts pour la table).",
+          "solution_premiers_suivants": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "S",
+                "b, d, f, g",
+                "$"
+              ],
+              [
+                "A",
+                "d, ε",
+                "b, a"
+              ],
+              [
+                "B",
+                "f, g",
+                "b"
+              ],
+              [
+                "C",
+                "d",
+                "a"
+              ]
+            ]
+          },
+          "solution_slr_table": {
+            "type": "table",
+            "headers": [
+              "SLR(1)",
+              "a",
+              "b",
+              "d",
+              "e",
+              "f",
+              "g",
+              "$",
+              "S",
+              "A",
+              "B",
+              "C"
+            ],
+            "rows": [
+              [
+                "0",
+                "r5",
+                "r5",
+                "d4",
+                "",
+                "d6",
+                "d7",
+                "",
+                "1",
+                "2",
+                "3",
+                "5"
+              ],
+              [
+                "1",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "Acc",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "2",
+                "",
+                "d8",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "3",
+                "",
+                "d9",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "4",
+                "r5",
+                "r5",
+                "d4",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "10",
+                "",
+                "5"
+              ],
+              [
+                "5",
+                "d11",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "6",
+                "",
+                "r7",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "7",
+                "",
+                "r7",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "8",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "9",
+                "",
+                "r1",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "10",
+                "",
+                "r6",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "11",
+                "r3",
+                "r3",
+                "",
+                "d12",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "12",
+                "r4",
+                "r4",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ]
+            ]
+          },
+          "Solution": "G est SLR(1) car il n'y a aucun cas de conflit dans la table : chaque case contient au plus une règle.",
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "question_text": "Analyser le mot « ddaeab$ » par un analyseur LR(1) (1 pt).",
+          "solution_table": {
+            "type": "table",
+            "headers": [
+              "Pile",
+              "Chaine",
+              "Action"
+            ],
+            "rows": [
+              [
+                "$0",
+                "ddaeab$",
+                "d4"
+              ],
+              [
+                "$0d4",
+                "daeab$",
+                "d4"
+              ],
+              [
+                "$0d4d4",
+                "aeab$",
+                "r5"
+              ],
+              [
+                "$0d4d4A",
+                "aeab$",
+                "10"
+              ],
+              [
+                "$0d4d4A10",
+                "aeab$",
+                "r6"
+              ],
+              [
+                "$0d4C",
+                "aeab$",
+                "5"
+              ],
+              [
+                "$0d4C5",
+                "aeab$",
+                "d11"
+              ],
+              [
+                "$0d4C5a11",
+                "eab$",
+                "d12"
+              ],
+              [
+                "$0d4C5a11e12",
+                "ab$",
+                "r4"
+              ],
+              [
+                "$0d4A",
+                "ab$",
+                "10"
+              ],
+              [
+                "$0d4A10",
+                "ab$",
+                "r6"
+              ],
+              [
+                "$0C",
+                "ab$",
+                "5"
+              ],
+              [
+                "$0C5",
+                "ab$",
+                "d11"
+              ],
+              [
+                "$0C5a11",
+                "b$",
+                "r3"
+              ],
+              [
+                "$0A",
+                "b$",
+                "2"
+              ],
+              [
+                "$0A2",
+                "b$",
+                "d8"
+              ],
+              [
+                "$0A2b8",
+                "$",
+                "r1"
+              ],
+              [
+                "$0S",
+                "$",
+                "1"
+              ],
+              [
+                "$0S1",
+                "$",
+                "Acc"
+              ]
+            ]
+          },
+          "level": "Procedural"
+        }
+      ]
+    }
+  ]
+}

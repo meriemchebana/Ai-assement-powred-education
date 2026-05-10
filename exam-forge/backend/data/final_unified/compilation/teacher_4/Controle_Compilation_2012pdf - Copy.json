@@ -1,0 +1,774 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h30m",
+    "language": "unknown"
+  },
+  "exam_content": {
+    "header": {
+      "raw_text": "Université Mohamed Khider – Biskra. Module: Compilation. Niveau : 3ème Licence. Année universitaire: 2011/2012. Département d'Informatique Documents non autorisés. Contrôle Date : 31/01/2012 Durée : 1h30m",
+      "language": "French"
+    },
+    "exercises": [
+      {
+        "id": "Exercice_01",
+        "title": "Exercice 01 (04 pts)",
+        "total_exercise_points": "4",
+        "introduction_context": "On souhaite écrire un analyseur lexical pour le langage de commandes suivant : – une commande est composée d'un nom de commande, suivi d'une liste optionnelle d'arguments, suivie d'une liste facultative d'options ; – une liste d'arguments est une suite d'arguments ; – une liste d'options est une suite non vide d'options encadrée par [ et ], à l'intérieur de laquelle les options sont séparées par virgule « , » ; – une option est un caractère précédé d'un tiret ; – un argument est un identificateur, de même qu'un nom de commande. Par exemple : macom arg1 arg2 [-a,-b] est une commande, ainsi que macom [-f] et macom .",
+        "Question": [
+          {
+            "id": "1",
+            "points": "2",
+            "level": "",
+            "Question": "1. Donnez une expression régulière étendue représentant les chaînes possibles.",
+            "Solution": [
+              "[a-zA-Z]+( [a-zA-Z]*(\\ [a-zA-Z]*)(\\[\\-[a-zA-Z](\\ \\-[a-zA-Z])*\\]) ?) ?"
+            ]
+          },
+          {
+            "id": "2",
+            "points": "2",
+            "level": "",
+            "Question": "2. Dessinez un automate acceptant le langage décrit par cette expression régulière.",
+            "Solution": {
+              "description": "Automate fini déterministe (DFA). Transitions : 1--[a-zA-Z]-->2, 2--space-->3, 3--[a-zA-Z]-->3, 3--'['-->4, 4--'-'-->6, 6--[a-zA-Z]-->7, 7--','-->6, 7--']'-->8.",
+              "precise_location": "Corrigé Page 3"
+            }
+          }
+        ]
+      },
+      {
+        "id": "Exercice_02",
+        "title": "Exercice 02 (08 pts)",
+        "total_exercise_points": "8",
+        "introduction_context": "Soit la grammaire suivante, d'axiome S. S →T U, T→ aTc | b, U → cU | d",
+        "Question": [
+          {
+            "id": "1",
+            "points": "1",
+            "level": "",
+            "Question": "1) Quelle est la forme générale des phrases engendrée par cette grammaire ?",
+            "Solution": "1. La forme générale des phrases engendrée par cette grammaire  .L(G) = { a^n b c^n c^m d, n >= 0, m >= 0 }"
+          },
+          {
+            "id": "2",
+            "points": "2.5",
+            "level": "",
+            "Question": "2) Construire la table d'analyse LL(1). La grammaire est-elle LL(1) ? Justifier votre réponse.",
+            "solution_premiers_suivants": {
+              "description": "Tableau des Premiers et Suivants",
+              "rows": [
+                {
+                  "non_terminal": "S",
+                  "premiers": "a, b",
+                  "suivants": "$"
+                },
+                {
+                  "non_terminal": "A",
+                  "premiers": "a, b",
+                  "suivants": "c, d"
+                },
+                {
+                  "non_terminal": "T",
+                  "premiers": "c, d",
+                  "suivants": "$"
+                }
+              ]
+            },
+            "solution_table": {
+              "headers": [
+                "",
+                "a",
+                "b",
+                "c",
+                "d"
+              ],
+              "rows": [
+                [
+                  "S",
+                  "S → TU",
+                  "S → TU",
+                  "",
+                  ""
+                ],
+                [
+                  "T",
+                  "T → aTc",
+                  "T → b",
+                  "",
+                  ""
+                ],
+                [
+                  "U",
+                  "",
+                  "",
+                  "U → cU",
+                  "U → d"
+                ]
+              ]
+            },
+            "Solution": "La grammaire est de type LL(1), puisqu'il n y a pas de cas de conflits (0,5 pts)."
+          },
+          {
+            "id": "3",
+            "points": "2",
+            "level": "",
+            "Question": "3) Simuler l'analyse prédictive de : a) abccd$; b) aabcd$.",
+            "solution_table_a": {
+              "title": "Simulation a: abccd$",
+              "headers": [
+                "Pile",
+                "Chaine",
+                "Action"
+              ],
+              "rows": [
+                [
+                  "$S",
+                  "abccd$",
+                  "S → TU"
+                ],
+                [
+                  "$UT",
+                  "abccd$",
+                  "T → aTc"
+                ],
+                [
+                  "$UcTa",
+                  "abccd$",
+                  "Dépiler, Avancer"
+                ],
+                [
+                  "$UcT",
+                  "bccd$",
+                  "T → b"
+                ],
+                [
+                  "$Ucb",
+                  "bccd$",
+                  "Dépiler, Avancer"
+                ],
+                [
+                  "$Uc",
+                  "ccd$",
+                  "Dépiler, Avancer"
+                ],
+                [
+                  "$U",
+                  "cd$",
+                  "U → cU"
+                ],
+                [
+                  "$Uc",
+                  "cd$",
+                  "Dépiler, Avancer"
+                ],
+                [
+                  "$U",
+                  "d$",
+                  "U → d"
+                ],
+                [
+                  "$d",
+                  "d$",
+                  "Dépiler, Avancer"
+                ],
+                [
+                  "$",
+                  "$",
+                  "Accepter"
+                ]
+              ]
+            },
+            "solution_table_b": {
+              "title": "Simulation b: aabcd$",
+              "headers": [
+                "Pile",
+                "Chaine",
+                "Action"
+              ],
+              "rows": [
+                [
+                  "$S",
+                  "aabcd$",
+                  "S → TU"
+                ],
+                [
+                  "$UT",
+                  "aabcd$",
+                  "T → aTc"
+                ],
+                [
+                  "$UcTa",
+                  "aabcd$",
+                  "Dépiler, Avancer"
+                ],
+                [
+                  "$UcT",
+                  "abcd$",
+                  "T → aTc"
+                ],
+                [
+                  "$UccTa",
+                  "abcd$",
+                  "Dépiler, Avancer"
+                ],
+                [
+                  "$UccT",
+                  "bcd$",
+                  "T → b"
+                ],
+                [
+                  "$Uccb",
+                  "bcd$",
+                  "Dépiler, Avancer"
+                ],
+                [
+                  "$Ucc",
+                  "cd$",
+                  "Dépiler, Avancer"
+                ],
+                [
+                  "$Uc",
+                  "d$",
+                  "Erreur"
+                ]
+              ]
+            }
+          },
+          {
+            "id": "4",
+            "points": "2.5",
+            "level": "",
+            "Question": "4) Construire la table d'analyse SLR(1) de G.",
+            "states_content": [
+              "I0: { E -> .S$ , S -> .TU , T -> .aTc , T -> .b }",
+              "I1: { E -> S.$ }",
+              "I2: { S -> T.U , U -> .cU , U -> .d }",
+              "I3: { T -> a.Tc , T -> .aTc , T -> .b }",
+              "I4: { T -> b. }",
+              "I5: { S -> TU. }",
+              "I6: { U -> c.U , U -> .cU , U -> .d }",
+              "I7: { T -> aT.c }",
+              "I8: { U -> cU. }",
+              "I9: { U -> d. }",
+              "I10: { T -> aTc. }"
+            ],
+            "solution_table": {
+              "headers": [
+                "Etat",
+                "a",
+                "b",
+                "c",
+                "d",
+                "$",
+                "S",
+                "T",
+                "U"
+              ],
+              "rows": [
+                [
+                  "0",
+                  "d3",
+                  "d4",
+                  "",
+                  "",
+                  "",
+                  "1",
+                  "2",
+                  ""
+                ],
+                [
+                  "1",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "ACC",
+                  "",
+                  "",
+                  ""
+                ],
+                [
+                  "2",
+                  "",
+                  "",
+                  "d6",
+                  "d9",
+                  "",
+                  "",
+                  "",
+                  "5"
+                ],
+                [
+                  "3",
+                  "d3",
+                  "d4",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "7",
+                  ""
+                ],
+                [
+                  "4",
+                  "",
+                  "",
+                  "r3",
+                  "r3",
+                  "",
+                  "",
+                  "",
+                  ""
+                ],
+                [
+                  "5",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "r1",
+                  "",
+                  "",
+                  ""
+                ],
+                [
+                  "6",
+                  "",
+                  "",
+                  "d6",
+                  "d9",
+                  "",
+                  "",
+                  "",
+                  "8"
+                ],
+                [
+                  "7",
+                  "",
+                  "",
+                  "d10",
+                  "",
+                  "",
+                  "",
+                  "",
+                  ""
+                ],
+                [
+                  "8",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "r4",
+                  "",
+                  "",
+                  ""
+                ],
+                [
+                  "9",
+                  "",
+                  "",
+                  "",
+                  "",
+                  "r5",
+                  "",
+                  "",
+                  ""
+                ],
+                [
+                  "10",
+                  "",
+                  "",
+                  "r2",
+                  "r2",
+                  "",
+                  "",
+                  "",
+                  ""
+                ]
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "Exercice_03",
+        "title": "Exercice 03 (08 pts)",
+        "total_exercise_points": "8",
+        "introduction_context": "Dans certain langage, pow(A,B) est introduit comme une fonction mathématique et rend la valeur A à la puissance de B si B !=0 et 1 sinon Par exemple : pow(3 + 2, 2 *1) = pow(5,2)=2 On veut introduire pow(A,B) comme un opérateur binaire. Dans une expression arithmétique, il se présente sous la forme :pow(exp_opérande_gauche,exp_opérande_droit) ",
+        "Question": [
+          {
+            "id": "1",
+            "points": "2",
+            "level": "",
+            "Question": "1. Ecrire la fonction CréerPow qui permet de créer l'arbre abstrait.t de cette expression.",
+            "Solution": [
+              "EXPR_ARBRE CreerBin (char op, EXPR_ARBRE g, EXPR_ARBRE d) {",
+              " EXPR_ARBRE aux = (EXPR_ARBRE)malloc(sizeof (struct _EXPR_ARBRE));",
+              " aux->type = BINAIRE;",
+              " aux->forme.bin.op = op;",
+              " aux->forme.bin.opg = g;",
+              " aux->forme.bin.opd = d;",
+              " return(aux);",
+              "}"
+            ]
+          },
+          {
+            "id": "2",
+            "points": "",
+            "level": "",
+            "Question": "2. Modifier les fichiers d'entrée pour Lex et Yacc (vues précédemment) pour accepter ce nouvel opérateur binaire et pour construire l'arbre correspon",
+            "Solution": [
+              "/* Lex */",
+              "pow {yylval.caractere = yytext[0]; return(TOKEN_Pow);}",
+              "/* Yacc */",
+              "F : TOKEN_Pow '(' E ',' E ')' {$$ = CreerBinaire($1, $3, $5);}",
+              ";"
+            ]
+          },
+          {
+            "id": "3",
+            "points": "2",
+            "level": "",
+            "Question": "3. Proposer un modèle de code MIPS pour ce nouvel opérateur.",
+            "Solution": [
+              "Code l'exp1 résultat $8",
+              "Code l'exp2 résultat $9",
+              "Li $10, 1",
+              "Li $11, 1",
+              "J e 100",
+              "Et101 : mult $10,$8,$10",
+              "SUB $9,$9,$11",
+              "Et100 : Li $12, 0",
+              "Bne $12,$9,Et101",
+              "Move $8,$10"
+            ]
+          },
+          {
+            "id": "4",
+            "points": "3",
+            "level": "",
+            "Question": "4. Construire l'arbre et donner le code MIPS complet correspondant au code MNL.",
+            "question_code": [
+              "Var a,b ;",
+              " Lire a",
+              "Lire b ",
+              " If(a<0)   ",
+              "  a=-1*a ;",
+              "if(b<0)",
+              "b=-1*b ;",
+              "c=pow(a,b) ;"
+            ],
+            "mips_syntax_table": {
+              "title": "Tableau de Syntaxe MIPS",
+              "type": "table",
+              "headers": [
+                "Syntaxe",
+                "Effet",
+                "Syntaxe",
+                "Effet"
+              ],
+              "rows": [
+                [
+                  "move r1, r2",
+                  "r1 ← r2",
+                  "lw r1, o (r2)",
+                  "r1 ← tas (r2 + o)"
+                ],
+                [
+                  "add r1, r2, o",
+                  "r1 ← o + r2",
+                  "sw r1, o (r2)",
+                  "tas.(r2 + o) ← r1"
+                ],
+                [
+                  "sub r1, r2, o",
+                  "r1 ← r2 - o",
+                  "slt r1, r2, o",
+                  "r1 ← r2 < o"
+                ],
+                [
+                  "mul r1, r2, o",
+                  "r1 ← r2 × o",
+                  "sle r1, r2, o",
+                  "r1 ← r2 <= o"
+                ],
+                [
+                  "div r1, r2, o",
+                  "r1 ← r2 ÷ o",
+                  "seq r1, r2, o",
+                  "r1 ← r2 = o"
+                ],
+                [
+                  "and r1, r2, o",
+                  "r1 ← r2 and o",
+                  "sne r1, r2, o",
+                  "r1 ← r2 != o"
+                ],
+                [
+                  "or r1, r2, o",
+                  "r1 ← r2 or o",
+                  "j o",
+                  "pc ← o"
+                ],
+                [
+                  "xor r1, r2, o",
+                  "r1 ← r2 xor o",
+                  "jal o",
+                  "ra ← pc+1 et pc ← o"
+                ],
+                [
+                  "sll r1, r2, o",
+                  "r1 ← r2 sl o",
+                  "beq r, o, a",
+                  "pc ← a si r = o"
+                ],
+                [
+                  "srl r1, r2, o",
+                  "r1 ← r2 sr o",
+                  "bne r, o, a",
+                  "pc ← a si r <> o"
+                ],
+                [
+                  "li r1, n",
+                  "r1 ← n",
+                  "syscall",
+                  "appel système"
+                ],
+                [
+                  "la r1, a",
+                  "r1 ← a",
+                  "nop",
+                  "ne fait rien"
+                ]
+              ],
+              "technical_templates": [
+                {
+                  "id": "TEMPLATE_SI",
+                  "title": "Traduction MNL vers MIPS : SI",
+                  "mnl_construct": "SI expression ALORS alternance_vraie SINON alternance_fausse",
+                  "mips_code": [
+                    "code de l'expression – résultat _$5",
+                    "bne $5, $6, etiqv",
+                    "code de l'alternance fausse",
+                    "j etiqfin",
+                    "etiqv: code de l'alternance vraie",
+                    "...",
+                    "etiqfin: nop"
+                  ]
+                },
+                {
+                  "id": "TEMPLATE_TANTQUE",
+                  "title": "Traduction MNL vers MIPS : TANTQUE",
+                  "mnl_construct": "TANTQUE comparaison FAIRE corps FINTQ",
+                  "mips_code": [
+                    "j etiqtest",
+                    "etiqcorps: code du corps",
+                    "...",
+                    "etiqtest: …code de l'expression",
+                    "résultat _$5",
+                    "bne $5, $0, etiqcorps"
+                  ]
+                },
+                {
+                  "id": "TEMPLATE_LIRE",
+                  "title": "Traduction MNL vers MIPS : lire x",
+                  "mnl_construct": "lire x",
+                  "mips_code": [
+                    "li $2,5",
+                    "syscall",
+                    "sw $2, décalage_de_la_variable($30)"
+                  ]
+                },
+                {
+                  "id": "TEMPLATE_ECRIRE_EXP",
+                  "title": "Traduction MNL vers MIPS : ECRIRE expression",
+                  "mnl_construct": "ECRIRE expression",
+                  "mips_code": [
+                    "… code de l'expression",
+                    "résultat _$5",
+                    "move $4, $5 # avec la valeur de l'expression déjà mis dans $8",
+                    "li $2, 1",
+                    "syscall"
+                  ]
+                },
+                {
+                  "id": "TEMPLATE_ECRIRE_CHAINE",
+                  "title": "Traduction MNL vers MIPS : Ecrire chaine",
+                  "mnl_construct": "Ecrire chaine",
+                  "mips_code": [
+                    "la $4, adresse_de_la_chaine",
+                    "li $2, 4",
+                    "syscall"
+                  ]
+                }
+              ]
+            },
+            "syscall_table": {
+              "id": "SYSCALL_TABLE",
+              "title": "Appels Système (Syscalls)",
+              "type": "table",
+              "headers": [
+                "Nom",
+                "N°",
+                "Effet"
+              ],
+              "rows": [
+                [
+                  "print_int",
+                  "1",
+                  "imprime l'entier contenu dans a0"
+                ],
+                [
+                  "print_string",
+                  "4",
+                  "imprime la chaîne en a0 jusqu'à '\\000'"
+                ],
+                [
+                  "read_int",
+                  "5",
+                  "lit un entier et le place dans v0"
+                ],
+                [
+                  "sbrk",
+                  "9",
+                  "alloue a0 bytes dans le tas, retourne l'adresse du début dans v0"
+                ],
+                [
+                  "exit",
+                  "10",
+                  "arrêt du programme en cours d'exécution"
+                ]
+              ]
+            },
+            "translation_logic_diagrams": [
+              {
+                "construct": "SI expression ALORS alternance_vraie SINON alternance_fausse",
+                "diagram_description": "Un rectangle à gauche contenant le code MNL fléché vers un bloc de code MIPS à droite. Le bloc MIPS montre la structure : code expression (résultat $5), bne $5, $6, etiqv, code alternance fausse, jump etiqfin, label etiqv (code alternance vraie), label etiqfin (nop).",
+                "mips_template": [
+                  "code de l'expression – résultat _$5",
+                  "bne $5, $6, etiqv",
+                  "code de l'alternance fausse",
+                  "j etiqfin",
+                  "etiqv: code de l'alternance vraie",
+                  "...",
+                  "etiqfin: nop"
+                ]
+              },
+              {
+                "construct": "TANTQUE comparaison FAIRE corps FINTQ",
+                "diagram_description": "Schéma avec des flèches croisées montrant le saut au test initial et le retour au corps de la boucle si la condition est vraie. Structure : j etiqtest, label etiqcorps (code du corps), label etiqtest (code comparaison, résultat $5), bne $5, $0, etiqcorps.",
+                "mips_template": [
+                  "j etiqtest",
+                  "etiqcorps: code du corps",
+                  "...",
+                  "etiqtest: …code de l'expression",
+                  "résultat _$5",
+                  "bne $5, $0, etiqcorps"
+                ]
+              },
+              {
+                "construct": "lire x",
+                "diagram_description": "Flèche simple vers le code de lecture système : li $2, 5, syscall, sw $2, décalage_de_la_variable($30).",
+                "mips_template": [
+                  "li $2,5",
+                  "syscall",
+                  "sw $2, décalage_de_la_variable($30)"
+                ]
+              },
+              {
+                "construct": "ECRIRE expression",
+                "diagram_description": "Flèche simple vers le code d'écriture : code expression (résultat $5), move $4, $5, li $2, 1, syscall.",
+                "mips_template": [
+                  "… code de l'expression",
+                  "résultat _$5",
+                  "move $4, $5 # avec la valeur de l'expression déjà mis dans $8",
+                  "li $2, 1",
+                  "syscall"
+                ]
+              }
+            ],
+            "source_files": {
+              "lex_file": [
+                "%{",
+                "%}",
+                "ER_ENTIER -?[0-9]+",
+                "ER_VARIABLE [a-zA-Z][0-9a-zA-Z]*",
+                "ER_SEPARATEUR [ \\n\\t]",
+                "%%",
+                "{ER_SEPARATEUR}+ { }",
+                "{ER_ENTIER} {yylval.entier = atoi(yytext); return(TOKEN_ENTIER);}",
+                "{ER_VARIABLE} { yylval.chaine = strcpy((char *)malloc(yyleng+1), yytext); return(TOKEN_VARIABLE);}",
+                "[\\+\\-] {yylval.caractere = yytext[0]; return(TOKEN_PLUS_MOINS);}",
+                "[\\*\\/\\%] {yylval.caractere = yytext[0]; return(TOKEN_MULT_DIV);}",
+                "[\\(\\)] {return(yytext[0]);}",
+                "\"++\"|\"--\" {yylval.caractere = yytext[0]; return(TOKEN_INC_DEC);}",
+                "[?:=] {return(yytext[0]);}",
+                "<<EOF>> {return(0);}",
+                "%%"
+              ],
+              "yacc_file": [
+                "%%",
+                "EE : C {a = $1;};",
+                "C : E '?' C ':' C {$$ = CreerTer($1, $3, $5);}",
+                "| E { };",
+                "E : E TOKEN_PLUS_MOINS T {$$ = CreerBin($2, $1, $3);}",
+                "| T {/* par defaut, $$ = $1 */};",
+                "T : T TOKEN_MULT_DIV G {$$ = CreerBin($2, $1, $3);}",
+                "| G { };",
+                "G : TOKEN_INC_DEC TOKEN_VARIABLE {$$ = CreerUn($1, $2);}",
+                "| F { };",
+                "F : '(' E ')' {$$ = $2;}",
+                "| TOKEN_VARIABLE {$$ = CreerVariable($1);}",
+                "| TOKEN_ENTIER {$$ = CreerConstante($1);};",
+                "%%"
+              ]
+            },
+            "Solution": [
+              ".data",
+              "MEM: .space 12",
+              ".text",
+              "main: la $30, MEM",
+              "li $2, 5",
+              "syscall",
+              "sw $2,0($30)",
+              "li $2, 5",
+              "syscall",
+              "sw $2,4($30)",
+              "lw $8, 0($30)",
+              "li $9, 0",
+              "blt $8, $9, E100",
+              "j E101",
+              "E100: lw $8,0($30)",
+              "li $9,-1",
+              "mult $8,$8,$9",
+              "sw $8, 0($30)",
+              "E101: lw $8, 4($30)",
+              "li $9, -1",
+              "mult $8,$8,$9",
+              "sw $8, 4($30)",
+              "lw $8, 0($30)",
+              "lw $9, 4($30)",
+              "E101: nop",
+              "Li $10, 1",
+              "Li $11, 1",
+              "J e 102",
+              "Et103 :mult $10,$8,$10",
+              "SUB $9,$9,$11",
+              "Et102 : Li $12, 0",
+              "Bne $12,$9,E103",
+              "Move $8,$10",
+              "sw $8, 8($30)",
+              "lw $4, 8($30)",
+              "li $2, 1",
+              "syscall",
+              "li $2, 10",
+              "syscall"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

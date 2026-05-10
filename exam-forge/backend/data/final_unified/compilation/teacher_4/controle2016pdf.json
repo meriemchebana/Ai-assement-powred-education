@@ -1,0 +1,930 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h30m",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (04 pts)",
+      "total_exercise_points": "4",
+      "introduction_context": "",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "1. En Caml, les identificateurs sont des suites de lettres, chiffres, _ et ' (le caractère apostrophe), commençant par une lettre. Les identificateurs ne doivent pas contenir deux caractères soulignés successifs (_ _). Donnez une expression régulière pour reconnaître les identificateurs de Caml. Exemples : x, x', Le_Compteur, k0, K''1, mais pas ab_ _cd.",
+          "Solution": "[A-Za-z](\"_\"?[A-Za-z0-9'])*\"_\"?",
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "2. Le langage Ada permet d'écrire les nombres entiers comme par exemple 1_234_567, c'est à dire qu'on peut découper le nombre par tranche de 3 chiffres. Donner une expression régulière qui reconnaît ces nombres.",
+          "Solution": "[0-9]{1,3}(_([0-9]{3}))* ou [0-9]([0-9][0-9]?)?(_[0-9][0-9][0-9])*",
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "Soit G la grammaire suivante : A → Bac | Bb ; B → Ad | Bc | ε",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "1. (1.5 pts) Il est évident que cette grammaire n'est pas LL(1). Transformez-la en Grammaire G1 de type LL(1).",
+          "Solution": "Il existe une factorisation dans A → Bac | Bb → A → B(ac|b), donc A → BA' avec A' → ac | b. Il existe une récursivité à gauche immédiate et indirecte dans B → Ad|Bc | ε , B →( Ad|ε)B’ B’ →cB’| ε A→BA’, A →( AdB’|B’)A’ A →AdB’A’|B’A’ ,A→ B’A’A’’ A’’→ dB’A’| ε :",
+          "solution_grammar": [
+            "A   → B'A'A''",
+            "A'  → ac | b",
+            "A'' → dB'A' | ε",
+            "B'  → cB' | ε"
+          ],
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "2. (1.5 pts) Construire la table d'analyse LL(1) pour G1.",
+          "solution_premiers_suivants": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "A",
+                "a, b, c",
+                "$"
+              ],
+              [
+                "A'",
+                "a, b",
+                "d, $"
+              ],
+              [
+                "A''",
+                "d, ε",
+                "$"
+              ],
+              [
+                "B'",
+                "c, ε",
+                "a, b"
+              ]
+            ]
+          },
+          "solution_table": {
+            "type": "table",
+            "headers": [
+              "",
+              "a",
+              "b",
+              "c",
+              "d",
+              "$"
+            ],
+            "rows": [
+              [
+                "A",
+                "B'A'A''",
+                "B'A'A''",
+                "B'A'A''",
+                "",
+                ""
+              ],
+              [
+                "A'",
+                "ac",
+                "b",
+                "",
+                "",
+                ""
+              ],
+              [
+                "A''",
+                "",
+                "",
+                "",
+                "dB'A'",
+                "ε"
+              ],
+              [
+                "B'",
+                "",
+                "",
+                "cB'",
+                "ε",
+                "ε"
+              ]
+            ]
+          },
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "question_text": "3. (1 pt) Analyser le mot « cccdbac » par un analyseur LL(1).",
+          "solution_table": {
+            "type": "table",
+            "headers": [
+              "Pile",
+              "Chaine",
+              "Action"
+            ],
+            "rows": [
+              [
+                "$A",
+                "cccdbac$",
+                "dépiler, empiler A''A'B'"
+              ],
+              [
+                "$A''A'B'",
+                "cccdbac$",
+                "dépiler, empiler B'c"
+              ],
+              [
+                "$A''A'B'c",
+                "cccdbac$",
+                "dépiler, Avancer"
+              ],
+              [
+                "$A''A'B'",
+                "ccdbac$",
+                "dépiler, empiler B'c"
+              ],
+              [
+                "$A''A'B'c",
+                "ccdbac$",
+                "dépiler, Avancer"
+              ],
+              [
+                "$A''A'B'",
+                "cdbac$",
+                "dépiler, empiler B'c"
+              ],
+              [
+                "$A''A'B'c",
+                "cdbac$",
+                "dépiler, Avancer"
+              ],
+              [
+                "$A''A'B'",
+                "dbac$",
+                "erreur"
+              ]
+            ]
+          },
+          "level": "Procedural"
+        },
+        {
+          "id": "4",
+          "question_text": "4. (2 pts) Construire l'automate LR pour G.",
+          "Solution": {
+            "type": "LR(0)",
+            "states_content": [
+              "I0: { E→.A$ , A→.Bac , A→.Bb , B→.Ad , B→.Bc , B→. }",
+              "I1: { A→B.ac , A→B.b , B→B.c }",
+              "I2: { B→Ad. }",
+              "I3: { A→Bb. }",
+              "I4: { A→Ba.c }",
+              "I5: { E→A.$ , B→A.d }",
+              "I6: { B→Bc. }",
+              "I7: { A→Bac. }"
+            ],
+            "precise_location": "Corrigé Page 3"
+          },
+          "level": "Procedural"
+        },
+        {
+          "id": "5",
+          "question_text": "5. (2 pts) G est-elle SLR(1) ? Justifier rigoureusement en énumérant tous les conflits et en précisant leur type (shift/reduce ou reduce/reduce).",
+          "solution_premiers_suivants": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "A",
+                "a, b, c",
+                "$, d"
+              ],
+              [
+                "B",
+                "a, b, c, ε",
+                "a, b, c"
+              ]
+            ]
+          },
+          "solution_slr_table": {
+            "type": "table",
+            "headers": [
+              "SLR(1)",
+              "a",
+              "b",
+              "c",
+              "d",
+              "$",
+              "A",
+              "B"
+            ],
+            "rows": [
+              [
+                "0",
+                "R5",
+                "R5",
+                "R5",
+                "",
+                "",
+                "1",
+                "2"
+              ],
+              [
+                "1",
+                "d3",
+                "",
+                "",
+                "",
+                "acc",
+                "",
+                ""
+              ],
+              [
+                "2",
+                "d4",
+                "d5",
+                "d6",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "3",
+                "R3",
+                "R3",
+                "R3",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "4",
+                "",
+                "",
+                "d7",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "5",
+                "d2",
+                "d2",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "6",
+                "R4",
+                "R4",
+                "R4",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "7",
+                "d1",
+                "d1",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ]
+            ]
+          },
+          "Solution": "G est SLR(1) car il n'y a aucun conflit dans la table : chaque case contient au plus une règle.",
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 03 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "On veut ajouter la structure de donnée matrices ; MAT[i,j] pour être utilisée dans les expressions arithmétiques.",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "1. Quelles sont les modifications qui doivent être apportées aux différents fichiers du compilateur (Lex, yacc, type.h).",
+          "solution_lex_code": [
+            "…",
+            "[?:= \\[,\\]] { return(yytext[0]); }",
+            "…"
+          ],
+          "solution_yacc_code": [
+            "V : '(' V ')' { $$ = $2; }",
+            "  | …",
+            "  | TOKEN_VARIABLE '[' C ',' C ']' { $$ = CreerMatrice($1, $3, $5); };",
+            "F : '(' C ')' { $$ = $2; }",
+            "  | …",
+            "  | TOKEN_VARIABLE '[' C ',' C ']' { $$ = CreerMatrice($1, $3, $5); };"
+          ],
+          "solution_typeh_code": [
+            "enum EXPR_TYPE { … , MATRICE };",
+            "typedef struct _EXPR_ARBRE {",
+            "  enum EXPR_TYPE type;",
+            "  union {",
+            "    …",
+            "    struct {",
+            "      char *NOMAT;",
+            "      struct _EXPR_ARBRE *INDL;",
+            "      struct _EXPR_ARBRE *INDC;",
+            "    } MATRICE;",
+            "    …",
+            "  } forme;",
+            "} *EXPR_ARBRE;"
+          ],
+          "level": "Factual"
+        },
+        {
+          "id": "2",
+          "question_text": "2. Proposer un modèle de code (d'instructions) MIPS permettant l'accès aux éléments de la matrice.On veut utiliser cette structure (matrice) dans les instructions lecture et affectation",
+          "Solution": [
+            "# Code pour calculer l'indice de ligne (expression) → $n",
+            "# Code pour calculer l'indice de colonne (expression) → $n+1",
+            "mul $n, $n, (nombre de colonnes)",
+            "add $n, $n, $n+1",
+            "li  $n+1, 4",
+            "mul $n, $n, $n+1",
+            "add $n, $n, $30",
+            "lw  $n, d($n)"
+          ],
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "question_text": "3. Proposer la structure d'une déclaration de l'arbre syntaxique des instructions (INST_ARBRE) acceptant la matrice.",
+          "solution_typeh_code": [
+            "typedef struct _INST_ARBRE {",
+            "  enum INST_TYPE type;",
+            "  union {",
+            "    ...",
+            "    struct {",
+            "      char *Matrice;",
+            "      struct _EXPR_ARBRE *indiceL;",
+            "      struct _EXPR_ARBRE *indiceC;",
+            "    } lecture_Mat;",
+            "    struct {",
+            "      char *Matrice;",
+            "      struct _EXPR_ARBRE *indiceL;",
+            "      struct _EXPR_ARBRE *indiceC;",
+            "      struct _EXPR_ARBRE *expr;",
+            "    } Affect_Mat;",
+            "    ...",
+            "  } forme;",
+            "} *INST_ARBRE;"
+          ],
+          "level": "Conceptual"
+        },
+        {
+          "id": "4",
+          "question_text": "4. Ecrire en MNL un programme qui permet de trouver le max d'une matrice.",
+          "Solution": [
+            "Const N=5, M=5;",
+            "Var i, j, Max",
+            "Matrice Mat[N,M]",
+            "Max := MAT[0,0];",
+            "i := 0;",
+            "Tantque i<N faire",
+            "{ j := 0;",
+            "  Tantque j<M faire",
+            "  { Lire MAT[i,j];",
+            "    j := j+1;",
+            "  }",
+            "  i := i+1;",
+            "}",
+            "i := 0;",
+            "Tantque i<N faire",
+            "{ j := 0;",
+            "  Tantque j<M faire",
+            "  { Si (MAT[i,j] > max)",
+            "      max := MAT[i,j];",
+            "    j := j+1;",
+            "  }",
+            "  i := i+1;",
+            "}",
+            "Ecrire Max;"
+          ],
+          "level": "Procedural"
+        },
+        {
+          "id": "5",
+          "question_text": "5. Suite à votre proposition construire l'arbre et donner le code MIPS complet correspondant (registre de départ c'est $8).",
+          "reference_lex_code": [
+            "……",
+            "%}",
+            "ER_ENTIER -?[0-9]+",
+            "ER_VARIABLE [a-zA-Z][0-9a-zA-Z]*",
+            "ER_SEPARATEUR [ \\n\\t]",
+            "%%",
+            "{ER_SEPARATEUR}+ {}",
+            "{ER_ENTIER} { yylval.entier = atoi(yytext); return(TOKEN_ENTIER); }",
+            "{ER_VARIABLE} { yylval.chaine = strcpy((char *)malloc(yyleng+1), yytext); return(TOKEN_VARIABLE); }",
+            "[\\+\\-] { yylval.caractere = yytext[0]; return(TOKEN_PLUS_MOINS); }",
+            "[\\*\\/\\%] { yylval.caractere = yytext[0]; return(TOKEN_MULT_DIV); }",
+            "[\\(\\)] { return(yytext[0]); }",
+            "\"++\"|\"--\" { yylval.caractere = yytext[0]; return(TOKEN_INC_DEC); }",
+            "[?:= \\[,\\]] { return(yytext[0]); }",
+            "<<EOF>> { return(0); }"
+          ],
+          "reference_mnl_mips": {
+            "type": "table",
+            "headers": [
+              "MNL",
+              "MIPS"
+            ],
+            "rows": [
+              [
+                "lire x",
+                "li $2, val\nsyscall\nsw $2, décalage_de_la_variable($30)"
+              ],
+              [
+                "ECRIRE expression",
+                "... code de l'expression résultat → $8\nmove $4, $8\nli $2, 1\nsyscall"
+              ],
+              [
+                "ECRIRE chaine",
+                "la $4, adresse_de_la_chaine\nli $2, 4\nsyscall"
+              ],
+              [
+                "SI expression\n  ALORS vrai\n  SINON faux",
+                "code de l'expression – résultat → $8\nbne $8, $9, etiqv\ncode de l'alternance fausse\nj etiqfin\netiqv: code de l'alternance vraie\netiqfin: nop"
+              ],
+              [
+                "TANTQUE comparaison FAIRE corps FINTQ",
+                "j etiqtest\netiqcorps: code du corps\netiqtest: ... code résultat → $8\nbne $8, $0, etiqcorps"
+              ]
+            ]
+          },
+          "reference_mips_syntax_table": {
+            "type": "table",
+            "headers": [
+              "Syntaxe",
+              "Effet",
+              "Syntaxe",
+              "Effet"
+            ],
+            "rows": [
+              [
+                "move r1, r2",
+                "r1 ← r2",
+                "lw r1, o(r2)",
+                "r1 ← mémoire[r2+o]"
+              ],
+              [
+                "add r1, r2, o",
+                "r1 ← r2 + o",
+                "sw r1, o(r2)",
+                "mémoire[r2+o] ← r1"
+              ],
+              [
+                "sub r1, r2, o",
+                "r1 ← r2 - o",
+                "slt r1, r2, o",
+                "r1 ← r2 < o"
+              ],
+              [
+                "mul r1, r2, o",
+                "r1 ← r2 × o",
+                "sle r1, r2, o",
+                "r1 ← r2 <= o"
+              ],
+              [
+                "div r1, r2, o",
+                "r1 ← r2 ÷ o",
+                "seq r1, r2, o",
+                "r1 ← r2 = o"
+              ],
+              [
+                "and r1, r2, o",
+                "r1 ← r2 and o",
+                "sne r1, r2, o",
+                "r1 ← r2 != o"
+              ],
+              [
+                "or  r1, r2, o",
+                "r1 ← r2 or o",
+                "j o",
+                "pc ← o"
+              ],
+              [
+                "xor r1, r2, o",
+                "r1 ← r2 xor o",
+                "jal o",
+                "ra ← pc+1 et pc ← o"
+              ],
+              [
+                "sll r1, r2, o",
+                "r1 ← r2 << o",
+                "beq r, o, a",
+                "pc ← a si r = o"
+              ],
+              [
+                "srl r1, r2, o",
+                "r1 ← r2 >> o",
+                "bne r, o, a",
+                "pc ← a si r <> o"
+              ],
+              [
+                "li r1, n",
+                "r1 ← n",
+                "syscall",
+                "appel système"
+              ],
+              [
+                "la r1, a",
+                "r1 ← a",
+                "nop",
+                "ne fait rien"
+              ]
+            ]
+          },
+          "reference_syscall_table": {
+            "type": "table",
+            "headers": [
+              "Nom",
+              "N°",
+              "Effet"
+            ],
+            "rows": [
+              [
+                "print_int",
+                "1",
+                "imprime l'entier contenu dans a0"
+              ],
+              [
+                "print_string",
+                "4",
+                "imprime la chaîne en a0 jusqu'à '\\000'"
+              ],
+              [
+                "read_int",
+                "5",
+                "lit un entier et le place dans v0"
+              ],
+              [
+                "sbrk",
+                "9",
+                "alloue a0 bytes dans le tas, retourne l'adresse du début dans v0"
+              ],
+              [
+                "exit",
+                "10",
+                "arrêt du programme en cours d'exécution"
+              ]
+            ]
+          },
+          "reference_yacc_code": [
+            "%{",
+            "…",
+            "EXPR_ARBRE a;",
+            "%}",
+            "%union { EXPR_ARBRE arbre; char *chaine; int entier; char caractere; }",
+            "%token <chaine> TOKEN_VARIABLE",
+            "%token <entier> TOKEN_ENTIER",
+            "%token <caractere> TOKEN_PLUS_MOINS TOKEN_MULT_DIV TOKEN_INC_DEC",
+            "%token TOKEN_FIN",
+            "%type <arbre> EE E T F G V C",
+            "%start EE",
+            "%%",
+            "EE : C { a = $1; };",
+            "C : E '?' C ':' C { $$ = CreerTer($1, $3, $5); }",
+            "  | E { };",
+            "E : E TOKEN_PLUS_MOINS T { $$ = CreerBin($2, $1, $3); }",
+            "  | T { };",
+            "T : T TOKEN_MULT_DIV G { $$ = CreerBin($2, $1, $3); }",
+            "  | G { };",
+            "G : TOKEN_INC_DEC V { $$ = CreerUn($1, $2); }",
+            "  | F { };",
+            "V : '(' TOKEN_VARIABLE ')' { $$ = CreerVariable($2); }",
+            "  | TOKEN_VARIABLE { $$ = CreerVariable($1); };",
+            "F : '(' C ')' { $$ = $2; }",
+            "  | TOKEN_VARIABLE { $$ = CreerVariable($1); }",
+            "  | TOKEN_ENTIER { $$ = CreerConstante($1); };",
+            "%%"
+          ],
+          "reference_typeh_code": [
+            "enum EXPR_TYPE { CONSTANTE, VARIABLE, BINAIRE, UNAIRE, TERNAIRE };",
+            "typedef struct _EXPR_ARBRE {",
+            "  enum EXPR_TYPE type;",
+            "  union {",
+            "    …",
+            "    struct {",
+            "      char op;",
+            "      struct _EXPR_ARBRE *opg;",
+            "      struct _EXPR_ARBRE *opd;",
+            "    } bin;",
+            "    …",
+            "  } forme;",
+            "} *EXPR_ARBRE;",
+            "",
+            "typedef struct _INST_ARBRE {",
+            "  enum INST_TYPE type;",
+            "  union {",
+            "    ...",
+            "    struct {",
+            "      char *vecteur;",
+            "      struct _EXPR_ARBRE *indice;",
+            "    } lecture_vect;",
+            "    ...",
+            "  } forme;",
+            "} *INST_ARBRE;"
+          ],
+          "Solution": {
+            "type": "AST",
+            "tree": {
+              "node": ";",
+              "children": [
+                {
+                  "node": ":=",
+                  "children": [
+                    {
+                      "node": "max"
+                    },
+                    {
+                      "node": "mat",
+                      "children": [
+                        {
+                          "node": "0"
+                        },
+                        {
+                          "node": "0"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "node": ";",
+                  "children": [
+                    {
+                      "node": ":=",
+                      "children": [
+                        {
+                          "node": "i"
+                        },
+                        {
+                          "node": "0"
+                        }
+                      ]
+                    },
+                    {
+                      "node": ";",
+                      "children": [
+                        {
+                          "node": "tq",
+                          "children": [
+                            {
+                              "node": "<",
+                              "children": [
+                                {
+                                  "node": "i"
+                                },
+                                {
+                                  "node": "N"
+                                }
+                              ]
+                            },
+                            {
+                              "node": ";",
+                              "children": [
+                                {
+                                  "node": ";",
+                                  "children": [
+                                    {
+                                      "node": ":=",
+                                      "children": [
+                                        {
+                                          "node": "j"
+                                        },
+                                        {
+                                          "node": "0"
+                                        }
+                                      ]
+                                    },
+                                    {
+                                      "node": "tq",
+                                      "children": [
+                                        {
+                                          "node": "<",
+                                          "children": [
+                                            {
+                                              "node": "j"
+                                            },
+                                            {
+                                              "node": "M"
+                                            }
+                                          ]
+                                        },
+                                        {
+                                          "node": ";",
+                                          "children": [
+                                            {
+                                              "node": "si",
+                                              "children": [
+                                                {
+                                                  "node": ">",
+                                                  "children": [
+                                                    {
+                                                      "node": "mat",
+                                                      "children": [
+                                                        {
+                                                          "node": "i"
+                                                        },
+                                                        {
+                                                          "node": "j"
+                                                        }
+                                                      ]
+                                                    },
+                                                    {
+                                                      "node": "max"
+                                                    }
+                                                  ]
+                                                },
+                                                {
+                                                  "node": ":=",
+                                                  "children": [
+                                                    {
+                                                      "node": "max"
+                                                    },
+                                                    {
+                                                      "node": "mat",
+                                                      "children": [
+                                                        {
+                                                          "node": "i"
+                                                        },
+                                                        {
+                                                          "node": "j"
+                                                        }
+                                                      ]
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "node": ":=",
+                                              "children": [
+                                                {
+                                                  "node": "j"
+                                                },
+                                                {
+                                                  "node": "+",
+                                                  "children": [
+                                                    {
+                                                      "node": "j"
+                                                    },
+                                                    {
+                                                      "node": "1"
+                                                    }
+                                                  ]
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "node": ":=",
+                                  "children": [
+                                    {
+                                      "node": "i"
+                                    },
+                                    {
+                                      "node": "+",
+                                      "children": [
+                                        {
+                                          "node": "i"
+                                        },
+                                        {
+                                          "node": "1"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "node": "ecrire",
+                          "children": [
+                            {
+                              "node": "max"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "solution_mips_code": [
+            ".data",
+            "MEM: .space 48",
+            ".text",
+            "main: la $30, MEM",
+            "… # lecture de la matrice",
+            "",
+            "# Max := MAT[0,0]",
+            "li  $8, 0($30)",
+            "li  $9, 4($30)",
+            "li  $10, 3",
+            "mul $8, $8, $10",
+            "add $8, $8, $9",
+            "li  $9, 4",
+            "mul $8, $8, $9",
+            "add $8, $8, $30",
+            "lw  $8, 12($8)",
+            "sw  $8, 12($30)",
+            "",
+            "# i := 0",
+            "li  $8, 0",
+            "sw  $8, 0($30)",
+            "",
+            "# TANTQUE i<N (boucle externe)",
+            "j   et1",
+            "et2: li  $8, 0",
+            "     sw  $8, 0($30)         # j := 0",
+            "j   et3",
+            "et4: lw  $8, 0($30)         # i",
+            "     lw  $9, 4($30)         # j",
+            "     li  $10, 3",
+            "     mul $8, $8, $10",
+            "     add $8, $8, $9",
+            "     li  $9, 4",
+            "     mul $8, $8, $9",
+            "     add $8, $8, $30",
+            "     lw  $8, 12($8)         # MAT[i,j]",
+            "     lw  $8, 8($30)         # max",
+            "     bgt $8, $9, et5",
+            "j   et6",
+            "et5: lw  $8, 0($30)         # i",
+            "     lw  $9, 4($30)         # j",
+            "     li  $10, 3",
+            "     mul $8, $8, $10",
+            "     add $8, $8, $9",
+            "     li  $9, 4",
+            "     mul $8, $8, $9",
+            "     add $8, $8, $30",
+            "     lw  $8, 12($8)         # MAT[i,j]",
+            "     sw  $8, 8($30)         # max := MAT[i,j]",
+            "et6: nop",
+            "     lw  $8, 4($30)",
+            "     li  $9, 1",
+            "     add $8, $8, $9",
+            "     sw  $8, 4($30)         # j := j+1",
+            "et3: lw  $8, 4($30)",
+            "     li  $9, 3",
+            "     blt $8, $9, et4",
+            "     lw  $8, 0($30)",
+            "     li  $9, 1",
+            "     add $8, $8, $9",
+            "     sw  $8, 0($30)         # i := i+1",
+            "et1: lw  $8, 0($30)",
+            "     li  $9, 3",
+            "     blt $8, $9, et2",
+            "",
+            "# Ecrire Max",
+            "lw   $8, 12($8)",
+            "move $4, $8",
+            "li   $2, 1",
+            "syscall",
+            "li   $2, 10",
+            "syscall"
+          ],
+          "level": "Procedural"
+        }
+      ]
+    }
+  ]
+}

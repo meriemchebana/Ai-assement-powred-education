@@ -1,0 +1,258 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (06 pts)",
+      "total_exercise_points": "6",
+      "Question": [
+        {
+          "id": "1",
+          "points": "04",
+          "question_text": "Considérons l'alphabet Σ={0,1,2,…, 9}, donner une expression régulière étendue qui reconnait la date dans l'année donnée sous la forme JJ/MM.",
+          "indications": {
+            "accepted": [
+              "17/02",
+              "5/03",
+              "12/4",
+              "29/02"
+            ],
+            "rejected": [
+              "31/04",
+              "30/02",
+              "49/07"
+            ]
+          },
+          "Solution": "[0-2]?[1-9] \"/\" (0?[1-9]|1[0-2])|30\"/\"(0?([13-9]|1[0-2])|31\"/\"(0?[13578]|10|12)",
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "points": "01+01",
+          "question_text": "Sur l'alphabet {a; b}, donner une expression régulière pour chacun des langages suivants :",
+          "sub_questions": [
+            {
+              "id": "2.a",
+              "points": "1",
+              "question_text": "L={ensemble des mots ne commençant jamais par la chaîne \"ba\"}.",
+              "Solution": "(a|bb)(a|b)*|b",
+              "level": "Conceptual"
+            },
+            {
+              "id": "2.b",
+              "points": "1",
+              "question_text": "L={ensemble des mots w ne contenant ni deux a consécutif ni deux b consécutifs}.",
+              "Solution": "ab(ab)*|ba(ba)*|a|b",
+              "level": "Conceptual"
+            }
+          ],
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (14 pts)",
+      "total_exercise_points": "14",
+      "introduction_context": "Soit la grammaire G suivante :",
+      "grammar": [
+        "S → AB",
+        "A → Ba | Sd",
+        "B → Bb | Sc | ε"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "points": "03",
+          "question_text": "Calculer Les ensembles premiers et suivants de la grammaire G.",
+          "solution_premiers_suivants": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "S",
+                "b, a",
+                "$, d, c"
+              ],
+              [
+                "A",
+                "b, a",
+                "$, d, c, a, b"
+              ],
+              [
+                "B",
+                "ε, b, a",
+                "$, d, c, a, b"
+              ]
+            ]
+          },
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "points": "0.5",
+          "question_text": "La grammaire G nécessite elle la factorisation à gauche ? Si oui modifier toutes les règles qui nécessite la factorisation.",
+          "Solution": "Non. G ne nécessite pas la factorisation à gauche.",
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "points": "0.5",
+          "question_text": "Est-ce que G contient la récursivité gauche ? Si oui éliminer tous les cas récursivité gauche.",
+          "Solution": "Oui, G contient deux cas de récursivité à gauche.",
+          "level": "Procedural"
+        },
+        {
+          "id": "4",
+          "points": "4",
+          "question_text": "Elimination de tous les cas de récursivité gauche.",
+          "solution_elimination": {
+            "steps": [
+              {
+                "step": "Pour i=0",
+                "detail": "S → AB : il n'y a pas de RG."
+              },
+              {
+                "step": "Pour i=1, j=0",
+                "detail": "A → Ba | Sd. Il faut remplacer S par AB → A → Ba | ABd. Il y a une RG, il faut l'éliminer.",
+                "result": [
+                  "A → BaA'",
+                  "A' → BdA' | ε"
+                ]
+              },
+              {
+                "step": "Pour i=2, j=1",
+                "detail": "B → Bb | Sc. Il faut remplacer S par AB → B → Bb | ABc."
+              },
+              {
+                "step": "Pour i=2, j=2",
+                "detail": "Il faut remplacer A par BaA' → B → Bb | BaA'Bc | ε. On peut écrire B comme : B → BB' | ε et B' → b | aA'Bc. Il y a une RG, il faut l'éliminer.",
+                "result": [
+                  "B → B'B | ε",
+                  "B' → b | aA'Bc"
+                ]
+              }
+            ],
+            "new_grammar": [
+              "S  → AB",
+              "A  → BaA'",
+              "A' → BdA' | ε",
+              "B  → B'B | ε",
+              "B' → b | aA'Bc"
+            ]
+          },
+          "level": "Procedural"
+        },
+        {
+          "id": "5",
+          "points": "2+3",
+          "question_text": "Construire la table d'analyse de la grammaire résultante.",
+          "solution_premiers_suivants_new": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "S",
+                "a, b",
+                "$"
+              ],
+              [
+                "A",
+                "a, b",
+                "a, b, $"
+              ],
+              [
+                "A'",
+                "a, b, d, ε",
+                "a, b, c, $"
+              ],
+              [
+                "B",
+                "a, b, ε",
+                "d, a, c, $"
+              ],
+              [
+                "B'",
+                "a, b",
+                "a, b, c, d, $"
+              ]
+            ]
+          },
+          "solution_ll1_table": {
+            "type": "table",
+            "headers": [
+              "",
+              "a",
+              "b",
+              "c",
+              "d",
+              "$"
+            ],
+            "rows": [
+              [
+                "S",
+                "AB",
+                "AB",
+                "",
+                "",
+                ""
+              ],
+              [
+                "A",
+                "BaA'",
+                "BaA'",
+                "",
+                "",
+                ""
+              ],
+              [
+                "A'",
+                "BdA' | ε",
+                "BdA' | ε",
+                "ε",
+                "BdA'",
+                "ε"
+              ],
+              [
+                "B",
+                "B'B | ε",
+                "B'B",
+                "ε",
+                "ε",
+                "ε"
+              ],
+              [
+                "B'",
+                "aA'Bc",
+                "b",
+                "",
+                "",
+                ""
+              ]
+            ]
+          },
+          "level": "Procedural"
+        },
+        {
+          "id": "6",
+          "points": "01",
+          "question_text": "La grammaire résultante est-elle de type LL(1) ? Justifier.",
+          "Solution": "La grammaire résultante n'est pas de type LL(1). Il y a un conflit dans la table dans la ligne A' et un conflit dans la ligne B colonne a.",
+          "level": "Metacognitive"
+        }
+      ]
+    }
+  ]
+}

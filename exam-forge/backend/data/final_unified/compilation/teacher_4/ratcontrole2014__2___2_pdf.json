@@ -1,0 +1,216 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h30m",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (04 pts)",
+      "total_exercise_points": "4",
+      "introduction_context": "",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "question_text": "1. Donner une expression régulière étendue en Lex permettant de reconnaître les chaînes composées de chiffres en ordre lexicographique croissant. Une chaîne vide est acceptée. Exemples de chaînes acceptées : 12345 23468 135 0127 122345. Exemples de chaînes non acceptées : 2410",
+          "Solution": "1*2*3*4*5*6*7*8*9*"
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "2. Donner une expression rationnelle étendue permettant de reconnaître des durées (strictement inférieures à 24h) en heures, minutes et secondes respectant les contraintes suivantes : Une durée s'exprime avec le format --h--m--s. Les secondes et minutes sont comprises entre 0 et 59 et composées d'un ou deux chiffres. Les heures sont comprises entre 0 et 23 et composées d'un ou deux chiffres. Les heures ne peuvent être présentes que si les minutes y sont et les minutes ne peuvent être présentes que si les secondes y sont. Exemples de durées acceptées : 05s 05m00s 02h3m04s 2h03m4s. Exemples de durées non acceptées: 05m : sans la présence des secondes",
+          "Solution": "(([0-1]?[0-9]|2[0-3]h)?([0-5]?[0-9]m))?([0-5]?[0-9])s"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "Soit la grammaire G : S → R a | b T c , R → b T c , T → T c | d . S est l'axiome.",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Conceptual",
+          "question_text": "1. Donner la forme générale des mots générés par cette grammaire.",
+          "Solution": "b d c^n (a | ε) / n > 0"
+        },
+        {
+          "id": "2",
+          "level": "Metacognitive",
+          "question_text": "2. G est-elle LL(1) ? justifier votre réponse. Sinon la transformer pour qu'elle le soit (grammaire G').",
+          "Solution": "",
+          "note": "Corrigé non disponible dans le document fourni"
+        },
+        {
+          "id": "3",
+          "level": "Procedural",
+          "question_text": "3. Construire la table d'analyse LL(1).",
+          "solution_table": {
+            "type": "table",
+            "headers": [],
+            "rows": [],
+            "note": "Corrigé non disponible dans le document fourni"
+          }
+        },
+        {
+          "id": "4",
+          "level": "Procedural",
+          "question_text": "4. Construire la table SLR de G. G est-elle SLR(1) ? Sinon Justifier rigoureusement en énumérant tous les conflits et en précisant leur type (shift/reduce ou reduce/reduce).",
+          "solution_table": {
+            "type": "table",
+            "headers": [],
+            "rows": [],
+            "note": "Corrigé non disponible dans le document fourni"
+          }
+        },
+        {
+          "id": "5",
+          "level": "Procedural",
+          "question_text": "5. Construire la table LR(0) de G. G est-elle LR(0) ? Sinon Justifier rigoureusement en énumérant tous les conflits et en précisant leur type (shift/reduce ou reduce/reduce).",
+          "solution_table": {
+            "type": "table",
+            "headers": [],
+            "rows": [],
+            "note": "Corrigé non disponible dans le document fourni"
+          }
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 03 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "Dans certain langage, Impaire(A) est introduit comme une fonction mathématique et rend la valeur 1 si A est impaire et 0 sinon. Par exemple : Impaire(3*2+1)=1. On veut introduire cette expression Impaire() dans le MiniLangage comme un opérateur unaire : Impaire(exp_opérande)",
+      "note_corrige": "Le corrigé fourni dans le document correspond à un autre examen (Carre/2013). Les solutions ci-dessous sont adaptées pour Impaire.",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "question_text": "1. Ecrire la fonction Créer Impaire qui permet de créer l'arbre abstrait de cette expression.",
+          "Solution": [
+            "typedef struct _EXPR_ARBRE {",
+            "  enum EXPR_TYPE type;",
+            "  union {",
+            "    int val;",
+            "    char *nom;",
+            "    struct {",
+            "      char op;",
+            "      struct _EXPR_ARBRE *u;",
+            "    } un;",
+            "    …..",
+            "  } forme;",
+            "} *EXPR_ARBRE;"
+          ]
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "2. Modifier les fichiers d'entrée pour Lex et Yacc pour accepter ce nouvel opérateur binaire et pour construire l'arbre correspondant.",
+          "solution_lex_code": [
+            "%%",
+            "………",
+            "impaire { yylval.caractere = yytext[0]; return(TOKEN_IMPAIRE); }",
+            "{ER_VARIABLE} {",
+            "  yylval.chaine = strcpy((char *)malloc(yyleng+1), yytext);",
+            "  return(TOKEN_VARIABLE);",
+            "}",
+            "………"
+          ],
+          "solution_yacc_code": [
+            "%%",
+            "……",
+            "F : '(' E ')' { $$ = $2; }",
+            "  | TOKEN_VARIABLE { $$ = CreerVariable($1); }",
+            "  | TOKEN_ENTIER { $$ = CreerConstante($1); }",
+            "  | TOKEN_IMPAIRE '(' C ')' { $$ = CreerUn($1, $3); }",
+            "%%"
+          ]
+        },
+        {
+          "id": "3",
+          "level": "Procedural",
+          "question_text": "3. Proposer un modèle de code (d'instructions) MIPS pour ce nouvel opérateur.",
+          "Solution": [
+            "# Code pour calculer son paramètre (qui est une expression) résultat $n",
+            "move $n, $n+1",
+            "mult $n, $n, $n+1"
+          ]
+        },
+        {
+          "id": "4",
+          "level": "Procedural",
+          "question_text": "4. Construire l'arbre et donner le code MIPS complet correspondant au code MNL suivant :",
+          "question_code": [
+            "Var a,b ;",
+            "Lire a;",
+            "Lire b;",
+            "If(a<0) a=-1*a ;",
+            "if(b<0) b=-1*b ;",
+            "ecrire Impaire(a>b?a:b);"
+          ],
+          "reference_lex_code": [
+            "……",
+            "%}",
+            "ER_ENTIER -?[0-9]+",
+            "ER_VARIABLE [a-zA-Z][0-9a-zA-Z]*",
+            "ER_SEPARATEUR [ \\n\\t]",
+            "%%",
+            "{ER_SEPARATEUR}+ {}",
+            "{ER_ENTIER} { yylval.entier = atoi(yytext); return(TOKEN_ENTIER); }",
+            "{ER_VARIABLE} {",
+            "  yylval.chaine = strcpy((char *)malloc(yyleng+1), yytext);",
+            "  return(TOKEN_VARIABLE);",
+            "}",
+            "[\\+\\-] { yylval.caractere = yytext[0]; return(TOKEN_PLUS_MOINS); }",
+            "[\\*\\/\\%] { yylval.caractere = yytext[0]; return(TOKEN_MULT_DIV); }",
+            "[\\(\\)] { return(yytext[0]); }",
+            "\"+\"|\"--\" { yylval.caractere = yytext[0]; return(TOKEN_INC_DEC); }",
+            "[?:=] { return(yytext[0]); }",
+            "<<EOF>> { return(0); }"
+          ],
+          "Solution": {
+            "type": "AST",
+            "description": "Arbre syntaxique abstrait du programme MNL. Racine séquentielle : lire(a), lire(b), si(a<0 → := a (-1*a)), si(b<0 → := b (-1*b)), ecrire(Impaire(a>b ? a : b)).",
+            "precise_location": "Corrigé Page 3"
+          },
+          "solution_mips_code": [
+            ".data",
+            "MEM: .space 8",
+            ".text",
+            "main: la $30, MEM",
+            "li $2,5; syscall; sw $2, 0($30)   # lire a",
+            "li $2,5; syscall; sw $2, 4($30)   # lire b",
+            "lw $8, 0($30)",
+            "blt $8, $0, et0",
+            "  lw $8, 0($30)",
+            "  li $9, -1",
+            "  mul $8, $9, $8",
+            "  sw $8, 0($30)",
+            "et0: lw $8, 4($30)",
+            "blt $8, $0, et1",
+            "  lw $8, 4($30)",
+            "  li $9, -1",
+            "  mul $8, $9, $8",
+            "  sw $8, 4($30)",
+            "et1:",
+            "lw $8, 0($30)   # a",
+            "lw $9, 4($30)   # b",
+            "bgt $8, $9, et2",
+            "  move $8, $9   # b",
+            "  j et3",
+            "et2: nop        # a",
+            "et3:",
+            "move $9, $8",
+            "mult $9, $9, $8",
+            "move $4, $9",
+            "li $2, 1; syscall",
+            "li $2, 10; syscall"
+          ]
+        }
+      ]
+    }
+  ]
+}

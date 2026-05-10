@@ -1,0 +1,243 @@
+{
+  "metadata": {
+    "module": "Operating Systems 2",
+    "duration": "",
+    "language": "english"
+  },
+  "exercises": [
+    {
+      "id": "Questions",
+      "title": "Questions (4 points)",
+      "total_exercise_points": "4",
+      "introduction_context": null,
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "What are the four necessary conditions for a deadlock to occur?",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "2",
+          "question_text": "What is the Banker's algorithm? What are its advantages and disadvantages?",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "3",
+          "question_text": "How does a monitor differ from a semaphore in terms of concurrency management?",
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_01",
+      "title": "Exercise 1 (4 points)",
+      "total_exercise_points": "4",
+      "introduction_context": "We consider four processes P1, P2, P3, and P4. Each uses three semaphores A, B, and C (initialized to 1). The code for each process is given below:",
+      "pseudocode": {
+        "declarations": [
+          "A = 1 ; B = 1 ; C = 1 ;"
+        ],
+        "processes": [
+          {
+            "name": "P1",
+            "code": [
+              "P(A); P(B); ...; V(B); V(A)"
+            ]
+          },
+          {
+            "name": "P2",
+            "code": [
+              "P(B); P(C); ...; V(C); V(B)"
+            ]
+          },
+          {
+            "name": "P3",
+            "code": [
+              "P(C); P(D); ...; V(D); V(C)"
+            ]
+          },
+          {
+            "name": "P4",
+            "code": [
+              "P(D); P(A); ...; V(A); V(D)"
+            ]
+          }
+        ]
+      },
+      "Question": [
+        {
+          "id": "a",
+          "question_text": "Explain why a deadlock might occur.",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "b",
+          "question_text": "Draw the wait-for graph corresponding to this situation.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "c",
+          "question_text": "Propose a solution to avoid deadlock while preserving access to the same resources.",
+          "Solution": null,
+          "level": "Metacognitive"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercise 2 (7 points)",
+      "total_exercise_points": "7",
+      "introduction_context": "A system manages multiple classes of critical resources. An array Available[0..N-1] indicates the number of available resources per class. You are required to implement a synchronization monitor that enables safe allocation and release of these resources.",
+      "Question": [
+        {
+          "id": "a",
+          "question_text": "Define what a synchronization monitor is according to Hoare.",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "b",
+          "question_text": "List the steps necessary to implement such a monitor.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "c",
+          "question_text": "Write in pseudo-code the monitor 'ResourceManager', with two operations: Allocate(int[] need) : allocates the requested resources. Release(int[] release) : releases the used resources.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "d",
+          "question_text": "Test your solution on a simple example involving 3 types of resources.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercise 3 (5 points)",
+      "total_exercise_points": "5",
+      "introduction_context": "A system includes 5 processes (P0 to P4) and 3 types of resources (A, B, C). At a given time T, we have:",
+      "banker_table": {
+        "disponible": [
+          "3",
+          "3",
+          "2"
+        ],
+        "allocation": {
+          "headers": [
+            "",
+            "A",
+            "B",
+            "C"
+          ],
+          "rows": [
+            [
+              "P0",
+              "0",
+              "1",
+              "0"
+            ],
+            [
+              "P1",
+              "2",
+              "0",
+              "0"
+            ],
+            [
+              "P2",
+              "3",
+              "0",
+              "2"
+            ],
+            [
+              "P3",
+              "2",
+              "1",
+              "1"
+            ],
+            [
+              "P4",
+              "0",
+              "0",
+              "2"
+            ]
+          ]
+        },
+        "need": {
+          "headers": [
+            "",
+            "A",
+            "B",
+            "C"
+          ],
+          "rows": [
+            [
+              "P0",
+              "7",
+              "4",
+              "3"
+            ],
+            [
+              "P1",
+              "1",
+              "2",
+              "2"
+            ],
+            [
+              "P2",
+              "6",
+              "0",
+              "0"
+            ],
+            [
+              "P3",
+              "0",
+              "1",
+              "1"
+            ],
+            [
+              "P4",
+              "4",
+              "3",
+              "1"
+            ]
+          ]
+        }
+      },
+      "Question": [
+        {
+          "id": "a",
+          "question_text": "Calculate the current Available vector.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "b",
+          "question_text": "Apply the Banker's algorithm to check whether the system state is safe.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "c",
+          "question_text": "Suppose P1 requests (1, 0, 1). Can this allocation be granted? Justify your answer.",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "d",
+          "question_text": "What is the role of the wait-for graph in deadlock detection?",
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+# usage: ./forge [start|stop|restart|status|logs|backend-logs|frontend-logs]
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+CONFIG="$ROOT/ecosystem.config.cjs"
+BACKEND="exam-forge-backend"
+FRONTEND="exam-forge-frontend"
+
+cmd="${1:-status}"
+
+case "$cmd" in
+  start)
+    pm2 start "$CONFIG" --only "$BACKEND,$FRONTEND"
+    pm2 save
+    ;;
+  stop)
+    pm2 stop "$BACKEND" "$FRONTEND"
+    ;;
+  restart)
+    pm2 restart "$BACKEND" "$FRONTEND"
+    ;;
+  restart-backend)
+    pm2 restart "$BACKEND"
+    ;;
+  restart-frontend)
+    pm2 restart "$FRONTEND"
+    ;;
+  status)
+    pm2 list
+    ;;
+  logs)
+    pm2 logs "$BACKEND" "$FRONTEND" --lines 50
+    ;;
+  backend-logs)
+    pm2 logs "$BACKEND" --lines 100
+    ;;
+  frontend-logs)
+    pm2 logs "$FRONTEND" --lines 100
+    ;;
+  *)
+    echo "usage: $0 [start|stop|restart|restart-backend|restart-frontend|status|logs|backend-logs|frontend-logs]"
+    exit 1
+    ;;
+esac

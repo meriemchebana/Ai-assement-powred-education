@@ -1,0 +1,212 @@
+{
+  "metadata": {
+    "module": "SEII",
+    "duration": "",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 1 (5 points)",
+      "total_exercise_points": "5",
+      "introduction_context": "On reprend le problème de synchronisation du Producteur-Consommateur avec buffer circulaire et de taille limitée N, mais on suppose qu'il y a maintenant deux producteurs P1 et P2 et un seul consommateur C. Le producteur P2 a une particularité : il produit et dépose deux messages à la fois (si toutefois, il y a des places libres dans le buffer).",
+      "question_text": "Proposez un schéma de synchronisation de ce problème. Écrivez le code des 3 processus P1, P2 et C. Précisez vos déclarations.",
+      "Solution": null,
+      "level": "Metacognitive"
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 2 (4 points)",
+      "total_exercise_points": "4",
+      "introduction_context": "Le problème de partage d'une base de données ou d'un fichier entre plusieurs processus est connu sous l'appellation du problème des lecteurs / rédacteurs. Les lecteurs consultent le fichier sans en modifier le contenu ; les rédacteurs quant à eux peuvent en modifier le contenu.",
+      "constraints": [
+        "Plusieurs lecteurs peuvent lire le fichier en même temps.",
+        "Un seul rédacteur à la fois peut écrire dans le fichier.",
+        "À la sortie d'un rédacteur, s'il existe des lecteurs et des rédacteurs bloqués, la priorité est donnée aux lecteurs."
+      ],
+      "question_text": "Écrivez le programme de synchronisation des processus lecteurs et rédacteurs avec le moniteur.",
+      "Solution": null,
+      "level": "Procedural"
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 3 (6 points)",
+      "total_exercise_points": "6",
+      "parts": [
+        {
+          "id": "A",
+          "introduction_context": "Considérant un système ayant sept processus, A à G, et six ressources R à W. L'attribution des ressources est la suivante :",
+          "allocation_description": [
+            "A détient R et demande S.",
+            "B demande T.",
+            "C demande S.",
+            "D détient U et demande S et T.",
+            "E détient T et demande V.",
+            "F détient W et demande S.",
+            "G détient V et demande U."
+          ],
+          "diagram": null,
+          "Question": [
+            {
+              "id": "A.1",
+              "question_text": "Construire le graphe d'allocation des ressources, puis effectuer la réduction de ce graphe.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "A.2",
+              "question_text": "Y a-t-il un interblocage ?",
+              "Solution": null,
+              "level": "Conceptual"
+            },
+            {
+              "id": "A.3",
+              "question_text": "Si oui, quels sont les processus concernés ?",
+              "Solution": null,
+              "level": "Factual"
+            }
+          ]
+        },
+        {
+          "id": "B",
+          "Question": [
+            {
+              "id": "B.1",
+              "question_text": "Donnez des exemples de ressources préemptibles et non préemptibles, puis dire quel est le risque d'un délai de fréquence de détection pour la méthode de traitement d'interblocage par détection et guérison ?",
+              "Solution": null,
+              "level": "Conceptual"
+            },
+            {
+              "id": "B.2",
+              "question_text": "L'état suivant est-il sain ? On a 5 processus (A, B, C, D, E) et 4 ressources (R1, R2, R3, R4) en quantités respectives (6, 4, 3, 2). Le processus B fait une demande d'une ressource de type R2 et une autre de type R3, cette requête sera-t-elle acceptée ou non ?",
+              "banker_tables": {
+                "description": "Deux matrices sont données : Ressources Demandées et Ressources Allouées, pour 5 processus (A à E) et 4 ressources (R1, R2, R3, R4).",
+                "ressources_demandees": {
+                  "type": "table",
+                  "headers": [
+                    "Processus",
+                    "R1",
+                    "R2",
+                    "R3",
+                    "R4"
+                  ],
+                  "rows": [
+                    [
+                      "A",
+                      "1",
+                      "1",
+                      "0",
+                      "0"
+                    ],
+                    [
+                      "B",
+                      "0",
+                      "1",
+                      "1",
+                      "2"
+                    ],
+                    [
+                      "C",
+                      "3",
+                      "1",
+                      "0",
+                      "0"
+                    ],
+                    [
+                      "D",
+                      "0",
+                      "0",
+                      "1",
+                      "0"
+                    ],
+                    [
+                      "E",
+                      "2",
+                      "1",
+                      "1",
+                      "0"
+                    ]
+                  ]
+                },
+                "ressources_allouees": {
+                  "type": "table",
+                  "headers": [
+                    "Processus",
+                    "R1",
+                    "R2",
+                    "R3",
+                    "R4"
+                  ],
+                  "rows": [
+                    [
+                      "A",
+                      "3",
+                      "0",
+                      "1",
+                      "1"
+                    ],
+                    [
+                      "B",
+                      "0",
+                      "1",
+                      "0",
+                      "0"
+                    ],
+                    [
+                      "C",
+                      "1",
+                      "1",
+                      "1",
+                      "0"
+                    ],
+                    [
+                      "D",
+                      "1",
+                      "1",
+                      "0",
+                      "1"
+                    ],
+                    [
+                      "E",
+                      "0",
+                      "0",
+                      "0",
+                      "0"
+                    ]
+                  ]
+                },
+                "total_ressources": [
+                  6,
+                  4,
+                  3,
+                  2
+                ]
+              },
+              "Solution": null,
+              "level": "Procedural"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_04",
+      "title": "Exercice 4 (5 points)",
+      "total_exercise_points": "5",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "Citez les outils de communication inter processus.",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "2",
+          "question_text": "Écrire un programme en C qui comporte deux processus. Le père lit 10 entiers saisis par l'utilisateur. Ces entiers sont envoyés au processus fils qui les affiche. Puis le fils calcule le double de ces entiers puis les envoie au père. Le père reçoit les valeurs doublées puis les affiche.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    }
+  ]
+}

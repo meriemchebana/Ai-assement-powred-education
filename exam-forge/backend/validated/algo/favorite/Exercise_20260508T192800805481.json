@@ -1,0 +1,78 @@
+{
+  "subject": "algo",
+  "type": "Exercise",
+  "status": "favorite",
+  "data": {
+    "id": "ex01",
+    "title": "Exercice 2 : Liste chaînée d'étudiants (6 pts : 2 + 1 + 2 + 1)",
+    "total_exercise_points": 6,
+    "introduction_context": "On dispose d'une liste chaînée contenant les informations des étudiants inscrits à un cours. Chaque maillon de la liste contient les champs suivants :\n- NumInscription : entier (numéro unique d'inscription)\n- Nom : chaîne de caractères\n- Note : réel (note sur 20)\n- Suivant : Pointeur(TMaillon)\n\nLa tête de liste est pointée par la variable globale `ListeEtu` de type `Pointeur(TMaillon)`.\nOn suppose que la liste n'est pas triée et qu'elle contient au moins un élément.\n\nPour les questions ci-dessous, vous devez écrire des procédures ou fonctions en pseudo-code (type algorithmique) utilisant les primitives classiques sur les pointeurs.",
+    "questions": [
+      {
+        "id": "ex01_q1",
+        "type": "FREE",
+        "question_text": "1. Écrire une procédure `AjouterDebut(Num, NomEtu, NoteEtu)` qui insère un nouvel étudiant en tête de la liste chaînée `ListeEtu`. Les paramètres sont respectivement le numéro d'inscription, le nom et la note du nouvel étudiant.",
+        "solution": {
+          "text": "```\nProcédure AjouterDebut(Num : entier, NomEtu : chaîne, NoteEtu : réel)\nVar P : Pointeur(TMaillon)\nDébut\n  Nouveau(P)\n  NumInscription(P) ← Num\n  Nom(P) ← NomEtu\n  Note(P) ← NoteEtu\n  Suivant(P) ← ListeEtu\n  ListeEtu ← P\nFin\n```",
+          "rubric": [
+            "Création du nouveau maillon avec Nouveau(P)",
+            "Affectation correcte des trois champs (NumInscription, Nom, Note)",
+            "Liaison : Suivant(P) ← ListeEtu puis mise à jour de ListeEtu ← P",
+            "Structure procédurale correcte (Début/Fin, pas de retour de valeur)"
+          ]
+        },
+        "points": 2,
+        "topic": "Listes chaînées"
+      },
+      {
+        "id": "ex01_q2",
+        "type": "FREE",
+        "question_text": "2. En utilisant la procédure de la question 1, écrire une procédure `ChargerListe()` qui crée la liste chaînée à partir des données suivantes (à insérer dans l'ordre donné, en commençant par une liste vide) :\n   (101, \"Ali\", 15.5), (102, \"Sara\", 17.0), (103, \"Omar\", 12.0).\n   Attention : l'ordre final dans la liste doit être le même que l'ordre de la séquence (le premier élément doit être en tête).",
+        "solution": {
+          "text": "```\nProcédure ChargerListe()\nDébut\n  ListeEtu ← Nil\n  AjouterDebut(103, \"Omar\", 12.0)\n  AjouterDebut(102, \"Sara\", 17.0)\n  AjouterDebut(101, \"Ali\", 15.5)\nFin\n```\nOu bien, en insérant dans l'ordre inverse de la séquence (car AjouterDebut insère en tête) : on insère d'abord le dernier, puis l'avant-dernier, etc.",
+          "rubric": [
+            "Initialisation de ListeEtu à Nil",
+            "Appels à AjouterDebut dans l'ordre inverse (103, puis 102, puis 101)",
+            "Arguments corrects pour chaque appel",
+            "L'ordre final de la liste est bien (101, 102, 103) de la tête vers la fin"
+          ]
+        },
+        "points": 1,
+        "topic": "Listes chaînées"
+      },
+      {
+        "id": "ex01_q3",
+        "type": "FREE",
+        "question_text": "3. Écrire une fonction `Rechercher(Num)` qui retourne un pointeur vers le maillon contenant le numéro d'inscription `Num`, ou `Nil` si ce numéro n'est pas présent dans la liste.",
+        "solution": {
+          "text": "```\nFonction Rechercher(Num : entier) : Pointeur(TMaillon)\nVar P : Pointeur(TMaillon)\nDébut\n  P ← ListeEtu\n  Tant que (P ≠ Nil) et (NumInscription(P) ≠ Num) faire\n    P ← Suivant(P)\n  Retourner P\nFin\n```",
+          "rubric": [
+            "Parcours de la liste à partir de ListeEtu",
+            "Condition d'arrêt : P ≠ Nil ET NumInscription(P) ≠ Num",
+            "Avancement correct : P ← Suivant(P)",
+            "Retour de P (qui vaut Nil si non trouvé, ou le pointeur vers le maillon sinon)"
+          ]
+        },
+        "points": 2,
+        "topic": "Listes chaînées"
+      },
+      {
+        "id": "ex01_q4",
+        "type": "FREE",
+        "question_text": "4. En utilisant la fonction de la question 3, écrire une procédure `ModifierNote(Num, NouvelleNote)` qui modifie la note de l'étudiant dont le numéro d'inscription est `Num`. Si l'étudiant n'existe pas, la procédure ne fait rien.",
+        "solution": {
+          "text": "```\nProcédure ModifierNote(Num : entier, NouvelleNote : réel)\nVar P : Pointeur(TMaillon)\nDébut\n  P ← Rechercher(Num)\n  Si P ≠ Nil Alors\n    Note(P) ← NouvelleNote\n  FinSi\nFin\n```",
+          "rubric": [
+            "Appel à Rechercher(Num) et stockage du résultat dans un pointeur",
+            "Test conditionnel : si P ≠ Nil",
+            "Affectation de NouvelleNote au champ Note(P)",
+            "Aucune action si P = Nil (ou pas de traitement explicite, juste ne rien faire)"
+          ]
+        },
+        "points": 1,
+        "topic": "Listes chaînées"
+      }
+    ],
+    "level": "Procedural"
+  }
+}

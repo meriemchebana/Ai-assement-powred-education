@@ -1,0 +1,214 @@
+{
+  "metadata": {
+    "module": "Algorithmique et Structures de données",
+    "duration": "08:00-09:30",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_1",
+      "title": "Exercice 1 Listes linéaires chaînées (08 pts : 2 + 1.5 + 2 + 2.5)",
+      "total_exercise_points": "08 pts",
+      "introduction_context": "On vous demande d’écrire les procédures et fonctions suivantes :",
+      "diagram": {
+        "description": "A horizontal linked list diagram where an arrow labeled Tete points to a sequence of nodes: [2] -> [5] -> [12] -> [19] -> [31] -> Nil.",
+        "precise_location": "Page 1 - Top"
+      },
+      "Question": [
+        {
+          "id": "1",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "1. Fonction Rechercher(L :pointeur(TMaillon), x :entier) :Boolean ; Une fonction récursive qui prend en entrée la tête d’une liste d’entiers triée L et un entier x et retourne Vrai si x existe dans la liste et Faux sinon.",
+          "Solution": [
+            "Fonction Rechercher( L : Pointeur(TMaillon), x : réel) : booléen;",
+            "Début",
+            "  Si (L=Nil ou x < Valeur(L)) Alors Rechercher ← Faux;",
+            "  Sinon Si (x = Valeur(L)) Alors Rechercher ← Vrai;",
+            "  Sinon Rechercher ← Rechercher(Suivant(L),x);",
+            "  Fin Si; Fin Si;",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "2",
+          "points": "1.5",
+          "level": "Procedural",
+          "question_text": "2. Procédure Ajouter(var L :pointeur(TMaillon), x :entier) ; Une procédure itérative permettant d’ajouter un entier x donné à une liste triée L.",
+          "Solution": [
+            "Procédure Ajouter(var L : Pointeur(TMaillon), x : entier);",
+            "var P,PP,Q : Pointeur(TMaillon);",
+            "Début",
+            "  P ← L; PP ← Nil;",
+            "  Tant que ((P ≠ Nil) et (Valeur(P) < x)) faire PP ← P; P ← Suivant(P); Fin TQ;",
+            "  Allouer(Q); Aff_val(Q,x); Aff_adr(Q,P);",
+            "  Si (PP = Nil) Alors L ← Q Sinon Aff_adr(PP,Q); Fin Si;",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "3",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "3. Procédure Eclater(L :pointeur(TMaillon), x :entier, var L1,L2 :pointeur(TMaillon)) ; Une procédure itérative permettant de prendre en entrée une liste triée L et un entier x et retourne deux listes, la première L1 contenant les éléments de L inférieurs à x et la deuxième L2 les éléments de L supérieurs à x.",
+          "Solution": [
+            "Procédure Eclater(L : Pointeur(TMaillon), x : entier, var L1, L2 : Pointeur(TMaillon) );",
+            "var Q, PQ, P : Pointeur(TMaillon) ;",
+            "Début",
+            "  P ← L; L1 ← Nil;",
+            "  Tant que ((P ≠ Nil) et (Valeur(P) < x)) faire",
+            "    Allouer(Q); Aff_val(Q,Valeur(P)); Aff_adr(Q,NIL);",
+            "    Si (L1= Nil) Alors L1 ← Q Sinon Aff_adr(PQ,Q); Fin Si;",
+            "    PQ ← Q; P ← Suivant(P);",
+            "  Fin TQ;",
+            "  L2 ← Nil;",
+            "  Tant que ((P ≠ Nil)) faire",
+            "    Si (Valeur(P) > x) Alors",
+            "      Allouer(Q); Aff_val(Q,Valeur(P)); Aff_adr(Q,NIL);",
+            "      Si (L2= Nil) Alors L2 ← Q Sinon Aff_adr(PQ,Q); Fin Si;",
+            "      PQ ← Q;",
+            "    Fin Si;",
+            "    P ← Suivant(P);",
+            "  Fin TQ;",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "4",
+          "points": "2.5",
+          "level": "Procedural",
+          "question_text": "4. Procédure Fusionner(L1,L2 :pointeur(TMaillon)), var L :pointeur(TMaillon) ; Une procédure itérative permettant de prendre en entrée deux listes triées L1 et L2 et retourne une liste L triée contenant les éléments des deux listes L1 et L2.",
+          "Solution": [
+            "Procédure Fusionner( L1, L2 : Pointeur(TMaillon), var L : Pointeur(TMaillon));",
+            "var PQ, Q : Pointeur(TMaillon);",
+            "Début",
+            "  L ← Nil; PQ ← Nil;",
+            "  Tant que ((L1 ≠ Nil) ou (L2 ≠ Nil) ) faire",
+            "    Allouer(Q); Aff_adr(Q,NIL);",
+            "    Si ((L1 ≠ Nil) et ((L2 = Nil) ou (Valeur(L1) < Valeur(L2)))) Alors",
+            "      Aff_val(Q,Valeur(L1)); L1 ← Suivant(L1);",
+            "    Sinon",
+            "      Aff_val(Q,Valeur(L2)); L2 ← Suivant(L2);",
+            "    Fin Si;",
+            "    Si (L = Nil) Alors L ← Q Sinon Aff_adr(PQ,Q); Fin Si;",
+            "    PQ ← Q;",
+            "  Fin TQ;",
+            "Fin;"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_2",
+      "title": "Exercice 2 Code morse (8 pts : 4 + 2 + 2)",
+      "total_exercise_points": "08 pts",
+      "introduction_context": "On vous demande d’écrire les procédures et fonctions suivantes :",
+      "diagram": {
+        "description": "Binary tree for Morse code. Root points to E (left/.) and T (right/-). E points to I (left) and A (right). T points to N (left) and M (right).",
+        "precise_location": "Page 1 - Bottom"
+      },
+      "Question": [
+        {
+          "id": "1",
+          "points": "4",
+          "level": "Procedural",
+          "question_text": "1. Fonction CodeCar(R :Pointeur(TNoeud), C :caractères) :Chaine de caractère ; Permettant de retourner le code morse du caractère C dans l’arbre de racine R. Si le caractère C n’existe pas dans l’arbre, la fonction doit retourner ’?’. Exemple : CodeCar(Racine,’A’)=’. -’",
+          "Solution": [
+            "Fonction CodeCar( R : Poniteur(TNoeud), C : Caractères) : Chaîne de caractères;",
+            "var S : Chaîne de caractères;",
+            "Début",
+            "  Si (R=Nil) Alors CodeCar ← '?' ;",
+            "  Sinon Si (Valeur(R)=C) Alors CodeCar ← \" \";",
+            "  Sinon S ← CodeCar(FG(R),C);",
+            "    Si (S≠'?') Alors CodeCar ← '.'+ S;",
+            "    Sinon S ← CodeCar(FD(R),C);",
+            "      Si (S ≠'?') Alors CodeCar ← '-'+ S;",
+            "      Sinon CodeCar ← '?' ; Fin Si;",
+            "    Fin Si; Fin Si; Fin Si;",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "2",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "2. Fonction CoderMessage(R :Pointeur(TNoeud), Message :Chaine de caractère) : Chaine de caractères ; Permettant de retourner le code morse de la chaine de caractères Message à partir de l’arbre de racine R. Les codes de deux caractères sont séparés par un blanc et les codes de deux mots sont séparés par deux blancs. Exemple : CoderMessage(R,’MATIN’)=’- . - - .. -.’",
+          "Solution": [
+            "Fonction CoderMessage( R : Poniteur(TNoeud), Message : Chaîne de Caractères) : Chaîne de caractères;",
+            "var i : entier; S : Chaîne de caractères;",
+            "Début",
+            "  S ← \"\"; Pour i de 1 à Longueur(Message) faire",
+            "    Si (Message[i] ≠ ' ') Alors S ← S + CodeCar(R, Message[i]); Fin Si;",
+            "    Si (i < Longueur(Message)) Alors S ← S + ' '; Fin Si;",
+            "  Fin Pour; CoderMessage ← S;",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "3",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "3. Fonction NbrePoints(R :Pointeur(TNoeud)) : entier ; Permettant de retourner le nombre de points dans l’arbre des codes morses de racine R.",
+          "Solution": [
+            "Fonction NbrePoints( R : Poniteur(TNoeud)) : entier;",
+            "var i : entier; Début Si (R = Nil) Alors NbrePoints ← 0;",
+            "  Sinon Si (FG(R) ≠ Nil) Alors i ← 1; Sinon i ← 0; Fin Si;",
+            "  NbrePoints ← i + NbrePoints(FG(R)) + NbrePoints(FD(R)); Fin Si;",
+            "Fin;"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_3",
+      "title": "Exercice 3 Arbres binaires (4 pts : 1.5 + 1.5 + 1)",
+      "total_exercise_points": "04 pts",
+      "introduction_context": "Soit la liste d’entiers suivantes : 8, 3, 9, 4, 1, 12, 10.",
+      "Question": [
+        {
+          "id": "1",
+          "points": "1.5",
+          "level": "Procedural",
+          "question_text": "1. Construire un arbre binaire de recherche en insérant ces entiers dans l’ordre.",
+          "Solution": {
+            "description": "BST with root 8. Left child 3 (with children 1 and 4). Right child 9 (with child 12, and 12 having left child 10).",
+            "precise_location": "Page 8 - Top"
+          }
+        },
+        {
+          "id": "2",
+          "points": "1.5",
+          "level": "Procedural",
+          "question_text": "2. Construire un tas en insérant dans l’ordre ces entiers.",
+          "Solution": {
+            "description": "Max-Heap with root 12. Level 1: 4 and 10. Level 2: [3, 1] children of 4, [8, 9] children of 10.",
+            "precise_location": "Page 8 - Middle"
+          }
+        },
+        {
+          "id": "3",
+          "points": "1",
+          "level": "Procedural",
+          "question_text": "3. Donner dans les deux cas la structure après la suppression de la valeur 9.",
+          "subquestions": [
+            {
+              "id": "3.a",
+              "question_text": "Cas de l’arbre de binaire de recherche",
+              "level": "Conceptual",
+              "Solution": {
+                "description": "BST after removing 9: Node 12 becomes the direct right child of root 8, carrying its left child 10."
+              }
+            },
+            {
+              "id": "3.b",
+              "question_text": "Cas du tas",
+              "level": "Factual",
+              "Solution": "Impossible de supprimer 9 du tas puisqu’elle n’est pas à la racine et on ne peut retirer d’un tas que l’élément de la racine."
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "footer": "★★★ Bonne chance ★★★ Page 2 de 8"
+}

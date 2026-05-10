@@ -1,0 +1,212 @@
+\documentclass[12pt,a4paper]{article}
+
+% ── Encoding and fonts ──────────────────────────────────────────────────────
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+
+% ── Language ────────────────────────────────────────────────────────────────
+\usepackage[english]{babel}
+
+% ── Page geometry ───────────────────────────────────────────────────────────
+\usepackage{vmargin}
+\setmarginsrb{2.5cm}{2cm}{2.5cm}{2cm}{1cm}{1.5cm}{1cm}{1.5cm}
+
+% ── Graphics ────────────────────────────────────────────────────────────────
+\usepackage{graphicx}
+\graphicspath{{images/}}
+
+% ── TikZ and UML diagrams ───────────────────────────────────────────────────
+\usepackage{tikz}
+\usetikzlibrary{shapes.multipart, positioning, arrows.meta, calc}
+\usepackage{pgf-umlsd}
+
+% ── Mathematics ─────────────────────────────────────────────────────────────
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+% ── Tables ──────────────────────────────────────────────────────────────────
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{float}
+\usepackage{diagbox}
+\restylefloat{table}
+
+% ── Lists ───────────────────────────────────────────────────────────────────
+\usepackage{enumitem}
+
+% ── Code listings ───────────────────────────────────────────────────────────
+\usepackage{listings}
+\usepackage{xcolor}
+\lstset{
+  basicstyle=\ttfamily\small,
+  breaklines=true,
+  frame=single,
+  backgroundcolor=\color{gray!8},
+  keywordstyle=\color{blue!80!black}\bfseries,
+  commentstyle=\color{green!50!black}\itshape,
+  numbers=left,
+  numberstyle=\tiny\color{gray},
+  numbersep=5pt,
+}
+
+% ── Algorithms ──────────────────────────────────────────────────────────────
+\usepackage{algorithm}
+\usepackage{algpseudocode}
+\usepackage{appendix}
+
+% ── Captions and figures ────────────────────────────────────────────────────
+% tableposition=top  → table captions always above the table
+% figureposition=bottom → figure captions always below the figure
+\usepackage[tableposition=top, figureposition=bottom, labelfont=bf]{caption}
+\usepackage{subcaption}
+
+% ── Spacing ─────────────────────────────────────────────────────────────────
+\usepackage{setspace}
+\setstretch{1.2}
+
+% ── Section numbering depth ─────────────────────────────────────────────────
+\setcounter{tocdepth}{2}
+\setcounter{secnumdepth}{3}
+
+% ── Headers and footers ─────────────────────────────────────────────────────
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+
+% ── Hyperlinks ──────────────────────────────────────────────────────────────
+\usepackage[hidelinks]{hyperref}
+\usepackage{url}
+
+% ── Title section formatting ────────────────────────────────────────────────
+\usepackage{titlesec}
+
+% ── Bibliography (natbib for \citet / \citep compatibility) ─────────────────
+\usepackage[numbers,sort&compress]{natbib}
+
+% ── Miscellaneous ───────────────────────────────────────────────────────────
+\usepackage{chngcntr}
+\counterwithin{equation}{section}
+\usepackage{pdfpages}
+
+% ════════════════════════════════════════════════════════════════════════════
+\begin{document}
+\pagenumbering{roman}
+
+% ── Cover Page ───────────────────────────────────────────────────────────────
+\input{PageGarde}
+\newpage
+
+% ── Abstract + Résumé (same page) ────────────────────────────────────────────
+\thispagestyle{empty}
+\section*{Abstract}
+\addcontentsline{toc}{section}{Abstract}
+
+This report presents \textbf{ExamGen}, an AI-powered intelligent assessment platform
+for higher education that assists teachers and institutions in automatically preparing
+high-quality examinations based on their own academic materials.
+The system analyses and learns from: (1)~course syllabi and learning objectives;
+(2)~lecture materials (slides, notes, textbooks); (3)~previous exams;
+and (4)~exercises and laboratory work prepared by teachers.
+
+Using advanced Artificial Intelligence and Natural Language Processing techniques,
+the platform generates customised exams that are coherent, balanced, and aligned
+with pedagogical objectives. The AI does not replace the teacher; instead, it
+operates as a decision-support and co-creation tool, allowing teachers to review,
+edit, validate, and finalise all generated assessments.
+
+A key innovation is the platform's ability to produce multiple equivalent exam
+variants, ensuring fairness and reducing academic dishonesty while preserving
+consistent difficulty levels and learning outcome coverage.
+Each generated question is accompanied by metadata such as estimated difficulty,
+targeted learning outcome, and reference source, enabling full traceability and
+compliance with quality assurance and accreditation standards.
+
+Technically, ExamGen comprises four integrated layers: (i)~\texttt{docParser},
+a five-stage Intelligent Document Processing (IDP) pipeline converting heterogeneous
+bilingual PDF documents into validated, Bloom-labelled JSON records; (ii)~a hybrid
+Retrieval-Augmented Generation (RAG) engine with language-aware bilingual retrieval;
+(iii)~a schema-enforced question generator producing MCQs, SAQs, and structured
+exercises; and (iv)~a React web application with real-time SSE streaming.
+Applied to 137 historical exam documents across five subjects, the system achieves
+a factual accuracy rate of 87.5\% on generated items.
+
+\vspace{0.4cm}
+\noindent\textbf{Keywords:} AI-Powered Assessment, Intelligent Document Processing,
+Retrieval-Augmented Generation, Automated Question Generation, Bloom's Taxonomy,
+Bilingual NLP, Large Language Models, Exam Quality Evaluation, Higher Education.
+
+\vspace{0.4cm}
+\hrule
+\vspace{0.3cm}
+
+% ── Résumé (même page) ───────────────────────────────────────────────────────
+\section*{R\'esum\'e}
+\addcontentsline{toc}{section}{R\'esum\'e}
+
+Ce rapport pr\'esente \textbf{ExamGen}, une plateforme intelligente bas\'ee sur
+l'IA pour l'enseignement sup\'erieur, qui assiste les enseignants dans la
+pr\'eparation automatique d'examens de haute qualit\'e \`a partir de leurs propres
+mat\'eriaux p\'edagogiques. Le syst\`eme analyse et apprend \`a partir de :
+(1)~les syllabi de cours et les objectifs p\'edagogiques ; (2)~les supports de cours
+(diapositives, notes, manuels) ; (3)~les examens ant\'erieurs ; et (4)~les exercices
+et travaux pratiques pr\'epar\'es par les enseignants.
+
+L'IA ne remplace pas l'enseignant ; elle fonctionne comme un outil d'aide \`a la
+d\'ecision et de co-cr\'eation, permettant aux enseignants de v\'erifier, modifier,
+valider et finaliser toutes les \'evaluations g\'en\'er\'ees. Une innovation cl\'e
+est la capacit\'e de la plateforme \`a produire plusieurs variantes d'examens
+\'equivalentes, garantissant l'\'equit\'e et r\'eduisant la malhonnet\^et\'e
+acad\'emique.
+
+Techniquement, ExamGen comprend quatre couches int\'egr\'ees : (i)~\texttt{docParser},
+un pipeline IDP en cinq \'etapes ; (ii)~un moteur RAG hybride bilingue ;
+(iii)~un g\'en\'erateur de questions \`a sch\'ema impos\'e (QCM, r\'eponses courtes,
+exercices) ; et (iv)~une application web React avec flux SSE en temps r\'eel.
+
+\vspace{0.3cm}
+\noindent\textbf{Mots-cl\'es:} Plateforme d'\'evaluation intelligente, Traitement
+intelligent de documents, G\'en\'eration augment\'ee par r\'ecup\'eration,
+G\'en\'eration automatique de questions, Taxonomie de Bloom, TAL bilingue,
+Grands mod\`eles de langage.
+
+\vspace{0.3cm}
+\hrule
+\vspace{0.2cm}
+\section*{Acknowledgements}
+\addcontentsline{toc}{section}{Acknowledgements}
+\begin{center}
+\small\textit{We sincerely thank our supervisor, Dr.\ Laid KAHLOUL, and Ms.\ Nour El Houda Ben Chaabene for their valuable guidance and support throughout this project. We also express our gratitude to the faculty members of the Department of Computer Science at the University of Mohamed Khider Biskra, as well as to our families for their continuous encouragement and support.}
+
+\vspace{0.3cm}
+\small\textit{We would also like to express our sincere thanks to Noui Aboud, Mohamed El Amine Chneihat, and Aissa Ghabrini for their help, support, and assistance in providing resources and creating a suitable working environment throughout the realization of this project.}
+
+\vspace{0.3cm}
+\small\textit{Special thanks are also extended to Al Abbas Abbara for his kindness, encouragement, and valuable support.}
+\end{center}
+
+\newpage
+
+% ── Table of Contents ────────────────────────────────────────────────────────
+\tableofcontents
+\newpage
+
+% ════════════════════════════════════════════════════════════════════════════
+%                              BODY
+% ════════════════════════════════════════════════════════════════════════════
+\input{Chapters/Introduction}
+\input{Chapters/Chapter1}
+\input{Chapters/Chapter2}
+\input{Chapters/Chapter3}
+\input{Chapters/Chapter4}
+\input{Chapters/Conclusion}
+\input{Chapters/WebInterface}
+
+% ── Bibliography ─────────────────────────────────────────────────────────────
+\newpage
+\bibliographystyle{plainnat}
+\bibliography{references}
+
+\end{document}

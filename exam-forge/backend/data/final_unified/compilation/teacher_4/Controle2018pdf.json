@@ -1,0 +1,511 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h30m",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (04 pts)",
+      "total_exercise_points": "4",
+      "introduction_context": "Soit l'alphabet A = {a,b}, définir les expressions régulières pour les langages :",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "Tous les mots non vides contenant un nombre impair de b.",
+          "Solution": "a*b(a*ba*b)* a*",
+          "level": "Conceptual"
+        },
+        {
+          "id": "2",
+          "question_text": "Tous les mots non vides contenant un nombre pair de a.",
+          "Solution": "(b*ab*a) (b*ab*a)* b*|bb*",
+          "level": "Conceptual"
+        },
+        {
+          "id": "3",
+          "question_text": "Tous les mots non vides ne contenant pas deux a consécutifs.",
+          "Solution": "(ab|b)*(a|b)",
+          "level": "Conceptual"
+        },
+        {
+          "id": "4",
+          "question_text": "Tous les mots ne contenant pas plus que deux a consécutifs.",
+          "Solution": "(ab|b)*(a|b) (ab|b)*a | ε",
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (04 pts)",
+      "total_exercise_points": "4",
+      "introduction_context": "Les commentaires de documentation en Java, sont encadrés par les motifs /** et */, ils peuvent se terminer par une liste de motifs spéciaux, appelés tags. Le nom d'un tag commence par le caractère arobase (@) et figure nécessairement en début de ligne (en ignorant les espaces et les *). Si des mots commençant par @ figurent ailleurs qu'en début de ligne, ils ne seront pas considérés comme des tags. Chaque tag a un texte associé (éventuellement sur plusieurs lignes) qui se termine au tag suivant ou au motif final */.",
+      "Question": [
+        {
+          "id": "0",
+          "question_text": "Ecrire un analyseur lexical, en lex, qui affiche dans un fichier nommé docfile les tags @param, @return et @exception des commentaires de documentation figurant dans le fichier java, avec leur texte associé.",
+          "example": "/*** Returns the character at the specified index.* @param index the index of the desired character. * @return the desired character. * @exception StringIndexOutOfRangeException * if the index is not in the range <code>0</code> * to <code>length()-1</code>.*/ ",
+          "solution_lex_code": [
+            "%{",
+            "#include <stdio.h>",
+            "#include <stdlib.h>",
+            "FILE *yyin, *yyout ;",
+            "%}",
+            "%start COM TAG",
+            "Tags ||",
+            "%%",
+            "<INITIAL>\"/**\" {BEGIN(COM);}",
+            "<COM> ^(\\*|' ')*\"@param\" { BEGIN(TAG); fprintf(yyout, \"%s\", \"@param\");}",
+            "<COM> ^(\\*|' ')*\"@return\" { BEGIN(TAG); fprintf(yyout, \"%s\", \"@return\");}",
+            "<COM> ^(\\*|' ')*\"@exception\" { BEGIN(TAG); fprintf(yyout, \"%s\", \"@exception\");}",
+            "<COM>\"*/\" {BEGIN(INITIAL);}",
+            "<COM> . {}",
+            "<TAG> ^(\\*|' ')*\"@param\" {fprintf(yyout, \"%s\", \"\\n@param\");}",
+            "<TAG> ^(\\*|' ')*\"@return\" { fprintf(yyout, \"%s\", \"\\n@return\");}",
+            "<TAG> ^(\\*|' ')*\"@exception\" {fprintf(yyout, \"%s\", \"\\n@exception\");}",
+            "<TAG> \"*/\" {BEGIN(INITIAL);}",
+            "<TAG> (.|'\\n') { fprintf(yyout, \"%c\", yytext[0]);}",
+            "%%",
+            "int yywrap(){ return 1; }",
+            "int main(int argc, char **argv){",
+            "  yyin = fopen(argv[1], \"r\");",
+            "  yyout = fopen(\"docfile\", \"w\");",
+            "  yylex();",
+            "  fclose(yyin);",
+            "  fclose(yyout);",
+            "}"
+          ],
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 03 (12 pts)",
+      "total_exercise_points": "12",
+      "introduction_context": "",
+      "parts": [
+        {
+          "id": "Partie_1",
+          "title": "Partie 1",
+          "introduction_context": "On considère la grammaire G définie par : S ⟶ S ∨ S | S ∧ S | ¬ S | (S) | b",
+          "Question": [
+            {
+              "id": "1",
+              "question_text": "Cette grammaire n'est pas LL(1) : pourquoi ?",
+              "Solution": "Cette grammaire est ambiguë puisqu'elle ne respecte pas la priorité et l'associativité des opérateurs booléens.",
+              "level": "Conceptual"
+            },
+            {
+              "id": "2",
+              "question_text": "Donner une grammaire G1 équivalente à G et qui vous semble LL(1).",
+              "Solution": "Il faut d'abord enlever l'ambiguïté de la grammaire,X⟶ X ∨ Y| Y ,Y⟶ Y ∧ Z |Z ,Z⟶ ¬ T | T ,T ⟶ (X) | b Il faut donc éliminer la récursivité à gauche.",
+              "solution_grammar": [
+                "X  ⟶ YX'",
+                "X' ⟶ ∨ YX' | ε",
+                "Y  ⟶ ZY'",
+                "Y' ⟶ ∧ ZY' | ε",
+                "Z  ⟶ ¬ T | T",
+                "T  ⟶ (X) | b"
+              ],
+              "level": "Procedural"
+            },
+            {
+              "id": "3",
+              "question_text": "Simuler le fonctionnement de l'analyseur LL(1) de cette grammaire sur le mot : ¬ (b ∨ b) ∧ b.",
+              "solution_premiers_suivants": {
+                "type": "table",
+                "headers": [
+                  "Non-Terminal",
+                  "Premiers",
+                  "Suivants"
+                ],
+                "rows": [
+                  [
+                    "X",
+                    "¬ , ( , b",
+                    "$ , )"
+                  ],
+                  [
+                    "X'",
+                    "∨ , ε",
+                    "$ , )"
+                  ],
+                  [
+                    "Y",
+                    "¬ , ( , b",
+                    "$ , ) , ∨"
+                  ],
+                  [
+                    "Y'",
+                    "∧ , ε",
+                    "$ , ) , ∨"
+                  ],
+                  [
+                    "Z",
+                    "¬ , ( , b",
+                    "$ , ) , ∨ , ∧"
+                  ],
+                  [
+                    "T",
+                    "( , b",
+                    "$ , ) , ∨ , ∧"
+                  ]
+                ]
+              },
+              "solution_ll1_table": {
+                "type": "table",
+                "headers": [
+                  "",
+                  "b",
+                  "¬",
+                  "∨",
+                  "∧",
+                  "(",
+                  ")",
+                  "$"
+                ],
+                "rows": [
+                  [
+                    "X",
+                    "YX'",
+                    "YX'",
+                    "",
+                    "",
+                    "YX'",
+                    "",
+                    ""
+                  ],
+                  [
+                    "X'",
+                    "",
+                    "",
+                    "∨ YX'",
+                    "",
+                    "",
+                    "ε",
+                    "ε"
+                  ],
+                  [
+                    "Y",
+                    "ZY'",
+                    "ZY'",
+                    "",
+                    "",
+                    "ZY'",
+                    "",
+                    ""
+                  ],
+                  [
+                    "Y'",
+                    "",
+                    "",
+                    "ε",
+                    "∧ ZY'",
+                    "",
+                    "ε",
+                    "ε"
+                  ],
+                  [
+                    "Z",
+                    "T",
+                    "¬ T",
+                    "",
+                    "",
+                    "T",
+                    "",
+                    ""
+                  ],
+                  [
+                    "T",
+                    "b",
+                    "",
+                    "",
+                    "",
+                    "(X)",
+                    "",
+                    ""
+                  ]
+                ]
+              },
+              "solution_table": {
+                "type": "table",
+                "headers": [
+                  "Chaine",
+                  "Pile",
+                  "Action"
+                ],
+                "rows": [
+                  [
+                    "¬ (b ∨ b) ∧ b$",
+                    "$X",
+                    "Dépiler, Empiler X'Y"
+                  ],
+                  [
+                    "¬ (b ∨ b) ∧ b$",
+                    "$X'Y",
+                    "Dépiler, Empiler Y'Z"
+                  ],
+                  [
+                    "¬ (b ∨ b) ∧ b$",
+                    "$X'Y'Z",
+                    "Dépiler, Empiler T ¬"
+                  ],
+                  [
+                    "¬ (b ∨ b) ∧ b$",
+                    "$X'Y' T ¬",
+                    "Dépiler, Avancer"
+                  ],
+                  [
+                    "(b ∨ b) ∧ b$",
+                    "$X'Y' T",
+                    "Dépiler, Empiler )X("
+                  ],
+                  [
+                    "(b ∨ b) ∧ b$",
+                    "$X'Y')X(",
+                    "Dépiler, Avancer"
+                  ],
+                  [
+                    "b ∨ b) ∧ b$",
+                    "$X'Y')X",
+                    "Dépiler, Empiler X'Y"
+                  ],
+                  [
+                    "b ∨ b) ∧ b$",
+                    "$X'Y')X'Y",
+                    "Dépiler, Empiler Y'Z"
+                  ],
+                  [
+                    "b ∨ b) ∧ b$",
+                    "$X'Y')X'Y'Z",
+                    "Dépiler, Empiler T"
+                  ],
+                  [
+                    "b ∨ b) ∧ b$",
+                    "$X'Y')X'Y'T",
+                    "Dépiler, Empiler b"
+                  ],
+                  [
+                    "b ∨ b) ∧ b$",
+                    "$X'Y')X'Y'b",
+                    "Dépiler, Avancer"
+                  ],
+                  [
+                    "∨ b) ∧ b$",
+                    "$X'Y')X'Y'",
+                    "Dépiler, Empiler ε"
+                  ],
+                  [
+                    "∨ b) ∧ b$",
+                    "$X'Y')X'",
+                    "Dépiler, Empiler X'Y∨"
+                  ],
+                  [
+                    "∨ b) ∧ b$",
+                    "$X'Y')X'Y∨",
+                    "Dépiler, Avancer"
+                  ],
+                  [
+                    "b) ∧ b$",
+                    "$X'Y')X'Y",
+                    "Dépiler, Empiler Y'Z"
+                  ],
+                  [
+                    "b) ∧ b$",
+                    "$X'Y')X'Y'Z",
+                    "Dépiler, Empiler T"
+                  ],
+                  [
+                    "b) ∧ b$",
+                    "$X'Y')X'Y'T",
+                    "Dépiler, Empiler b"
+                  ],
+                  [
+                    "b) ∧ b$",
+                    "$X'Y')X'Y'b",
+                    "Dépiler, Avancer"
+                  ],
+                  [
+                    ") ∧ b$",
+                    "$X'Y')X'Y'",
+                    "Dépiler, Empiler ε"
+                  ],
+                  [
+                    ") ∧ b$",
+                    "$X'Y')X'",
+                    "Dépiler, Empiler ε"
+                  ],
+                  [
+                    ") ∧ b$",
+                    "$X'Y')",
+                    "Dépiler, Avancer"
+                  ],
+                  [
+                    "∧ b$",
+                    "$X'Y'",
+                    "Dépiler, Empiler Y'Z∧"
+                  ],
+                  [
+                    "∧ b$",
+                    "$X'Y' Z∧",
+                    "Dépiler, Avancer"
+                  ],
+                  [
+                    "b$",
+                    "$X'Y' Z",
+                    "Dépiler, Empiler T"
+                  ],
+                  [
+                    "b$",
+                    "$X'Y' T",
+                    "Dépiler, Empiler b"
+                  ],
+                  [
+                    "b$",
+                    "$X'Y' b",
+                    "Dépiler, Avancer"
+                  ],
+                  [
+                    "$",
+                    "$X'Y'",
+                    "Dépiler, Empiler ε"
+                  ],
+                  [
+                    "$",
+                    "$X'",
+                    "Dépiler, Empiler ε"
+                  ],
+                  [
+                    "$",
+                    "$",
+                    "Accepter"
+                  ]
+                ]
+              },
+              "level": "Procedural"
+            }
+          ]
+        },
+        {
+          "id": "Partie_2",
+          "title": "Partie 2",
+          "introduction_context": "Soit la grammaire G suivante, écrite dans le format reconnu par yacc :0) E→.S $ ,1) S⟶.S ’ ∧’ S ,2)S ⟶ .S'∧'S ,3) S⟶.b Le token b représente une variable booléenne.",
+          "Question": [
+            {
+              "id": "1",
+              "question_text": "Construisez l'automate LR de cette grammaire.",
+              "Solution": {
+                "type": "LR(0)",
+                "states_content": [
+                  "I0: { E → .S $, S ⟶ .S'∨'S, S ⟶ .S'∧'S, S ⟶ .b }",
+                  "I1: { E → S.$, S ⟶ S.'∨'S, S ⟶ S.'∧'S }",
+                  "I2: { S → b. }",
+                  "I3: { S ⟶ S'∨'.S, S ⟶ .S'∨'S, S ⟶ .S'∧'S, S ⟶ .b }",
+                  "I4: { S ⟶ S'∧'.S, S ⟶ .S'∨'S, S ⟶ .S'∧'S, S ⟶ .b }",
+                  "I5: { S ⟶ S'∨'S., S ⟶ S.'∨'S, S ⟶ S.'∧'S }",
+                  "I6: { S ⟶ S'∧'S., S ⟶ S.'∨'S, S ⟶ S.'∧'S }"
+                ]
+              },
+              "level": "Procedural"
+            },
+            {
+              "id": "2",
+              "question_text": "Il est évident que cette grammaire n'est pas de type LR(0), Quelle sorte de conflits apparaissent ?",
+              "Solution": "Des conflits shift/reduce apparaissent dans les états 5 et 6 : sur les symboles ∨ et ∧, l'analyseur peut soit réduire (r1 ou r2) soit décaler (d3 ou d4).",
+              "solution_slr_table": {
+                "type": "table",
+                "headers": [
+                  "État",
+                  "b",
+                  "∨",
+                  "∧",
+                  "$",
+                  "S"
+                ],
+                "rows": [
+                  [
+                    "0",
+                    "d2",
+                    "",
+                    "",
+                    "",
+                    "1"
+                  ],
+                  [
+                    "1",
+                    "",
+                    "Acc/d3",
+                    "Acc/d4",
+                    "Acc",
+                    ""
+                  ],
+                  [
+                    "2",
+                    "r3",
+                    "r3",
+                    "r3",
+                    "r3",
+                    ""
+                  ],
+                  [
+                    "3",
+                    "d2",
+                    "d3",
+                    "d4",
+                    "",
+                    "6"
+                  ],
+                  [
+                    "4",
+                    "d2",
+                    "d3",
+                    "d4",
+                    "",
+                    "5"
+                  ],
+                  [
+                    "5",
+                    "",
+                    "R1/d3",
+                    "R1/d4",
+                    "R1",
+                    ""
+                  ],
+                  [
+                    "6",
+                    "",
+                    "R2/d3",
+                    "R2/d4",
+                    "R2",
+                    ""
+                  ]
+                ]
+              },
+              "level": "Conceptual"
+            },
+            {
+              "id": "3",
+              "question_text": "Proposez une solution pour résoudre ces conflits. Indiquer les modifications à apporter dans le fichier yacc.",
+              "Solution": "Déclarer la précédence et l'associativité des opérateurs dans le fichier yacc avec %left.",
+              "solution_yacc_code": [
+                "%token b",
+                "%left '∨'",
+                "%left '∧'",
+                "%%",
+                "S ⟶ S '∨' S",
+                "  | S '∧' S",
+                "  | b",
+                "  ;",
+                "%%"
+              ],
+              "level": "Metacognitive"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

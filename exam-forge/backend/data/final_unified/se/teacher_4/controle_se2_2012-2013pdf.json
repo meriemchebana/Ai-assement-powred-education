@@ -1,0 +1,188 @@
+{
+  "metadata": {
+    "module": "Système d'exploitation II",
+    "duration": "",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Questions_de_cours",
+      "title": "Questions de cours (3 points)",
+      "total_exercise_points": "3",
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": null,
+          "question_text": "Citez les mécanismes matériels utilisés pour la synchronisation de processus puis donnez l'inconvénient de chacun d'eux.",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "Partie_2",
+          "points": null,
+          "question_text": "Présentez brièvement le principe de la méthode \"détection-guérison\" des interblocages.",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "Partie_3",
+          "points": null,
+          "introduction_context": "3. Dans un système, on numérote arbitrairement les types de ressources de 1 à N (exemple : bande magnétique =1, processeur =2, imprimante=3, …). On impose que chaque processus demande les ressources dont il a besoin dans l'ordre numérique croissant des ressources. Par exemple, un processus qui a besoin d'une imprimante et d'un processeur, doit d'abord demander le processeur (n° 2) et ensuite l'imprimante (n° 3).",
+          "question_text": "Démontrez qu'avec cette démarche, il n'y a aucun risque d'interblocage.",
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 1",
+      "total_exercise_points": null,
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": null,
+          "introduction_context": "On considère les trois processus suivants (Le sémaphore mutex est initialisé à 1, et la variable x à 3) :",
+          "pseudocode": {
+            "declarations": [
+              "mutex = 1 ; x = 3 ;"
+            ],
+            "processes": [
+              {
+                "name": "Programme P1",
+                "code": [
+                  "(a) P(Mutex) ;",
+                  "(b) x := x + 1 ;",
+                  "(c) V(Mutex) ;"
+                ]
+              },
+              {
+                "name": "Programme P2",
+                "code": [
+                  "(d) P(Mutex);",
+                  "(e) x := x * 2;",
+                  "(f) V(Mutex) ;"
+                ]
+              },
+              {
+                "name": "Programme P3",
+                "code": [
+                  "(g) P(Mutex);",
+                  "(h) x := x - 4 ;",
+                  "(i) V(Mutex) ;"
+                ]
+              }
+            ]
+          },
+          "Question": [
+            {
+              "id": "1",
+              "question_text": "On considère le scénario d'exécution suivant : a d b g c e f h i :",
+              "sub_questions": [
+                {
+                  "id": "1.a",
+                  "question_text": "Est-il possible ?",
+                  "Solution": null,
+                  "level": "Conceptual"
+                },
+                {
+                  "id": "1.b",
+                  "question_text": "Si oui quelle est la valeur finale de x (initialisé à 3) ?",
+                  "Solution": null,
+                  "level": "Procedural"
+                }
+              ],
+              "Solution": null,
+              "level": "Conceptual"
+            },
+            {
+              "id": "2",
+              "question_text": "Modifier ces processus pour que x contienne la valeur 3 à la fin de l'exécution. Vous commencerez par établir le graphe de précédence correspondant aux exécutions souhaitables.",
+              "Solution": null,
+              "level": "Procedural"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 2",
+      "total_exercise_points": null,
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": null,
+          "introduction_context": "Soient 4 processus producteurs P1, P2, P3, P4 et deux processus consommateurs C1, C2 qui partagent un tampon de taille fixe. On définit les contraintes suivantes d'accès au tampon :",
+          "constraints": [
+            "P1, P2 constituent une même classe CL1.",
+            "P3, P4 constituent une même classe CL2.",
+            "Ci ne peut consommer que les messages produits par les processus de la classe CLi.",
+            "A tout instant, le tampon ne contient que les messages produits par les processus d'une même classe."
+          ],
+          "Question": [
+            {
+              "id": "1",
+              "question_text": "A l'aide des sémaphores, synchroniser l'ensemble de ces processus parallèles pour l'accès au tampon.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "2",
+              "question_text": "Quelles seront les modifications nécessaires à apporter à la solution, si on ajoute une classe CL3 et un consommateur C3 ?",
+              "Solution": null,
+              "level": "Conceptual"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 3",
+      "total_exercise_points": null,
+      "parts": [
+        {
+          "id": "Partie_A",
+          "points": null,
+          "introduction_context": "On considère quatre processus P1 P2 P3 P4 qui partagent un même fichier. Ce fichier est composé de 6 blocs de données notés B1, B2, B3, B4, B5 et B6. L'exécution de chacun des processus nécessite la pose de verrous exclusifs sur certains blocs :",
+          "constraints": [
+            "P1 : B1 B3 B2",
+            "P2 : B4 B2 B3",
+            "P3 : B5 B2 B1",
+            "P4 : B6 B2 B4 B3"
+          ],
+          "initial_state": " On Suppose qu’à l’état courant, les blocs suivants sont verrouillés : B1 et B3 par P1, B4 par P2, B5 par P3, B6 par P4",
+          "Question": [
+            {
+              "id": "A.a",
+              "question_text": "L'état courant est-il sûr (sain) ?",
+              "Solution": null,
+              "level": "Metacognitive"
+            },
+            {
+              "id": "A.b",
+              "question_text": "Le système reçoit dans l'ordre les requêtes suivantes : P3 demande B2, P1 demande B2 et P2 demande B2. Le système répond favorablement à une requête uniquement si cela ne conduit pas vers un état non sûr. Indiquer, en utilisant l'algorithme du banquier, lequel des processus parviendra-t-il à verrouiller le bloc B2 ?",
+              "Solution": null,
+              "level": "Procedural"
+            }
+          ]
+        },
+        {
+          "id": "Partie_B",
+          "points": null,
+          "introduction_context": "Considérons un système gérant quatre processus, P1 à P4, et trois types de ressources R1, R2 et R3 (3 instances R1, 2 instances R2 et 2 instances R3). Les ressources sont attribuées comme suit :",
+          "constraints": [
+            "P1 détient une ressource de type R1 et demande une ressource de type R2.",
+            "P2 détient 2 ressources de type R2 et demande une ressource de type R1 et une ressource de type R3.",
+            "P3 détient 1 ressource de type R1 et demande une ressource de type R2.",
+            "P4 détient 2 ressources de type R3 et demande une ressource de type R1."
+          ],
+          "question_text": "Y a-t-il un interblocage ? Justifiez. Si oui, quels sont les processus concernés ?",
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    }
+  ]
+}

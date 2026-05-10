@@ -1,0 +1,116 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h30m",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (06 pts)",
+      "total_exercise_points": "6",
+      "introduction_context": "",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "question_text": "Écrire une expression régulière qui définit un nombre décimal avec virgule fixe sans zéros au début ni à la fin. Exemples acceptées : 123.01, 1230005.0 — non acceptées : 00.0, 001.000, 0002345.1000.",
+          "Solution": "0([1-9]+0*)*(\\.(0*[1-9])+)"
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "Donner une expression régulière définissant le langage composé de tous les mots non vides, sur l'alphabet {0,1}, qui contient au moins deux 1 mais pas des 1 consécutifs.",
+          "Solution": "(00*100*1)+(0)*|(100*100*)+(1|ε)"
+        },
+        {
+          "id": "3",
+          "level": "Procedural",
+          "question_text": "Donner une expression régulière définissant le langage composé de tous les mots non vides, sur l'alphabet {0,1}, qui contient au plus deux 1 mais pas des 1 consécutifs.",
+          "Solution": "1 | 0*1?00*1?0*"
+        },
+        {
+          "id": "4",
+          "level": "Procedural",
+          "question_text": "Donner une expression régulière définissant le langage composé de tous les mots non vides, sur les chiffres décimaux dont ces mots ne dépassent pas le nombre 2020.",
+          "Solution": "[0-1]?[0-9]{3} | 20([0-1][0-9]|20)"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (06 pts)",
+      "total_exercise_points": "6",
+      "introduction_context": "Soit G la grammaire suivante :",
+      "grammar": [
+        "S → Aa | Bb",
+        "A → aA | b",
+        "B → bc | bD",
+        "D → De | fFg | fe",
+        "F → fDg"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "level": "Conceptual",
+          "question_text": "Cette grammaire n'est pas LL(1) : pourquoi ?",
+          "Solution": null
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "Donner une grammaire G1 équivalente à G et qui vous semble LL(1).",
+          "solution_grammar": null
+        },
+        {
+          "id": "3",
+          "level": "Metacognitive",
+          "question_text": "Donner la table d'analyse LL(1) de G1. Justifier en utilisant cette table que G1 est une grammaire LL(1).",
+          "solution_premiers_suivants": null,
+          "solution_ll1_table": null
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 03 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "Soit la grammaire G = (VN, VT, T, P) avec : VT = {. , =, key, nl, str, num}, VN = {T, E, F, K, L, V} et P est l'ensemble de règles :",
+      "grammar": [
+        "T → E F",
+        "F → nl E F | ε",
+        "E → K = V",
+        "K → key L",
+        "L → . key L | ε",
+        "V → str | num"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "question_text": "Construire l'automate LR(0) pour G.",
+          "Solution": null
+        },
+        {
+          "id": "2",
+          "level": "Conceptual",
+          "question_text": "Au vu de l'automate, exhibez tous les états pour lesquels il y aura un conflit dans la table Action de l'automate LR(0), et explicitez ces conflits.",
+          "Solution": null
+        },
+        {
+          "id": "3",
+          "level": "Metacognitive",
+          "question_text": "Construire la table de l'analyseur SLR(1) pour G. G est-elle SLR(1) ? Justifiez.",
+          "Solution": null,
+          "solution_slr_table": null
+        },
+        {
+          "id": "4",
+          "level": "Procedural",
+          "question_text": "Effectuez la reconnaissance du mot key = str nl key.key = num à l'aide de table SLR(1). En cas de conflit, précisez l'action choisie.",
+          "solution_table": null
+        }
+      ]
+    }
+  ]
+}

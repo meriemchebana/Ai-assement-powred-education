@@ -1,0 +1,1 @@
+from src.modules.practical_series.model import PracticalSeries

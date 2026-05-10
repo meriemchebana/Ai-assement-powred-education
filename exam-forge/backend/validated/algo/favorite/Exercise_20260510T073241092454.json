@@ -1,0 +1,60 @@
+{
+  "subject": "algo",
+  "type": "Exercise",
+  "status": "favorite",
+  "data": {
+    "id": "ex03",
+    "title": "Exercice 3 : Tas et file de priorité",
+    "total_exercise_points": 6,
+    "introduction_context": "On considère la séquence de nombres entiers suivante donnée dans l'ordre : 28, 15, 42, 8, 19, 31, 5, 12.\n\nOn souhaite insérer ces nombres dans un tas-max initialement vide. Le tas est représenté de manière statique par un tableau T indicé à partir de 1.",
+    "questions": [
+      {
+        "id": "ex03_q1",
+        "type": "FREE",
+        "question_text": "1. Construire le tas-max statique (tableau T) obtenu après insertion de tous les nombres dans l'ordre donné. Écrire le tableau final.",
+        "solution": {
+          "text": "T = [42, 19, 31, 12, 15, 28, 5, 8]",
+          "rubric": [
+            "La racine est bien le maximum (42).",
+            "Chaque nœud est supérieur ou égal à ses deux fils (propriété de tas-max respectée).",
+            "L'ordre des éléments correspond à une insertion séquentielle correcte (pas de permutation arbitraire)."
+          ]
+        },
+        "points": 2,
+        "topic": "Tas-max statique, insertion, extraction"
+      },
+      {
+        "id": "ex03_q2",
+        "type": "FREE",
+        "question_text": "2. En utilisant le tableau T obtenu à la question 1, appliquer l'opération `ExtraireMax` une seule fois. Donner le nouveau tableau T' après extraction et rétablissement de la propriété de tas.",
+        "solution": {
+          "text": "T' = [31, 19, 28, 12, 15, 8, 5, _] (la dernière case peut être ignorée ou marquée comme libre).\n\nDétail : on place le dernier élément (8) à la racine, puis on tamise : 8 échange avec 31, puis avec 28.",
+          "rubric": [
+            "La nouvelle racine est 31 (le plus grand après 42).",
+            "Le dernier élément (8) a été remonté à la racine puis tamisé correctement.",
+            "Le tableau conserve la propriété de tas-max (chaque parent ≥ ses fils)."
+          ]
+        },
+        "points": 2,
+        "topic": "Tas-max statique, insertion, extraction"
+      },
+      {
+        "id": "ex03_q3",
+        "type": "FREE",
+        "question_text": "3. Proposer une procédure en pseudo-code qui, étant donné un tas-max statique T de taille n et un entier x, insère x dans le tas tout en maintenant la propriété de tas. On suppose que le tableau a une capacité suffisante.",
+        "solution": {
+          "text": "```\nProcédure InsererTas(T, n, x)\n  n ← n + 1\n  i ← n\n  T[i] ← x\n  Tant que i > 1 et T[i] > T[i div 2] faire\n    Échanger(T[i], T[i div 2])\n    i ← i div 2\n  FinTant\nFinProcédure\n```",
+          "rubric": [
+            "La taille n est incrémentée avant insertion.",
+            "L'élément est placé à la fin du tableau.",
+            "La remontée (percolation vers le haut) compare avec le parent et échange si nécessaire.",
+            "La boucle s'arrête quand la propriété est rétablie ou quand on atteint la racine."
+          ]
+        },
+        "points": 2,
+        "topic": "Tas-max statique, insertion, extraction"
+      }
+    ],
+    "level": "Procedural"
+  }
+}

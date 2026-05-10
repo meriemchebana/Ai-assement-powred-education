@@ -1,0 +1,70 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction}{3}{section.1}%
+\contentsline {section}{\numberline {2}Related Work}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Automated Question Generation}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Quality Assessment of AI-Generated Exams}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Automatic Question Generation with Constructed Response Scoring}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Retrieval-Augmented Generation}{6}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Intelligent Document Processing and Arabic NLP}{6}{subsection.2.5}%
+\contentsline {section}{\numberline {3}System Evolution: From RAG-Phi4 to ExamForge}{6}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Version 1: Placeholder AI Endpoints (School Generator)}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Version 2: The RAG-Phi4 Prototype (Failed Approach)}{6}{subsection.3.2}%
+\contentsline {paragraph}{Failure 1 --- Absence of structural output enforcement.}{7}{subsection.3.2}%
+\contentsline {paragraph}{Failure 2 --- Free-tier instruction-following fidelity.}{7}{subsection.3.2}%
+\contentsline {paragraph}{Failure 3 --- Semantic retrieval blends topics.}{7}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Version 3: ExamForge (Final Architecture)}{7}{subsection.3.3}%
+\contentsline {section}{\numberline {4}System Architecture}{8}{section.4}%
+\contentsline {paragraph}{Multi-tenancy.}{9}{figure.caption.1}%
+\contentsline {paragraph}{Service bridge.}{9}{figure.caption.1}%
+\contentsline {section}{\numberline {5}Materials and Methods}{10}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Dataset}{10}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}The \texttt {docParser} Pipeline}{10}{subsection.5.2}%
+\contentsline {subsubsection}{\numberline {5.2.1}Stage 1 --- PDF to Markdown Conversion}{10}{subsubsection.5.2.1}%
+\contentsline {subsubsection}{\numberline {5.2.2}Stage 2 --- LLM Extraction with Self-Healing Schema Enforcement}{11}{subsubsection.5.2.2}%
+\contentsline {subsubsection}{\numberline {5.2.3}Stage 3 --- Grounding Validation and Confidence Scoring}{11}{subsubsection.5.2.3}%
+\contentsline {paragraph}{Grounding check.}{11}{subsubsection.5.2.3}%
+\contentsline {paragraph}{Correction section detection.}{11}{subsubsection.5.2.3}%
+\contentsline {paragraph}{Confidence scoring.}{12}{subsubsection.5.2.3}%
+\contentsline {subsubsection}{\numberline {5.2.4}Stage 4 --- Bloom's Taxonomy Classification}{12}{subsubsection.5.2.4}%
+\contentsline {subsubsection}{\numberline {5.2.5}Stage 5 --- VLM Diagram Transcription}{12}{subsubsection.5.2.5}%
+\contentsline {paragraph}{Diagram vs.\ table discrimination.}{12}{subsubsection.5.2.5}%
+\contentsline {paragraph}{Rendering and VLM invocation.}{12}{subsubsection.5.2.5}%
+\contentsline {paragraph}{Question linkage.}{12}{subsubsection.5.2.5}%
+\contentsline {subsection}{\numberline {5.3}The exam-forge Generation Engine}{13}{subsection.5.3}%
+\contentsline {subsubsection}{\numberline {5.3.1}Dataset Loading and Schema Normalisation}{13}{subsubsection.5.3.1}%
+\contentsline {subsubsection}{\numberline {5.3.2}Hybrid Retrieval-Augmented Generation}{13}{subsubsection.5.3.2}%
+\contentsline {paragraph}{Chunking.}{13}{subsubsection.5.3.2}%
+\contentsline {paragraph}{Sparse retrieval.}{13}{subsubsection.5.3.2}%
+\contentsline {paragraph}{Dense retrieval with language-aware routing.}{13}{subsubsection.5.3.2}%
+\contentsline {paragraph}{Reciprocal Rank Fusion.}{13}{subsubsection.5.3.2}%
+\contentsline {paragraph}{Cloud RAG.}{13}{equation.5.2}%
+\contentsline {subsubsection}{\numberline {5.3.3}Question Generation}{14}{subsubsection.5.3.3}%
+\contentsline {paragraph}{Few-shot style anchoring.}{14}{subsubsection.5.3.3}%
+\contentsline {paragraph}{Duplicate avoidance.}{14}{subsubsection.5.3.3}%
+\contentsline {paragraph}{MCQ constraints.}{14}{subsubsection.5.3.3}%
+\contentsline {paragraph}{SAQ constraints.}{14}{subsubsection.5.3.3}%
+\contentsline {paragraph}{Exercise generation.}{14}{subsubsection.5.3.3}%
+\contentsline {subsubsection}{\numberline {5.3.4}Exam Planning and Assembly}{14}{subsubsection.5.3.4}%
+\contentsline {subsubsection}{\numberline {5.3.5}Post-Generation Evaluator}{14}{subsubsection.5.3.5}%
+\contentsline {subsection}{\numberline {5.4}Web Application}{15}{subsection.5.4}%
+\contentsline {subsubsection}{\numberline {5.4.1}School Management Backend}{15}{subsubsection.5.4.1}%
+\contentsline {subsubsection}{\numberline {5.4.2}Frontend Web Interface}{15}{subsubsection.5.4.2}%
+\contentsline {section}{\numberline {6}Results}{16}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Document Parsing Performance}{16}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Bloom's Level Distribution}{16}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Generation Quality}{17}{subsection.6.3}%
+\contentsline {subsection}{\numberline {6.4}Retrieval Effectiveness}{17}{subsection.6.4}%
+\contentsline {section}{\numberline {7}Discussion}{18}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Contributions Relative to Prior Work}{18}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Limitations}{18}{subsection.7.2}%
+\contentsline {paragraph}{Scanned document quality.}{18}{subsection.7.2}%
+\contentsline {paragraph}{Law dataset sparsity.}{18}{subsection.7.2}%
+\contentsline {paragraph}{Table-diagram boundary cases.}{18}{subsection.7.2}%
+\contentsline {paragraph}{Evaluator reliability.}{18}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Design Choices and Alternatives}{19}{subsection.7.3}%
+\contentsline {paragraph}{Why Docling over alternative PDF libraries?}{19}{subsection.7.3}%
+\contentsline {paragraph}{Why \texttt {instructor} over prompt-engineered JSON?}{19}{subsection.7.3}%
+\contentsline {paragraph}{Why RRF over learned rank aggregation?}{19}{subsection.7.3}%
+\contentsline {paragraph}{Why separate style anchors from RAG context?}{19}{subsection.7.3}%
+\contentsline {section}{\numberline {8}Conclusion}{19}{section.8}%
+\contentsline {paragraph}{Future work.}{20}{section.8}%

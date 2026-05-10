@@ -1,0 +1,275 @@
+{
+  "metadata": {
+    "module": "SEII",
+    "duration": "",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 1 (2+3 points)",
+      "total_exercise_points": "5",
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": "2",
+          "introduction_context": "Soit s un sémaphore, on note :",
+          "definitions": [
+            "i(s) : valeur initiale du sémaphore s (par définition i(s) ≥ 0).",
+            "np(s) : nombre d'opérations P(s) exécutées sur s.",
+            "nv(s) : nombre d'opérations V(s) exécutées sur s.",
+            "nf(s) : nombre de processus qui ont franchi la primitive P(s)."
+          ],
+          "question_text": "Vérifier que la relation suivante est correcte : nf(s) = min(np(s), i(s) + nv(s)).",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "Partie_2",
+          "points": "3",
+          "introduction_context": " On dispose d’une carte électronique à base de microcontrôleurs pour contrôler un ensemble de robots. La carte est livrée avec un logiciel sous Linux, qui permet de créer son propre programme pour commander et coordonner un ensemble de robots, et de le charger ensuite dans la mémoire non volatile (sur la carte) par un port série. On vous sollicite pour écrire un pseudocode qui contrôle le déplacement de plusieurs robots sur les chemins suivants : ",
+          "constraints": [
+            "Les robots peuvent partir de A vers C ou de D vers A.",
+            "Pour éviter tout risque de collision, il faut s'assurer que chaque segment du chemin (segments AB, BC et DB) est utilisé par un robot au plus."
+          ],
+          "diagram": {
+            "description": "Graphe de chemins pour les robots. Quatre nœuds disposés comme suit : A (en haut à gauche), B (en haut au centre), C (en haut à droite), D (en bas à droite). Les arêtes sont : A—B (segment horizontal), B—C (segment horizontal), B—D (segment diagonal de B vers D en bas). Les robots empruntent le chemin A→B→C (de gauche à droite) ou D→B→A (de bas à droite vers gauche).",
+            "nodes": [
+              "A",
+              "B",
+              "C",
+              "D"
+            ],
+            "edges": [
+              {
+                "from": "A",
+                "to": "B",
+                "label": "segment AB"
+              },
+              {
+                "from": "B",
+                "to": "C",
+                "label": "segment BC"
+              },
+              {
+                "from": "D",
+                "to": "B",
+                "label": "segment DB"
+              }
+            ],
+            "paths": [
+              "A → B → C",
+              "D → B → A"
+            ]
+          },
+          "question_text": "Proposez une solution assurant la synchronisation des deux robots en utilisant les sémaphores. Vérifiez la validité de votre solution.",
+          "Solution": null,
+          "level": "Metacognitive"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 2 (5+4 points)",
+      "total_exercise_points": "9",
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": "5",
+          "introduction_context": "Dans les algorithmes suivants, 3 processus utilisent de manière concurrente des ressources notées A..F :",
+          "algorithms": [
+            {
+              "label": "Algorithm 1: Processus 1",
+              "code": [
+                "while true do",
+                "  get(A);",
+                "  get(B);",
+                "  get(C);",
+                "  // section critique ;",
+                "  release(A);",
+                "  release(B);",
+                "  release(C);",
+                "end"
+              ]
+            },
+            {
+              "label": "Algorithm 2: Processus 2",
+              "code": [
+                "while true do",
+                "  get(D);",
+                "  get(E);",
+                "  get(B);",
+                "  // section critique ;",
+                "  release(D);",
+                "  release(E);",
+                "  release(B);",
+                "end"
+              ]
+            },
+            {
+              "label": "Algorithm 3: Processus 3",
+              "code": [
+                "while true do",
+                "  get(C);",
+                "  get(F);",
+                "  get(D);",
+                "  // section critique ;",
+                "  release(C);",
+                "  release(F);",
+                "  release(D);",
+                "end"
+              ]
+            }
+          ],
+          "Question": [
+            {
+              "id": "1",
+              "question_text": "En utilisant un graphe d'allocation de ressources, prouvez la possibilité d'un interblocage.",
+              "Solution": null,
+              "level": "Conceptual"
+            },
+            {
+              "id": "2",
+              "question_text": "Prévention : Modifiez l'ordre de demande des ressources pour éviter l'interblocage. Justifier votre réponse.",
+              "Solution": null,
+              "level": "Metacognitive"
+            }
+          ]
+        },
+        {
+          "id": "Partie_2",
+          "points": "4",
+          "introduction_context": "Soit un système à un instant t0 :",
+          "banker_table": {
+            "description": "Tableau de l'algorithme du banquier avec 5 tâches (T0 à T4) et 4 types de ressources (A, B, C, D).",
+            "headers": [
+              "",
+              "Allocation A",
+              "Allocation B",
+              "Allocation C",
+              "Allocation D",
+              "Max A",
+              "Max B",
+              "Max C",
+              "Max D",
+              "Disponible A",
+              "Disponible B",
+              "Disponible C",
+              "Disponible D"
+            ],
+            "rows": [
+              [
+                "T0",
+                "0",
+                "0",
+                "1",
+                "2",
+                "0",
+                "0",
+                "1",
+                "2",
+                "1",
+                "5",
+                "2",
+                "0"
+              ],
+              [
+                "T1",
+                "1",
+                "0",
+                "0",
+                "0",
+                "1",
+                "7",
+                "5",
+                "0",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "T2",
+                "1",
+                "3",
+                "5",
+                "4",
+                "2",
+                "3",
+                "5",
+                "6",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "T3",
+                "0",
+                "6",
+                "3",
+                "2",
+                "0",
+                "6",
+                "5",
+                "2",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "T4",
+                "0",
+                "0",
+                "1",
+                "4",
+                "0",
+                "6",
+                "5",
+                "6",
+                "",
+                "",
+                "",
+                ""
+              ]
+            ],
+            "note": "Le vecteur Disponible est donné uniquement pour T0 : [1, 5, 2, 0]. Les cases vides pour T1 à T4 dans la colonne Disponible ne sont pas renseignées dans l'énoncé."
+          },
+          "Question": [
+            {
+              "id": "1",
+              "question_text": "En utilisant l'algorithme du banquier donner le contenu de la matrice Besoin et le vecteur E. Le système est-il dans un état sain ?",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "2",
+              "question_text": "Si la tâche T1 émet la requête (0,4,2,0) peut-elle être honorée immédiatement ?",
+              "Solution": null,
+              "level": "Conceptual"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 3 (6 points)",
+      "total_exercise_points": "6",
+      "introduction_context": "Dans une ville tranquille, un coiffeur possède un petit salon ayant une porte d'entrée, une porte de sortie, un fauteuil de coiffure et quelques chaises. Les clients arrivent par la porte d'entrée et sortent par la porte de sortie après avoir eu leur coupe de cheveux. Comme le salon est petit, uniquement le client sur le fauteuil de coiffure peut être servi à un moment donné par le coiffeur.",
+      "scenario": [
+        "Le coiffeur passe sa vie entre dormir et servir ses clients.",
+        "Quand il n'a aucun client, le coiffeur dort dans le fauteuil.",
+        "Quand un client arrive et trouve le coiffeur endormi, il le réveille, s'assoit dans le fauteuil et s'endort pendant que le coiffeur lui coupe les cheveux.",
+        "Si un client arrive et le coiffeur est occupé, le client s'endort dans une chaise libre.",
+        "Après avoir fini une coupe, le coiffeur ouvre la porte de sortie et attend que le client coiffé quitte le salon.",
+        "Ensuite, s'il y a des clients en attente, le coiffeur réveille un et attend qu'il occupe le fauteuil de coiffure.",
+        "S'il n'y a aucun client, le coiffeur s'endort."
+      ],
+      "question_text": "Modéliser ce problème en utilisant un moniteur pour la synchronisation entre le coiffeur et ses clients.",
+      "Solution": null,
+      "level": "Metacognitive"
+    }
+  ]
+}

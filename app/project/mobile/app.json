@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "School Generator",
+    "slug": "school-generator",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#F5F5F7"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.schoolgenerator.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#F5F5F7"
+      },
+      "package": "com.schoolgenerator.app"
+    },
+    "plugins": [
+      "expo-secure-store",
+      "expo-document-picker",
+      "expo-web-browser"
+    ]
+  }
+}

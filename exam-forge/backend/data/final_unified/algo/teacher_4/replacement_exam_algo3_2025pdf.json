@@ -1,0 +1,100 @@
+{
+  "metadata": {
+    "module": "Algorithmique et Structures de données",
+    "duration": "Unspecified",
+    "language": "english"
+  },
+  "exercises": [
+    {
+      "id": "Exercise_1",
+      "title": "Exercise 1",
+      "total_exercise_points": "2 point",
+      "Question": [
+        {
+          "id": "1.1",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "Given the following list of values 1, 0, 2 and 3, we want to generate the heap that contains this list of values. Show all the states that the heap goes through.",
+          "Solution": null
+        }
+      ]
+    },
+    {
+      "id": "Exercise_2",
+      "title": "Exercise 2",
+      "total_exercise_points": "18 points total",
+      "introduction_context": "1. In the following, the requested algorithms can only use the standard operations already mentioned (no access to the internal representation of the stacks or queues. No operations on pointers).",
+      "Question": [
+        {
+          "id": "2.1.1",
+          "points": "4",
+          "level": "Metacognitive",
+          "question_text": "Propose a Function Max1:Integer; that allows to find the maximum of the stack S1. At the end of the execution of Max1, the stack S1 must remain unchanged. If temporary stacks are used, the minimum possible of these stacks to be named Sj (j>=2) must be used.",
+          "Solution": null
+        },
+        {
+          "id": "2.1.2",
+          "points": "4",
+          "level": "Procedural",
+          "question_text": "By exploiting the standard operations of S1 already mentioned and assuming, this time, that the function Max1:Integer finds and deletes each time the max element of the stack S1, propose an iterative procedure SortStack1; that allows to sort the stack S1 in an ascending order from the base to the top (the max element at the top). If temporary stacks are used, the minimum possible of these stacks to be named Sj (j>=2) must be used.",
+          "Solution": null
+        },
+        {
+          "id": "2.2.1",
+          "points": "1",
+          "level": "Procedural",
+          "question_text": "Consider the balanced binary tree T, the example of which is presented below: Assuming that the type of the root of this tree is named TypeRoot. Propose the necessary declaration of this structure using pointers.",
+          "diagram": {
+            "description": "A complete balanced binary tree labeled T. The root node contains the value [10]. It has two children: left child [5] and right child [15]. At the next level, node [5] has left child [2] and right child [8]. Node [15] has left child [12] and right child [20].",
+            "precise_location": "Page 1 - Middle section",
+            "node_values": {
+              "root": 10,
+              "level_1": [
+                5,
+                15
+              ],
+              "level_2": [
+                2,
+                8,
+                12,
+                20
+              ]
+            }
+          },
+          "Solution": null
+        },
+        {
+          "id": "2.2.2",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "Write an algorithm that traverses the complete binary tree in breadth and retrieves the values in an integer stack S1. At the end of the traversal, the root of the tree will be at the top of S1. The signature of the procedure must be as follows: Procedure Tree2Stack1(R: TypeRoot);",
+          "Solution": null
+        },
+        {
+          "id": "2.2.3",
+          "points": "6",
+          "level": "Procedural",
+          "question_text": "A binary tree is considered to be sorted in descending order if its breadth-first traversal generates a sequence of values sorted in descending order, like the tree below. Assuming that we have an operation ConstTreei(R: TypeRoot) that creates a balanced binary tree with root R from a stack of integers Si (such that the element of the top of Si will be put in the root and so on), propose a procedure to sort a binary tree whose root is R by exploiting a stack of integers S1. The signature should be as follows: Procedure SortTree1(R: TypeRoot);",
+          "diagram": {
+            "description": "A binary tree representing a descending sequence in breadth-first order. The root node contains [25]. Level 1 nodes from left to right are [20] and [15]. Level 2 nodes from left to right are [10], [8], [5], and [2]. The breadth-first sequence is (25, 20, 15, 10, 8, 5, 2).",
+            "precise_location": "Page 1 - Bottom section",
+            "node_values": {
+              "root": 25,
+              "level_1": [
+                20,
+                15
+              ],
+              "level_2": [
+                10,
+                8,
+                5,
+                2
+              ]
+            }
+          },
+          "Solution": null
+        }
+      ]
+    }
+  ]
+}

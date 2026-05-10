@@ -1,0 +1,257 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "points": "04",
+          "question_text": "Dans une formule mathématique d'un document LaTeX, un indice est indiqué par le caractère _ ; par exemple x_i désigne xi ; si l'indice n'est pas réduit à un seul caractère, il faut employer des accolades : x_{i+1} désigne xi+1 ; la notation x_{i} est bien sûr autorisée. Dans un document HTML, un indice est indiqué par la balise <SUB> obligatoirement suivie de la balise fermante </SUB> ; ainsi xi s'écrit x<SUB>i</SUB> et xi+1 s'écrit x<SUB>i+1</SUB>. Ecrire un analyseur lexical qui transforme les formules LaTeX en formules HTML.",
+          "solution_lex_code": null
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "points": "04",
+          "question_text": "Considérons A = {0, 1}. Pour les langages suivants, donner une ERE.",
+          "sub_questions": [
+            {
+              "id": "2.1",
+              "level": "Conceptual",
+              "points": "1.5",
+              "question_text": "Tous les mots non vides qui contiennent un nombre de 0 multiple de 3.",
+              "Solution": "(1*01*01*01*)(1*01*01*01*)*"
+            },
+            {
+              "id": "2.2",
+              "level": "Conceptual",
+              "points": "1.5",
+              "question_text": "Tous les mots tels que chaque bloc de 3 symboles consécutifs contiennent exactement 2 occurrences du symbole 0.",
+              "Solution": "(001|010|100)*(0|1)?(0|1)?"
+            },
+            {
+              "id": "2.3",
+              "level": "Conceptual",
+              "points": "1",
+              "question_text": "L'ensemble de toutes les chaînes de 0 et de 1 telles que chaque 0 soit immédiatement suivi par au moins un 1.",
+              "Solution": "((01)*1*)*"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (12 pts)",
+      "total_exercise_points": "12",
+      "introduction_context": "Soit la grammaire des expressions post-fixées, G, d'axiome E :",
+      "grammar": [
+        "E → E E O | n",
+        "O → + | - | * | /"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "level": "Metacognitive",
+          "points": "1.5",
+          "question_text": "Vérifier les conditions LL(1). G est-elle LL(1) ? Justifiez.",
+          "Solution": "Non. G est récursive à gauche : E → E E O | n. G ne nécessite pas la factorisation."
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "points": "10.5",
+          "question_text": "Si oui, effectuez l'analyse descendante de 3 5 + 4 * en montrant les étapes de la construction de l'arbre d'analyse syntaxique. Sinon la transformer pour qu'elle le soit et analyser le mot.",
+          "Solution": "Elimination de la récursivité à gauche : E → E E O | n  →  E → nE',  E' → E O E' | ε",
+          "solution_grammar_G1": [
+            "E  → nE'",
+            "E' → EOE' | ε",
+            "O  → + | - | * | /"
+          ],
+          "solution_premiers_suivants": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "E",
+                "n",
+                "$ , + , - , * , /"
+              ],
+              [
+                "E'",
+                "n , ε",
+                "$ , + , - , * , /"
+              ],
+              [
+                "O",
+                "+ , - , * , /",
+                "n , $ , + , - , * , /"
+              ]
+            ]
+          },
+          "solution_ll1_table": {
+            "type": "table",
+            "headers": [
+              "",
+              "n",
+              "+",
+              "-",
+              "*",
+              "/",
+              "$"
+            ],
+            "rows": [
+              [
+                "E",
+                "nE'",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "E'",
+                "EOE'",
+                "ε",
+                "ε",
+                "ε",
+                "ε",
+                "ε"
+              ],
+              [
+                "O",
+                "",
+                "+",
+                "-",
+                "*",
+                "/",
+                ""
+              ]
+            ]
+          },
+          "solution_table": {
+            "type": "table",
+            "headers": [
+              "PILE",
+              "Entrée",
+              "Action",
+              "Sortie"
+            ],
+            "rows": [
+              [
+                "$E",
+                "3 5 + 4 *$",
+                "dépiler, empiler E'n",
+                "E → nE'"
+              ],
+              [
+                "$E'n",
+                "3 5 + 4 *$",
+                "dépiler, avancer",
+                ""
+              ],
+              [
+                "$E'",
+                "5 + 4 *$",
+                "dépiler, empiler EOE'",
+                "E' → EOE'"
+              ],
+              [
+                "$E'OE",
+                "5 + 4 *$",
+                "dépiler, empiler E'n",
+                "E → nE'"
+              ],
+              [
+                "$E'OE'n",
+                "5 + 4 *$",
+                "dépiler, avancer",
+                ""
+              ],
+              [
+                "$E'OE'",
+                "+ 4 *$",
+                "dépiler, empiler ε",
+                "E' → ε"
+              ],
+              [
+                "$E'O",
+                "+ 4 *$",
+                "dépiler, empiler +",
+                "O → +"
+              ],
+              [
+                "$E'+",
+                "+ 4 *$",
+                "dépiler, avancer",
+                ""
+              ],
+              [
+                "$E'",
+                "4 *$",
+                "dépiler, empiler EOE'",
+                "E' → EOE'"
+              ],
+              [
+                "$E'OE",
+                "4 *$",
+                "dépiler, empiler E'n",
+                "E → nE'"
+              ],
+              [
+                "$E'OE'n",
+                "4 *$",
+                "dépiler, avancer",
+                ""
+              ],
+              [
+                "$E'OE'",
+                "*$",
+                "dépiler, empiler ε",
+                "E' → ε"
+              ],
+              [
+                "$E'O",
+                "*$",
+                "dépiler, empiler *",
+                "O → *"
+              ],
+              [
+                "$E'*",
+                "*$",
+                "dépiler, avancer",
+                ""
+              ],
+              [
+                "$E'",
+                "$",
+                "dépiler, empiler ε",
+                "E' → ε"
+              ],
+              [
+                "$",
+                "$",
+                "Accepter",
+                ""
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}

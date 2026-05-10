@@ -1,0 +1,23 @@
+{
+  "metadata": {
+    "module": "SEII",
+    "duration": "",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 2 (5 points)",
+      "total_exercise_points": "5",
+      "introduction_context": "A un instant donné, le stade peut recevoir un nombre quelconque d’athlètes mais de deux clubs au maximum. Par exemple, 5 athlètes du club B et 3 athlètes du Club C peuvent s’entraîner en même temps, mais si un athlète du club A veut accéder au stade, il doit attendre jusqu’à ce que tous les athlètes aient quitté le stade, soit du club B soit du club C. On vous demande de proposer un schéma de synchronisation des processus: Processus A, Processus B et Processus C correspondant respectivement à des athlètes des clubs A, B et C, et ce en utilisant des sémaphores",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "Proposer un schéma de synchronisation des processus : Processus A, Processus B et Processus C correspondant respectivement à des athlètes des clubs A, B et C, et ce en utilisant des sémaphores. Déclarez clairement vos variables et précisez leurs initialisations.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    }
+  ]
+}

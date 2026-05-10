@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "module": "Examen",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "title": "Exercice 01",
+      "introduction_context": "On considère 3 possibilités de définitions de l'élément e :\n\n<!ELEMENT e(a*|b*)*> <!ELEMENT e(a*|b*)> <!ELEMENT e(a,b)*>\n\nLes éléments a et b sont définis comme\n\n<!ELEMENT a EMPTY>\n\n<!ELEMENT b EMPTY>",
+      "Question": [
+        {
+          "question_text": "<e><a/><b/><a/><b/><a/><b/><a/><b/></e>",
+          "Solution": "✓ 1 o 2 ✓ 3",
+          "level": "Factual"
+        },
+        {
+          "question_text": "<e><a/><b/><a/><a/><b/><a/><b/><b/><a/><b/></e>",
+          "Solution": "✓ 1 o 2 o 3",
+          "level": "Procedural"
+        },
+        {
+          "question_text": "<e><a/><a/><a/></e>",
+          "Solution": "✓ 1 ✓ 2 o 3",
+          "level": "Factual"
+        },
+        {
+          "question_text": "<e/>",
+          "Solution": "✓ 1 ✓ 2 ✓ 3",
+          "level": "Factual"
+        }
+      ]
+    },
+    {
+      "title": "Exercice 02",
+      "introduction_context": "Donner l'extrait de schéma XSD qui permet de représenter un film qui est constitué :\n- d'un titre : attribut texte\n- d'une année : attribut entier entre 1895 et 2050\n- d'au moins un réalisateur\n- éventuellement d'acteurs\n- Les réalisateurs et les acteurs sont constitués :\n  - d'un nom : attribut texte\n  - d'un prénom : attribut texte",
+      "Question": [
+        {
+          "question_text": "Donner l'extrait de schéma XSD",
+          "Solution": null,
+          "level": "Factual"
+        }
+      ]
+    },
+    {
+      "title": "Exercice 03",
+      "introduction_context": "Soit le fichier shop.xml",
+      "Question": [
+        {
+          "question_text": "A. Donnez des requêtes XPath pour sélectionner les éléments suivants.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "question_text": "B. Pour le document shop.xml donner une expression Xquery correspondant à la requête : Les noms des articles pour lesquels la marge est inférieure à 20% (la marge est définie comme le rapport (prix de vente - prix d'achat) /prix de vente).",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "question_text": "C. Proposez une feuille de style XSL permettant un affichage HTML du catalogue du magasin à destination des clients :\n1. Cette  page  donnera  le  nom  du  magasin  avec  son  adresse  puis,  pour  chaque produit, sa description, son illustration, son prix de vente, et enfin affichera le nombre d'éléments en stock.\n2. Modifiez votre feuille de style pour que le contenu de la page soit sensible au nombre d'éléments en stock :\n   - 'Produit indisponible' si le stock est vide,\n   - 'Attention, plus que x éléments en stock\" s'il reste 0 < x ≤ 5 d'éléments en  stock, (la valeur de x doit être insérée dans le message)\n   - 'Produit disponible' sinon.",
+          "Solution": null,
+          "level": "Metacognitive"
+        }
+      ]
+    }
+  ]
+}

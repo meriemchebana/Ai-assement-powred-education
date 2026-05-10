@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "Ecrire les expressions régulières acceptant les langages suivants :",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "1. Un langage L défini sur l'alphabet {A, B, C, …, Z} est composé de mots présentant les caractéristiques suivantes :\n- Les mots se commencent par une consonne et se terminent par une voyelle.\n- Les consonnes sont séparées par des voyelles (pas de consonnes consécutives).\n- Plusieurs voyelles (au maximum 3) peuvent se suivre.\n- La longueur d'un mot est comprise entre 2 et 8 inclus.",
+          "constraints": {
+            "alphabet": "A-Z (majuscules)",
+            "starts_with": "consonne",
+            "ends_with": "voyelle",
+            "consecutive_consonants": false,
+            "max_consecutive_vowels": 3,
+            "length": "entre 2 et 8 inclus"
+          },
+          "Solution": "",
+          "level": "Conceptual"
+        },
+        {
+          "id": "2",
+          "question_text": "2. L'ensemble des chaînes composées de lettres, de chiffres et de tirets. Elles ne peuvent ni commencer, ni finir par un tiret et ne contiennent pas deux tirets consécutifs.",
+          "constraints": {
+            "alphabet": "lettres, chiffres, tiret (-)",
+            "starts_with": "lettre ou chiffre (pas tiret)",
+            "ends_with": "lettre ou chiffre (pas tiret)",
+            "consecutive_hyphens": false
+          },
+          "Solution": "",
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "question_text": "3. L'ensemble de toutes les chaînes de 0 et de 1 telles que chaque 0 soit immédiatement suivi par au moins un 1.",
+          "constraints": {
+            "alphabet": "{0, 1}",
+            "rule": "chaque 0 doit être immédiatement suivi par au moins un 1"
+          },
+          "Solution": "",
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (12 pts)",
+      "total_exercise_points": "12",
+      "introduction_context": "Soit la grammaire G : S → Aa | SaSb | ε ; A → Ba | Sb ; B → aBb | Bba | a",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "1. G est-elle LL(1) ? Pourquoi ?",
+          "Solution": "",
+          "level": "Conceptual"
+        },
+        {
+          "id": "2",
+          "question_text": "2. S'il est possible, transformez-la pour qu'elle devienne LL(1) ? Justifier.",
+          "solution_grammar": [],
+          "solution_premiers_suivants": {},
+          "solution_table": {},
+          "Solution": "",
+          "level": "Procedural"
+        }
+      ]
+    }
+  ]
+}

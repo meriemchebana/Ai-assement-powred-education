@@ -1,0 +1,197 @@
+{
+  "metadata": {
+    "module": "SEII",
+    "duration": "",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 1",
+      "total_exercise_points": null,
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": null,
+          "introduction_context": "Considérons l'attribution des ressources suivante :",
+          "constraints": [
+            "A détient R et demande S.",
+            "B demande T.",
+            "C demande S.",
+            "D détient U et demande S et T.",
+            "E détient T et demande V.",
+            "F détient W et demande S.",
+            "G détient V et demande U."
+          ],
+          "question_text": "Construire le graphe d'allocation des ressources. Y a-t-il un interblocage ? Si oui, quels sont les processus concernés ?",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "Partie_2",
+          "points": null,
+          "introduction_context": "On considère un système composé de 4 types de ressources : Quatre (4) dérouleurs de bandes (DB), Deux (2) tables traçantes (TR), Trois (3) scanners (S), Un (1) lecteur de CD (CD).Le système comporte trois (3) processus. Le processus P1 possède un scanner; le processus P2 possède deux dérouleurs de bandes et un lecteur CD; le processus P3 possède une table traçante et deux scanners. Chaque processus a besoin de ressources supplémentaires comme le montre la matrice Requête",
+          "banker_table": {
+            "requete": {
+              "headers": [
+                "",
+                "DB",
+                "TR",
+                "S",
+                "CD"
+              ],
+              "rows": [
+                [
+                  "P1",
+                  "2",
+                  "0",
+                  "0",
+                  "1"
+                ],
+                [
+                  "P2",
+                  "1",
+                  "0",
+                  "1",
+                  "0"
+                ],
+                [
+                  "P3",
+                  "2",
+                  "1",
+                  "0",
+                  "0"
+                ]
+              ]
+            }
+          },
+          "Question": [
+            {
+              "id": "a",
+              "question_text": "Donner la matrice d'allocation.",
+              "Solution": null,
+              "level": "Factual"
+            },
+            {
+              "id": "b",
+              "question_text": "Donner le tableau de ressources disponibles.",
+              "Solution": null,
+              "level": "Factual"
+            },
+            {
+              "id": "c",
+              "question_text": "Exécuter l'algorithme de détection d'interblocage pour vérifier si le système est en interblocage et si oui quels sont les processus impliqués.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "d",
+              "question_text": "Supposons que le processus 2 ait besoin de trois scanners et de la table traçante. Est-ce que le système est en état d'interblocage ?",
+              "Solution": null,
+              "level": "Conceptual"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 2",
+      "total_exercise_points": null,
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": null,
+          "introduction_context": "Une piscine peut accueillir N nageurs au plus. Ce nombre N est le nombre de paniers disponibles pour les habits des nageurs. A l'entrée comme à la sortie les nageurs entrent en compétition pour l'acquisition d'une cabine d'habillage/déshabillage, il y a C cabines (1 <= C << N). Chaque nageur effectue les opérations :",
+          "pseudocode": {
+            "declarations": [],
+            "processes": [
+              {
+                "name": "Proc Nageur",
+                "code": [
+                  " Début",
+                  "<se déshabiller>",
+                  "<nager>",
+                  "<se rhabiller>",
+                  "Fin"
+                ]
+              }
+            ]
+          },
+          "Question": [
+            {
+              "id": "1",
+              "question_text": "Ecrire l'algorithme des processus Nageur synchronisés par sémaphores.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "2",
+              "question_text": "On considère maintenant que les nageurs entrants sont prioritaires pour l'acquisition des cabines. Réécrire l'algorithme des processus Nageur.",
+              "Solution": null,
+              "level": "Procedural"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 3 (6 points)",
+      "total_exercise_points": "6",
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": null,
+          "question_text": "Définir le moniteur.",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "Partie_2",
+          "points": null,
+          "introduction_context": "Des pierres sont disposées dans le cours d'une rivière pour permettre sa traversée par une ou des personnes venant d'une seule direction à la fois. Désignons par A et B les deux rives de la rivière. Assignons à chaque personne sur la rive A un processus P_A, et à chaque personne sur la rive B un processus P_B.",
+          "pseudocode": {
+            "declarations": [],
+            "processes": [
+              {
+                "name": "process P_A",
+                "code": [
+                  "TRAVERSEE DE A VERS B"
+                ]
+              },
+              {
+                "name": "process P_B",
+                "code": [
+                  "TRAVERSEE DE B VERS A"
+                ]
+              }
+            ]
+          },
+          "Question": [
+            {
+              "id": "A",
+              "question_text": "Ecrivez un moniteur (en Euclid Concurrent) et complétez des processus pour assurer la coordination de la traversée entre les personnes venant de rive opposée. La solution doit permettre la traversée simultanée de plusieurs personnes venant d'une même rive, et doit également assurer qu'il n'y aura pas d'interblocage (deadlock). Dans un premier temps, vous ne tiendrez pas compte des risques de famine (report à l'infini, 'starvation'). Recherchez plutôt la simplicité dans l'écriture du moniteur.",
+              "sub_questions": [
+                {
+                  "id": "A.a",
+                  "question_text": "Dans un premier temps, vous ne tiendrez pas compte des risques de famine (report à l'infini, 'starvation'). Recherchez plutôt la simplicité dans l'écriture du moniteur.",
+                  "Solution": null,
+                  "level": "Conceptual"
+                },
+                {
+                  "id": "A.b",
+                  "question_text": "Dans un second temps, suggérez une approche pour éviter les risques de famine, écrivez le moniteur correspondant, et expliquez comment les risques de famine sont évités.",
+                  "Solution": null,
+                  "level": "Metacognitive"
+                }
+              ],
+              "Solution": null,
+              "level": "Procedural"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

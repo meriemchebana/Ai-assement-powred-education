@@ -1,0 +1,187 @@
+{
+  "metadata": {
+    "module": "Systèmes d'exploitation 2",
+    "duration": "",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Questions",
+      "title": "Questions (4 points)",
+      "total_exercise_points": "4",
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": null,
+          "question_text": "Qu'est-ce qu'un moniteur en programmation concurrente ? Quels sont les principaux composants d'un moniteur ?",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "Partie_2",
+          "points": null,
+          "question_text": "Expliquez comment fonctionne la méthode wait() dans un moniteur.",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "Partie_3",
+          "points": null,
+          "question_text": "Quels sont les avantages d'utiliser des moniteurs par rapport à d'autres mécanismes de synchronisation ?",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "Partie_4",
+          "points": null,
+          "question_text": "Quelle est la principale différence entre les moniteurs spécifiés par Hoare et ceux spécifiés par Brinch Hansen ?",
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 1 (6 points)",
+      "total_exercise_points": "6",
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": null,
+          "introduction_context": "Deux processus A et B communiquent au moyen d'un tampon T pouvant contenir qu'un seul message à la fois. Ce tampon est utilisé, de façon alternée, pour la communication dans les eux sens (un seul processus utilise à la fois ce tampon). Le processus A dépose un message dans le tampon puis attend la réponse de B avant de déposer à nouveau un autre message et ainsi de suite.... Lorsque B reçoit un message de A, il dépose sa réponse dans le tampon puis se met en attente d'un autre message de A et ainsi de suite...",
+          "Question": [
+            {
+              "id": "1",
+              "question_text": "Synchronisez au moyen de sémaphores les processus A et B.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "2",
+              "question_text": "Supposez maintenant qu'un troisième processus C veuille communiquer avec B en utilisant l'unique tampon T. Les processus A et C se comportent de la même manière. B peut donc recevoir un message de A ou C, la réponse doit être récupérée par le processus expéditeur du message. Synchroniser au moyen de sémaphores les processus A, B et C.",
+              "Solution": null,
+              "level": "Procedural"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 2 (4 points)",
+      "total_exercise_points": "4",
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": "4",
+          "introduction_context": "Considérons les 3 processus suivants qui s'exécutent simultanément :",
+          "pseudocode": {
+            "declarations": [],
+            "processes": [
+              {
+                "name": "P1",
+                "code": [
+                  "print(Y)",
+                  "print(ARE)"
+                ]
+              },
+              {
+                "name": "P2",
+                "code": [
+                  "print(O)",
+                  "print(OK)"
+                ]
+              },
+              {
+                "name": "P3",
+                "code": [
+                  "print(U)",
+                  "print(NOW)"
+                ]
+              }
+            ]
+          },
+          "question_text": "Utiliser des sémaphores et des initialisations de sémaphores de manière à ce que le résultat imprimé soit : Y O U ARE OK NOW",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 3 (6 points)",
+      "total_exercise_points": "6",
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": "6",
+          "introduction_context": "Considérez un système d'exploitation monoprocesseur doté de 6 types de ressources (R1, R2 ... R6), une seule de chaque type, partagées en exclusion mutuelle par 3 processus P1, P2 et P3. Ces processus exécutent respectivement les codes suivants :",
+          "pseudocode": {
+            "declarations": [],
+            "processes": [
+              {
+                "name": "P1()",
+                "code": [
+                  "while(1){",
+                  "prendre (R4); prendre (R5);",
+                  "prendre (R3);",
+                  "// Utiliser R4, R5, R3",
+                  "liberer(R4);",
+                  "liberer(R5); liberer(R3); }"
+                ]
+              },
+              {
+                "name": "P2()",
+                "code": [
+                  "while(1){",
+                  "prendre (R3); prendre (R2);",
+                  "prendre (R6);",
+                  "//Utiliser R3, R2, R6",
+                  "liberer(R6);",
+                  "liberer(R2); liberer(R3); }"
+                ]
+              },
+              {
+                "name": "P3()",
+                "code": [
+                  "while(1){",
+                  "prendre (R1); prendre (R2);",
+                  "prendre (R5);",
+                  "// Utiliser R1, R2, R5",
+                  "liberer(R5);",
+                  "liberer(R2); liberer(R1); }"
+                ]
+              }
+            ]
+          },
+          "Question": [
+            {
+              "id": "1",
+              "question_text": "La fonction « prendre » permet d'allouer une ressource au processus appelant, si cette dernière est libre. Dans le cas contraire, elle bloque le processus appelant jusqu'à l'obtention de la ressource demandée. Une ressource allouée est libérée par le processus détenteur lorsqu'il invoquera la fonction « liberer ».",
+              "Solution": null,
+              "level": "Factual"
+            },
+            {
+              "id": "2",
+              "question_text": "Donnez une séquence d'entrelacements des instructions de P1, P2 et P3 qui mène vers un interblocage.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "3",
+              "question_text": "Peut-on prévenir les interblocages en modifiant l'ordre des demandes de ressources ? Justifiez votre réponse.",
+              "Solution": null,
+              "level": "Conceptual"
+            },
+            {
+              "id": "4",
+              "question_text": "On veut éviter les interblocages en utilisant l'algorithme du banquier. Doit-on modifier la fonction « prendre » ? Si oui, expliquez comment. Supposez que le système est dans l'état où P1 détient les ressources R4 et R5, et P3 détient les ressources R1 et R2. Le processus P2 demande la ressource R3. Le système va-t-il satisfaire cette demande ? Justifiez votre réponse.",
+              "Solution": null,
+              "level": "Conceptual"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

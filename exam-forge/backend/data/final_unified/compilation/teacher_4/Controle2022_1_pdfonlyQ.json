@@ -1,0 +1,87 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (08 pts)",
+      "total_exercise_points": "8",
+      "Question": [
+        {
+          "id": "1",
+          "points": null,
+          "question_text": "Écrire un lexeur qui compte le nombre de mots, de signes de ponctuation et de nombres dans un texte. Attention, dans « 12345,45 euros », il n'y a qu'un seul nombre et aucun signe de ponctuation !",
+          "solution_lex_code": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "points": null,
+          "question_text": "Modifier la règle reconnaissant les nombres pour prendre en compte les espaces entre les milliers : une espace apparaît uniquement entre les groupes de 3 nombres. Vérifier que «12 345,456 7» et «12,45» sont reconnus chacun comme un seul nombre mais que « 123 45 » et « 5,4 567 » sont reconnus chacun comme deux nombres.",
+          "verification": {
+            "single_number": [
+              "12 345,456 7",
+              "12,45"
+            ],
+            "two_numbers": [
+              "123 45",
+              "5,4 567"
+            ]
+          },
+          "solution_lex_code": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "points": null,
+          "question_text": "Sur l'alphabet {a; b}, donner, lorsque c'est possible, une expression rationnelle pour chacun des langages suivants :",
+          "sub_questions": [
+            {
+              "id": "3.a",
+              "question_text": "L={ensemble des mots w contenant au moins trois occurrences successives de a}.",
+              "Solution": "(a|b)*aaa(a|b)*",
+              "level": "Factual"
+            },
+            {
+              "id": "3.b",
+              "question_text": "L={ensemble des mots w de longueur paire, y compris le mot de longueur 0}.",
+              "Solution": "((a|b)(a|b))*",
+              "level": "Factual"
+            }
+          ],
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (12 pts)",
+      "total_exercise_points": "12",
+      "introduction_context": "Soit la grammaire G :",
+      "grammar": [
+        "S → Aa | SaSb | ε",
+        "A → Ba | Sb",
+        "B → aBb | Bba | a"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "points": null,
+          "question_text": "G est-elle LL(1) ? Pourquoi ?",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "2",
+          "points": null,
+          "question_text": "S'il est possible, transformez-la pour qu'elle devienne LL(1) ? Justifier.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    }
+  ]
+}

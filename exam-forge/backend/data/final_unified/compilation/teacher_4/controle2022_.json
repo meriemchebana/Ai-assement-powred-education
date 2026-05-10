@@ -1,0 +1,76 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "Dans une formule mathématique d'un document LaTeX, un indice est indiqué par le caractère _ ; par exemple x_i désigne xi ; si l'indice n'est pas réduit à un seul caractère, il faut employer des accolades : x_{i+1} désigne xi+1 ; la notation x_{i} est bien sûr autorisée. Dans un document HTML, un indice est indiqué par la balise <SUB> obligatoirement suivie de la balise fermante </SUB> ; ainsi xi s'écrit x<SUB>i</SUB> et xi+1 s'écrit x<SUB>i+1</SUB>.",
+      "Question": [
+        {
+          "id": "0",
+          "question_text": "Ecrire un analyseur lexical qui transforme les formules LaTeX en formules HTML.",
+          "Solution": null,
+          "level": "Metacognitive"
+        },
+        {
+          "introduction_context": "Donner une expression régulière pour chacune des langues suivantes :"
+        },
+        {
+          "id": "1",
+          "question_text": "L'ensemble des chaînes composées de lettres, de chiffres et de tirets. Elles ne peuvent ni commencer, ni finir par un tiret et ne contiennent pas deux tirets consécutifs.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "L'ensemble de toutes les chaînes de 0 et de 1 telles que chaque 0 soit immédiatement suivi par au plus trois 1.",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "3",
+          "question_text": "Tous les mots non vides ne contenant pas plus que deux 0 consécutifs.",
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (12 pts)",
+      "total_exercise_points": "12",
+      "introduction_context": "Soit la grammaire G :",
+      "grammar": [
+        "S ⟶ Aa | Bb",
+        "A ⟶ CB | Bb | ε",
+        "B ⟶ b",
+        "C ⟶ c | ε"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "G est-elle LL(1) ? Pourquoi ?",
+          "Solution": null,
+          "level": "Metacognitive"
+        },
+        {
+          "id": "2",
+          "question_text": "Transformez-la pour qu'elle devienne LL(1) ? Justifier.",
+          "solution_grammar": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "question_text": "Analyser la chaine « cbbab$ »",
+          "solution_table": null,
+          "level": "Conceptual"
+        }
+      ]
+    }
+  ]
+}

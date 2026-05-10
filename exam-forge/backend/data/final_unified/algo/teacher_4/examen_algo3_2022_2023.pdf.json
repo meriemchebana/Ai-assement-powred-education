@@ -1,0 +1,142 @@
+{
+  "metadata": {
+    "module": "Algorithmique et Structures de données",
+    "duration": "None",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "exercise_title": "Exercice 1 : (Tableaux, Récursivité et complexité) (4+1) points",
+      "points": "5",
+      "introduction_context": "",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "1) Proposer une solution récursive pour la recherche séquentielle d’un entier e dans un tableau T d’entiers. On veut une fonction avec l’entête : fonction Rech(var T :TabEntier ; Début :entier; var indice :entier):Bool ;",
+          "subquestions": [],
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "2) Trouver et prouver la complexité de cette fonction.",
+          "subquestions": [],
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "exercise_title": "Exercice 2 : (Pile et Récursivité) (3points)",
+      "points": "3",
+      "introduction_context": "Soit le type TPointeur des éléments pointeurs sur les maillons d’une pile d’entiers. On considère qu’une pile Pi d’entiers avec son sommet Si est spécifiée par les fonctions suivantes : Init(Si :TPointeur) (créer une pile vide dont le sommet est Si), ValSommet (Si :TPointeur)(donner la valeur au sommet Si ), Empiler(Si :TPointeur ; e :entier) (empiler l’élément e dans la pilePi), et Dépiler(Si :TPointeur) (dépiler l’élément au sommet Si de la pile Pi) , PileVide(Si :TPointeur) (tester si la pile Piest vide ou pas). En utilisant seulement ces fonctions, on vous demande de rédiger une fonction de recherche récursive Rech(S1, S2 :TPointeur ; e :entier) :Bool ; qui cherche un entier e dans la pileP1(dont le sommet est S1) et retourne vrai ou faux. Cette fonction utilisera la pile P2 (dont le sommet est S2) pour récupérer les éléments de P1 dépilées (éventuellement) durant son exécution. Après l’exécution de la fonction, on peutrétablirP1en utilisant les éléments empilés dans P2 (ce rétablissement n’est pas demandé dans cet exercice).",
+      "Question": [
+        {
+          "id": null,
+          "question_text": "Ecrire la fonction Rech(S1, S2 :TPointeur ; e :entier) :Bool ;",
+          "subquestions": [],
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "exercise_title": "Exercice 3 : (Structure TAS) (7points)",
+      "points": "7",
+      "introduction_context": "",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "1) Soit le TAS de la figure, montrer les différentes étapes de l’opération ajouter(19) à ce TAS :",
+          "subquestions": [],
+          "content_blocks": [
+            {
+              "type": "image",
+              "description": "Un arbre binaire représentant un TAS (Max-Heap). La racine est 18. Le niveau 1 contient 15 (gauche) et 2 (droite). Le niveau 2 contient les fils de 15 : 6 (gauche) et 3 (droite), et les fils de 2 : 0 (gauche) et 1 (droite).",
+              "extracted_text": "18, 15, 2, 6, 3, 0, 1",
+              "position": {
+                "exercise": "Exercice 3",
+                "question_text": "1",
+                "relative_location": "after text",
+                "level": "Factual"
+              }
+            }
+          ],
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "2) Soit le tableau suivant :",
+          "subquestions": [
+            {
+              "id": null,
+              "question_text": "Est-ce que ce tableau représente un TAS ?Justifier. Si Oui, tracer la structure hiérarchique qui lui correspond.",
+              "level": "Procedural"
+            }
+          ],
+          "content_blocks": [
+            {
+              "type": "table",
+              "headers": [],
+              "rows": [
+                [
+                  "14",
+                  "6",
+                  "12",
+                  "3",
+                  "2",
+                  "4",
+                  "8",
+                  "1"
+                ]
+              ],
+              "merge_info": {}
+            }
+          ],
+          "level": "Factual"
+        },
+        {
+          "id": "3",
+          "question_text": "3) Soit la structure suivante :",
+          "subquestions": [
+            {
+              "id": null,
+              "question_text": "Sur les tableaux présentés sur la feuille de réponses page 2, montrer les différentes étapes d’une opération de retrait de ce TAS implémenté sur un tableau statique.",
+              "level": "Procedural"
+            }
+          ],
+          "content_blocks": [
+            {
+              "type": "image",
+              "description": "Même structure d'arbre que dans la question 1 : Racine 18, fils 15 et 2. Fils de 15 sont 6 et 3. Fils de 2 sont 0 et 1.",
+              "extracted_text": "18, 15, 2, 6, 3, 0, 1",
+              "position": {
+                "exercise": "Exercice 3",
+                "question_text": "3",
+                "relative_location": "after text",
+                "level": "Factual"
+              }
+            }
+          ],
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "exercise_title": "Exercice 4 : (Tableaux, Fusion et Complexité) (5points)",
+      "points": "5",
+      "introduction_context": "On veut écrire la procédure Fusion (var T : TabEntier ; Début, FinT : entier) qui prend en entrée un tableau T, son Début et sa FinT. La procédure suppose que les deux sous parties de T [Début .. (Début+FinT) div2] et [(Début+FinT) div2+1 .. FinT] sont déjà triés et elle va fusionner ces deux sous parties pour rendre T totalement trié. Dans la solution, on propose que la procédure commence par faire un parcours des deux sous parties : en comparant éléments par éléments des deux sous partie et l’élément le plus petit sera mis dans un tableau temporaire Ttemp. A la fin de ce parcours, on devrait faire parcourir l’une des deux sous parties jusqu’à sa fin. Donc, on arrête ce premier parcours et on ajoute les éléments restants dans la partie non parcourue dans sa totalité au tableau Ttemp, et à la fin, on copie le tableau Ttemp dans T.",
+      "Question": [
+        {
+          "id": null,
+          "question_text": "Compléter la procédure donnée en feuille de réponse (page 2).",
+          "subquestions": [],
+          "level": "Procedural"
+        },
+        {
+          "id": null,
+          "question_text": "C’est quoi la complexité de cette procédure ? Justifier.",
+          "subquestions": [],
+          "level": "Conceptual"
+        }
+      ]
+    }
+  ]
+}

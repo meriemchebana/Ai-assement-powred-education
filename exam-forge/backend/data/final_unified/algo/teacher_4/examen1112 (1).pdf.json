@@ -1,0 +1,300 @@
+{
+  "metadata": {
+    "module": "ALGO1",
+    "duration": "8:00-9:30",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_1",
+      "title": "LLCs",
+      "total_exercise_points": "8 pts",
+      "introduction_context": "Un pharmacien souhaite traiter les informations concernant son stock de médicaments par ordinateur. On vous propose de représenter ces informations sous forme de liste linéaire chaînée où chaque maillon contient le libellé d’un médicament, la quantité disponible (nombre de boîtes) et le prix unitaire.",
+      "diagram": {
+        "preceding_text": "Exemple :",
+        "description": "A horizontal linked list showing the 'Stock'. Node 1: [PARACETAMOL | 5 boîtes | 117.00 DA]. Node 2: [ACTIFED | 15 boîtes | 125.25 DA]. Followed by ellipsis and Node 3: [ASPIRINE | 44 boîtes | 78.25 DA].",
+        "precise_location": "Page 1 - Middle left"
+      },
+      "Question": [
+        {
+          "id": "1.1",
+          "points": "1",
+          "level": "Conceptual",
+          "question_text": "1. Donner les structures de données nécessaires à la représentation de ce stock.",
+          "Solution": [
+            "Type TMaillon = Structure",
+            "    Libellé : chaine ;",
+            "    Quantité : entier ;",
+            "    PrixUnit : réel ;",
+            "    Suivant : Pointeur(TMaillon) ;",
+            "Fin ;",
+            "Var Stock : Pointeur(TMaillon) ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.2",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "2. Ecrire la procédure Vendre(Med, NbBoites) permettant de retirer, si possible, ’NbBoites’ du médicament ’Med’ du stock. Attention : Il faut supprimer du stock le médicament dont la quantité atteint 0.",
+          "Solution": [
+            "Procédure Vendre( Med : chaine, NbBoites : entier);",
+            "Var P,PP : Pointeur(TMaillon) ;",
+            "Début",
+            "  P ← Stock ;",
+            "  PP ← Nil ;",
+            "  Tant que ((P ≠ Nil) et (Libellé(P) ≠ Med)) faire",
+            "    PP ← P ;",
+            "    P ← Suivant(P) ;",
+            "  Fin TQ;",
+            "  Si (P ≠ Nil) Alors",
+            "    Si (Quantité(P) < NbBoites) Alors",
+            "      Ecrire('Quantité insuffisante')",
+            "    Sinon",
+            "      Aff_Quantité(P,Quantité(P)-NbBoites) ;",
+            "      Si (Quantité(P) = 0) Alors",
+            "        Si (PP = Nil) Alors",
+            "          Stock ← Suivant(Stock)",
+            "        Sinon",
+            "          Aff_Adr(PP,Suivant(P))",
+            "        Fin Si;",
+            "        Libérer(P) ;",
+            "      Fin Si;",
+            "    Fin Si;",
+            "  Sinon",
+            "    Ecrire('Ce médicament n’existe pas');",
+            "  Fin Si;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.3",
+          "points": "2.5",
+          "level": "Procedural",
+          "question_text": "3. Ecrire la procédure Acheter(Med, NbBoites, Prix) permettant au pharmacien d’alimenter son stock par ’NbBoites’ du médicament ’Med’ ayant le prix unitaire ’Prix’ DA. On considère qu’un médicament prenne toujours le nouveau prix.",
+          "Solution": [
+            "Procédure Acheter( Med : chaine, NbBoites : entier, PrixUnit : réel);",
+            "Var P : Pointeur(TMaillon);",
+            "Début",
+            "  P ← Stock ;",
+            "  Tant que ((P ≠ Nil) et (Libellé(P) ≠ Med)) faire",
+            "    P ← Suivant(P);",
+            "  Fin TQ;",
+            "  Si (P ≠ Nil) Alors",
+            "    Aff_Quantité(P, Quantité(P) + NbBoites);",
+            "    Aff_PrixUnit(P, PrixUnit);",
+            "  Sinon",
+            "    Allouer(P);",
+            "    Aff_Libellé(P, Med);",
+            "    Aff_Quantité(P, NbBoites);",
+            "    Aff_PrixUnit(P, PrixUnit);",
+            "    Aff_Adr(P, Stock);",
+            "    Stock ← P;",
+            "  Fin Si;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.4",
+          "points": "1.5",
+          "level": "Procedural",
+          "question_text": "4. Ecrire la fonction PrixStock permettant de calculer le prix total des médicaments dans le stock.",
+          "Solution": [
+            "Fonction PrixStock() : réel;",
+            "Var P : Pointeur(TMaillon);",
+            "    S : réel;",
+            "Début",
+            "  P ← Stock ;",
+            "  S ← 0;",
+            "  Tant que (P ≠ Nil) faire",
+            "    S ← S + Quantité(P) * PrixUnit(P);",
+            "    P ← Suivant(P);",
+            "  Fin TQ;",
+            "  PrixStock ← S ;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        }
+      ]
+    },
+    {
+      "id": "Exercice_2",
+      "title": "ARB",
+      "total_exercise_points": "9 pts",
+      "introduction_context": "Le pharmacien, appréciant la méthode des LLCs, a remarqué rapidement la lenteur des procédures Vendre et Acheter et il vous demande une solution plus rapide. On vous propose de réécrire la solution précédente en utilisant un arbre de recherche binaire basé sur l’ordre alphabétique des libellés des médicaments.",
+      "diagram": {
+        "preceding_text": "Exemple :",
+        "description": "A Binary Search Tree (BST) showing the 'Stock'. Root is 'PARACETAMOL', with left child 'DOLIPRANE' and right child 'UPSA'. 'DOLIPRANE' branches into 'ACTIFED' and 'MENTHOL'. 'UPSA' branches into 'RUMAFED' and 'VICK'.",
+        "precise_location": "Page 1 - Bottom right"
+      },
+      "Question": [
+        {
+          "id": "2.1",
+          "points": "1",
+          "level": "Conceptual",
+          "question_text": "1. Donner les structures de données nécessaires à la représentation de ce stock.",
+          "Solution": [
+            "Type TNoeud = Structure",
+            "     Libellé : chaine;",
+            "     Quantité : entier;",
+            "     PrixUnit : réel;",
+            "     FG, FD : Pointeur(TNoeud);",
+            "Fin;",
+            "Var Stock : Pointeur(TNoeud);"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "2.2",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "2. Réécrire la procédure Vendre décrite dans l’exercice précédent sur la nouvelle structure. NB : On donne la procédure Nettoyer (Stock) permettant de supprimer du stock tous les médicaments ayant une quantité nulle.",
+          "Solution": [
+            "Procédure Vendre( Med : chaine, NbBoîtes : entier);",
+            "Var P,PP : Pointeur(TNoeud);",
+            "Début",
+            "    P ← Stock;",
+            "    PP ← Nil;",
+            "    Tant que ((P ≠ Nil) et (Libellé(P) ≠ Med)) faire",
+            "        PP ← P;",
+            "        Si (Libellé(P) > Med) Alors",
+            "            P ← FG(P)",
+            "        Sinon",
+            "            P ← FD(P)",
+            "        Fin Si;",
+            "    Fin TQ;",
+            "    Si (P ≠ Nil) Alors",
+            "        Si (Quantité(P) < NbBoîtes) Alors",
+            "            Ecrire('Quantité insuffisante')",
+            "        Sinon",
+            "            Aff_Quantité(P,Quantité(P)-NbBoîtes);",
+            "            Si (Quantité(P) = 0) Alors",
+            "                Nettoyer(P)",
+            "            Fin Si;",
+            "        Fin Si;",
+            "    Sinon",
+            "        Ecrire('Ce médicament n’existe pas');",
+            "    Fin Si;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "2.3",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "3. Réécrire la procédure Acheter décrite dans l’exercice précédent sur la nouvelle structure.",
+          "Solution": [
+            "Procédure Acheter( Med : chaine, NbBoites : entier, PrixUnit : réel);",
+            "Var P,PP : Pointeur(TNoeud);",
+            "Début",
+            "    P ← Stock ; PP ← Nil;",
+            "    Tant que ((P ≠ Nil) et (Libellé(P) ≠ Med)) faire",
+            "        PP ← P;",
+            "        Si (Libellé(P) > Med) Alors",
+            "            P ← FG(P)",
+            "        Sinon",
+            "            P ← FD(P)",
+            "        Fin Si;",
+            "    Fin TQ;",
+            "    Si (P ≠ Nil) Alors",
+            "        Aff_Quantité(P,Quantité(P)+NbBoites);",
+            "        Aff_PrixUnit(P,PrixUnit);",
+            "    Sinon",
+            "        Allouer(P);",
+            "        Aff_Libellé(P,Med);",
+            "        Aff_Quantité(P,NbBoites);",
+            "        Aff_PrixUnit(P,PrixUnit);",
+            "        Aff_FG(P,Nil) ; Aff_FD(P,Nil) ;",
+            "        Si (PP = Nil) Alors",
+            "            Stock ← P",
+            "        Sinon",
+            "            Si (Libellé(PP) > Med) Alors",
+            "                Aff_FG(PP,P)",
+            "            Sinon",
+            "                Aff_FD(PP,P)",
+            "            Fin Si;",
+            "        Fin Si;",
+            "    Fin Si;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "2.4",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "4. Réécrire la fonction PrixStock décrite dans l’exercice précédent sur la nouvelle structure.",
+          "Solution": [
+            "Fonction PrixStock( P : Pointeur(TNoeud)) : réel;",
+            "Début",
+            "  Si (P = Nil) Alors",
+            "    PrixStock ← 0",
+            "  Sinon",
+            "    PrixStock ← Quantité(P) × PrixUnit(P) + PrixStock(FG(P)) + PrixStock(FD(P));",
+            "  Fin Si;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        }
+      ]
+    },
+    {
+      "id": "Exercice_3",
+      "title": "Exercice 3",
+      "total_exercise_points": "3 pts",
+      "introduction_context": "Soit l’arbre binaire suivant :",
+      "diagram": {
+        "description": "A complete binary tree with root 28, left subtree (17 -> 14, 16) and right subtree (24 -> 19, 21).",
+        "precise_location": "Page 2 - Center left"
+      },
+      "Question": [
+        {
+          "id": "3.1",
+          "points": "1",
+          "level": "Factual",
+          "question_text": "1. Que représente cette structure : un ARB ou un tas ?",
+          "Solution": "Cette structure représente un tas (Max-Heap).",
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "3.2",
+          "points": "1",
+          "level": "Procedural",
+          "question_text": "2. Donner cette structure après l’ajout de 40 puis 22.",
+          "Solution": {
+            "preceding_text": "2. Le tas après l’ajout de 40 puis 22. (1 pt)",
+            "description": "Max-Heap with root 40, children 28 and 24, etc.",
+            "precise_location": "Page 6 - Bottom left"
+          },
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "3.3",
+          "points": "1",
+          "level": "Procedural",
+          "question_text": "3. Donner cette structure après la suppression de 19 puis 28.",
+          "Solution": {
+            "preceding_text": "3. Après le retrait de 28, le tas devient (0.5 pt) :",
+            "description": "Max-Heap with root 24, children 17 and 21, etc.",
+            "precise_location": "Page 6 - Top right"
+          },
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        }
+      ]
+    }
+  ]
+}

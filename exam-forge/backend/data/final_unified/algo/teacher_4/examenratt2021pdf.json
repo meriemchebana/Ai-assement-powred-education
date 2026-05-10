@@ -1,0 +1,130 @@
+{
+  "metadata": {
+    "module": "Algorithmique et Structures de données",
+    "duration": "08:00-09:00",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_1",
+      "title": "Exercice Unique",
+      "total_exercise_points": "20 Pts",
+      "introduction_context": "On souhaite dans cet exercice traiter des listes linéaires chaînées de nombres entiers.",
+      "diagram": {
+        "preceding_text": "Exemple :",
+        "description": "Visual representation of a linked list: Tete ⟼ [4] ⟼ [-1] ⟼ [2] ⟼ [1] ⟼ [-3] ⟼ Nil",
+        "precise_location": "Page 1 - Top"
+      },
+      "Question": [
+        {
+          "id": "1",
+          "points": "1.5 pt",
+          "question_text": "1. Donner les déclarations permettant d'utiliser de telles listes.",
+          "Solution": [
+            "Type TMaillon = Structure",
+            "    Valeur : entier;",
+            "    Suivant : Pointeur(TMaillon);",
+            "Fin;",
+            "Var Tete : Pointeur(TMaillon);"
+          ],
+          "level": "Factual"
+        },
+        {
+          "id": "2",
+          "points": "2.5 pts",
+          "question_text": "2. Soit la fonction f suivante : Donner la valeur retournée par l'appel de la fonction f sur la liste de l'exemple ci-dessus.",
+          "question_code": [
+            "Fonction f( P : Poniteur(TMaillon)) : entier;",
+            "Début",
+            "    Si (P=Nil) Alors f ← 0;",
+            "    Sinon f ← Valeur(P)-f(Suivant(P));",
+            "    Fin Si;",
+            "Fin;"
+          ],
+          "Solution": "La valeur retournée : f(Tete) = 4 - (-1 - (2 - (1 - (-3 - 0)))) = 3",
+          "level": "Factual"
+        },
+        {
+          "id": "3",
+          "points": "4 pts",
+          "question_text": "3. Écrire la fonction récursive : Fonction MemeSigne(L : pointeur(TMaillon)) :booléen ; permettant de retourner vrai si les éléments de la liste L sont tous positifs ou tous négatifs et faux sinon.",
+          "Solution": [
+            "Fonction MemeSigne( L : Poniteur(TMaillon)) : booleen;",
+            "Début",
+            "    Si (L=Nil ou Suivant(L)=Nil) Alors",
+            "        MemeSigne ← Vrai;",
+            "    Sinon",
+            "        Si (Valeur(L)*Valeur(Suivant(L)) < 0) Alors",
+            "            MemeSigne ← Faux;",
+            "        Sinon",
+            "            MemeSigne ← MemeSigne(Suivant(L));",
+            "        Fin Si;",
+            "    Fin Si;",
+            "Fin;"
+          ],
+          "level": "Procedural"
+        },
+        {
+          "id": "4",
+          "points": "4 pts",
+          "question_text": "4. Écrire la procédure : Procédure Purger(L : pointeur(TMaillon)); permettant de supprimer de la liste L tous les éléments négatifs ou nuls et ne garder que les positifs.",
+          "Solution": [
+            "Procédure Purger(Var L : Pointeur(TMaillon));",
+            "Var NouvelleL, P, Q : Pointeur(TMaillon);",
+            "Début",
+            "    NouvelleL ← Nil;",
+            "    Tant que (L ≠ Nil) faire",
+            "        P ← L; L ← Suivant(L);",
+            "        Si (Valeur(P) > 0) Alors",
+            "            Aff_adr(P, Nil);",
+            "            Si (NouvelleL = Nil) Alors NouvelleL ← P;",
+            "            Sinon Aff_adr(Q, P);",
+            "            Fin Si;",
+            "            Q ← P;",
+            "        Sinon Libérer(P);",
+            "        Fin Si;",
+            "    Fin TQ;",
+            "    L ← NouvelleL;",
+            "Fin;"
+          ],
+          "level": "Procedural"
+        },
+        {
+          "id": "5",
+          "points": "5 pts",
+          "question_text": "5. Écrire la procédure Procédure Tourner(L : pointeur(TMaillon)); permettant de permuter les parties gauche et droite de la liste.",
+          "question_diagram": {
+            "description": "Visual transformation of a linked list. Input: [4,-1,2,1,-3]. Output: [1,-3,2,4,-1]. Node [2] acts as a pivot. the first block of two nodes ([4] and [-1]) is swapped with the last block of two nodes ([1] and [-3]). The central node ([2]) remains in its fixed position",
+            "location": "Page 1 - Bottom  after question 4"
+          },
+          "Solution": [
+            "Procédure Tourner(Var L : Pointeur(TMaillon));",
+            "Var Last, P, Q : Pointeur(TMaillon);",
+            "i, n : entier ;",
+            "Début",
+            "  n ← 0 ; P ← L ; Last ← Nil ;",
+            "  Tant que (P ≠ Nil) faire n ← n + 1 ; Last ← P ; P ← Suivant(P) ; Fin TQ ;",
+            "  i ← 0 ; P ← L ; Q ← Nil ;",
+            "  Tant que (i < n/2) faire i ← i + 1 ; Q ← P ; P ← Suivant(P) ; Fin TQ ;",
+            "  Si (Q ≠ Nil) Alors",
+            "    Aff_adr(Q, Nil) ; Aff_adr(Last, P) ;",
+            "    Q ← Suivant(P) ; Aff_adr(P, L) ; L ← Q ;",
+            "  Fin Si ;",
+            "Fin ;"
+          ],
+          "level": "Procedural"
+        },
+        {
+          "id": "6",
+          "points": "3 pts",
+          "question_text": "6. Donner le tas obtenu en insérant dans l'ordre les clés suivantes : 18, 25, 22, 9, 19, 4, 31, 14.",
+          "Solution": {
+            "description": "A Max-Heap binary tree. Root: 31. Level 1: [19, 25]. Level 2: [14, 18] children of 19; [4, 22] children of 25. Level 3: [9] child of 14.",
+            "precise_location": "Page 3 - Bottom"
+          },
+          "level": "Procedural"
+        }
+      ]
+    }
+  ]
+}

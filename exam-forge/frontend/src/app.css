@@ -1,0 +1,75 @@
+@import 'tailwindcss';
+
+@theme {
+	--font-sans: 'Inter', 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+	--font-display: 'Inter', 'Segoe UI', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+	--color-parchment: #f5efe6;
+	--color-ink: #111014;
+	--color-ash: #1c1a22;
+	--color-slate: #26232d;
+	--color-amber: #8b5cf6;
+	--color-amber-soft: #c4b5fd;
+	--color-ember: #c4542d;
+	--color-sage: #8aa58e;
+	--color-teal: #4dc4b0;
+}
+
+html,
+body {
+	background-color: var(--color-ink);
+	color: var(--color-parchment);
+	font-family: var(--font-sans);
+	font-feature-settings: 'kern', 'liga', 'calt';
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	background-image:
+		radial-gradient(ellipse 60rem 30rem at 80% -10%, rgba(139, 92, 246, 0.12), transparent 60%),
+		radial-gradient(ellipse 50rem 40rem at -10% 20%, rgba(109, 40, 217, 0.08), transparent 55%),
+		radial-gradient(ellipse 45rem 30rem at 50% 110%, rgba(77, 196, 176, 0.05), transparent 55%);
+}
+
+.serif {
+	font-family: var(--font-display);
+	font-weight: 700;
+	letter-spacing: -0.005em;
+}
+
+.mono {
+	font-family: var(--font-mono);
+}
+
+.parchment-card {
+	background: linear-gradient(180deg, rgba(28, 26, 34, 0.9), rgba(17, 16, 20, 0.9));
+	border: 1px solid rgba(245, 239, 230, 0.08);
+	backdrop-filter: blur(8px);
+}
+
+.amber-ring {
+	box-shadow:
+		0 0 0 1px rgba(139, 92, 246, 0.35),
+		0 10px 30px -10px rgba(139, 92, 246, 0.25);
+}
+
+.mono {
+	font-feature-settings: 'tnum', 'kern';
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+	height: 10px;
+}
+::-webkit-scrollbar-track {
+	background: transparent;
+}
+::-webkit-scrollbar-thumb {
+	background: rgba(245, 239, 230, 0.12);
+	border-radius: 999px;
+}
+::-webkit-scrollbar-thumb:hover {
+	background: rgba(245, 239, 230, 0.22);
+}

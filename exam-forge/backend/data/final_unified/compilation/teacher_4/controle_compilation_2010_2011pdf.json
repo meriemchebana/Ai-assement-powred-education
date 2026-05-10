@@ -1,0 +1,404 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h30m",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice 01",
+      "title": "Exercice 01 (4 pts)",
+      "total_exercise_points": "4",
+      "introduction_context": "Une liste de plaques d’immatriculation françaises séparées par des virgules et terminée par un point est donnée en entrée d’un programme sous forme d’une chaîne de caractère. Où chaque matricule est composé de: • 3 à 5 chiffres ne commençant par le chiffre 0, • suivis de 2 lettres majuscules en excluant WW, • terminant par 2 chiffres en excluant 00.",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "question_text": "1. Donnez une expression régulière étendue représentant les chaînes possibles.",
+          "Solution": [
+            "elem -> [1-9]([0-9]{2,4})([A-VX-Z][A-Z]|W[A-VX-Z])([1-9][0-9]|0[1-9])",
+            "Liste -> elem(,elem)*\\. (02 pts)"
+          ]
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "2. Dessinez un automate acceptant le langage décrit par cette expression régulière.",
+          "Solution": {
+            "description": "Automate fini déterministe (DFA) pour les matricules.",
+            "precise_location": "Corrigé Page 1/5",
+            "nodes": "States: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13",
+            "transitions": "1--[1-9]-->2, 2--[0-9]-->3, 3--[0-9]-->4, 4--[0-9]-->5, 5--[0-9]-->6, 3--[0-9]-->6 (arc long), 4--[0-9]-->6 (arc long), 6--[A-VX-Z]-->7, 6--W-->8, 7--[A-Z]-->9, 8--[A-VX-Z]-->9, 9--0-->10, 9--[1-9]-->11, 10--[1-9]-->12, 11--[0-9]-->12, 12--,-->1, 12--.-->13"
+          }
+        }
+      ]
+    },
+    {
+      "id": "Exercice 02",
+      "title": "Exercice 02 (6 pts)",
+      "total_exercise_points": "6",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Conceptual",
+          "question_text": "1. Déterminez si G est ambiguë.",
+          "solution_grammar": "Soit la grammaire G suivante : S -> xABy , A -> Azy | z , B -> t",
+          "Solution": "Non, la grammaire n'est pas LL(1) parce qu'elle contient la récursivité à gauche"
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "2. Déterminez si G est récursive à gauche, si oui éliminez la récursivité à gauche.",
+          "Solution": [
+            "S -> xABy",
+            "A -> zA'",
+            "A' -> zyA' | ε",
+            "B -> t"
+          ]
+        },
+        {
+          "id": "3",
+          "level": "Procedural",
+          "question_text": "3. Construisez les ensembles Premier et Suivant pour G.",
+          "solution_table": {
+            "headers": [
+              "Non-Terminal",
+              "Premier",
+              "Suivant"
+            ],
+            "rows": [
+              [
+                "S",
+                "x",
+                "$"
+              ],
+              [
+                "A",
+                "z",
+                "t"
+              ],
+              [
+                "A'",
+                "z, ε",
+                "t"
+              ],
+              [
+                "B",
+                "t",
+                "y"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "3b",
+          "level": "Procedural",
+          "question_text": "la table de l'analyseur LL(1) qui lui correspond",
+          "solution_table": {
+            "headers": [
+              "",
+              "x",
+              "y",
+              "z",
+              "t",
+              "$"
+            ],
+            "rows": [
+              [
+                "S",
+                "S -> xABy",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "A",
+                "",
+                "",
+                "A -> zA'",
+                "",
+                ""
+              ],
+              [
+                "A'",
+                "",
+                "",
+                "A' -> zyA'",
+                "A' -> ε",
+                ""
+              ],
+              [
+                "B",
+                "",
+                "",
+                "",
+                "B -> t",
+                ""
+              ]
+            ]
+          }
+        },
+        {
+          "id": "4",
+          "level": "Procedural",
+          "question_text": "4. Construire la table d'analyse ascendante LR pour G. Conclusion",
+          "grammar_rules": [
+            "0. S' -> S$",
+            "1. S -> xABy",
+            "2. A -> Azy",
+            "3. A -> z",
+            "4. B -> t"
+          ],
+          "states_content": [
+            "I0: {S' -> .S$, S -> .xABy}",
+            "I1: {S' -> S.$}",
+            "I2: {S -> x.ABy, A -> .Azy, A -> .z}",
+            "I3: {A -> z.}",
+            "I4: {S -> xA.By, A -> A.zy, B -> .t}",
+            "I5: {B -> t.}",
+            "I6: {A -> Az.y}",
+            "I7: {S -> xAB.y}",
+            "I8: {A -> Azy.}",
+            "I9: {S -> xABy.}"
+          ],
+          "solution_table": {
+            "headers": [
+              "Etat",
+              "x",
+              "y",
+              "z",
+              "t",
+              "$",
+              "S",
+              "A",
+              "B"
+            ],
+            "rows": [
+              [
+                "0",
+                "d2",
+                "",
+                "",
+                "",
+                "",
+                "1",
+                "",
+                ""
+              ],
+              [
+                "1",
+                "",
+                "",
+                "",
+                "",
+                "Accepter",
+                "",
+                "",
+                ""
+              ],
+              [
+                "2",
+                "",
+                "",
+                "d3",
+                "",
+                "",
+                "",
+                "4",
+                ""
+              ],
+              [
+                "3",
+                "",
+                "",
+                "",
+                "Réduire 3",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "4",
+                "",
+                "d6",
+                "",
+                "d5",
+                "",
+                "",
+                "",
+                "7"
+              ],
+              [
+                "5",
+                "",
+                "Réduire 4",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "6",
+                "",
+                "d8",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "7",
+                "",
+                "d9",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "8",
+                "",
+                "",
+                "",
+                "Réduire 2",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "9",
+                "",
+                "Réduire 1",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "Exercice 03",
+      "title": "Exercice 03 (09 pts)",
+      "total_exercise_points": "9",
+      "subsections": [
+        {
+          "id": "Part 01",
+          "title": "Part 01",
+          "Question": [
+            {
+              "id": "1",
+              "level": "Procedural",
+              "question_text": "1. Ecrire la fonction CréerABS",
+              "Solution": [
+                "EXPR_ARBRE CreerABS (char *op, EXPR_ARBRE u)",
+                "{",
+                "  EXPR_ARBRE aux = (EXPR_ARBRE)malloc(sizeof (struct _EXPR_ARBRE));",
+                "  aux->type = UNAIRE;",
+                "  aux->forme.un.op = (char*)malloc(sizeof(2*char));",
+                "  strcpy(aux->forme.un.op, \"||\");",
+                "  aux->forme.un.u = u;",
+                "  return(aux);",
+                "}"
+              ]
+            }
+          ]
+        },
+        {
+          "id": "Part 02",
+          "title": "Part 02",
+          "Question": [
+            {
+              "id": "1",
+              "level": "Procedural",
+              "question_text": "Construire l’arbre correspondant",
+              "Solution": {
+                "description": "Arbre de Syntaxe Abstraite (AST) pour Fibonacci.",
+                "precise_location": "Corrigé Page 4/5",
+                "tree_nodes": "SI -- branch 1: == (n, 0) | SI -- branch 2: Ecrire (0) | SI -- branch 3: SI (Sinon Si)",
+                "nested_si": "SI (2nd) -- branch 1: == (n, 1) | SI (2nd) -- branch 2: Ecrire (1) | SI (2nd) -- branch 3: ; (Chain)",
+                "statement_chain": "; -- branch 1: := (Un2, 0) | ; -- branch 2: ; -- branch 1: := (Un1, 1) | ; -- branch 2: tq (>= (n, 2), StatementBlock) | ; -- branch 3: Ecrire (chaine) | ; -- branch 4: Ecrire (Un1)"
+              }
+            },
+            {
+              "id": "2",
+              "level": "Procedural",
+              "question_text": "donner le code MIPS complet pour ce programme",
+              "Solution": [
+                ".data",
+                "MEM: .space",
+                "chaine0: .asciiz \"Donnez la valeur de n\"",
+                "chaine1: .asciiz \"Le nombre de Fibonacci de n est:\\n\"",
+                ".text",
+                "main: la $30, MEM",
+                "la $4, chaine0",
+                "li $2, 4",
+                "syscall #ECRIRE Chaine0",
+                "li $2, 5",
+                "syscall #lire n",
+                "sw $2, 0($30)",
+                "lw $8, 0($30)",
+                "li $9, 0",
+                "beq $8, $9, 100 # SI n == 0",
+                "lw $8, 0($30)",
+                "li $9, 1",
+                "beq $8, $9, 101 # SI n == 1",
+                "li $8, 0",
+                "sw $8, 12($30) # Un2 := 0",
+                "li $8, 1",
+                "sw $8, 8($30) # Un1 := 1",
+                "j 102",
+                "103: lw $8, 8($30)",
+                "sw $8, 4($30) # U := Un1",
+                "lw $8, 4($30)",
+                "lw $9, 12($30)",
+                "add $8, $8, $9",
+                "sw $8, 8($30) # Un1 := U + Un2",
+                "lw $8, 4($30)",
+                "sw $8, 12($30) # Un2 := U",
+                "lw $8, 0($30)",
+                "li $9, 1",
+                "sub $8, $8, $9 # n := n-1",
+                "sw $8, 0($30)",
+                "102: lw $8, 0($30)",
+                "li $9, 2",
+                "bge $8, $9, 103 # tq(n>=2)",
+                "la $4, chaine1",
+                "li $2, 4",
+                "syscall #ECRIRE Chaine1",
+                "lw $4, 8($30) #ECRIRE Un1",
+                "li $2, 1",
+                "syscall",
+                "j 104",
+                "101: li $4, 1 #ecrire 1",
+                "li $2, 1",
+                "syscall",
+                "j 105",
+                "100: li $4, 0 #ecrire 0",
+                "li $2, 1",
+                "syscall",
+                "104: nop",
+                "j 105",
+                "105: li $2, 10 #exit",
+                "syscall"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

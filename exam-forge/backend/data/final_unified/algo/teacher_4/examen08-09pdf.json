@@ -1,0 +1,189 @@
+{
+  "metadata": {
+    "module": "Algorithmique et Structures de données",
+    "duration": "14h-15h30",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_1",
+      "title": "Exercice 1 (10 pts: 4 + 3 + 3)",
+      "total_exercise_points": "10 pts",
+      "introduction_context": "Il est demandé d’écrire les fonctions suivantes :",
+      "diagram": {
+        "preceding_text": "Exemple : Le nombre \"145379\" est représenté par la liste suivante :",
+        "description": "A linked list where each node contains a digit of the number 145379 in reverse order. Tete ⟼ [9|.] ⟼ [7|.] ⟼ [3|.] ⟼ [5|.] ⟼ [4|.] ⟼ [1|/] ⟼ Nil.",
+        "precise_location": "Page 1 - Left column"
+      },
+      "available_functions": "On suppose que les fonctions suivantes sont disponibles et peuvent être utilisées : - Fonction Nbre(c :car) :entier retourne la valeur entière du caractère numérique c : Nbre(‘1’)=1 - Fonction Car(N :entier) : car : retourne le caractère du naturel N<10 : Car(1) =’1’ - Fonction Comparer(N1, N2 : pointeur(TMaillon)) : entier Compare les deux entiers représentés par les deux listes N1 et N2 et retourne : -1 si N1<N2, 0 si N1=N2 et 1 si N1>N2. - Fonction Somme(N1,N2 : pointeur(TMaillon)): pointeur(TMaillon) qui retourne une liste contenant la somme des deux naturels N1 et N2.",
+      "Question": [
+        {
+          "id": "1.1",
+          "points": "4 Pts",
+          "level": "Procedural",
+          "question_text": "1. Fonction Moins(N1, N2 : pointeur(TMaillon)) : pointeur(TMaillon) ; Retourne NIL si N1<=N2 et la liste représentant N1 – N2 sinon.",
+          "Solution": [
+            "Fonction Moins(N1,N2: pointeur(TMaillon)): pointeur(TMaillon);",
+            "Var P, tete,Q : pointeur(TMaillon) ; V1, V2, Reste : entier ;",
+            "Debut",
+            "  Si Comparer(N1,N2)<1 alors Moins ← NIL ;",
+            "  Sinon",
+            "    Reste ← 0 ; Tete ← NIL ;",
+            "    TQ N1≠NIL Faire",
+            "      Allouer(P) ; Aff_Adr(P,NIL) ;",
+            "      Si Tete=NIL alors Tete ← P Sinon Aff_Adre(Q,P) ; FSi",
+            "      V1 ← Nbre(Valeur(N1)) ;",
+            "      Si N2≠NIL alors V2 ← Nbre(Valeur(N2)) Sinon V2 ← 0 ; FSi",
+            "      Si V1 ≥ (V2 + Reste) alors",
+            "        Aff_Val(P, Car(V1 - V2 – Reste)) ; Reste ← 0 ;",
+            "      Sinon",
+            "        Aff_Val(P, Car(V1 + 10 - V2 - Reste)) ; Reste ← 1 ;",
+            "      Fsi",
+            "      Q ← P ; N1 ← Suivant(N1) ;",
+            "      Si N2≠NIL alors N2 ← Suivant(N2) ;",
+            "    FTQ ;",
+            "    Moins ← tete ;",
+            "  FSi",
+            "Fin ;"
+          ]
+        },
+        {
+          "id": "1.2",
+          "points": "3 Pts",
+          "level": "Procedural",
+          "question_text": "2. Fonction Mult(N1, N2 : pointeur(TMaillon)) : pointeur(TMaillon) ; Retourne une liste représentant N1*N2.",
+          "Solution": [
+            "Fonction Mult(N1, N2 : pointeur(TMaillon)) : pointeur(TMaillon) ;",
+            "Var Un, Resultat : pointeur(TMaillon) ;",
+            "Debut",
+            "  Si N1 = NIL ou N2 = NIL alors Mult ← NIL ;",
+            "  Sinon",
+            "    Allouer(Un) ; Aff_Adr(Un,Nil) ; Aff_Val(Un,’1’) ;",
+            "    Resultat ← NIL ;",
+            "    TQ Comparer(N2,NIL) = 1 Faire",
+            "      Resultat ← Somme (Resultat, N1) ;",
+            "      N2 ← Moins(N2, Un) ;",
+            "    FTQ ;",
+            "    Mult ← Resultat ;",
+            "  FSi",
+            "Fin ;"
+          ]
+        },
+        {
+          "id": "1.3",
+          "points": "3 Pts",
+          "level": "Procedural",
+          "question_text": "3. Fonction Div(N1, N2 : pointeur(TMaillon)) : pointeur(TMaillon) ; Retourne NIL si N1<N2 et le résultat de la division sinon.",
+          "Solution": [
+            "Fonction Div(N1, N2 : pointeur(TMaillon)) : pointeur(TMaillon) ;",
+            "Var Un, Resultat, Reste : pointeur(TMaillon) ;",
+            "Debut",
+            "  Si Comparer(N1,N2) = -1 ou N1 = NIL ou N2 = NIL alors Div ← Nil ;",
+            "  Sinon",
+            "    Resultat ← Nil ; Reste ← N1 ;",
+            "    Allouer(Un) ; Aff_Adr(Un,Nil) ; Aff_Val(Un,’1’) ;",
+            "    TQ Comparer(Reste,N2) ≥ 0 Faire",
+            "      Resultat ← Somme(Resultat, Un) ;",
+            "      Reste ← Moins (Reste, N2) ;",
+            "    FTQ",
+            "    Div ← Resultat ;",
+            "  FSi",
+            "Fin ;"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_2",
+      "title": "Exercice 2 (2.5 pts)",
+      "Question": [
+        {
+          "id": "2.1",
+          "points": "2.5 pts",
+          "level": "Procedural",
+          "question_text": "Ecrire la procédure TrierTas(T :Tableau[1..N]), permettant de trier le tableau T en utilisant un tas (utiliser sans implémentation les procedures InsererTas et RetirerTas)",
+          "Solution": [
+            "Procedure TrierTas(T : Tableau[1..N]) ;",
+            "Var i : entier ;",
+            "Debut",
+            "  Init_Tas ;",
+            "  Pour i = 1 à N faire Inserer_Tas(T[i]) ; FPour ;",
+            "  Pour i = 1 à N faire Retirer_Tas(T[i]) ; FPour ;",
+            "Fin ;"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_3",
+      "title": "Exercice 3 (7.5 pts : 1.5 + 1 + 2.5 + 2.5)",
+      "introduction_context": "Soit l’arbre binaire de recherche suivant composé de caractères et basé sur l’ordre alphabétique :",
+      "diagram": {
+        "description": "A Binary Search Tree (BST). Root: I. Left Child: D. Right Child: O. D has children A (L) and G (R). O has child M (L). A has child C (R). G has children E (L) and H (R). M has children K (L) and N (R). C has child B (L). E has child F (R). K has children J (L) and L (R).",
+        "precise_location": "Page 1 - Bottom right"
+      },
+      "Question": [
+        {
+          "id": "3.1",
+          "points": "1.5 Pt",
+          "level": "Procedural",
+          "question_text": "1. Donner les chaînes de caractères obtenus en parcourant l’arbre en profondeur en l’ordre préfixe, infixe puis postfixه.",
+          "Solution": "- Parcours en profondeur préfixe : IDACBGEFHOMKJLN - Parcours en profondeur infixe : ABCDEFGHIJKLMNO - Parcours en profondeur postfixe : BCAFEHGDJLKNMOI"
+        },
+        {
+          "id": "3.2",
+          "points": "1 Pt",
+          "level": "Procedural",
+          "question_text": "2. Donner l’arbre après la suppression de ‘D’ puis de ‘I’.",
+          "Solution": {
+            "description": "The BST from Exercise 3 after removing 'D' then 'I'. The new structure is rooted at 'J' (or 'H' depending on replacement strategy shown). The provided solution diagram in the OCR shows root 'J' with children 'E' (L) and 'M' (R). 'E' has children 'A' (L) and 'G' (R). 'M' has children 'K' (L) and 'O' (R).",
+            "precise_location": "Page 4 - Bottom left"
+          }
+        },
+        {
+          "id": "3.3",
+          "points": "2.5 Pts",
+          "level": "Procedural",
+          "context_note": "On associe à chaque caractère un code binaire représentant sa position dans l’arbre binaire comme suit :A chaque fois qu’on passe à un fils gauche, on considère un 1 et chaque fois qu’on passe à un fils droit, on considère un 0.",
+          "binary_logic_diagram": {
+            "description": "A subtree rooted at 'D'. Edge to left child 'A' is labeled '1'. Edge to right child 'G' is labeled '0'. Edge from 'A' to right child 'C' is labeled '0'. Edge from 'G' to left child 'E' is labeled '1'.",
+            "precise_location": "Page 2 - Middle"
+          },
+          "introduction_context": "Il est demandé d’écrire les deux fonctions suivantes :",
+          "question_text": "3. Fonction Code(Racine: Pointeur(TNoeud),C: caractère): chaîne ; qui retourne le code binaire du caractère C dans une chaîne de caractères contenant des ‘0’ et des ‘1’. Exemple : Code(‘C’) = ‘10’, Code(‘F’) = ‘010’",
+          "Solution": [
+            "Fonction Code(Racine: Pointeur(TNoeud), C: caractère): chaîne ;",
+            "Var N : pointeur(TNoeud) ; S : Chaine ;",
+            "Debut",
+            "  N ← Racine ; S ← ‘’ ;",
+            "  TQ N ≠ NIL et Valeur(N) ≠ C Faire ;",
+            "    Si Valeur(N) > C et FG(N) ≠ NIL alors S ← S + ‘1’ ; N ← FG(N) ; FSi",
+            "    Si Valeur(N) < C et FD(N) ≠ NIL alors S ← S + ‘0’ ; N ← FD(N) ; FSi",
+            "  FTQ",
+            "  Si N = NIL alors Code ← ‘#’ Sinon Code ← S ; FSi",
+            "Fin ;"
+          ]
+        },
+        {
+          "id": "3.4",
+          "points": "2.5 Pts",
+          "level": "Procedural",
+          "question_text": "4. Fonction Caract(Racine:Pointeur(TNoeud), B:chaine):caractère; qui retourne le caractère correspondant au code binaire donné. Exemple : Caract(‘00’) = ‘H’ ; Caract(‘101’) = ‘B’",
+          "Solution": [
+            "Fonction Caract(Racine:Pointeur(TNoeud), B:chaine):caractère;",
+            "Var N : pointeur(TNoeud) ; I : entier ;",
+            "Debut",
+            "  N ← Racine ; I ← 1 ;",
+            "  TQ N ≠ NIL et I <= Longeur(B) Faire ;",
+            "    Si B[I] = ’1’ alors N ← FG(N) Sinon N ← FD(N) ; FSi",
+            "    I ← I + 1 ;",
+            "  FTQ",
+            "  Si N = NIL alors Caract ← ‘#’ // Erreur : caractère inexistant Sinon Caract ← Valeur(N) ; FSi",
+            "Fin ;"
+          ]
+        }
+      ]
+    }
+  ],
+  "footer": "Bon courage A. Djeffal Tournez la page ../.. Page 2"
+}

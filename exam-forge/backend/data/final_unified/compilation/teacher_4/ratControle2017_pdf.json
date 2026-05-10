@@ -1,0 +1,457 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h30m",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (06 pts)",
+      "total_exercise_points": "6",
+      "introduction_context": "",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "question_text": "Donner une expression régulière qui valide une forme simplifiée des adresses électroniques. Définition simplifiée : une adresse électronique est constituée d'un champ ou plusieurs suivies d'un @ suivi d'un champ ou plusieurs. Un champ est constitué d'un caractère ou plusieurs (lettre, chiffre, -, _).",
+          "Solution": "([a-zA-Z0-9]|\\-\\_)+@([a-zA-Z0-9]|\\-\\_)+"
+        },
+        {
+          "id": "2",
+          "level": "Factual",
+          "question_text": "Un nombre binaire est constitué de 0 et de 1.",
+          "sub_questions": [
+            {
+              "id": "2.A",
+              "level": "Procedural",
+              "question_text": "Donner une expression régulière qui accepte les nombres binaires contenants au moins deux 0.",
+              "Solution": "(0|1)*0(0|1)*0(0|1)*"
+            },
+            {
+              "id": "2.B",
+              "level": "Procedural",
+              "question_text": "Donner une expression régulière qui accepte les nombres binaires contenants au plus trois 0.",
+              "Solution": "1(0|ε)1*(0|ε)1*(0|ε)1* | 01*(0|ε)1*(0|ε)1*"
+            }
+          ]
+        },
+        {
+          "id": "3",
+          "level": "Procedural",
+          "question_text": "Donner une expression régulière sur l'alphabet {a, b}, qui accepte tous les mots qui ne contiennent pas le facteur bab.",
+          "Solution": "a*(b*((aa)a*)*)*(a|ε)"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (10 pts)",
+      "total_exercise_points": "10",
+      "introduction_context": "Soit G la grammaire suivante :",
+      "grammar": [
+        "A → da | acB",
+        "B → abB | daA | Af"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "level": "Metacognitive",
+          "question_text": "G est-elle LL(1) ? justifier votre réponse. Sinon la transformer pour qu'elle le soit (grammaire G').",
+          "Solution": "Non, il existe une factorisation indirecte dans la règle B → abB | daA | Af dont Premiers(A) ∩ Premiers(B) ≠ ∅.",
+          "solution_transformation_steps": [
+            "A →da|acB",
+            "Substitution de A dans la règle de B :",
+            "B → abB | daA | Af",
+            "B → abB | daA | (da | acB)f",
+            "B → abB | daA | daf | acBf",
+            "B → abB | acBf | daA | daf",
+            "Factorisation :",
+            "B → a(bB | cBf) | da(A | f)",
+            "B → aB' | daB''",
+            "B' → bB | cBf",
+            "B'' → A | f"
+          ],
+          "solution_grammar_G_prime": [
+            "A → da | acB",
+            "B → aB' | daB''",
+            "B' → bB | cBf",
+            "B'' → A | f"
+          ]
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "Construire la table d'analyse LL(1).",
+          "solution_premiers_suivants": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "A",
+                "d, a",
+                "$, f"
+              ],
+              [
+                "B",
+                "d, a",
+                "$, f"
+              ],
+              [
+                "B'",
+                "b, c",
+                "$, f"
+              ],
+              [
+                "B''",
+                "d, a, f",
+                "$, f"
+              ]
+            ]
+          },
+          "solution_ll1_table": {
+            "type": "table",
+            "headers": [
+              "",
+              "a",
+              "b",
+              "c",
+              "d",
+              "f",
+              "$"
+            ],
+            "rows": [
+              [
+                "A",
+                "acB",
+                "",
+                "",
+                "da",
+                "",
+                ""
+              ],
+              [
+                "B",
+                "aB'",
+                "",
+                "",
+                "daB''",
+                "",
+                ""
+              ],
+              [
+                "B'",
+                "",
+                "bB",
+                "cBf",
+                "",
+                "",
+                ""
+              ],
+              [
+                "B''",
+                "A",
+                "",
+                "",
+                "A",
+                "f",
+                ""
+              ]
+            ]
+          }
+        },
+        {
+          "id": "3",
+          "level": "Procedural",
+          "question_text": "Construire l'automate LR pour G.",
+          "Solution": {
+            "type": "LR(0)",
+            "states_content": [
+              "I0:  { S → .A $, A → .da, A → .acB }",
+              "I1:  { S → A.$ }",
+              "I2:  { A → a.cB }",
+              "I3:  { A → d.a }",
+              "I4:  { A → ac.B, B → .abB, B → .daA, B → .Af, A → .da, A → .acB }",
+              "I5:  { A → da. }",
+              "I6:  { A → acB. }",
+              "I7:  { B → A.f }",
+              "I8:  { B → Af. }",
+              "I9:  { B → d.aA, A → d.a }",
+              "I10: { B → a.bB, A → a.cB }",
+              "I11: { B → ab.B, B → .abB, B → .daA, B → .Af, A → .da, A → .acB }",
+              "I12: { B → da.A, A → da., A → .da, A → .acB }",
+              "I13: { B → daA. }",
+              "I14: { B → abB. }"
+            ]
+          }
+        },
+        {
+          "id": "4",
+          "level": "Conceptual",
+          "question_text": "La grammaire G est-elle SLR(1) ? Justifier.",
+          "Solution": "Oui, G est SLR(1) car il n'y a aucun conflit dans la table SLR.",
+          "solution_slr_table": {
+            "type": "table",
+            "headers": [
+              "État",
+              "a",
+              "b",
+              "c",
+              "d",
+              "f",
+              "$",
+              "A",
+              "B"
+            ],
+            "rows": [
+              [
+                "0",
+                "d3",
+                "",
+                "",
+                "d2",
+                "",
+                "",
+                "1",
+                ""
+              ],
+              [
+                "1",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "Acc",
+                "",
+                ""
+              ],
+              [
+                "2",
+                "",
+                "",
+                "d4",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "3",
+                "d5",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "4",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "5",
+                "r1",
+                "",
+                "",
+                "",
+                "r1",
+                "",
+                "",
+                ""
+              ],
+              [
+                "6",
+                "",
+                "",
+                "",
+                "d10",
+                "",
+                "",
+                "6",
+                "7"
+              ],
+              [
+                "7",
+                "",
+                "",
+                "",
+                "",
+                "d8",
+                "",
+                "",
+                ""
+              ],
+              [
+                "8",
+                "",
+                "",
+                "",
+                "",
+                "r5",
+                "r5",
+                "",
+                ""
+              ],
+              [
+                "9",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "10",
+                "",
+                "",
+                "",
+                "d11",
+                "",
+                "",
+                "",
+                "d5"
+              ],
+              [
+                "11",
+                "",
+                "d10",
+                "",
+                "d9",
+                "",
+                "",
+                "7",
+                "14"
+              ],
+              [
+                "12",
+                "d3",
+                "",
+                "",
+                "d2",
+                "r1",
+                "r1",
+                "13",
+                ""
+              ],
+              [
+                "13",
+                "",
+                "",
+                "",
+                "",
+                "r4",
+                "r4",
+                "",
+                ""
+              ],
+              [
+                "14",
+                "",
+                "",
+                "",
+                "",
+                "r3",
+                "r3",
+                "",
+                ""
+              ]
+            ]
+          },
+          "solution_premiers_suivants": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "A",
+                "d, a",
+                "$, f"
+              ],
+              [
+                "B",
+                "d, a",
+                "$, f"
+              ],
+              [
+                "B'",
+                "b, c",
+                "$, f"
+              ],
+              [
+                "B''",
+                "d, a, f",
+                "$, f"
+              ]
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 03 (04 pts)",
+      "total_exercise_points": "4",
+      "introduction_context": "",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "question_text": "Ecrire un programme en lex qui supprime une suite d'espaces et les remplace par un seul espace.",
+          "solution_lex_code": [
+            "%%",
+            "( )+    printf(\" \");",
+            "%%",
+            "int main(int argc, char *argv[])",
+            "{",
+            "  yyin = fopen(argv[1], \"r\");",
+            "  yylex();",
+            "  fclose(yyin);",
+            "}"
+          ]
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "Ecrire un programme en Flex qui compte le nombre de caractères, de mots et de lignes d'un texte en entrée.",
+          "solution_lex_code": [
+            "%{",
+            "int nbm = 0, nbl = 0, nbc = 0;",
+            "%}",
+            "mot [a-zA-Z]+",
+            "%%",
+            "{mot}   nbm++; nbc += yyleng;",
+            "\\n      nbl++; nbc++;",
+            ".       nbc++;",
+            "%%",
+            "main()",
+            "{",
+            "  yylex();",
+            "  printf(\"Il y a %d mots, %d caracteres et %d lignes.\\n\", nbm, nbc, nbl);",
+            "}"
+          ]
+        }
+      ]
+    }
+  ]
+}

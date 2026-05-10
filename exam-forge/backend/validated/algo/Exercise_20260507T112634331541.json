@@ -1,0 +1,77 @@
+{
+  "subject": "algo",
+  "type": "Exercise",
+  "data": {
+    "id": "ex01",
+    "title": "Exercice 2 (8 pts : 2 + 2 + 2 + 2)",
+    "total_exercise_points": 8.5,
+    "introduction_context": "Soit l'arbre binaire de recherche (ARB) construit en insérant les clés suivantes dans l'ordre donné :\n\n45, 25, 65, 15, 35, 55, 75, 10, 20, 30, 40, 50, 60, 70, 80\n\nOn suppose que l'insertion se fait sans équilibrage particulier (ARB classique).\n\nPour toute suppression dans un ARB, on utilisera le prédécesseur (le maximum du sous-arbre gauche) pour remplacer un nœud ayant deux enfants.\n\nOn définit la hauteur d'un arbre vide comme -1 et la hauteur d'un nœud feuille comme 0. Une feuille est un nœud sans fils (FG et FD à Nil).",
+    "questions": [
+      {
+        "id": "ex01_q1",
+        "type": "FREE",
+        "question_text": "1. Construire l'ARB obtenu après toutes les insertions. Représenter l'arbre final avec sa racine R.",
+        "solution": {
+          "text": "Racine : 45\nGauche de 45 : 25 (gauche 15, droite 35)\n  - 15 : gauche 10, droite 20\n  - 35 : gauche 30, droite 40\nDroite de 45 : 65 (gauche 55, droite 75)\n  - 55 : gauche 50, droite 60\n  - 75 : gauche 70, droite 80",
+          "rubric": [
+            "Racine correcte 45.",
+            "Sous-arbre gauche de 45 : 25 avec ses descendants corrects.",
+            "Sous-arbre droit de 45 : 65 avec ses descendants corrects.",
+            "Respect de la propriété d'ARB (clé gauche < racine < clé droite) à chaque nœud."
+          ]
+        },
+        "points": 2,
+        "topic": "Arbres binaires de recherche (ARB) – construction, suppression, fonction récursive"
+      },
+      {
+        "id": "ex01_q2",
+        "type": "FREE",
+        "question_text": "2. En utilisant l'arbre construit en Q1, supprimer successivement les clés 25, 55 et 45 (dans cet ordre). Donner l'arbre final après ces trois suppressions.",
+        "solution": {
+          "text": "Après suppression de 25 : on remplace 25 par son prédécesseur 20 (max du sous-arbre gauche de 25). Le sous-arbre gauche de 20 devient 15 (10, 20 n'a pas de fils droit).\nAprès suppression de 55 : on remplace 55 par son prédécesseur 50 (max du sous-arbre gauche de 55). Le sous-arbre gauche de 50 devient nil.\nAprès suppression de 45 : on remplace 45 par son prédécesseur 40 (max du sous-arbre gauche de 45). Le sous-arbre droit de 40 devient le sous-arbre droit de 45 (65...).\nArbre final : racine 40, gauche : 35 (30, 20 (15 (10), nil)), droite : 65 (50 (nil, 60), 75 (70, 80)).",
+          "rubric": [
+            "Suppression de 25 : remplacement correct par 20 et rattachement du sous-arbre gauche de 25.",
+            "Suppression de 55 : remplacement correct par 50 et rattachement du sous-arbre gauche de 55.",
+            "Suppression de 45 : remplacement correct par 40 et rattachement du sous-arbre droit de 45.",
+            "Arbre final cohérent et respectant la propriété d'ARB."
+          ]
+        },
+        "points": 2,
+        "topic": "Arbres binaires de recherche (ARB) – construction, suppression, fonction récursive"
+      },
+      {
+        "id": "ex01_q3",
+        "type": "FREE",
+        "question_text": "3. Écrire la fonction récursive NbFeuilles(R) qui retourne le nombre de feuilles dans l'ARB de racine R (on suppose R non nul).",
+        "solution": {
+          "text": "Fonction NbFeuilles(R) :\n  Si (FG(R) = Nil et FD(R) = Nil) Alors\n    Retourner 1\n  Sinon\n    Retourner NbFeuilles(FG(R)) + NbFeuilles(FD(R))\n  Fin Si\nFin Fonction",
+          "rubric": [
+            "Cas de base correct : nœud feuille → retourne 1.",
+            "Appel récursif sur les deux fils et somme des résultats.",
+            "Syntaxe correcte (Si/Sinon, affectation, retour).",
+            "Fonction, pas procédure ; retour entier."
+          ]
+        },
+        "points": 2,
+        "topic": "Arbres binaires de recherche (ARB) – construction, suppression, fonction récursive"
+      },
+      {
+        "id": "ex01_q4",
+        "type": "FREE",
+        "question_text": "4. En utilisant l'arbre initial de Q1 (avant toute suppression), donner le résultat de l'appel NbFeuilles(R) pour R = racine de l'arbre. Justifier brièvement.",
+        "solution": {
+          "text": "Les feuilles sont : 10, 20, 30, 40, 50, 60, 70, 80 (8 feuilles).\nL'appel retourne 8.",
+          "rubric": [
+            "Identification correcte des 8 feuilles de l'arbre initial.",
+            "Comptage correct (8).",
+            "Justification : mention que ce sont les nœuds sans fils.",
+            "Réponse cohérente avec l'arbre de Q1."
+          ]
+        },
+        "points": 2.5,
+        "topic": "Arbres binaires de recherche (ARB) – construction, suppression, fonction récursive"
+      }
+    ],
+    "level": "Conceptual"
+  }
+}

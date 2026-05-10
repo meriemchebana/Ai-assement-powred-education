@@ -1,0 +1,1 @@
+from src.modules.exam.model import Exam

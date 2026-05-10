@@ -1,0 +1,80 @@
+{
+  "metadata": {
+    "module": "Algorithmique et Structures de données",
+    "duration": "None",
+    "language": "english"
+  },
+  "exercises": [
+    {
+      "id": "Exercise_1",
+      "title": "Exercise 1: (Sequential structures) (10 pts)",
+      "total_exercise_points": "10 pts",
+      "introduction_context": "Given two stacks of integers S1, S2 known by their basic operations presented in the course (like their exact presentation in the course)",
+      "Question": [
+        {
+          "id": "1.1",
+          "points": "5 pts",
+          "level": "Procedural",
+          "question_text": "give a function « SearchStack (e: integer): Boolean; »which searches for an integer e in S1. S2 can be used by the function to restore S1 to its initial state after the function ends. Use indices 1 and 2 to",
+          "Solution": null
+        },
+        {
+          "id": "1.2",
+          "points": "5pts",
+          "level": "Procedural",
+          "question_text": "- Same question but for two queues Q1, Q2 and a function « SearchQueue (e: integer): Boolean; ». (5pts)",
+          "Solution": null
+        }
+      ]
+    },
+    {
+      "id": "Exercise_2",
+      "title": "Exercise 2: (Hierarchical Structures). (10 pts)",
+      "total_exercise_points": "10 pts",
+      "introduction_context": "Consider the following values: 5, 10, 16, 30, 14, 18, 3.",
+      "Question": [
+        {
+          "id": "1",
+          "points": "2pts",
+          "level": "Procedural",
+          "question_text": "1) Fill the following graphs according to successive additions of these values in a heap. (2pts)",
+          "diagram": {
+            "description": "18 images of a balanced binary tree template containing placeholders for 7 elements.",
+            "precise_location": "Page 1 - Middle"
+          }
+        },
+        {
+          "id": "3",
+          "points": "2pts",
+          "level": "Procedural",
+          "question_text": "3) Fill the following graphs according to successive additions of those values (as keys) in a BST. (2pts)",
+          "diagram": {
+            "description": "12 images of a balanced binary tree template containing placeholders for 7 elements.",
+            "precise_location": "Page 1 - Bottom"
+          }
+        },
+        {
+          "id": "4",
+          "points": "1pt",
+          "level": "Metacognitive",
+          "question_text": "4) What do you think about the last result in the BST? (1pt)",
+          "Solution": null
+        },
+        {
+          "id": "5",
+          "points": "1pt",
+          "level": "Conceptual",
+          "question_text": "5) What is the problem with this result? (1pt)",
+          "Solution": null
+        },
+        {
+          "id": "6",
+          "points": "3pt",
+          "level": "Metacognitive",
+          "question_text": "6) Propose the basic steps to manage this problem (3pt)",
+          "Solution": null
+        }
+      ]
+    }
+  ]
+}

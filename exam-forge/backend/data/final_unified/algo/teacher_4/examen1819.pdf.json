@@ -1,0 +1,200 @@
+{
+  "metadata": {
+    "module": "Algorithmique et Structures de données",
+    "duration": "12:00-13:30",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_1",
+      "title": "Exercice 1 : Listes linéaires chaînées",
+      "total_exercise_points": "10 pts : 2 + 2 + 2 + 4",
+      "introduction_context": "On met aussi `a votre disposition les proc´edures et fonctions suivantes d´evelopp´ees dans le TP et que vous pouvez utiliser sans les ´ecrire :.",
+      "diagram": {
+        "preceding_text": "Exemple : Le polynôme 2x^5 + 3x^4 + (1/2)x^2 + 1 est représenté par la liste suivante :",
+        "description": "A horizontal linked list diagram representing a polynomial. It starts with a label Tete followed by an arrow pointing to the first of four rectangular nodes. Node 1: [2][5], Node 2: [3][4], Node 3: [0.5][2], Node 4: [1][0]. The final node points to a diagonal slash symbol indicating NULL.",
+        "precise_location": "Page 1 - Middle"
+      },
+      "Question": [
+        {
+          "id": "1",
+          "points": "2 pts",
+          "level": "Procedural",
+          "question_text": "1. Fonction ValeurPoly(P :pointeur(TMaillon), x :réel) :réel ; Permettant de calculer la valeur de P pour une valeur x donnée., c-`a-d P(x)",
+          "Solution": [
+            "Fonction ValeurPoly( P : Pointeur(TMaillon), x : réel) : réel;",
+            "var S, Puiss : réel; i : entier ;",
+            "Début",
+            "    S ← 0;",
+            "    Tant que (P ≠ Nil) faire",
+            "        Puiss ← 1;",
+            "        Pour i de 1 à Degré(P) faire",
+            "            Puiss ← Puiss × x;",
+            "        Fin Pour;",
+            "        S ← S + Coef(P) × Puiss;",
+            "        P ← Suivant(P);",
+            "    Fin TQ;",
+            "    ValeurPoly ← S;",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "2",
+          "points": "2 pts",
+          "level": "Procedural",
+          "question_text": "2. Fonction DivTermParTerm(T1, T2 :pointeur(TMaillon)) : pointeur(TMaillon) ; Permettant de retourner la tˆete du polynˆome repr´esentant le resultat de division du terme T1 par le terme T2.example: T1 = 6x^5, T2 = 2x^2, Résultat = 3x^3.",
+          "Solution": [
+            "Fonction DivTermParTerm( T1, T2 : Pointeur(TMaillon)) : Pointeur(TMaillon);",
+            "var Q : Pointeur(TMaillon);",
+            "Début",
+            "    Si (T1=Nil ou T2=Nil ou Degré(T1) < Degré(T2)) Alors Q ← Nil;",
+            "    Sinon",
+            "        Allouer(Q); Aff_Adr(Q,Nil);",
+            "        Aff_Degré(Q,Degré(T1)-Degré(T2));",
+            "        Aff_Coef(Q,Coef(T1)/Coef(T2));",
+            "    Fin Si;",
+            "    DivTermParTerm ← Q;",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "3",
+          "points": "2 pts",
+          "level": "Procedural",
+          "question_text": "3. Fonction Diff2Poly(P1, P2 :pointeur(TMaillon)) : pointeur(TMaillon) ;Permettant de retourner la tete du polynˆome repr´esentant le resultat de soustraction du polynˆome P2 du polynˆome P1 c-`a-d P1 − P2 .",
+          "Solution": [
+            "Fonction Diff2Poly( P1, P2 : Pointeur(TMaillon)) : Pointeur(TMaillon);",
+            "var Somme, Prod, Negatif : Pointeur(TMaillon) ;",
+            "Début",
+            "    Allouer(Negatif) ; Aff_Adr(Negatif,Nil) ; Aff_Degré(Negatif,0) ; Aff_Coef(Negatif,-1) ;",
+            "    Prod ← Produit2Poly(P2,Negatif) ; Somme ← Somme2Poly(P1,Prod) ;",
+            "    Libérer(Negatif) ; LibérerPoly(Prod) ; Diff2Poly ← Somme ;",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "4",
+          "points": "4 pts",
+          "level": "Procedural",
+          "question_text": "4. Procédure Diviser2Poly(P1, P2 :pointeur(TMaillon), var Q, R : pointeur(TMaillon)) ; Permettant de caculer le r´esultat de division du polynˆome P1 par le polynˆome P2 et mettre le r´esultat de division dans Q et le reste dans R",
+          "diagram": {
+            "type": "polynomial_long_division",
+            "description": "Example of dividing P1 by P2 to find quotient Q and remainder R",
+            "content": {
+              "dividend": "6x^5 + 5x^3 + x + 2",
+              "divisor": "2x^2 + 1",
+              "quotient": "3x^3 + x",
+              "remainder": "2"
+            },
+            "precise_location": "Page 1 - Middle right, labeled as 'Exemple'"
+          },
+          "Solution": [
+            "Procédure Diviser2Poly( P1, P2 : Pointeur(TMaillon), var Q, R : Pointeur(TMaillon));",
+            "var Q1, Temp, Prod : Pointeur(TMaillon) ;",
+            "Début",
+            "    Q ← Nil ; Q1 ← Nil ; Prod ← Nil ; R ← P1 ;",
+            "    Tant que (Degré(R) ≥ Degré(P2)) faire",
+            "        Q1 ← DivTermParTerm(R, P2) ; Prod ← Produit2Poly(P2, Q1) ;",
+            "        Temp ← Q ; Q ← Somme2Poly(Q, Q1) ; LibérerPoly(Temp) ;",
+            "        Temp ← R ; R ← Diff2Poly(R, Prod) ; LibérerPoly(Temp) ;",
+            "        LibérerPoly(Prod) ; LibérerPoly(Q1) ;",
+            "    Fin TQ;",
+            "Fin;"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_2",
+      "title": "Exercice 2 : Arbres binaires",
+      "total_exercise_points": "10 pts : 4 + 2 + 4",
+      "introduction_context": "On souhaite dans cet exercice compl´eter aussi le dernier TP sur les arbres binaires appliqu´es au codage de Huffman par d’autres proc´edures et fonctions. On vous rappelle que l’arbre de Huffman est un arbre binaire repr´esentant les codes binaires des caract`eres o`u les feuilles repr´esentent les caract`eres, les branches droites repr´esentent le code 1 et les branches gauches repr´esentent le code 0.",
+      "diagram": {
+        "description": "Huffman binary tree. Root internal node labeled ?. Left (0) leads to leaf a or node for b. Right (1) leads to node for d.",
+        "precise_location": "Page 2 - Middle"
+      },
+      "Question": [
+        {
+          "id": "1",
+          "points": "4 pts",
+          "level": "Procedural",
+          "introduction_context": "On vous demande d’´ecrire les proc´edures et fonctions suivantes :",
+          "question_text": "1. Fonction CodeCar(R :Pointeur(TNoeud), C :caractères) :Chaine de caractère ; Permettant de retourner le code binaire du caract`ere C dans l’arbre de huffman de racine R. Si le caract`ere C n’existe pas dans l’arbre, la fonction doit retourner ’ ?’.Exemple : CodeCar(R,’b’)=010 ",
+          "Solution": [
+            "Fonction CodeCar( R : Pointeur(TNoeud), C : Caractères) : Chaîne de caractères;",
+            "var S : Chaîne de caractères;",
+            "Début",
+            "  Si (R=Nil) Alors CodeCar ← '?';",
+            "  Sinon Si (Valeur(R)=C) Alors CodeCar ← '';",
+            "  Sinon S ← CodeCar(FG(R),C);",
+            "    Si (S ≠ '?') Alors CodeCar ← '0'+ S;",
+            "    Sinon S ← CodeCar(FD(R),C);",
+            "      Si (S ≠ '?') Alors CodeCar ← '1'+ S;",
+            "      Sinon CodeCar ← '?'; Fin Si;",
+            "    Fin Si;",
+            "  Fin Si;",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "2",
+          "points": "2 pts",
+          "level": "Procedural",
+          "question_text": "2. Fonction CoderMessage(R :Pointeur(TNoeud), Message :Chaine de caractère) : Chaine de caractères ;Permettant de retourner le code binaire de la chaine de caract`eres Message `a partir de l’arbre de Huffman de racine R. Exemple : CoderMessage(R,’adkba’)=0010 ?01000",
+          "Solution": [
+            "Fonction CoderMessage( R : Pointeur(TNoeud), Message : Chaîne de Caractères) : Chaîne de caractères;",
+            "var i : entier; S : Chaîne de caractères;",
+            "Début",
+            "  S ← ''; Pour i de 1 à Longueur(Message) faire S ← S + CodeCar(R, Message[i]); Fin Pour;",
+            "  CoderMessage ← S;",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "3",
+          "points": "4 pts",
+          "level": "Procedural",
+          "question_text": "3. Procédure SupprimerCode(R :Pointeur(TNoeud), Code :Chaine de caractères) ; Permettant de supprimer le code binaire Code de l’arbre de racine R. On vous conseille d’utiliser une pile. NB : Pour les deux exercices, une proc´edure ou fonction ´ecrite peut ˆetre utilis´ee dans les questions suivantes.",
+          "Solution": [
+            "Procédure SupprimerCode( R : Pointeur(TNoeud), Code : Chaîne de Caractères);",
+            "var i : entier ;",
+            "S : Chaîne de caractères ;",
+            "Début",
+            "    i ← 1 ;",
+            "    Tant que (i ≤ Longueur(Code) et R ≠ Nil) faire",
+            "        Empiler(R) ;",
+            "        Si (Code[i]='1') Alors",
+            "            R ← FD(R) ;",
+            "        Sinon",
+            "            R ← FG(R) ;",
+            "        Fin Si;",
+            "        i ← i + 1 ;",
+            "    Fin TQ;",
+            "    Si (R=Nil ou Valeur(R)='?') Alors",
+            "        Ecrire('Ce code n’existe pas') ;",
+            "    Sinon",
+            "        Libérer(R) ;",
+            "        Continue ← Vrai ;",
+            "        i ← Longueur(Code) ;",
+            "        Tant que (PileVide=Faux et Continue=Vrai) faire",
+            "            Déplier(R) ;",
+            "            Si ( (Code[i]='1' et FG(R) = Nil) ou (Code[i]='0' et FD(R) = Nil) ) Alors",
+            "                Libérer(R) ;",
+            "            Sinon",
+            "                Si (Code[i]='1') Alors",
+            "                    Aff_FD(R, Nil) ;",
+            "                Sinon",
+            "                    Aff_FG(R, Nil) ;",
+            "                Fin Si;",
+            "                Continue ← Faux ;",
+            "            Fin Si;",
+            "            i ← i - 1 ;",
+            "        Fin TQ;",
+            "    Fin Si;",
+            "Fin;"
+          ]
+        }
+      ]
+    }
+  ]
+}

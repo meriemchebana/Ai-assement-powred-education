@@ -1,0 +1,309 @@
+{
+  "metadata": {
+    "module": "Algorithmique et Structures de données",
+    "duration": "10h-11h30",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_1",
+      "title": "Exercice 1",
+      "total_exercise_points": "5.5 Pts",
+      "introduction_context": "On convient de représenter un nombre binaire b1b2..bn, où chaque bi est un 0 ou un 1, par une liste linéaire chaînée où chaque élément contient un bi.",
+      "diagram": {
+        "preceding_text": "Exemple : 1011",
+        "description": "A horizontal sequence of four rectangular nodes. Each node is divided into two parts. The first part contains a value (1, 0, 1, and 1 respectively). The second part contains a pointer represented by an arrow. The fourth node's pointer contains a slash (/) indicating a NULL terminator.",
+        "precise_location": "Page 1 - Exercice 1 preamble"
+      },
+      "Question": [
+        {
+          "id": "1.1",
+          "points": "0.5 Pt",
+          "level": "Factual",
+          "question_text": "1. Donner la structure des maillions utilisées (déclaration)",
+          "Solution": [
+            "Type TBit = Structure",
+            "    Val :Entier ;",
+            "    Suivant : Pointeur (TBit) ;",
+            "Fin ;"
+          ]
+        },
+        {
+          "id": "1.2",
+          "points": "2 Pts",
+          "level": "Procedural",
+          "question_text": "2. Ecrire la procédure Mult2(L) qui multiplie la valeur de la liste par 2 : Exemple : Mult2(1011=11) -> 10110=22",
+          "Solution": [
+            "Procedure Mult2 (L : Pointeur(TBit)) ;",
+            "Var P, PP, Q : Pointeur(TBit)",
+            "Debut",
+            "    P ← L ; PP ← Nil ;",
+            "    TQ P <> Nil Faire",
+            "        PP ← P ;",
+            "        P ← Suivant(P) ; /* aller à la fin de la liste */",
+            "    FTQ ;",
+            "    Si L <> Nil alors",
+            "        Allouer (Q) ;",
+            "        Aff_Val (Q, 0) ; /* Ajouter un ‘0’ */",
+            "        Aff_Adr (Q, Nil);",
+            "        Aff_Adr (PP,Q);",
+            "    Fsi",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "1.3",
+          "points": "2 Pts",
+          "level": "Procedural",
+          "question_text": "3. Ecrire la procédure Div2(L) qui divise la valeur de la liste par 2 : Exemple : Div2(1011=11) -> 101=5",
+          "Solution": [
+            "Procedure Div2(L: Pointeur(TBit)) ;",
+            "    Var P , PP, PPP: Pointeur(TBit) ;",
+            "    Debut",
+            "    Si L <> Nil alors",
+            "        P ← L ; PP ← Nil ; PPP ← Nil ;",
+            "        TQ P <> Nil Faire",
+            "            PPP ← PP ; PP ← P ;",
+            "            P ← Suivant(P) ; /* aller à la fin de la liste */",
+            "        FTQ ;",
+            "        Si PPP = Nil alors /* Un seul élément */",
+            "            L ← Nil ;",
+            "        Sinon",
+            "            Aff_Adr(PPP, Nil);",
+            "        Fsi",
+            "        Libérer (PP) ;",
+            "    Fsi",
+            "Fin;"
+          ]
+        },
+        {
+          "id": "1.4",
+          "points": "1 Pt",
+          "level": "Procedural",
+          "question_text": "4. Ecrire la procédure Div2k(L, k) qui divise la valeur de la liste L par 2k en utilisant la procédure Div2. Exemple : Div2k(1011,2) -> 10 = 2",
+          "Solution": [
+            "Procedure Div2K(L : Pointeur(TBit) ; k : entier) ;",
+            "    Var i :entier ;",
+            "    Debut",
+            "        Pour i = 1 à k faire",
+            "            Div2(L) ;",
+            "        FPour",
+            "    Fin ;"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_2",
+      "title": "Exercice 2",
+      "total_exercise_points": "5.5 Pts",
+      "introduction_context": "On souhaite utiliser les listes linéaires chaînées unidirectionnelles triées pour représenter des ensembles d’entiers. L’exemple de la liste du schéma ci-dessous représente l’ensemble {12, 26, 47, 60}. On rappelle qu’un élément n’apparaît au plus qu’une seule fois dans un ensemble.",
+      "diagram": {
+        "preceding_text": "L",
+        "description": "A linked list starting with a label 'L'. It consists of four nodes containing the integers 12, 26, 47, and 60. The final node has a diagonal slash (/) in its pointer field.",
+        "precise_location": "Page 1 - Exercice 2 preamble"
+      },
+      "Question": [
+        {
+          "id": "2.1",
+          "points": null,
+          "level": "Factual",
+          "question_text": "1. Donner la structure des maillions utilisées (déclaration)",
+          "Solution": [
+            "Type TMaillon = Structure",
+            "    Val : entier",
+            "    Suivant : Pointeur (TMaillon) ;",
+            "Fin ;"
+          ]
+        },
+        {
+          "id": "2.2",
+          "points": "1 Pt",
+          "level": "Procedural",
+          "question_text": "2. Ecrire la fonction Cardinal(L) qui retourne le nombre d’éléments d’un ensemble donnée (sous forme de liste)",
+          "Solution": [
+            "Fonction Cardinal ( L : Pointeur (TMaillon) : Entier ;",
+            "Var P : Pointeur (TMaillon) ;",
+            "N : entier ;",
+            "Debut",
+            "P ← L ; N ← 0 ;",
+            "TQ P <> Nil Faire",
+            "N ← N + 1 ;",
+            "P ← Suivant (P) ;",
+            "FTQ ;",
+            "N ← N+1 ;",
+            "Fin ;"
+          ]
+        },
+        {
+          "id": "2.3",
+          "points": "2.5 Pts",
+          "level": "Procedural",
+          "question_text": "3. Ecrire la procédure Intersection(L1, L2, L) qui retourne dans L les éléments qui apparaissent à la fois dans L1 et L2.",
+          "Solution": [
+            "Procedure Intersection (L1, L2, L : Pointeur (TMaillon) ;",
+            "Var P1, P2, P, Q : Pointeur (TMaillon)",
+            "Debut",
+            "P1 ← L1 ; P2 ← L2 ;",
+            "L ← Nil ;",
+            "TQ P1 <> Nil et P2 <> Nil faire",
+            "Si Valeur(P1) = Valeur (P2) alors",
+            "Allouer(P) ;",
+            "Aff_Val(P, Valeur(P1) ;",
+            "Aff_Adr(P, Nil) ;",
+            "Si L = Nil alors L ← P",
+            "Sinon Aff_Adr (Q, P) ;",
+            "FSi ;",
+            "Q ← P ;",
+            "P1 ← Suivant (P1) ; P2 ← Suivant (P2) ;",
+            "Sinon",
+            "Si Valeur(P1) < Valeur(P2) alors P1 ← Suivant (P1)",
+            "Sinon P2 ← Suivant (P2)",
+            "FSi;",
+            "FSi",
+            "FTQ",
+            "Fin ;"
+          ]
+        },
+        {
+          "id": "2.4",
+          "points": "1.5 Pt",
+          "level": "Procedural",
+          "question_text": "4. Ecrire la fonction Inclus(L1, L2) qui retourne vrai si tous les éléments de L1 existent dans L2 et faux sinon.",
+          "Solution": [
+            "Fonction Inclus (L1, L2 : Pointeur (TMaillon)) : Booleen ;",
+            "Var P1, P2 : Pointeur (TMaillon) ;",
+            "Inc : Booleen ;",
+            "Debut",
+            "P1 ← L1 ; P2 ← L2 ;",
+            "Inc ← Vrai ;",
+            "TQ ( P1 <> Nil) et (P2 <> Ni)l et Inc faire",
+            "Si Valeur (P1) = Valeur (P2) alors",
+            "P1 ← Suivant (P1) ;",
+            "P2 ← Suivant (P2) ;",
+            "Sinon",
+            "Si Valeur (P1) > Valeur (P2) alors P2 ← Suivant (P2)",
+            "Sinon Inc ← Faux",
+            "FSi",
+            "FSi",
+            "FTQ",
+            "Inclus ← Inc et (P1 = Nil) ;",
+            "Fin ;"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_3",
+      "title": "Exercice 3",
+      "total_exercise_points": "5 Pts",
+      "Question": [
+        {
+          "id": "3.1",
+          "points": "2 Pts",
+          "level": "Procedural",
+          "question_text": "1. Ecrire la procédure Inverser File(F) qui permet d’inverser une file d’attente d’entiers donnée en utilisant une pile. Exemple File=(5, 2, 3, 0) -> (0, 3, 2, 5) ;",
+          "Solution": [
+            "Procedure Inverser_File (F)",
+            "Var X : entier ;",
+            "P : Pile ;",
+            "Debut",
+            "Init_Pile (P) ;",
+            "TQ Non File_Vide (F) Faire",
+            "Défiler (F, X) ;",
+            "Empiler (P,X) ;",
+            "FTQ ;",
+            "TQ Non Pile_Vide (P) Faire",
+            "Dépiler (P, X) ;",
+            "Enfiler (F,X) ;",
+            "FTQ ;",
+            "Fin ;"
+          ]
+        },
+        {
+          "id": "3.2",
+          "points": "1 Pt",
+          "level": "Procedural",
+          "question_text": "2. Calculer la complexité de cette procédure (IverserFile).",
+          "Solution": "La complexité de cette Procedure est O(n)."
+        },
+        {
+          "id": "3.3",
+          "points": "2 Pts",
+          "level": "Procedural",
+          "question_text": "3. Ecrire la procédure Inverser Pile(P) qui permet d’inverser une pile d’entiers donnée en utilisant une file d’attente. Exemple Pile=(5, 2, 3, 0) -> (0, 3, 2, 5) ;",
+          "Solution": [
+            "Procedure Inverser_Pile (P)",
+            "Var X : entier ;",
+            "F : File ;",
+            "Debut",
+            "Init_File (F) ;",
+            "TQ Non Pile_Vide (P) Faire n fois",
+            "Dépiler (P, X) ;",
+            "Enfiler (F, X) ;",
+            "FTQ ;",
+            "TQ Non File_Vide (F) Faire n fois",
+            "Défiler (F, X) ;",
+            "Empiler (P, X) ;",
+            "FTQ ;",
+            "Fin ;"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_4",
+      "title": "Exercice 4",
+      "total_exercise_points": "4 Pts",
+      "Question": [
+        {
+          "id": "4.1",
+          "points": "1 Pt",
+          "level": "Procedural",
+          "introduction_context": "Soit l’arbre binaire de recherche suivant :",
+          "question_text": "1. Donner les résultats des parcours Préfixé, Poste Fixé de cet arbre",
+          "question_diagram": {
+            "description": "A Binary Search Tree (BST) structure. Root node is 'K'. Left child of 'K' is 'D'. Right child of 'K' is 'S'. Node 'D' has a left child 'B' and a right child 'H'. Node 'H' has a left child 'F'. Node 'S' has a right child 'P'. Node 'P' has a left child 'N' and a right child 'R'.",
+            "precise_location": "Page 2 - Question 4.1"
+          },
+          "Solution": "Parcours Préfixé (P, FG, FD): K D B H F S P N R. Parcours PostFixé (FG, FD, P): B F H D N R P S K."
+        },
+        {
+          "id": "4.2",
+          "points": "1 Pt",
+          "level": "Procedural",
+          "question_text": "2. Donner l’arbre après la suppression du nœud « D ».",
+          "Solution": {
+            "description": "A binary tree structure with root node K. Left child D and right child S. Node D has children B and H. Node H has child F. Node S has child P. Node P has children N and R.",
+            "precise_location": "Page 5 - Correction Exercice 4.2"
+          }
+        },
+        {
+          "id": "4.3",
+          "points": "1 Pt",
+          "level": "Procedural",
+          "introduction_context": "Soit le tas suivant :",
+          "question_text": "3. Donner le tas après un retrait.",
+          "question_diagram": {
+            "description": "A Max-Heap structure represented as a binary tree. Root node is 'S'. Level 1: 'K', 'H'. Level 2: 'F', 'I', 'E', 'B'.",
+            "precise_location": "Page 2 - Question 4.3"
+          },
+          "Solution": {
+            "description": "Binary tree result of heap withdrawal.",
+            "precise_location": "Page 5 - Correction Exercice 4.3"
+          }
+        },
+        {
+          "id": "4.4",
+          "points": "1 Pt",
+          "level": "Procedural",
+          "question_text": "4. Donner le tas après l’ajout de « P ».",
+          "Solution": {
+            "description": "A binary tree structure representing a deletion or rotation result. Root node S. Node S has children D and R. Node D has children B and H. Node H has right child F. Node R has child P. Node P has child N.",
+            "precise_location": "Page 5 - Correction Exercice 4.4"
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,71 @@
+{
+  "metadata": {
+    "module": "Examen",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "title": "Questions",
+      "introduction_context": "",
+      "Question": [
+        {
+          "question_text": "Qu'est ce qu'un langage de balise? Quelles en sont les utilisations?",
+          "Solution": "XML est un méta-langage universel pour représenter les données échangées sur le Web qui permet au développeur de délivrer du contenu depuis les applications à d'autres applications ou aux navigateurs",
+          "level": "Conceptual"
+        },
+        {
+          "question_text": "Un avantage de XML est de permettre la définition de DTD. Rappelez ce qu'est une DTD et à quoi sert une DTD ? Quelles sont les inconvénients de DTD qui mènent les chercheurs à définir d'autres langages de description des documents XML.",
+          "Solution": "La DTD est définie comme une grammaire du langage dont les phrases sont des documents XML (instances). Elle permet de définir le «vocabulaire» et la structure qui seront utilisés dans le document XML.\nLes inconvénients de DTD qui mènent les chercheurs à définir d'autres langages de description des documents XML:\n- Pas de types de données\n- difficile à interpréter par le récepteur\n- difficile à traduire en schéma objets\n- Pas en XML\n- langage spécifique",
+          "level": "Conceptual"
+        },
+        {
+          "question_text": "La distance entre XML et les différents environnements de programmation est très vague. Comment peut-on résoudre ce problème ? Expliquer les principes des approches (les plus connues) proposées",
+          "Solution": "On peut manipuler les documents XML grâce à des analyseurs de documents appelés parseurs et qui ont en charge l'interprétation et le traitement des documents XML. Il existe un certain nombre de parseurs disponibles sous forme d'APIs. Ces API sont implémentées sur la base de 2 modèles:\n- Le DOM XML (Document Objet Model) permettant la manipulation d'un document XML après l'avoir représenté en mémoire sous la forme d'un arbre d'objets.\n- Le modèle SAX (Simple API for XML) permettant la manipulation d'un document XML au fur et à mesure de la lecture de celui-ci. L'extraction des données est basée sur une gestion d'événements (création d'un document, d'un élément ...).",
+          "level": "Conceptual"
+        },
+        {
+          "question_text": "Quelles sont les contraintes qui doivent être vérifiées par un document XML bien formé.",
+          "Solution": "Les contraintes qui doivent être vérifiées par un document XML bien formé:\n- Guillemets (ou apostrophes) obligatoires autour des valeurs\n- Les éléments vides utilisent une notation spécifique\n- Les balises doivent être correctement imbriquées\n- Le document a une seule racine\n- Un attribut est unique dans son élément",
+          "level": "Factual"
+        }
+      ]
+    },
+    {
+      "title": "Exercice 1",
+      "introduction_context": "Voici un exemple d'une bibliothèque au format bibtex :\n```\n@InProceedings{BelkSanto-07, author ={Belkhir, Walid and Santocanale, Luigi}, title = {Undirected Graphs of Entanglement 2}, booktitle = {Annual Conference on Foundations of Software Technology and Theoretical Computer Science}, year={2007}, pages = {508-519}, volume = {4855}, series = {LNCS}, publisher = {Springer}, } @Article{BelkSanto-08, author = {Belkhir, Walid and Santocanale, Luigi}, title = {The variable hierarchy for the games mu-calculus}, journal = {Annals of Pure and Applied Logic}, volume = {161}, year = {2010}, pages = {690-707}, }\n```\nChaque ligne commençant par un @ introduit une nouvelle référence bibliographique, vous avez ensuite le type de publication (InProceedings, Article ou Book), puis l'identifiant unique de la publication. Vous avez ensuite une série de couples attributs/valeurs, chaque couple étant codé sur une ligne. Les champs indispensables sont : author, title, year, les autres sont optionnels. L'ordre des champs n'est pas important.",
+      "Question": [
+        {
+          "question_text": "Proposer un document XML (élégant!) qui correspond à la bibliothèque bibtex.",
+          "Solution": "",
+          "level": "Metacognitive"
+        },
+        {
+          "question_text": "Proposer une DTD pour ce document XML.",
+          "Solution": null,
+          "level": "Metacognitive"
+        },
+        {
+          "question_text": "Ecrire une expression XPath qui permet de:\n- a) Récupérer toutes les publications de type article.\n- b) Récupérer les publications datées avant 2006 et ayant Belkhir et Santocanale comme auteurs.\n- c) Récupérer tous les volumes (c-à-d les valeur des champs volume) des publications dont le publisher est Springer.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "title": "Exercice 2",
+      "introduction_context": "On considère le schema XML suivant\n```\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<xsd:schema xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">\n<xsd:complexType name=\"I\" abstract=\"true\">\n<xsd:simpleContent>\n<xsd:extension base=\"xsd:integer\">\n<xsd:attribute name=\"sign\">\n<xsd:simpleType>\n<xsd:restriction base=\"xsd:string\">\n<xsd:enumeration value=\"+\"/>\n<xsd:enumeration value=\"-\"/>\n</xsd:restriction>\n</xsd:simpleType>\n</xsd:attribute>\n</xsd:extension>\n</xsd:simpleContent>\n</xs极Type>\n<xsd:complexType name=\"P\">\n<xsd:simpleContent>\n<xsd:restriction base=\"I\">\n<xsd:simpleType>\n<xsd:restriction base=\"xsd:nonNegativeInteger\"/>\n</xsd:simpleType>\n<xsd:attribute name=\"sign\" use=\"prohibited\"/>\n</xsd:restriction>\n</xsd:simpleContent>\n</xs极Type>\n<xsd:element name=\"root\">\n<xsd:complexType>\n<xs极Sequence>\n<xsd:element name=\"i\" type=\"I\" minOccurs=\"2\" maxOccurs=\"3\"/>\n</xsd:sequence>\n</xsd:complexType>\n</xsd:element>\n</xsd:schema>\n```",
+      "Question": [
+        {
+          "question_text": "Donner un document valide pour ce schéma.",
+          "Solution": "",
+          "level": "Procedural"
+        },
+        {
+          "question_text": "Donner une DTD équivalente qui valide les mêmes documents que ce schéma.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    }
+  ]
+}

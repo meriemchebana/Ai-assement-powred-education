@@ -1,0 +1,268 @@
+{
+  "metadata": {
+    "module": "SEII",
+    "duration": "",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 1",
+      "total_exercise_points": null,
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": null,
+          "question_text": "Comment traiter l'interblocage ?",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "Partie_2",
+          "points": null,
+          "introduction_context": "Considérons l'attribution des ressources suivante :",
+          "constraints": [
+            "A détient R et demande S.",
+            "B demande T.",
+            "C demande S.",
+            "D détient U et demande S et T.",
+            "E détient T et demande V.",
+            "F détient W et demande S.",
+            "G détient V et demande U."
+          ],
+          "question_text": "Construire le graphe d'allocation des ressources. Y a-t-il un interblocage ? Si oui, quels sont les processus concernés ?",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "Partie_3",
+          "points": null,
+          "introduction_context": "On considère le système suivant, avec 5 processus et 4 ressources, avec plusieurs instances de chaque ressource (3, 14, 12, 12) :",
+          "banker_table": {
+            "allocation": {
+              "headers": [
+                "",
+                "R1",
+                "R2",
+                "R3",
+                "R4"
+              ],
+              "rows": [
+                [
+                  "P1",
+                  "0",
+                  "0",
+                  "1",
+                  "2"
+                ],
+                [
+                  "P2",
+                  "1",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                [
+                  "P3",
+                  "1",
+                  "3",
+                  "5",
+                  "4"
+                ],
+                [
+                  "P4",
+                  "0",
+                  "6",
+                  "3",
+                  "2"
+                ],
+                [
+                  "P5",
+                  "0",
+                  "0",
+                  "1",
+                  "4"
+                ]
+              ]
+            },
+            "max": {
+              "headers": [
+                "",
+                "R1",
+                "R2",
+                "R3",
+                "R4"
+              ],
+              "rows": [
+                [
+                  "P1",
+                  "0",
+                  "0",
+                  "1",
+                  "2"
+                ],
+                [
+                  "P2",
+                  "2",
+                  "7",
+                  "5",
+                  "0"
+                ],
+                [
+                  "P3",
+                  "2",
+                  "3",
+                  "5",
+                  "0"
+                ],
+                [
+                  "P4",
+                  "0",
+                  "6",
+                  "5",
+                  "2"
+                ],
+                [
+                  "P5",
+                  "0",
+                  "6",
+                  "5",
+                  "6"
+                ]
+              ]
+            }
+          },
+          "Question": [
+            {
+              "id": "1",
+              "question_text": "Donner la matrice Besoin (Besoin = Max – Allocation) et le vecteur Disponible.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "2",
+              "question_text": "L'état est-il sûr ?",
+              "Solution": null,
+              "level": "Conceptual"
+            },
+            {
+              "id": "3",
+              "question_text": "P2 effectue la requête (0, 4, 2, 0). Peut-elle être satisfaite immédiatement ?",
+              "Solution": null,
+              "level": "Conceptual"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 2",
+      "total_exercise_points": null,
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": null,
+          "question_text": "Rappelez le concept des sémaphores en mettant en évidence le fonctionnement des primitives P et V.",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "Partie_2",
+          "points": null,
+          "introduction_context": "Soit P0 et P1 deux processus parallèles se partageant deux ressources R1 et R2. Les algorithmes de ces deux processus sont écrits comme suit :",
+          "pseudocode": {
+            "declarations": [
+              "vars1, s2 : sémaphore init 1, 1 ;"
+            ],
+            "processes": [
+              {
+                "name": "Processus P0",
+                "code": [
+                  "Répéter",
+                  "(1) P(s1) ;",
+                  "(2) <utiliser R1> ;",
+                  "(3) P(s2) ;",
+                  "<utiliser R1 et R2>",
+                  "V(s1) ;",
+                  "V(s2) ;",
+                  "Jusqu'à faux",
+                  "Fin."
+                ]
+              },
+              {
+                "name": "Processus P1",
+                "code": [
+                  "Répéter",
+                  "(1) P(s2) ;",
+                  "(2) <utiliser R2> ;",
+                  "(3) P(s1) ;",
+                  "<utiliser R1 et R2>",
+                  "V(s2) ;",
+                  "V(s1) ;",
+                  "Jusqu'à faux",
+                  "Fin."
+                ]
+              }
+            ]
+          },
+          "question_text": "A quelle situation anormale peut conduire l'exécution de ces deux processus ?",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "Partie_3",
+          "points": null,
+          "question_text": "Donner une solution à ce problème.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 3",
+      "total_exercise_points": null,
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": null,
+          "introduction_context": "Le salon de coiffure dispose d'un coiffeur C, d'un fauteuil F où le client s'assoit pour se faire coiffer, de N sièges pour attendre et de N sièges pour patienter.",
+          "scenario": [
+            "S'il n'y a pas de clients, le coiffeur C somnole sur le fauteuil F.",
+            "Lorsqu'un client arrive et que C dort, il le réveille, et C se lève. Le client s'assoit sur le fauteuil F et se fait coiffer.",
+            "Si un client arrive pendant que le coiffeur travaille : si l'un des N sièges est libre, le client s'assoit et attend ; sinon, il part."
+          ],
+          "Question": [
+            {
+              "id": "1",
+              "question_text": "Définir les données nécessaires à la simulation du problème.",
+              "Solution": null,
+              "level": "Factual"
+            },
+            {
+              "id": "2",
+              "question_text": "Écrire les procédures de processus permettant de synchroniser les activités du coiffeur et de ses clients à l'aide de : sémaphores / moniteurs.",
+              "sub_questions": [
+                {
+                  "id": "2.a",
+                  "question_text": "sémaphores",
+                  "Solution": null,
+                  "level": "Factual"
+                },
+                {
+                  "id": "2.b",
+                  "question_text": "moniteurs",
+                  "Solution": null,
+                  "level": "Factual"
+                }
+              ],
+              "Solution": null,
+              "level": "Procedural"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

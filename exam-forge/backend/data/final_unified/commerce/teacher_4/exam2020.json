@@ -1,0 +1,188 @@
+{
+  "metadata": {
+    "module": "الاستدلال الإحصائي",
+    "duration": "",
+    "language": "arabic"
+  },
+  "exercises": [
+    {
+      "id": "التمرين_الأول",
+      "title": "التمرين 1 (4 نقاط)",
+      "total_exercise_points": "4",
+      "introduction_context": "لتكن {X₁, X₂, ..., Xₙ} عينة عشوائية بسيطة حجمها n=100 مسحوبة من مجتمع X متوسطه μ=0 وتباينه σ². نعرف الإحصائيات التالية: V₁ = (1/100)·Σᵢ₌₁¹⁰⁰ Xᵢ² ، V₂ = S²·(1/σ²) حيث S² = (1/99)·Σᵢ₌₁¹⁰⁰(Xᵢ - X̄)². نفترض في ما بعد أن توزيع المجتمع طبيعي.",
+      "note": null,
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "أحسب P[Σᵢ₌₁ⁿ 5·Xᵢ > σ].",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "أوجد توزيع المعاينة للإحصائيتين V₁ و V₂. بررّ إجابتك.",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "3",
+          "question_text": "احسب الاحتمالات الآتية: P[X₁² + X₂² > 6·σ²] ، P[X ≤ 0.13·S] ، P[S² > (4/3)·σ²].",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "4",
+          "question_text": "أحسب COV[(X₁+X₂), (X₁-X₂)]. ماذا تستنتج؟",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "التمرين_الثاني",
+      "title": "التمرين 2 (5 نقاط)",
+      "total_exercise_points": "5",
+      "introduction_context": "لتكن {X₁, X₂, ..., Xₙ} عينة عشوائية بسيطة مسحوبة من مجتمع X له التوزيع المنتظم المستمر على المجال Rₓ = [k, k+θ] حيث k هي ثابت معلوم (k>0) وθ معلمة مجهولة. دالة الكثافة الاحتمالية لـ X هي: f(x;θ) = (1/θ)·1_{x∈Rₓ}.",
+      "note": null,
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "أحسب E[X] و V[X].",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "أوجد مقدر طريقة العزوم θ̂ₘ للمعلمة θ.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "question_text": "هل هذا المقدر متقارب (متسق)؟ أحسب المخاطرة التربيعية لـ θ̂ₘ.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "4",
+          "question_text": "من أجل n كبير بما فيه الكفاية، أعط التوزيع التقاربي لـ θ̂ₘ.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "5",
+          "question_text": "أنشئ مجال ثقة (تقاربي) حول θ بدرجة ثقة 90%.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "6",
+          "question_text": "ماذا يمكن القول حول طول هذا المجال عندما تزيد قيمة الثابتة k؟",
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "id": "التمرين_الثالث",
+      "title": "التمرين 3 (6 نقاط)",
+      "total_exercise_points": "6",
+      "introduction_context": "لتكن {X₁, X₂, ..., Xₙ} عينة عشوائية بسيطة حجمها n من مجتمع طبيعي متوسطه μ وتباينه σ² مجهولان. نعتبر الإحصائية W = ((n-1)·S²)/σ² حيث S² = (1/(n-1))·Σᵢ₌₁ⁿ(Xᵢ - X̄)².",
+      "note": "نتائج العينة: Σᵢ₌₁¹⁰⁰ xᵢ = 2250 و Σᵢ₌₁¹⁰⁰(xᵢ - x̄)² = 15.",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "ما هو توزيع الإحصائية W؟ لماذا؟",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "2",
+          "question_text": "أنشئ مجال ثقة حول المعلمة σ² بدرجة ثقة تساوي (1-α).",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "question_text": "نفترض الآن أن توزيع المجتمع مجهول. هل المقدر S² غير متحيز؟ لماذا؟",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "4",
+          "question_text": "إذا كان n كبير بما فيه الكفاية، نعلم أن الإحصائية S تتبع تقريبا التوزيع الطبيعي بمتوسط σ وتباين σ²/(2n). استعمل هذه النتيجة لإنشاء مجال ثقة حول المعلمة σ بدرجة ثقة تساوي (1-α).",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "5",
+          "question_text": "أحسب مجال ثقة حول المعلمتين σ² و σ بدرجة ثقة تساوي 95% باستعمال نتائج السؤالين 2 و 4.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "التمرين_الرابع",
+      "title": "التمرين 4 (5 نقاط)",
+      "total_exercise_points": "5",
+      "introduction_context": "نعتبر مجتمعا X دالة كثافته الاحتمالية معطاة بالصيغة الآتية: f(x,k,θ) = { x^(k-1)·e^(-x/θ) / ((k-1)!·θᵏ) إذا x≥0 ، 0 إذا x<0 }. حيث k∈ℕ* معلومة وθ>0 معلمة مجهولة يراد تقديرها. نعلم أن E(X)=k·θ و V(X)=k·θ². نسحب عينة عشوائية بسيطة {X₁, X₂, ..., Xₙ} بحجم n من هذا المجتمع.",
+      "note": null,
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "أكتب دالة الترجيح ثم أوجد المقدر θ̂ᵥ للمعلمة θ باستعمال طريقة الترجيح الأعظم.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "أوجد كمية معلومة فيشر Fisher I(θ). هل θ̂ᵥ مقدر غير متحيز وله أدنى تباين؟",
+          "Solution": null,
+          "level": "Metacognitive"
+        },
+        {
+          "id": "3",
+          "question_text": "ما هو التوزيع التقاربي للمقدر θ̂ᵥ؟",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "4",
+          "question_text": "إذا كان حجم العينة n=100، اختر ثم أجب على إحدى السؤالين التاليين:",
+          "sub_questions": [
+            {
+              "id": "4.1",
+              "question_text": "أنشئ مجال ثقة حول المعلمة θ بدرجة ثقة تساوي 95%.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "4.2",
+              "question_text": "نريد إجراء الاختبار: H₀: θ=1 ضد الفرضية البديلة H₁: θ>1 ونقبل الفرضية H₀ إذا وفقط إذا كان k·θ̂ᵥ > 1 - (1/5)√(k/n). ما هو احتمال ارتكاب الخطأ من الصنف الأول؟ ما هو احتمال ارتكاب الخطأ من الصنف الثاني لقيمة θ=1/2؟",
+              "Solution": null,
+              "level": "Procedural"
+            }
+          ],
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "سؤال_إضافي",
+      "title": "سؤال إضافي (2 نقطة إضافية)",
+      "total_exercise_points": "2",
+      "introduction_context": "على أساس معطيات التمرين الثاني:",
+      "note": null,
+      "Question": [
+        {
+          "id": "bonus",
+          "question_text": "أوجد مقدر الترجيح الأعظم θ̂ᵥ للمعلمة θ ثم استنتج دالته الاحتمالية. هل المقدر θ̂ᵥ غير متحيز؟ غير متحيز بالتقارب؟",
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    }
+  ]
+}

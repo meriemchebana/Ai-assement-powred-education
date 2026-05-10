@@ -1,0 +1,63 @@
+#!/usr/bin/env bash
+# usage: ./tunnel [start|stop|restart|status|logs|url]
+set -euo pipefail
+
+ROOT="$(cd "$(dirname "$0")" && pwd)"
+CONFIG="$ROOT/ecosystem.config.cjs"
+TUNNEL="exam-forge-tunnel"
+LOG="$ROOT/logs/tunnel.err.log"
+
+cmd="${1:-url}"
+
+case "$cmd" in
+  start)
+    pm2 start "$CONFIG" --only "$TUNNEL"
+    pm2 save
+    echo "Waiting for tunnel URL..."
+    for i in $(seq 1 15); do
+      url=$(grep -oP 'https://\S+\.trycloudflare\.com' "$LOG" 2>/dev/null | tail -1)
+      if [[ -n "$url" ]]; then
+        echo "$url"
+        exit 0
+      fi
+      sleep 1
+    done
+    echo "Tunnel started but URL not found yet — run: ./tunnel url"
+    ;;
+  stop)
+    pm2 stop "$TUNNEL"
+    ;;
+  restart)
+    pm2 restart "$TUNNEL"
+    echo "Waiting for new tunnel URL..."
+    truncate -s 0 "$LOG"
+    for i in $(seq 1 15); do
+      url=$(grep -oP 'https://\S+\.trycloudflare\.com' "$LOG" 2>/dev/null | tail -1)
+      if [[ -n "$url" ]]; then
+        echo "$url"
+        exit 0
+      fi
+      sleep 1
+    done
+    echo "Tunnel restarted but URL not found yet — run: ./tunnel url"
+    ;;
+  status)
+    pm2 list | grep "$TUNNEL"
+    ;;
+  logs)
+    pm2 logs "$TUNNEL" --lines 50
+    ;;
+  url)
+    url=$(grep -oP 'https://\S+\.trycloudflare\.com' "$LOG" 2>/dev/null | tail -1)
+    if [[ -n "$url" ]]; then
+      echo "$url"
+    else
+      echo "No URL found — is the tunnel running? Try: ./tunnel start"
+      exit 1
+    fi
+    ;;
+  *)
+    echo "usage: $0 [start|stop|restart|status|logs|url]"
+    exit 1
+    ;;
+esac

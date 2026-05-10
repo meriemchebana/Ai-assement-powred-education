@@ -1,0 +1,214 @@
+{
+  "metadata": {
+    "module": "ALGO1",
+    "duration": "16:30-18:00",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_Huffman",
+      "title": "Exercice Huffman",
+      "total_exercise_points": "20 pts",
+      "introduction_context": "On souhaite écrire les algorithmes permettant de créer l'arbre de Huffman correspondant à une chaîne de caractères donnée, tel que vu dans le cours. Pour celà, on vous propose de commencer par créer une liste linéaire chainée contenat les caractères de la chaîne à coder avec leurs fréquences d'apparition et des pointeurs vers leurs noeuds correspondants dans l'arbre de Huffman, tel que représenté dans la figure suivante :",
+      "diagram": {
+        "preceding_text": "Chaîne : \"structure arbre\"",
+        "description": "The diagram illustrates the relationship between a Linked List (Liste des fréquences) and a Huffman Tree with leaf nodes pointing back to list elements.",
+        "precise_location": "Page 1 - Left column, center"
+      },
+      "Question": [
+        {
+          "id": "1",
+          "points": "2",
+          "level": "Conceptual",
+          "introduction_context": "Initialement, l’arbre et la liste des fr´equneces sont vides. Pour r´ealiserce travail, on vous demande de :",
+          "question_text": "1. Donner les structures de données nécessaires à la représentation en mémoire de la liste des fréquences et de l'arbre de Hauffman avec les initialisations nécessaires.",
+          "Solution": [
+            "Type TNoeud = Structure",
+            "    Car : caractère ;",
+            "    FG,FD : Pointeur(TNoeud) ;",
+            "Fin ;",
+            "Type TMaillon = Structure",
+            "    Car : caractère ;",
+            "    Freq : entier ;",
+            "    Noeud : Pointeur(TNoeud) ;",
+            "    Suivant : Pointeur(TMaillon) ;",
+            "Fin ;",
+            "Var Racine : Pointeur(TNoeud) ; // Initialisée Nil",
+            "    TeteFreq : Pointeur(TMaillon) ; // Initialisée Nil"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "2",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "2. Ecrire la procédure AjouterCar(C :caractère) permettant d'ajouter le caractère C à la liste des fréquences, avec un pointeur nil au nœud de l'arbre. (si C existe déjà, on incrémente uniquement sa fréquence)",
+          "Solution": [
+            "Procédure AjouterCar( C : caractère);",
+            "Var P : Pointeur(TMaillon);",
+            "Début",
+            "    P ← TeteFreq ;",
+            "    Tant que ((P ≠ Nil) et (Car(P) ≠ C)) faire",
+            "        P ← Suivant(P);",
+            "    Fin TQ;",
+            "    Si (P ≠ Nil) Alors",
+            "        Aff_Freq(P, Freq(P)+1)",
+            "    Sinon",
+            "        Allouer(P);",
+            "        Aff_Car(P, C);",
+            "        Aff_Freq(P, 1);",
+            "        Aff_Noeud(P, Nil);",
+            "        Aff_Adr(P, TeteFreq);",
+            "        TeteFreq ← P ;",
+            "    Fin Si;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "3",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "3. Ecrire la procédure CreerListeFreq(Ch :chaîne) permettant de créer la liste de tête TeteFreq, contenant les caractères de la chaîne Ch avec leurs fréquences et des pointeurs des pointeurs nil vers l'arbre, en utilisant la procédure précédente.",
+          "Solution": [
+            "Procédure CreerListeFreq( Ch : chaîne);",
+            "Var i : entier;",
+            "Début",
+            "    TeteFreq ← Nil;",
+            "    Pour i de 1 à Longueur(Ch) faire",
+            "        AjouterCar(Ch[i])",
+            "    Fin Pour;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "4",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "4. Ecrire la procédure CreerFeuilles permettant de créer, pour chaque caractère de la liste des fréquences, un nœud feuille de l'arbre contenant ce caractère, tel que présenté dans la figure suivante :",
+          "diagram": {
+            "preceding_text": "Exemple :",
+            "description": "Detailed view of the mapping between the frequency list and tree leaves.",
+            "precise_location": "Page 1 - Right column, below Question 4"
+          },
+          "Solution": [
+            "Procédure CeerFeuilles();",
+            "Var P : Pointeur(TMaillon);",
+            "    N : Pointeur(TNoeud);",
+            "Début",
+            "    P ← TeteFreq;",
+            "    Tant que (P ≠ Nil) faire",
+            "        Allouer(N);",
+            "        Aff_Car(N, Car(P));",
+            "        Aff_FG(N, Nil);",
+            "        Aff_FD(N, Nil);",
+            "        Aff_Noeud(P, N);",
+            "        P ← Suivant(P);",
+            "    Fin TQ;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "5",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "5. Ecrire la fonction GetMinFreq permettant de retourner le pointeurs vers le caractère de fréquence minimale dans la liste des fréquences tout en le supprimant de la liste sans le libérer.",
+          "Solution": [
+            "Fonction GetMinFreq() : Pointeur(TMaillon);",
+            "Var P, Prec, PrecMin, PMin : Pointeur(TMaillon);",
+            "Début",
+            "    P ← TeteFreq;",
+            "    PMin ← P;",
+            "    PrecMin ← Nil;",
+            "    Prec ← Nil;",
+            "    Tant que (P ≠ Nil) faire",
+            "        Si (Freq(P) < Freq(PMin)) Alors",
+            "            PMin ← P;",
+            "            PrecMin ← Prec;",
+            "        Fin Si;",
+            "        Prec ← P;",
+            "        P ← Suivant(P);",
+            "    Fin TQ;",
+            "    Si (PrecMin ≠ Nil) Alors",
+            "        Aff_Adr(PrecMin, Suivant(PMin));",
+            "    Sinon",
+            "        Si (TeteFreq ≠ Nil) Alors",
+            "            TeteFreq ← Suivant(TeteFreq);",
+            "        Fin Si;",
+            "    Fin Si;",
+            "    GetMinFreq ← PMin;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "6",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "6. Ecrire la procédure AjouterNoeud(P1,P2 :Pointeur(TMaillon)) permettant de : (a) Créer un nouveau nœud de l’arbre ayant deux fils, les nœuds pointés par P1 et P2, (b) Ajouter un nouveau maillon à la liste des fréquences avec une fréquence égale à la somme des fréquences de P1 et P2, et avac un pointeur vers le nouveau nœud crée de l’arbre.",
+          "Solution": [
+            "Procédure AjouterNoeud( P1, P2 : Pointeur(TMaillon));",
+            "Var P : Pointeur(TMaillon) ;",
+            "    N : Pointeur(TNoeud) ;",
+            "Début",
+            "    Allouer(N) ;",
+            "    Aff_Car(N, ’?’) ;",
+            "    Aff_FG(N, Noeud(P1)) ;",
+            "    Aff_FD(N, Noeud(P2)) ;",
+            "    Allouer(P) ;",
+            "    Aff_Car(P, ’?’) ;",
+            "    Aff_Freq(P, Freq(P1) + Freq(P2)) ;",
+            "    Aff_Noeud(P, N) ;",
+            "    Aff_Adr(P, TeteFreq) ;",
+            "    TeteFreq ← P ;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "7",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "7. Ecrire la procédure CreerArbreHuffman(Ch :chaîne) permettant de créer l’arbre de Huffman correspondant à la chaîne de caractères Ch en utilisant les procédures et la fonction précédentes.",
+          "diagram": {
+            "preceding_text": "Exemple :",
+            "description": "The diagram visualizes the 'AjouterNoeud' procedure in two states. Top: Shows TeteFreq pointing to list nodes ('s', 't') and external nodes P1 ('a',1) and P2 ('b',1). An arrow labeled 'AjouterNoeud' points to the bottom state: A new node (freq: 2) is added to the start of the list, pointing to a parent tree node ('?') that has P1 and P2 as children, followed by the rest of the original list.",
+            "precise_location": "Page 2 - Upper half of the page"
+          },
+          "Solution": [
+            "Procédure CreerArbreHuffman( Ch : chaîne);",
+            "Var P1, P2 : Pointeur(TMaillon) ;",
+            "Début",
+            "    CreerListeFreq(Ch) ;",
+            "    CreerFeuilles ;",
+            "    Tant que ((TeteFreq ≠ Nil) et (Suivant(TeteFreq) ≠ Nil)) faire",
+            "        P1 ← GetMinFreq ;",
+            "        P2 ← GetMinFreq ;",
+            "        AjouterNoeud(P1, P2) ;",
+            "        Libérer(P1) ;",
+            "        Libérer(P2) ;",
+            "    Fin TQ;",
+            "    Si (TeteFreq ≠ Nil) Alors",
+            "        Racine ← Noeud(TeteFreq) ;",
+            "        Libérer(TeteFreq) ;",
+            "    Sinon",
+            "        Racine ← Nil ;",
+            "    Fin Si;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        }
+      ],
+      "footer_note": "Barème : 2 + 3 + 3 + 3 + 3 + 3 + 3 ★★★ Bonne chance ★★★ A.Djeffal"
+    }
+  ]
+}

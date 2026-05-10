@@ -1,0 +1,99 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Conceptual",
+          "question_text": "Les identifiants de fichiers distants se présentent, dans la plupart des cas, comme suit: user@hostname:filename Les parties des identifiants sont constituées de mots, qui sont des séquences d'une ou plusieurs lettres et chiffres. La partie user contient un seul mot. La partie hostname: se compose d'un ou plusieurs mots séparés par des points (comme dans www.uio.no),. filename se compose d'un ou plusieurs mots séparés par des barres obliques (/) avec une barre oblique facultative au début et / ou à la fin. La partie « user @» est facultative et peut être omise. La totalité de «user @ hostname:» peut également être omise, y compris les deux-points de fin «:». La partie «user @» peut ne pas apparaître mais la partie hostname: doit toujours présente.",
+          "Solution": "word = [a-zA-Z0-9]+\n((word@)?word(\\.word)*:)?(/)?word(/word)*(/)?",
+          "solution_regex": "((word@)?word(\\.word)*:)?(/)?word(/word)*(/)?",
+          "solution_definitions": [
+            "word = [a-zA-Z0-9]+"
+          ]
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "Soit l'alphabet A = {a,b}. Définir les expressions régulières pour les langages ci-dessous.",
+          "sub_questions": [
+            {
+              "id": "2.a",
+              "level": "Factual",
+              "question_text": "Chaque a est suivi d'au moins trois b.",
+              "Solution": "b*(abbb b*)*"
+            },
+            {
+              "id": "2.b",
+              "level": "Procedural",
+              "question_text": "Les mots contiennent un nombre impair de a.",
+              "Solution": "b*ab*(ab*ab*)*"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (12 pts)",
+      "total_exercise_points": "12",
+      "introduction_context": "Soit G la grammaire suivante :",
+      "grammar": [
+        "S → Aa | Bb",
+        "A → Sa | ε",
+        "B → Sb | ε"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "question_text": "La grammaire G nécessite-t-elle la factorisation à gauche ? Si oui modifier toutes les règles qui nécessitent la factorisation.",
+          "Solution": "oui La modifier des règles qui nécessite la factorisation. S → Aa | Bb on a premier= (S)= premier (A)⋃premier (B) mais premier (A)∩ premier (B)!={∮} Alors Il faire un genre de factorisation de la partie droite la règle (1)",
+          "solution_steps": [
+            "S → Aa | Bb",
+            "S → (Sa | ε)a | (Sb | ε)b",
+            "S → Saa | a | Sbb | b",
+            "S → S(aa | bb) | a | b",
+            "Grammaire résultante :",
+            "S  → SS' | a | b",
+            "S' → aa | bb",
+            "Les non-terminaux A et B sont supprimés car ils ne sont plus accessibles"
+          ]
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "Est-ce que G contient la récursivité gauche ? Si oui éliminer tous les cas de récursivité gauche.",
+          "Solution": "Oui. S → SS' | a | b contient une récursivité gauche directe.",
+          "solution_grammar_after_elimination": [
+            "S  → aS'' | bS''",
+            "S'' → S'S'' | ε",
+            "S' → aa | bb"
+          ]
+        },
+        {
+          "id": "3",
+          "level": "Procedural",
+          "question_text": "Construire la table d'analyse de la grammaire.",
+          "solution_premiers_suivants": null,
+          "solution_ll1_table": null
+        },
+        {
+          "id": "4",
+          "level": "Metacognitive",
+          "question_text": "La grammaire résultante est-elle de type LL(1) ? Justifier.",
+          "Solution": null
+        }
+      ]
+    }
+  ]
+}

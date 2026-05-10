@@ -1,0 +1,275 @@
+{
+  "metadata": {
+    "module": "ALGO1",
+    "duration": "8:00-9:30",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_1",
+      "title": "Exercice 1 Tas",
+      "total_exercise_points": "10 pts",
+      "introduction_context": "Soit les valeurs des clés suivantes : 38, 5, 2, 17, 10, 3, 16, 22, 11, 33",
+      "Question": [
+        {
+          "id": "1.1",
+          "points": "1.5",
+          "level": "Procedural",
+          "introduction_context": "Soit les valeurs des cl´es suivantes :",
+          "question_text": "1. Donner le tas dynamique obtenu après l'insertion de ces clés dans l'ordre.",
+          "Solution": {
+            "description": "A max-heap represented as a binary tree with 10 nodes. Root node: 38. Level 2: 33, 16. Level 3: 17, 22, 3, 2. Level 4: 5, 11, 10.",
+            "precise_location": "Page 2 - Upper left column"
+          },
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.2",
+          "points": "1.5",
+          "level": "Procedural",
+          "question_text": "2. Donner le tas statique correspondant.",
+          "Solution": {
+            "description": "A horizontal array representation: [1]:38, [2]:33, [3]:16, [4]:17, [5]:22, [6]:3, [7]:2, [8]:5, [9]:11, [10]:10.",
+            "precise_location": "Page 2 - Middle left column"
+          },
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.3",
+          "points": "1",
+          "level": "Factual",
+          "question_text": "3. Donner la déclaration des structures de données permettant de représenter en mémoire le tas statique précédent.",
+          "Solution": [
+            "Var Tas : Tableau[1..NMax] de entier",
+            "N : entier ; // nombre d’éléments dans le tas, initialisé à 0"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.4",
+          "points": "2.5",
+          "level": "Procedural",
+          "question_text": "4. Ecrire la procédure Enfiler(x) permettant d'ajouter au tas statique la valeur x.",
+          "Solution": [
+            "Procédure Enfiler( x : entier ;);",
+            "Var P,Pere : entier ;",
+            "Début",
+            "    Si (N=NMax) Alors",
+            "        Ecrire(’le tas est plein’)",
+            "    Sinon",
+            "        N ← N+1;",
+            "        Tas[N] ← x;",
+            "        P ← N;",
+            "        Pere ← N div 2;",
+            "        Tant que ((P > 1) et (Tas[Pere] < Tas[P])) faire",
+            "            x ← Tas[Pere];",
+            "            Tas[Pere] ← Tas[P];",
+            "            Tas[P] ← x;",
+            "            P ← Pere;",
+            "            Pere ← P div 2;",
+            "        Fin TQ;",
+            "    Fin Si;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.5",
+          "points": "2.5",
+          "level": "Procedural",
+          "question_text": "5. Ecrire la fonction Défiler permettant de défiler une clé du tas statique.",
+          "Solution": [
+            "Fonction Defiler() : entier;",
+            "Var P,Fils1,Fils2,PMax,x : entier ;",
+            "Début",
+            "  Si (N=0) Alors",
+            "    Ecrire(’le tas est vide’)",
+            "  Sinon",
+            "    Defiler ← Tas[1] ;",
+            "    Tas[1] ← Tas[N] ;",
+            "    N ← N-1 ;",
+            "    P ← 1;",
+            "    Fils1 ← 2 ;",
+            "    Fils2 ← 3 ;",
+            "    Tant que (((Fils1 ≤ N) et (Tas[P] < Tas[Fils1]))",
+            "    ou ((Fils2 ≤ N) et (Tas[P] < Tas[Fils2]))) faire",
+            "      Si (Fils2 > N) Alors",
+            "        PMax ← Fils1",
+            "      Sinon",
+            "        Si (Tas[Fils1] > Tas[Fils2]) Alors",
+            "          PMax ← Fils1",
+            "        Sinon",
+            "          PMax ← Fils2",
+            "        Fin Si;",
+            "      Fin Si;",
+            "      x ← Tas[P] ;",
+            "      Tas[P] ← Tas[PMax] ;",
+            "      Tas[PMax] ← x ;",
+            "      P ← PMax ;",
+            "      Fils1 ← P * 2 ;",
+            "      Fils2 ← P * 2 + 1 ;",
+            "    Fin TQ;",
+            "  Fin Si;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.6",
+          "points": "1",
+          "level": "Procedural",
+          "question_text": "6. Donner le tas statique de la question 2, après les appels suivants : Enfiler(4) ; Enfiler(14) ; Défiler ; Enfiler(1) ; Défiler ;",
+          "Solution": {
+            "description": "A horizontal array showing updated values: [1]:22, [2]:17, [3]:16, [4]:11, [5]:10, [6]:14, [7]:2, [8]:5, [9]:1, [10]:3, [11]:4.",
+            "precise_location": "Page 3 - Top right column"
+          },
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        }
+      ]
+    },
+    {
+      "id": "Exercice_2",
+      "title": "Exercice 2 LLCs",
+      "total_exercise_points": "10 pts",
+      "introduction_context": "On souhaite représenter les polynômes par des listes linéaires chaînées, où chaque terme d'un polynôme est rangé dans un maillon de la liste contenant le degré du terme et le coefficient correspondant.",
+      "diagram": {
+        "preceding_text": "Exemple : Le polynôme $2x^5 + 3x^4 + \\frac{1}{2}x^2 + 1$ est représentée par la liste suivante :",
+        "description": "A horizontal linked list representing a polynomial with nodes [2|5], [3|4], [0.5|2], [1|0].",
+        "precise_location": "Page 1 - Right column under example text"
+      },
+      "Question": [
+        {
+          "id": "2.1",
+          "points": "1",
+          "level": "Factual",
+          "introduction_context": "On vous demande de :",
+          "question_text": "1. Donner les structures de données nécessaires à la représentation des polynômes.",
+          "Solution": [
+            "Type TTerme = Structure",
+            "  Coef : réel ;",
+            "  Degre : entier ;",
+            "  Suivant : Pointeur(TTerme) ;",
+            "Fin ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "2.2",
+          "points": "1.5",
+          "level": "Procedural",
+          "question_text": "2. Ecrire la fonction Valeur(P, x) permettant de donner la valeur du polynôme P pour x.\nExemple : Valeur(tete, 1) = 6.5",
+          "Solution": [
+            "Fonction Valeur( P : Pointeur(TTerme), x : réel) : réel;",
+            "Var P1 : Pointeur(TTerme);",
+            "    S,C : réel;",
+            "Début",
+            "    S ← 0;",
+            "    P1 ← P;",
+            "    Tant que (P1 ≠ Nil) faire",
+            "        C ← 1;",
+            "        Pour i de 1 à Degre(P1) faire",
+            "            C ← C*x;",
+            "        Fin Pour;",
+            "        S ← S + C * Coef(P1);",
+            "        P1 ← Suivant(P1);",
+            "    Fin TQ;",
+            "    Valeur ← S;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "2.3",
+          "points": "2.5",
+          "level": "Procedural",
+          "question_text": "3. Ecrire la procédure Dériver(P) permettant de calculer la dérivée du polynôme P et le retourner dans P.",
+          "Solution": [
+            "Procédure Dériver( P : Pointeur(TTerme));",
+            "Var P1,PP1 : Pointeur(TTerme);",
+            "Début",
+            "    PP1 ← Nil;",
+            "    P1 ← P;",
+            "    Tant que (P1 ≠ Nil) faire",
+            "        Si (Degré(P1) ≠ 0) Alors",
+            "            Aff_Coef(P1, Coef(P1)*Degré(P1));",
+            "            Aff_Degré(P1,Degré(P1)-1);",
+            "            PP1 ← P1;",
+            "            P1 ← Suivant(P1);",
+            "        Sinon",
+            "            Si (PP1 = Nil) Alors",
+            "                P ← Nil;",
+            "            Sinon",
+            "                Aff_Adr(PP1,Nil)",
+            "            Fin Si;",
+            "            Libérer(P1);",
+            "            P1 ← Nil;",
+            "        Fin Si;",
+            "    Fin TQ;",
+            "Fin;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "2.4",
+          "points": "2.5",
+          "level": "Procedural",
+          "question_text": "4. Ecrire la procédure Intégrer(P) permettant de calculer l'intégrale du polynôme P et le retourner dans P.",
+          "Solution": [
+            "Procédure Intégrer( P : Pointeur(TTerme));",
+            "Var P1,PP1 : Pointeur(TTerme) ;",
+            "Début",
+            "  PP1 ← Nil ;",
+            "  P1 ← P ;",
+            "  Tant que (P1 ≠ Nil) faire",
+            "    Aff_Coef(P1, Coef(P1)/(Degré(P1)+1)) ;",
+            "    Aff_Degré(P1,Degré(P1)+1) ;",
+            "    PP1 ← P1 ;",
+            "    P1 ← Suivant(P1) ;",
+            "  Fin TQ ;",
+            "  Allouer(P1) ;",
+            "  Aff_Coef(P1,1) ;",
+            "  Aff_Degré(P1,0) ;",
+            "  Aff_Adr(P1,Nil) ;",
+            "  Si (PP1 = Nil) Alors",
+            "    P ← P1 ;",
+            "  Sinon",
+            "    Aff_Adr(PP1,P1) ;",
+            "  Fin Si ;",
+            "Fin ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "2.5",
+          "points": "2.5",
+          "level": "Procedural",
+          "question_text": "5. Ecrire la procédure Déviation(P, x) permettant de retourner Vrai si x est un point de déviation du polynôme P et Faux si non.",
+          "Solution": [
+            "Fonction Déviation( P : Pointeur(TTerme), x : réel) : booléen;",
+            "Début",
+            "  Si (P=Nil ou Degré(P)< 2) Alors",
+            "    Déviation ← Faux",
+            "  Sinon",
+            "    Dériver(P) ;",
+            "    Dériver(P) ;",
+            "    Déviation ← (Valeur(P,x) = 0) ;",
+            "  Fin Si ;",
+            "Fin ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        }
+      ]
+    }
+  ]
+}

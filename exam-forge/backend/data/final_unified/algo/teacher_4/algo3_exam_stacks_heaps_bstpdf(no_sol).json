@@ -1,0 +1,128 @@
+{
+  "metadata": {
+    "module": "Algorithmique et Structures de données",
+    "duration": "None",
+    "language": "english"
+  },
+  "exercises": [
+    {
+      "id": "Exercise_1",
+      "title": "Exercise 1: (Stacks and Heaps)",
+      "total_exercise_points": null,
+      "introduction_context": "In this exam, let’s consider a set of stacks of integers denoted by Si with their standard operations: Pushi(e:integer), Popi, GetTopi, Emptyi, Createi. Let’s consider a Queue of Pointers with its standard operations: Enqueue(N:Pointer), Dequeue, GetHead, GetTail, EmptyQ, CreateQ. In the following two exercises, you are free to use Queue of pointers if you need. You are also free to use as much as it is necessary stacks of integers. Heaps and BST use the same notation seen in the dynamic implementation in the course.",
+      "Question": [
+        {
+          "id": "1",
+          "points": null,
+          "level": "Procedural",
+          "question_text": "1) Write a procedure Print_All, which prints all the content of stack S1. At the end, S1 must have its initial state before the execution of Print_All",
+          "Solution": null
+        },
+        {
+          "id": "2",
+          "points": null,
+          "level": "Procedural",
+          "question_text": "2) Write a procedure Heap_2_Stack that transforms a heap (known by its root R) to a stack S1. The highest priority element must be at the top of the stack.",
+          "Solution": null
+        },
+        {
+          "id": "3",
+          "points": null,
+          "level": "Metacognitive",
+          "question_text": "3) Is this stack an optimal choice for operations addition and deletion? Justify?",
+          "Solution": null
+        }
+      ]
+    },
+    {
+      "id": "Exercise_2",
+      "title": "Exercise 1: (Binary Search Tree)",
+      "total_exercise_points": null,
+      "introduction_context": "In this exercise, D_BST refers to a dynamic implementation of a BST.",
+      "Question": [
+        {
+          "id": "1",
+          "points": null,
+          "level": "Procedural",
+          "question_text": "1) Given a D_BST and the following values: 4, 5, 7, 10, 15. Show the results of adding all these values, such that 10 is at the root and 7 is in a leaf.",
+          "Solution": null
+        },
+        {
+          "id": "2",
+          "points": null,
+          "level": "Metacognitive",
+          "question_text": "2) Propose the declaration of a binary search tree (BST) represented as a static array S_BST. Add a global variable M that contains the number of added elements in S_BST.",
+          "Solution": null
+        },
+        {
+          "id": "3",
+          "points": null,
+          "level": "Procedural",
+          "question_text": "3) Convert the previous D_BST into the following S_BST. The constant NULL in D_BST is replaced by the value -1 in S_BST.",
+          "diagram": {
+            "description": "A grid (static array) consisting of 6 rows and 8 columns.",
+            "precise_location": "Immediately following the text of question 3"
+          },
+          "Solution": null
+        },
+        {
+          "id": "4",
+          "points": null,
+          "level": "Procedural",
+          "question_text": "4) Write the algorithm that returns the size of a BST implemented as static array S_BST? What is its complexity?",
+          "Solution": null
+        },
+        {
+          "id": "5",
+          "points": null,
+          "level": "Procedural",
+          "question_text": "5) Write the procedure that transforms D_BST into S_BST. You can use a Queue of nodes (if necessary).",
+          "Solution": null
+        },
+        {
+          "id": "6",
+          "points": null,
+          "level": "Procedural",
+          "question_text": "6) Add the value 2 to the previous BST. Show the finale result in the following structures.",
+          "diagram": {
+            "description": "Two response structures: An 8x6 grid (static array cells) and a template for a balanced binary tree with 15 nodes.",
+            "precise_location": "Following question 6"
+          },
+          "Solution": null
+        },
+        {
+          "id": "7",
+          "points": null,
+          "level": "Metacognitive",
+          "question_text": "7) Is this new BST balanced? Justify.",
+          "Solution": null
+        },
+        {
+          "id": "8",
+          "points": null,
+          "level": "Procedural",
+          "question_text": "8) Transform the previous BST into a balanced one. Show results in the following two structures",
+          "diagram": {
+            "description": "Two response structures: An 8x6 grid (static array cells) and a template for a balanced binary tree with 15 nodes.",
+            "precise_location": "Following question 8"
+          },
+          "Solution": null
+        },
+        {
+          "id": "9",
+          "points": null,
+          "level": "Procedural",
+          "question_text": "9) Given an S_BST containing M entries. Suppose that we have a function CreateNode(index: integer):Pointer(Node); which creates a node in D_BST (with two empty children) giving its index in the S_BST. Suppose that we have a function Add_Node(Node_index, Parent_index, Position: integer) that creates and adds a node in D_BST, such that: Node_index is its index in S_BST, and it will be a Left Child (if Position=0) or a Right Child (if Position=1) for an already created Parent (given that Parent_index is its index in S_BST). Write a procedure that traverses a given S_BST (with an M>>1) and generates the equivalent D_BST. The Idea of the solution: Start by create the root of the D_BST, then traverse all the S_BST from 1 to M and add all the nodes as children and small children to that root.",
+          "Solution": null
+        },
+        {
+          "id": "10",
+          "points": null,
+          "level": "Procedural",
+          "question_text": "10) Given an unbalanced S_BST like the one in question 6, and suppose that you have the Balancing procedures presented in the course (Procedure Infix_FDT(root:Pointer(TNode), T:array[1..N]of integer), and Procedure Bal_BST(T:array[1..N] of integer, var root:Pointer(TNode))). Propose a high-level algorithm (just an algorithm that calls existing procedures without entering in details) that allows balancing an S_BST.",
+          "Solution": null
+        }
+      ]
+    }
+  ]
+}

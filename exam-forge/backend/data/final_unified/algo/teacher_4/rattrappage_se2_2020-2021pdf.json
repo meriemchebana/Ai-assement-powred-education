@@ -1,0 +1,253 @@
+{
+  "metadata": {
+    "module": "None",
+    "duration": "",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 1 (6 points)",
+      "total_exercise_points": "6",
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": null,
+          "question_text": "Quelles sont les conditions que doit vérifier une solution du problème de la section critique ?",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "Partie_2",
+          "points": null,
+          "introduction_context": "On considère le programme parallèle suivant :",
+          "pseudocode": {
+            "declarations": [
+              "var n : entier init 0 ; /* n entier initialisé à 0 */"
+            ],
+            "processes": [
+              {
+                "name": "Processus P1",
+                "code": [
+                  "{n := n + 1}"
+                ]
+              },
+              {
+                "name": "Processus P2",
+                "code": [
+                  "{n := n - 1}"
+                ]
+              }
+            ]
+          },
+          "Question": [
+            {
+              "id": "1",
+              "question_text": "Quel est le résultat de son exécution dans les cas suivants :",
+              "sub_questions": [
+                {
+                  "id": "1.a",
+                  "question_text": "on considère les opérations sur la variable n sont indivisibles",
+                  "level": "Factual"
+                },
+                {
+                  "id": "1.b",
+                  "question_text": "les opérations sur n ne sont pas indivisibles : elles peuvent être décomposées.",
+                  "level": "Factual"
+                }
+              ],
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "2",
+              "question_text": "Dans le cas b) comment faire pour que la mise-à-jour de n se fasse en exclusion mutuelle.",
+              "Solution": null,
+              "level": "Conceptual"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 2 (8 points)",
+      "total_exercise_points": "8",
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": null,
+          "introduction_context": "Dans un lavomatique, on cherche une solution pour permettre de répartir les machines à laver équitablement entre les clients. Considérez le programme suivant. Pour obtenir une machine, chaque client doit utiliser la fonction allouer(). Après usage de la machine, il doit utiliser liberer().",
+          "pseudocode": {
+            "declarations": [
+              "#define NMACHINES 5",
+              "int dispo[NMACHINES] = (1,1,1,1,1) ;"
+            ],
+            "processes": [
+              {
+                "name": "Allouer()",
+                "code": [
+                  "{ Int i ;",
+                  "for (i=0; i < NMACHINES; i++)",
+                  "if (dispo[i] != 0) {",
+                  "dispo[i] = 0;",
+                  "return i; }",
+                  "}"
+                ]
+              },
+              {
+                "name": "liberer(int machine)",
+                "code": [
+                  "{ dispo(machine) = 1 ; }"
+                ]
+              }
+            ]
+          },
+          "question_text": "Synchroniser les opérations allouer() et libérer() par les sémaphores.",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "Partie_2",
+          "points": null,
+          "question_text": "Donner les opérations qui peuvent être effectuées sur une variable condition C dans un moniteur ?",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "Partie_3",
+          "points": null,
+          "question_text": "Quels sont les inconvénients de sémaphores par rapport aux moniteurs ?",
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 3 (6 points)",
+      "total_exercise_points": "6",
+      "parts": [
+        {
+          "id": "Partie_1",
+          "points": "6",
+          "introduction_context": "Soit le système suivant, sachant que le nombre restant de ressources de chaque classe est : Disponible = [010000]",
+          "banker_table": {
+            "allocation": {
+              "headers": [
+                "",
+                "R1",
+                "R2",
+                "R3",
+                "R4",
+                "R5",
+                "R6"
+              ],
+              "rows": [
+                [
+                  "P1",
+                  "1",
+                  "0",
+                  "1",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                [
+                  "P2",
+                  "0",
+                  "0",
+                  "0",
+                  "1",
+                  "0",
+                  "0"
+                ],
+                [
+                  "P3",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "1",
+                  "0"
+                ],
+                [
+                  "P4",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "0",
+                  "1"
+                ]
+              ]
+            },
+            "besoin": {
+              "headers": [
+                "",
+                "R1",
+                "R2",
+                "R3",
+                "R4",
+                "R5",
+                "R6"
+              ],
+              "rows": [
+                [
+                  "P1",
+                  "0",
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                [
+                  "P2",
+                  "0",
+                  "1",
+                  "1",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                [
+                  "P3",
+                  "1",
+                  "1",
+                  "0",
+                  "0",
+                  "0",
+                  "0"
+                ],
+                [
+                  "P4",
+                  "0",
+                  "1",
+                  "1",
+                  "1",
+                  "0",
+                  "0"
+                ]
+              ]
+            }
+          },
+          "Question": [
+            {
+              "id": "1",
+              "question_text": "Vérifier si le système est sur ou non sur.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "2",
+              "question_text": "Si P3 demande une ressource R2 peut on lui accorder immédiatement sa requête ? Justifier.",
+              "Solution": null,
+              "level": "Conceptual"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

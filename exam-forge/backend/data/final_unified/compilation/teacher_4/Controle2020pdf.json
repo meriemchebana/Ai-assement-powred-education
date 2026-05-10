@@ -1,0 +1,525 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h30m",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (06 pts)",
+      "total_exercise_points": "6",
+      "introduction_context": "",
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "question_text": "Donner une expression régulière du langage formé des mots de longueur au moins 2 sur {a, b} pour lesquels tous les a éventuellement présents précèdent les b (éventuellement présents).",
+          "Solution": "aa*bb* | aaa* | bbb*"
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "Donner une expression régulière du langage formé des mots sur {a,b,c} qui ne contiennent pas deux a consécutifs.",
+          "Solution": "(ac|ab|b|c)(ac|ab|b|c)*(a|ε)"
+        },
+        {
+          "id": "3",
+          "level": "Procedural",
+          "question_text": "En java, le type double permet de représenter les nombres à virgule flottante. Un nombre double peut contenir un point '.' mais ce n'est pas obligatoire. Lorsqu'il possède un point, il y a forcément un chiffre avant ou après le point. Un littéral double peut posséder un signe + ou -. Il peut aussi posséder un facteur d'échelle représenté par un nombre entier signé précédé par e ou E. Exemples : 3.86473e5, 123.0e+8, -12E4, .45E-23, -16, 012.e78. En utilisant Lex, écrire un programme reconnaissant les nombres double de java.",
+          "solution_lex_code": [
+            "#include<stdio.h>",
+            "chiffre [0-9]",
+            "nbr     {chiffre}+",
+            "sig     [\\+\\-]",
+            "Exp     [Ee]{sig}?{nbr}",
+            "nbr1    {nbr}(\\.)?{nbr}?{Exp}?",
+            "nbr2    {nbr}?(\\.{nbr}){Exp}?",
+            "doubleJava {sig}?({nbr1}|{nbr2})",
+            "%%",
+            "{doubleJava}  return(double);",
+            "%%"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "Soit G la grammaire suivante :",
+      "grammar": [
+        "S ⟶ BAc | a",
+        "A ⟶ bSBa | ε",
+        "B ⟶ dBcS | ε"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "question_text": "Construire les ensembles PREMIER et SUIVANT des symboles de G.",
+          "solution_premiers_suivants": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "S",
+                "a, b, c, d",
+                "a, d, c, $"
+              ],
+              [
+                "A",
+                "b, ε",
+                "c"
+              ],
+              [
+                "B",
+                "d, ε",
+                "a, b, c"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "G est-elle LL(1) ?",
+          "Solution": "Oui, G est LL(1) car il n'y a aucun conflit dans la table d'analyse.",
+          "solution_ll1_table": {
+            "type": "table",
+            "headers": [
+              "",
+              "a",
+              "b",
+              "c",
+              "d",
+              "$"
+            ],
+            "rows": [
+              [
+                "S",
+                "a",
+                "BAc",
+                "",
+                "BAc",
+                ""
+              ],
+              [
+                "A",
+                "",
+                "bSBa",
+                "ε",
+                "",
+                ""
+              ],
+              [
+                "B",
+                "ε",
+                "ε",
+                "ε",
+                "dBcS",
+                ""
+              ]
+            ]
+          }
+        },
+        {
+          "id": "3",
+          "level": "Conceptual",
+          "question_text": "Si oui analyser la chaîne « dcbaacc ».",
+          "solution_table": {
+            "type": "table",
+            "headers": [
+              "Chaine",
+              "Pile",
+              "Action"
+            ],
+            "rows": [
+              [
+                "dcbaacc$",
+                "$S",
+                "dépiler, empiler cAB"
+              ],
+              [
+                "dcbaacc$",
+                "$cAB",
+                "dépiler, empiler ScBd"
+              ],
+              [
+                "dcbaacc$",
+                "$cAScBd",
+                "dépiler, Avancer"
+              ],
+              [
+                "cbaacc$",
+                "$cAScB",
+                "dépiler, empiler ε"
+              ],
+              [
+                "cbaacc$",
+                "$cASc",
+                "dépiler, Avancer"
+              ],
+              [
+                "baacc$",
+                "$cAS",
+                "dépiler, empiler cAB"
+              ],
+              [
+                "baacc$",
+                "$cAcAB",
+                "dépiler, empiler ε"
+              ],
+              [
+                "baacc$",
+                "$cAcA",
+                "dépiler, empiler aBSb"
+              ],
+              [
+                "baacc$",
+                "$cAcaBSb",
+                "dépiler, Avancer"
+              ],
+              [
+                "aacc$",
+                "$cAcaBS",
+                "dépiler, empiler a"
+              ],
+              [
+                "aacc$",
+                "$cAcaBa",
+                "dépiler, Avancer"
+              ],
+              [
+                "acc$",
+                "$cAcaB",
+                "dépiler, empiler ε"
+              ],
+              [
+                "acc$",
+                "$cAca",
+                "dépiler, Avancer"
+              ],
+              [
+                "cc$",
+                "$cAc",
+                "dépiler, Avancer"
+              ],
+              [
+                "c$",
+                "$cA",
+                "dépiler, empiler ε"
+              ],
+              [
+                "c$",
+                "$c",
+                "dépiler, Avancer"
+              ],
+              [
+                "$",
+                "$",
+                "Accepter"
+              ]
+            ]
+          }
+        },
+        {
+          "id": "4",
+          "level": "Metacognitive",
+          "question_text": "Transformer G en une grammaire G' ε-libre équivalente. G' est-elle LL(1) ?",
+          "Solution": "Deux solutions possibles :",
+          "solution_variants": [
+            {
+              "label": "Sol1 (G' n'est pas LL(1))",
+              "grammar": [
+                "S  ⟶ BAc | Bc | Ac | a",
+                "A  ⟶ bSBa | bSa",
+                "B  ⟶ dBcS | dcS"
+              ]
+            },
+            {
+              "label": "Sol2 (G' est LL(1))",
+              "grammar": [
+                "S  ⟶ BS' | Ac | a",
+                "S' ⟶ Ac | c",
+                "A  ⟶ bSA'",
+                "A' ⟶ Ba | bSa",
+                "B  ⟶ dB'",
+                "B' ⟶ BcS | cS"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 03 (06 pts)",
+      "total_exercise_points": "6",
+      "introduction_context": "Soit la grammaire G d'axiome S, de terminaux {a, b, d, e} et de productions :",
+      "grammar": [
+        "S → AB | Da",
+        "A → aAb | ε",
+        "B → bB | ε",
+        "D → dD | e"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "level": "Procedural",
+          "question_text": "Construire l'automate LR de cette grammaire.",
+          "Solution": {
+            "type": "LR(0)",
+            "states_content": [
+              "I0:  { S' → .S $, S → .AB, S → .Da, A → .aAb, A → ., D → .dD, D → .e }",
+              "I1:  { S' → S.$ }",
+              "I2:  { S → A.B, B → .bB, B → . }",
+              "I3:  { S → D.a }",
+              "I4:  { A → a.Ab, A → .aAb, A → . }",
+              "I5:  { D → d.D, D → .dD, D → .e }",
+              "I6:  { D → e. }",
+              "I7:  { S → AB. }",
+              "I8:  { B → b.B, B → .bB, B → . }",
+              "I9:  { B → bB. }",
+              "I10: { S → Da. }",
+              "I11: { A → aA.b }",
+              "I12: { A → aAb. }",
+              "I13: { D → dD. }"
+            ]
+          }
+        },
+        {
+          "id": "2",
+          "level": "Procedural",
+          "question_text": "Est-ce que G est de type SLR(1) ? Justifier rigoureusement en énumérant tous les conflits et en précisant leur type (shift/reduce ou reduce/reduce).",
+          "Solution": "Oui, G est SLR(1) car il n'y a aucun conflit dans la table SLR.",
+          "solution_premiers_suivants": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "S",
+                "a, b, e, d",
+                "$"
+              ],
+              [
+                "A",
+                "a, ε",
+                "$, b"
+              ],
+              [
+                "B",
+                "b, ε",
+                "$"
+              ],
+              [
+                "D",
+                "d, e",
+                "a"
+              ]
+            ]
+          },
+          "solution_slr_table": {
+            "type": "table",
+            "headers": [
+              "État",
+              "a",
+              "b",
+              "d",
+              "e",
+              "$",
+              "S",
+              "A",
+              "B",
+              "D"
+            ],
+            "rows": [
+              [
+                "0",
+                "d4",
+                "r5",
+                "d5",
+                "d6",
+                "r5",
+                "1",
+                "2",
+                "",
+                "3"
+              ],
+              [
+                "1",
+                "",
+                "",
+                "",
+                "",
+                "Acc",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "2",
+                "",
+                "d8",
+                "",
+                "",
+                "r6",
+                "",
+                "",
+                "7",
+                ""
+              ],
+              [
+                "3",
+                "d10",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "4",
+                "d4",
+                "r4",
+                "",
+                "",
+                "r4",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "5",
+                "",
+                "",
+                "d5",
+                "d6",
+                "",
+                "",
+                "",
+                "",
+                "13"
+              ],
+              [
+                "6",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "7",
+                "",
+                "",
+                "",
+                "",
+                "r1",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "8",
+                "",
+                "d8",
+                "",
+                "",
+                "r6",
+                "",
+                "",
+                "9",
+                ""
+              ],
+              [
+                "9",
+                "",
+                "",
+                "",
+                "",
+                "r5",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "10",
+                "",
+                "",
+                "",
+                "",
+                "r2",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "11",
+                "",
+                "d12",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "12",
+                "",
+                "",
+                "",
+                "",
+                "r3",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "13",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ]
+            ]
+          }
+        },
+        {
+          "id": "3",
+          "level": "Conceptual",
+          "question_text": "Est-ce que G est de type LR(0) ? Justifiez votre réponse sans construire la table d'analyse.",
+          "Solution": "Non, G n'est pas LR(0) puisqu'il existe plusieurs cas de conflits, par exemple dans l'état 0 où A → . provoque un conflit reduce/shift."
+        }
+      ]
+    }
+  ]
+}

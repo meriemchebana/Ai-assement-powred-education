@@ -1,0 +1,232 @@
+{
+  "metadata": {
+    "module": "SEII",
+    "duration": "",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 1",
+      "total_exercise_points": null,
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "Donner la structure d'un moniteur, puis expliquer quels sont les avantages de moniteurs sur les sémaphores ?",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "2",
+          "question_text": "Soient les 3 processus suivants :",
+          "processes": [
+            {
+              "label": "Processus P1",
+              "code": [
+                "Cycle",
+                "  Afficher(\"A\") ;",
+                "Fin Cycle"
+              ]
+            },
+            {
+              "label": "Processus P2",
+              "code": [
+                "Cycle",
+                "  Afficher(\"B\") ;",
+                "Fin Cycle"
+              ]
+            },
+            {
+              "label": "Processus P3",
+              "code": [
+                "Cycle",
+                "  Afficher(\"C\") ;",
+                "Fin Cycle"
+              ]
+            }
+          ],
+          "sub_questions": [
+            {
+              "id": "2.a",
+              "question_text": "La chaîne de caractères affichée soit : ACACACAC….",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "2.b",
+              "question_text": "Le nombre de \"C\" affichés soit toujours supérieur ou égal au nombre de \"B\" affichés.",
+              "Solution": null,
+              "level": "Conceptual"
+            },
+            {
+              "id": "2.c",
+              "question_text": "Chaque cycle du processus Processus_A précède un cycle du processus Processus_B et un cycle du processus Processus_C.",
+              "Solution": null,
+              "level": "Conceptual"
+            }
+          ],
+          "level": "Factual"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 2",
+      "total_exercise_points": null,
+      "introduction_context": "Un ensemble de N (N > 4) processus partagent 3 imprimantes LP0, LP1, LP2. Pour éviter de mélanger les lignes sorties de chaque processus, le processus Pi doit réserver l’imprimante avant de l’utiliser. Pour connaître l’état de chaque imprimante il y a une variable globale int LP[3]initialisée par 0. Les codes des deux fonctions : prendre() et liberer()sont comme suit:",
+      "given_code": {
+        "prendre": [
+          "int prendre()",
+          "{ int i=0;",
+          "  while(i<3)",
+          "  { if(LP[i]==0){",
+          "      LP[i]=getpid();",
+          "      return i;",
+          "    }",
+          "    ++i;",
+          "  }",
+          "  return -1;",
+          "}"
+        ],
+        "liberer": [
+          "int liberer(int i)",
+          "{",
+          "  LP[i]=0;",
+          "}"
+        ]
+      },
+      "question_text": "En utilisant 2 sémaphores, complétez prendre() et liberer() pour synchroniser entre les N processus.",
+      "Solution": null,
+      "level": "Procedural"
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 3",
+      "total_exercise_points": null,
+      "parts": [
+        {
+          "id": "I",
+          "question_text": "Quel est l'intérêt du graphe des attentes pour le problème d'interblocage ?",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "II",
+          "introduction_context": "Soit un système composé de 5 processus P0, P1, P2, P3 et P4 et de trois types de ressource (A, B et C). À l'instant Ti, le système est décrit par : E = (10, 5, 7) et",
+          "banker_tables": {
+            "description": "Deux matrices 5×3 sont données : Max et Allocation, pour 5 processus (P0 à P4) et 3 ressources (A, B, C).",
+            "E_vector": [
+              10,
+              5,
+              7
+            ],
+            "max_matrix": {
+              "type": "matrix",
+              "rows_label": [
+                "P0",
+                "P1",
+                "P2",
+                "P3",
+                "P4"
+              ],
+              "columns_label": [
+                "A",
+                "B",
+                "C"
+              ],
+              "data": [
+                [
+                  7,
+                  5,
+                  3
+                ],
+                [
+                  3,
+                  2,
+                  2
+                ],
+                [
+                  9,
+                  0,
+                  2
+                ],
+                [
+                  2,
+                  2,
+                  2
+                ],
+                [
+                  4,
+                  3,
+                  3
+                ]
+              ]
+            },
+            "allocation_matrix": {
+              "type": "matrix",
+              "rows_label": [
+                "P0",
+                "P1",
+                "P2",
+                "P3",
+                "P4"
+              ],
+              "columns_label": [
+                "A",
+                "B",
+                "C"
+              ],
+              "data": [
+                [
+                  0,
+                  1,
+                  0
+                ],
+                [
+                  2,
+                  0,
+                  0
+                ],
+                [
+                  3,
+                  0,
+                  2
+                ],
+                [
+                  2,
+                  1,
+                  1
+                ],
+                [
+                  0,
+                  0,
+                  2
+                ]
+              ]
+            }
+          },
+          "Question": [
+            {
+              "id": "II.1",
+              "question_text": "Calculer disponible et Besoin à l'instant Ti.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "II.2",
+              "question_text": "L'état du système à l'instant Ti est-il sain ? Justifier.",
+              "Solution": null,
+              "level": "Metacognitive"
+            },
+            {
+              "id": "II.3",
+              "question_text": "On suppose que le processus P1 émet la requête R1 = (1, 0, 2). La requête va-t-elle être accordée de suite, ou bien va-t-elle être mise en attente ? Justifier.",
+              "Solution": null,
+              "level": "Procedural"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

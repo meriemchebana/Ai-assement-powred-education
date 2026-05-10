@@ -1,0 +1,148 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage{blindtext}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+%\usepackage[LFE,LAE]{fontenc}
+\usepackage{caption}
+%\usepackage{polyglossia}
+\usepackage{subcaption}
+\usepackage{lmodern}
+%\usepackage[arabic, english]{babel}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage{pdfpages}
+\graphicspath{ {images/} }
+\usepackage{pdfpages}
+\usepackage{xcolor}
+\usepackage{fontawesome}
+\usepackage{setspace}
+%\usepackage{lettrine}
+\usepackage{amstext}
+\usepackage{setspace}
+\setstretch{1}
+\usepackage{fancybox}
+\usepackage{amssymb,amsmath}
+\usepackage[english]{babel}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\setcounter{tocdepth}{3}
+ \setcounter{secnumdepth}{4}
+%\fancyhead{}
+%\fancyhead[LO,LE]{Thesis Title}
+%\fancyfoot{}
+%\fancyfoot[LE,RO]{\thepage}
+%\fancyfoot[LO,CE]{\leftmark}
+
+
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\usepackage{biblatex}
+
+\usepackage{titlesec}
+%%%%%%%%%55
+
+
+
+
+
+
+\usepackage{comment} 
+\usepackage{color}
+%%%%%%%%%%%%%%%%
+\usepackage{version}
+\usepackage{float}
+%\usepackage{frbib}
+%\usepackage{makeidx}
+\usepackage{fancyhdr}
+\usepackage{vmargin}
+\usepackage{algorithm}
+\usepackage{appendix}
+\usepackage{diagbox}
+\usepackage{amssymb}
+%\overfullrule=15mm
+\usepackage{multirow}
+\usepackage{chngcntr}
+\usepackage{float}
+\counterwithin{equation}{section}
+\restylefloat{table}
+%%
+%%
+%\setdefaultlanguage{english}
+%\setotherlanguage[numerals=maghrib,locale=algeria]{arabic} 
+\include{Grande_Lettre}
+
+
+
+
+
+
+\addbibresource{references.bib}
+%\title{Intelligent Monitoring of Drinking Water Network }
+%\author{Ben aicha Feryel}
+%\date{03/03/2019}
+
+\begin{document}
+
+\pagenumbering{roman}
+\input{PageGarde2.tex}
+\setstretch{1.4}
+\newpage
+\section*{Abstract}
+
+  % \addcontentsline{toc}{chapter}{Abstract}
+{............................}\\
+
+
+
+
+ 
+%\newpage
+\section*{Resumé}
+ {..............................}\\
+ 
+
+\newpage
+
+\section*{Acknowledgements}
+%\addcontentsline{toc}{chapter}{Acknowledgements}
+\begin{center}
+    
+\textit{Firstly, we  thank our superviser \textbf{Telli Abdelmoutia} the Computer Science faculty at Mohamed Khider University-BISKRA and appreciate his efforts in helping us in making this project . Whenever we ran into a trouble spot or had a question about our research or writing this rapport or when we didn't understand something about the project  or didn't have clear idea about anything he will always have the answer to our questions , satisfy our curiosity and have a solution to our problems . He consistently checked our work and gave us pointers on how to make it as good as possible and we would like to apologize to him if we troubled him .}
+
+\textit{We would also like to thank the teachers who taught us throughout the journey and helped us to reach this place .}
+
+\textit{Last but not the least, we would like to thank our families: our parents and to our brothers and sisters for supporting us spiritually throughout writing this thesis and
+our life in general.}
+\end{center}
+\newpage
+\tableofcontents{}
+
+ %\addcontentsline{toc}{chapter}{Contents}
+
+ 
+
+
+  
+
+ \listoffigures
+
+ 
+\input{Chapters/Introduction}
+
+\newpage
+\input{Chapters/Chapter1}
+
+
+\input{Chapters/Conclusion}
+ \appendix
+%\chapter{Annex}
+%\input{Chapters/appendix}
+
+\printbibliography
+
+
+\newpage
+\input{Chapters/annexe}
+ 
+\end{document}

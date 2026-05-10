@@ -1,0 +1,659 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h30m",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (04 pts)",
+      "total_exercise_points": "4",
+      "introduction_context": "On souhaite écrire un analyseur lexical pour le langage de commandes suivant : – une commande est composée d'un nom de commande, suivi d'une liste optionnelle d'arguments, suivie d'une liste facultative d'options ; – une liste d'arguments est une suite d'arguments ; – une liste d'options est une suite non vide d'options encadrée par [ et ], à l'intérieur de laquelle les options sont séparées par virgule « , » ; – une option est un caractère précédé d'un tiret ; – un argument est un identificateur, de même qu'un nom de commande. Par exemple : macom arg1 arg2 [-a,-b] est une commande, ainsi que macom [-f] et macom.",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "1. (2 pts) Dessinez un automate acceptant les chaines appartenant à ce langage.",
+          "Solution": {
+            "type": "DFA",
+            "description": "Automate fini déterministe reconnaissant le langage de commandes",
+            "states_content": [
+              "État 0 → (initial) sur [a-zA-Z] → État 1",
+              "État 1 → (id/nom de commande) sur [a-zA-Z] → État 1 (boucle)",
+              "État 1 → sur espace → État 2",
+              "État 2 → (liste d'arguments) sur [a-zA-Z] → État 3",
+              "État 3 → sur [a-zA-Z] → État 3 (boucle)",
+              "État 3 → sur espace → État 2",
+              "État 2 → sur [ → État 4",
+              "État 1 → sur [ → État 4",
+              "État 4 → sur - → État 6",
+              "État 6 → sur [a-zA-Z] → État 7",
+              "État 7 → (option lue) sur , → État 8",
+              "État 8 → sur - → État 6",
+              "État 7 → sur ] → État final (acceptant)"
+            ],
+            "transitions": [
+              {
+                "from": "0",
+                "label": "[a-zA-Z]",
+                "to": "1"
+              },
+              {
+                "from": "1",
+                "label": "[a-zA-Z]",
+                "to": "1"
+              },
+              {
+                "from": "1",
+                "label": " ",
+                "to": "2"
+              },
+              {
+                "from": "2",
+                "label": "[a-zA-Z]",
+                "to": "3"
+              },
+              {
+                "from": "3",
+                "label": "[a-zA-Z]",
+                "to": "3"
+              },
+              {
+                "from": "3",
+                "label": " ",
+                "to": "2"
+              },
+              {
+                "from": "2",
+                "label": "[",
+                "to": "4"
+              },
+              {
+                "from": "1",
+                "label": "[",
+                "to": "4"
+              },
+              {
+                "from": "4",
+                "label": "-",
+                "to": "6"
+              },
+              {
+                "from": "6",
+                "label": "[a-zA-Z]",
+                "to": "7"
+              },
+              {
+                "from": "7",
+                "label": ",",
+                "to": "8"
+              },
+              {
+                "from": "8",
+                "label": "-",
+                "to": "6"
+              },
+              {
+                "from": "7",
+                "label": "]",
+                "to": "final"
+              }
+            ],
+            "accepting_states": [
+              "1",
+              "2",
+              "3",
+              "final"
+            ]
+          },
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "2. (2 pts) Décrire ce langage à l'aide d'un fichier Lex.",
+          "solution_lex_code": [
+            "%{",
+            "#include <string.h>",
+            "#include <stdlib.h>",
+            "#include <stdio.h>",
+            "%}",
+            "Lettre [a-zA-Z]",
+            "Id {Lettre}{Lettre}*",
+            "%%",
+            "{Id}(\\ {Id})*(\\[\\-{Lettre}(,\\-{Lettre})*\\])? { return(TOKEN_COMMANDE); }",
+            "%%"
+          ],
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "Dans les formules mathématiques du langage LATEX, une partie en indice est indiquée par le caractère souligné '_'. Par exemple x_i représente xi. Si l'indice n'est pas réduit à un seul caractère, il faut le mettre entre accolades. Par exemple x_{i+1} représente xi+1. Les indices peuvent être imbriqués : x_{y_i} représente xyi. On considère la grammaire G suivante qui engendre les formules du langage LATEX : FormuleLatex → ε | FormuleLatex Primaire | Primaire ; Primaire → id | '_' Indice ; Indice → '{' FormuleLatex '}' | id ; avec VT = { id, '_', '{', '}' }, où id représente un caractère quelconque autre que '_', '{' et '}'.",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "1. Cette grammaire n'est pas LL(1) : pourquoi ?",
+          "Solution": "Il y'a la récursivité à gauche dans la règle : FL → ε | FL P | P (0.5 pts)",
+          "level": "Conceptual"
+        },
+        {
+          "id": "2",
+          "question_text": "2. (1 pt) Donner une grammaire G' équivalente à G et qui vous semble LL(1).",
+          "Solution": "Une grammaire G' équivalente à G (1 pts) :",
+          "solution_grammar": [
+            "FL → ε | P FL",
+            "P  → id | '_' I",
+            "I  → '{' FL '}' | id"
+          ],
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "question_text": "3. (1.5 pts) Donner la table d'analyse LL(1) de G'. Justifier en utilisant cette table que G' est une grammaire LL(1).",
+          "solution_premiers_suivants": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "FL",
+                "ε, id, _",
+                "$, }"
+              ],
+              [
+                "P",
+                "id, _",
+                "id, _, $, }"
+              ],
+              [
+                "I",
+                "{, id",
+                "id, _, $, }"
+              ]
+            ]
+          },
+          "solution_table": {
+            "type": "table",
+            "headers": [
+              "",
+              "id",
+              "_",
+              "{",
+              "}",
+              "$"
+            ],
+            "rows": [
+              [
+                "FL",
+                "FL → P FL",
+                "FL → P FL",
+                "",
+                "FL → ε",
+                "FL → ε"
+              ],
+              [
+                "P",
+                "P → id",
+                "P → _ I",
+                "",
+                "",
+                ""
+              ],
+              [
+                "I",
+                "I → id",
+                "",
+                "I → { FL }",
+                "",
+                ""
+              ]
+            ]
+          },
+          "Solution": "G' est LL(1) car il n'y a aucun conflit dans la table : chaque case contient au plus une règle de production.",
+          "level": "Procedural"
+        },
+        {
+          "id": "4",
+          "question_text": "4. (2 pts) Construire l'automate LR pour G.",
+          "Solution": {
+            "type": "LR(0)",
+            "states_content": [
+              "I0:  { E → .FL$ , FL → . , FL → .FL P , FL → .P , P → .id , P → ._ I }",
+              "I1:  { E → FL.$ , FL → FL.P , P → .id , P → ._ I }",
+              "I2:  { P → id. }",
+              "I3:  { FL → P. }",
+              "I4:  { P → _.I , I → .{FL} , I → .id }",
+              "I5:  { P → _I. }",
+              "I6:  { FL → FL P. }",
+              "I7:  { E → FL.$ }",
+              "I8:  { I → {.FL} , FL → . , FL → .FL P , FL → .P , P → .id , P → ._ I }",
+              "I9:  { I → {FL.} , FL → FL.P , P → .id , P → ._ I }",
+              "I10: { I → {FL}. }"
+            ]
+          },
+          "level": "Procedural"
+        },
+        {
+          "id": "5",
+          "question_text": "5. (1 pt) La grammaire G est-elle LR(0) ? Justifier.",
+          "Solution": "Non, G n'est pas LR(0). Il y a des conflits shift/reduce dans la table LR(0) : par exemple dans l'état I0 et I8, on a à la fois FL → . (réduction) et des actions de décalage sur id et _, ce qui crée des conflits.",
+          "solution_lr0_table": {
+            "type": "table",
+            "headers": [
+              "LR(0)",
+              "id",
+              "_",
+              "{",
+              "}",
+              "$",
+              "FL",
+              "P",
+              "I"
+            ],
+            "rows": [
+              [
+                "0",
+                "d2/r1",
+                "d4/r1",
+                "r1",
+                "r1",
+                "r1",
+                "1",
+                "3",
+                ""
+              ],
+              [
+                "1",
+                "d2",
+                "d4",
+                "",
+                "",
+                "Accepter",
+                "",
+                "6",
+                ""
+              ],
+              [
+                "2",
+                "r4",
+                "r4",
+                "r4",
+                "r4",
+                "r4",
+                "",
+                "",
+                ""
+              ],
+              [
+                "3",
+                "r3",
+                "r3",
+                "r3",
+                "r3",
+                "r3",
+                "",
+                "",
+                ""
+              ],
+              [
+                "4",
+                "d5",
+                "",
+                "d8",
+                "",
+                "",
+                "",
+                "",
+                "7"
+              ],
+              [
+                "5",
+                "r7",
+                "r7",
+                "r7",
+                "r7",
+                "r7",
+                "",
+                "",
+                ""
+              ],
+              [
+                "6",
+                "r2",
+                "r2",
+                "r2",
+                "r2",
+                "r2",
+                "",
+                "",
+                ""
+              ],
+              [
+                "7",
+                "r5",
+                "r5",
+                "r5",
+                "r5",
+                "r5",
+                "",
+                "",
+                ""
+              ],
+              [
+                "8",
+                "d2/r1",
+                "d4/r1",
+                "r1",
+                "r1",
+                "r1",
+                "9",
+                "3",
+                ""
+              ],
+              [
+                "9",
+                "d2",
+                "d4",
+                "",
+                "d10",
+                "",
+                "",
+                "6",
+                ""
+              ],
+              [
+                "10",
+                "r6",
+                "r6",
+                "r6",
+                "r6",
+                "r6",
+                "",
+                "",
+                ""
+              ]
+            ]
+          },
+          "level": "Conceptual"
+        },
+        {
+          "id": "6",
+          "question_text": "6. (1 pt) La grammaire G est-elle SLR(1) ? Justifier.",
+          "Solution": "Oui, G est SLR(1). Les conflits shift/reduce de LR(0) sont résolus grâce aux ensembles Suivants : la réduction FL → ε ne se fait que sur } et $, ce qui élimine tous les conflits.",
+          "solution_slr_table": {
+            "type": "table",
+            "headers": [
+              "SLR(1)",
+              "id",
+              "_",
+              "{",
+              "}",
+              "$",
+              "FL",
+              "P",
+              "I"
+            ],
+            "rows": [
+              [
+                "0",
+                "d2",
+                "d4",
+                "",
+                "r1",
+                "r1",
+                "1",
+                "3",
+                ""
+              ],
+              [
+                "1",
+                "d4",
+                "",
+                "",
+                "",
+                "Acc",
+                "",
+                "",
+                "6"
+              ],
+              [
+                "2",
+                "r4",
+                "r4",
+                "r4",
+                "r4",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "3",
+                "r3",
+                "r3",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "4",
+                "d5",
+                "",
+                "d8",
+                "",
+                "",
+                "",
+                "",
+                "7"
+              ],
+              [
+                "5",
+                "r7",
+                "r7",
+                "r7",
+                "r7",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "6",
+                "r2",
+                "r2",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "7",
+                "r5",
+                "r5",
+                "r5",
+                "r5",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "8",
+                "d2",
+                "d4",
+                "",
+                "r1",
+                "r1",
+                "9",
+                "3",
+                ""
+              ],
+              [
+                "9",
+                "d2",
+                "d4",
+                "",
+                "d10",
+                "",
+                "",
+                "6",
+                ""
+              ],
+              [
+                "10",
+                "r6",
+                "r6",
+                "r6",
+                "r6",
+                "r6",
+                "",
+                "",
+                ""
+              ]
+            ]
+          },
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 03 (08 pts)",
+      "total_exercise_points": "8",
+      "introduction_context": "On souhaite introduire dans les expressions arithmétiques de MIL-0 deux fonctions standard à deux arguments entiers, MIN(a, b) et MAX(a, b), dont les valeurs sont le minimum (resp. le maximum) de leurs deux arguments. On les modélisera comme deux nouvelles formes d'expressions arithmétiques, au même titre que les constantes, les variables et les expressions binaires.",
+      "example_code": [
+        "VAR a ; b ; r.",
+        "LIRE a ; LIRE b {supposés tous deux positifs};",
+        "SI a = b ALORS ECRIRE a",
+        "SINON",
+        "  TANTQUE MIN(a,b) <> MAX(a-b, b-a) FAIRE",
+        "    r := MAX(a-b , b-a) ;",
+        "    SI a<b ALORS b := r SINON a := r FINSI",
+        "  FINTQ ;",
+        "  ECRIRE MIN(a, b)",
+        "FINSI."
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "1. (2 pts) Etendre le lexeur et le parseur du cours. Les noms 'MIN' et 'MAX' seront traités comme des mots-clés. Attention ! Une forme comme : 'a * MAX(x, y)+b' s'analyse comme : '((a * MAX(x, y))+b)'.",
+          "solution_lex_code": [
+            "%%",
+            "…",
+            "MIN { return(LMin); }",
+            "MAX { return(LMax); }",
+            "…",
+            "%%"
+          ],
+          "solution_yacc_code": [
+            "%token LMin LMax",
+            "…",
+            "FACTEUR : '(' EXPAR ')' { $$ = $2; }",
+            "        | Cte           { $$ = cons_ar_cte($1); }",
+            "        | VAR           { $$ = cons_ar_var($1); }",
+            "        | LMin '(' EXPAR ',' EXPAR ')' { $$ = cons_min($3, $5); }",
+            "        | LMax '(' EXPAR ',' EXPAR ')' { $$ = cons_max($3, $5); }",
+            "        ;"
+          ],
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "2. (2 pts) Etendre le générateur de code du cours.",
+          "Solution": [
+            "case min: {",
+            "  /* Code calculant arg1(e) → $k   */",
+            "  /* Code calculant arg2(e) → $k+1 */",
+            "  blt $k, $k+1, etiqv",
+            "  move $k, $k+1",
+            "  j etiqfin",
+            "  etiqv: nop",
+            "  etiqfin: nop",
+            "  break;",
+            "}",
+            "case max: {",
+            "  /* Code calculant arg1(e) → $k   */",
+            "  /* Code calculant arg2(e) → $k+1 */",
+            "  bgt $k, $k+1, etiqv",
+            "  move $k, $k+1",
+            "  j etiqfin",
+            "  etiqv: nop",
+            "  etiqfin: nop",
+            "  break;",
+            "}"
+          ],
+          "level": "Procedural"
+        },
+        {
+          "id": "3",
+          "question_text": "3. (2 pts) Sur la base de votre proposition, traduire en assembleur MIPS le programme donné en exemple ci-dessus.",
+          "Solution": "Hypothèses sur les adresses des variables : a = 0($30), b = 4($30), r = 8($30)",
+          "solution_mips_code": [
+            "      j e101              # aller au test de la boucle",
+            "",
+            "# Corps de la boucle TANTQUE",
+            "e106: lw  $8, 0($30)     # a",
+            "      lw  $9, 4($30)     # b",
+            "      sub $8, $8, $9     # $8 = a-b",
+            "      lw  $9, 4($30)     # b",
+            "      lw  $10, 0($30)    # a",
+            "      sub $9, $9, $10    # $9 = b-a",
+            "      blt $8, $9, e102",
+            "      j   e103           # sinon $8 contient le max",
+            "e102: move $8, $9        # $8 contient max(a-b, b-a)",
+            "e103: nop",
+            "      sw  $8, 8($30)     # r := max(a-b, b-a)",
+            "",
+            "# SI a<b ALORS b:=r SINON a:=r FINSI",
+            "      lw  $8, 0($30)     # a",
+            "      lw  $9, 4($30)     # b",
+            "      blt $8, $9, e104",
+            "      lw  $8, 8($30)     # r",
+            "      sw  $8, 4($30)     # b := r",
+            "      j   e105",
+            "e104: lw  $8, 8($30)     # r",
+            "      sw  $8, 0($30)     # a := r",
+            "e105: nop",
+            "",
+            "# Test de la boucle : MIN(a,b) <> MAX(a-b, b-a)",
+            "e101: lw  $8, 0($30)     # a",
+            "      lw  $9, 4($30)     # b",
+            "      bgt $8, $9, e107   # test inverse pour MIN",
+            "      j   e108",
+            "e107: move $8, $9",
+            "e108: nop                # $8 contient min(a, b)",
+            "      lw  $9,  0($30)    # a",
+            "      lw  $10, 4($30)    # b",
+            "      sub $9,  $9, $10   # a-b",
+            "      lw  $10, 4($30)    # b",
+            "      lw  $11, 0($30)    # a",
+            "      sub $10, $10, $11  # b-a",
+            "      blt $9,  $10, e109",
+            "      j   e110",
+            "e109: move $9, $10",
+            "e110: nop                # $9 contient max(a-b, b-a)",
+            "      bne $8, $9, e106   # retour au corps si MIN <> MAX"
+          ],
+          "level": "Procedural"
+        },
+        {
+          "id": "4",
+          "question_text": "4. (2 pts) Construire l'arbre abstrait correspondant.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    }
+  ]
+}

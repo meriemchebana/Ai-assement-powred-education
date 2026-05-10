@@ -1,0 +1,141 @@
+{
+  "metadata": {
+    "module": "الاستدلال الاحصائي",
+    "duration": "",
+    "language": "arabic"
+  },
+  "exercises": [
+    {
+      "id": "التمرين_الأول",
+      "title": "التمرين الأول (5 نقاط)",
+      "total_exercise_points": "5",
+      "introduction_context": "لدينا المجتمع X ~ N(0, σ=0.5). نسحب منه عينة عشوائية بسيطة {X₁, X₂, X₃, X₄}. أوجد توزيع المعاينة للإحصائيات التالية : i=1,...,5  Gᵢ",
+      "note": "حيث S² تباين العينة",
+      "Question": [
+        {
+          "id": "a",
+          "question_text": "G₁ = Σᵢ₌₁⁴ Xᵢ",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "b",
+          "question_text": "G₂ = G₁²",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "c",
+          "question_text": "G₃ = 4 Σᵢ₌₁⁴ Xᵢ²",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "d",
+          "question_text": "G₄ = (X₁² + X₂²) / (X₃² + X₄²)",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "e",
+          "question_text": "G₅ = 0.5 G₁ / S",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "التمرين_الثاني",
+      "title": "التمرين الثاني (7 نقاط)",
+      "total_exercise_points": "7",
+      "introduction_context": "X متغير عشوائي له دالة كثافة احتمالية f_θ(x) = (x²/2θ³) exp(-x/θ) من أجل x > 0 و 0 في الحالة العكسية مع θ > 0. تم سحب عينة عشوائية مستقلة بحجم n من هذا المجتمع {X₁, X₂, ..., Xₙ}.",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "تحقق أن المتغير X له توزيع Gamma يطلب تعيين معالمه ثم استنتج أن E(X)=3θ و V(X)=3θ².",
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "بين أن T = (1/3n) Σᵢ Xᵢ هو مقدر الترجيح الأعظم للمعلمة θ.",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "3",
+          "question_text": "هل المقدر T غير متحيز؟ متسق؟ فعال؟",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "4",
+          "question_text": "نعرف المتغيرات Yᵢ = 1/Xᵢ لـ i=1,...,n، هل Ȳ = (1/n) Σᵢ₌₁ⁿ Yᵢ هو مقدر غير متحيز للمعلمة 1/θ؟ في حالة النفي، اقترح مقدر غير متحيز للمعلمة 1/θ.",
+          "Solution": null,
+          "level": "Metacognitive"
+        }
+      ]
+    },
+    {
+      "id": "التمرين_الثالث",
+      "title": "التمرين الثالث (8 نقاط)",
+      "total_exercise_points": "8",
+      "introduction_context": null,
+      "Question": [
+        {
+          "id": "I",
+          "question_text": "ليكن مجتمع X له التوزيع الطبيعي N(μ, σ). نسحب منه عينة عشوائية بسيطة حجمها n=9 حيث x̄=1.25 و s²=2.17 وسط وتباين العينة على الترتيب.",
+          "sub_questions": [
+            {
+              "id": "I.1",
+              "question_text": "أعط مجال ثقة حول المعلمة μ بدرجة ثقة 99%.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "I.2",
+              "question_text": "نختبر الفرضية H₀ : μ=1 ضد الفرضية H₁ : μ=2 بمستوى الدلالة 5%. نعتبر قاعدة القرار التالية : d(x̄) = { a₀ : x̄ < 1.912 , a₁ : x̄ ≥ 1.912 }",
+              "sub_questions": [
+                {
+                  "id": "I.2.a",
+                  "question_text": "أحسب احتمال ارتكاب الخطأ من الصنف 1.",
+                  "Solution": null,
+                  "level": "Procedural"
+                },
+                {
+                  "id": "I.2.b",
+                  "question_text": "احسب قوة هذا الاختبار.",
+                  "Solution": null,
+                  "level": "Procedural"
+                }
+              ],
+              "Solution": null,
+              "level": "Procedural"
+            }
+          ],
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "II",
+          "introduction_context": "ليكن p₁ و p₂ نسب التلفاز من نوع A و B على الترتيب الذين يتوقفون خلال فترة الضمان.",
+          "sub_questions": [
+            {
+              "id": "II.1",
+              "question_text": "لوحظ أن من بين 200 تلفاز من نوع A، 24 منهم توقفوا بسبب عطب خلال فترة الضمان. اختبر الفرضية H₀ : p₁=0.1 ضد الفرضية H₁ : p₁ > 0.1 بمستوى الدلالة 5%.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "II.2",
+              "question_text": "تم ملاحظة 200 تلفاز من نوع B فتبين أن 18 منهم توقفوا خلال نفس فترة الضمان. ماذا تقترح لزبون يريد أن يشتري تلفاز من أحد النوعين؟ استعمل الاختبار المناسب بمستوى الدلالة 5%.",
+              "Solution": null,
+              "level": "Procedural"
+            }
+          ],
+          "Solution": null
+        }
+      ]
+    }
+  ]
+}

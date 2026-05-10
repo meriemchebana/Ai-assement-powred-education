@@ -1,0 +1,75 @@
+{
+  "subject": "algo",
+  "type": "Exercise",
+  "data": {
+    "id": "ex01",
+    "title": "Exercice : Arbre de Recherche Binaire",
+    "total_exercise_points": 8.5,
+    "introduction_context": "Soit un arbre de recherche binaire (ARB) d'entiers. On insère successivement les clés suivantes dans l'ordre : 30, 15, 50, 10, 20, 40, 60, 5, 25, 35, 45, 55, 65. L'arbre est initialement vide et chaque insertion respecte les propriétés d'un ARB. On suppose que l'arbre n'est jamais vide pour les fonctions Min et Père.",
+    "questions": [
+      {
+        "id": "ex01_q1",
+        "type": "FREE",
+        "question_text": "1. Donnez l'arbre obtenu après toutes les insertions. Pour chaque nœud, indiquez son fils gauche (FG) et son fils droit (FD) (ou Nil si absent).",
+        "solution": {
+          "text": "30 : FG=15, FD=50\n15 : FG=10, FD=20\n10 : FG=5, FD=Nil\n5 : FG=Nil, FD=Nil\n20 : FG=Nil, FD=25\n25 : FG=Nil, FD=Nil\n50 : FG=40, FD=60\n40 : FG=35, FD=45\n35 : FG=Nil, FD=Nil\n45 : FG=Nil, FD=Nil\n60 : FG=55, FD=65\n55 : FG=Nil, FD=Nil\n65 : FG=Nil, FD=Nil",
+          "rubric": [
+            "Racine correcte = 30",
+            "Sous-arbre gauche de 30 correct",
+            "Sous-arbre droit de 30 correct",
+            "Tous les nœuds et liens exacts"
+          ]
+        },
+        "points": 2,
+        "topic": "Arbres de recherche binaires"
+      },
+      {
+        "id": "ex01_q2",
+        "type": "FREE",
+        "question_text": "2. En utilisant l'arbre construit dans Q1, supprimez dans l'ordre les éléments suivants : 20, 50, 30. Pour chaque suppression, utilisez le successeur in-order. Donnez l'arbre final après ces trois suppressions, de la même manière qu'en Q1.",
+        "solution": {
+          "text": "Après suppression de 20 : remplacé par 25.\nAprès suppression de 50 : successeur in-order = 55, remplacé par 55.\nAprès suppression de 30 : successeur in-order = 35, remplacé par 35.\nArbre final :\n35 : FG=15, FD=55\n15 : FG=10, FD=25\n10 : FG=5, FD=Nil\n5 : FG=Nil, FD=Nil\n25 : FG=Nil, FD=Nil\n55 : FG=40, FD=60\n40 : FG=Nil, FD=45\n45 : FG=Nil, FD=Nil\n60 : FG=Nil, FD=65\n65 : FG=Nil, FD=Nil",
+          "rubric": [
+            "Suppression de 20 correcte (remplacement par 25)",
+            "Suppression de 50 correcte (successeur 55)",
+            "Suppression de 30 correcte (successeur 35)",
+            "Arbre final correct (structure et liens)"
+          ]
+        },
+        "points": 3,
+        "topic": "Arbres de recherche binaires"
+      },
+      {
+        "id": "ex01_q3",
+        "type": "FREE",
+        "question_text": "3. Écrire la fonction Min(R) qui retourne la valeur minimale dans l'ARB de racine R. On suppose que R ≠ Nil.",
+        "solution": {
+          "text": "Fonction Min(R : Pointeur(TNoeud)) : Entier\nDébut\n  Tant que FG(R) ≠ Nil faire\n    R ← FG(R)\n  Fin Tant que\n  Min ← Valeur(R)\nFin",
+          "rubric": [
+            "Parcourt à gauche jusqu'à Nil",
+            "Retourne la valeur du nœud le plus à gauche",
+            "Utilisation de boucle ou récursion correcte"
+          ]
+        },
+        "points": 2,
+        "topic": "Arbres de recherche binaires"
+      },
+      {
+        "id": "ex01_q4",
+        "type": "FREE",
+        "question_text": "4. Écrire la fonction Père(R, x) qui retourne le père du nœud contenant x dans l'ARB de racine R. Si x n'est pas présent, retourner Nil. On suppose que R ≠ Nil.",
+        "solution": {
+          "text": "Fonction Père(R : Pointeur(TNoeud), x : Entier) : Pointeur(TNoeud)\nVar P, PP : Pointeur(TNoeud)\nDébut\n  P ← R\n  PP ← Nil\n  Tant que P ≠ Nil et Valeur(P) ≠ x faire\n    PP ← P\n    Si x < Valeur(P) alors\n      P ← FG(P)\n    Sinon\n      P ← FD(P)\n    Fin Si\n  Fin Tant que\n  Si P = Nil alors\n    Père ← Nil\n  Sinon\n    Père ← PP\n  Fin Si\nFin",
+          "rubric": [
+            "Parcours de l'arbre en comparaison avec x",
+            "Garde trace du parent (PP)",
+            "Retourne Nil si x absent"
+          ]
+        },
+        "points": 1.5,
+        "topic": "Arbres de recherche binaires"
+      }
+    ],
+    "level": "Procedural"
+  }
+}

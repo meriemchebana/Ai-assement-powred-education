@@ -1,0 +1,589 @@
+{
+  "metadata": {
+    "module": "Compilation",
+    "duration": "1h30m",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 01 (06 pts)",
+      "total_exercise_points": "6",
+      "introduction_context": "",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "1. Écrivez une expression régulière étendue pour représenter les valeurs monétaires en dollars. Une telle valeur est exprimée sous forme de chaîne commençant par le symbole dollar $ suivi d'un nombre réel avec deux chiffres décimaux, dans lequel le symbole virgule \",\" est utilisé comme séparateur pour des milliers et le symbole point \".\" sépare la partie décimale. Le chiffre le plus significatif peut être zéro uniquement si la valeur totale est inférieure à 1.",
+          "examples": {
+            "accepted": [
+              "$0.35",
+              "$87.40",
+              "$77,888,999.11",
+              "$103,000,222.00"
+            ],
+            "rejected": [
+              "$0,342.34",
+              "$02.34",
+              "$1.000.2"
+            ]
+          },
+          "Solution": "\\$(([1-9][0-9]{0,2}(\\,[0-9]{3})*)|0)\\.[0-9]{2}",
+          "points": "02 pts",
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "2. Sur l'alphabet A = {a,b}, définir l'expression régulière de tous les mots non vides contenant un nombre pair de b.",
+          "Solution": "aa*(ba*ba*)*|a*(ba*ba*)*(ba*ba*)",
+          "points": "05 pts",
+          "level": "Metacognitive"
+        },
+        {
+          "id": "3",
+          "question_text": "3. Soit la spécification lexicale de type lex suivante :\n%%\na*b { printf(\"1\"); }\nca { printf(\"2\"); }\na*ca* { printf(\"3\"); }\n%%\nPour la chaîne d'entrée \"abcaacacaaabbaaabcaaca\", donner la sortie de cet analyseur lexical?",
+          "input_string": "abcaacacaaabbaaabcaaca",
+          "lex_rules": [
+            {
+              "pattern": "a*b",
+              "action": "printf(\"1\");"
+            },
+            {
+              "pattern": "ca",
+              "action": "printf(\"2\");"
+            },
+            {
+              "pattern": "a*ca*",
+              "action": "printf(\"3\");"
+            }
+          ],
+          "Solution": "132311132",
+          "points": "02 pts",
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 02 (05 pts)",
+      "total_exercise_points": "5",
+      "introduction_context": "Soit la grammaire G : S → AC | Bz ; A → xA | ε ; B → xB | z ; C → yC | ε",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "1. Cette grammaire n'est pas LL(1) : pourquoi en détail ?",
+          "Solution": "La grammaire G n'est pas LL(1) puisque Premier(AC) ∩ Premier(Bz) ≠ ∅.",
+          "level": "Conceptual"
+        },
+        {
+          "id": "2",
+          "question_text": "2. Donner une grammaire G' équivalente à G et qui vous semble LL(1).",
+          "Solution": "On A → xA | ε → A = x* (1) et B → xB | z → A = x*z (2). À partir de (1) et (2) on peut remplacer la règle B → xB | z par B → Az. Donc G' nécessite la factorisation et aussi la règle B → Az est inutile et doit être supprimée.",
+          "solution_grammar": [
+            "S  → AS'",
+            "A  → xA | ε",
+            "S' → C | zz",
+            "C  → yC | ε"
+          ],
+          "level": "Metacognitive"
+        },
+        {
+          "id": "3",
+          "question_text": "3. Donner la table d'analyse LL(1) de G'. Justifier en utilisant cette table que G' est une grammaire LL(1).",
+          "solution_premiers_suivants": {
+            "type": "table",
+            "headers": [
+              "Non-Terminal",
+              "Premiers",
+              "Suivants"
+            ],
+            "rows": [
+              [
+                "S",
+                "x, y, z, ε",
+                "$"
+              ],
+              [
+                "A",
+                "x, ε",
+                "z, y, $"
+              ],
+              [
+                "S'",
+                "z, y, ε",
+                "$"
+              ],
+              [
+                "C",
+                "y, ε",
+                "$"
+              ]
+            ]
+          },
+          "solution_table": {
+            "type": "table",
+            "headers": [
+              "",
+              "x",
+              "y",
+              "z",
+              "$"
+            ],
+            "rows": [
+              [
+                "S",
+                "AS'",
+                "AS'",
+                "AS'",
+                "AS'"
+              ],
+              [
+                "A",
+                "xA",
+                "ε",
+                "ε",
+                "ε"
+              ],
+              [
+                "S'",
+                "",
+                "C",
+                "zz",
+                "C"
+              ],
+              [
+                "C",
+                "",
+                "yC",
+                "",
+                "ε"
+              ]
+            ]
+          },
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_03",
+      "title": "Exercice 03 (05 pts)",
+      "total_exercise_points": "5",
+      "introduction_context": "Considérez la grammaire : S → AB ; A → aBb | e ; B → cAd | e",
+      "numbered_rules": [
+        "0) S' → S$",
+        "1) S  → AB",
+        "2) A  → aBb",
+        "3) A  → e",
+        "4) B  → cAd",
+        "5) B  → e"
+      ],
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "1. Est ce que la grammaire est LR(0) ? Justifiez votre réponse.",
+          "Solution": {
+            "type": "LR(0)",
+            "states_content": [
+              "I0:  { S'→.S$ , S→.AB , A→.aBb , A→.e , B→.cAd , B→.e }",
+              "I1:  { S'→S.$ }",
+              "I2:  { A→e. }",
+              "I3:  { S→A.B , B→.cAd , B→.e }",
+              "I4:  { A→a.Bb , B→.cAd , B→.e }",
+              "I5:  { B→e. }",
+              "I6:  { S→AB. }",
+              "I7:  { B→c.Ad , A→.aBb , A→.e }",
+              "I8:  { A→aB.b }",
+              "I9:  { B→cA.d }",
+              "I10: { A→aBb. }",
+              "I11: { B→cAd. }"
+            ],
+            "transitions": [
+              {
+                "from": "I0",
+                "symbol": "S",
+                "to": "I1"
+              },
+              {
+                "from": "I0",
+                "symbol": "A",
+                "to": "I3"
+              },
+              {
+                "from": "I0",
+                "symbol": "a",
+                "to": "I4"
+              },
+              {
+                "from": "I0",
+                "symbol": "e",
+                "to": "I2"
+              },
+              {
+                "from": "I3",
+                "symbol": "B",
+                "to": "I6"
+              },
+              {
+                "from": "I3",
+                "symbol": "c",
+                "to": "I7"
+              },
+              {
+                "from": "I3",
+                "symbol": "e",
+                "to": "I5"
+              },
+              {
+                "from": "I4",
+                "symbol": "B",
+                "to": "I8"
+              },
+              {
+                "from": "I4",
+                "symbol": "c",
+                "to": "I7"
+              },
+              {
+                "from": "I4",
+                "symbol": "e",
+                "to": "I5"
+              },
+              {
+                "from": "I7",
+                "symbol": "A",
+                "to": "I9"
+              },
+              {
+                "from": "I7",
+                "symbol": "a",
+                "to": "I4"
+              },
+              {
+                "from": "I7",
+                "symbol": "e",
+                "to": "I2"
+              },
+              {
+                "from": "I8",
+                "symbol": "b",
+                "to": "I10"
+              },
+              {
+                "from": "I9",
+                "symbol": "d",
+                "to": "I11"
+              }
+            ]
+          },
+          "solution_slr_table": {
+            "type": "table",
+            "headers": [
+              "État",
+              "a",
+              "c",
+              "b",
+              "d",
+              "e",
+              "$",
+              "S",
+              "A",
+              "B"
+            ],
+            "rows": [
+              [
+                "0",
+                "d4",
+                "",
+                "",
+                "",
+                "d2",
+                "",
+                "1",
+                "3",
+                ""
+              ],
+              [
+                "1",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "Acc",
+                "",
+                "",
+                ""
+              ],
+              [
+                "2",
+                "r3",
+                "r3",
+                "r3",
+                "r3",
+                "r3",
+                "r3",
+                "",
+                "",
+                ""
+              ],
+              [
+                "3",
+                "",
+                "d7",
+                "",
+                "",
+                "d5",
+                "",
+                "",
+                "",
+                "6"
+              ],
+              [
+                "4",
+                "",
+                "d7",
+                "",
+                "",
+                "d5",
+                "",
+                "",
+                "",
+                "8"
+              ],
+              [
+                "5",
+                "r5",
+                "r5",
+                "r5",
+                "r5",
+                "r5",
+                "r5",
+                "",
+                "",
+                ""
+              ],
+              [
+                "6",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "r1",
+                "",
+                "",
+                ""
+              ],
+              [
+                "7",
+                "d4",
+                "",
+                "",
+                "",
+                "d2",
+                "",
+                "",
+                "9",
+                ""
+              ],
+              [
+                "8",
+                "",
+                "",
+                "d10",
+                "",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "9",
+                "",
+                "",
+                "",
+                "d11",
+                "",
+                "",
+                "",
+                "",
+                ""
+              ],
+              [
+                "10",
+                "r2",
+                "r2",
+                "r2",
+                "r2",
+                "r2",
+                "r2",
+                "",
+                "",
+                ""
+              ],
+              [
+                "11",
+                "r4",
+                "r4",
+                "r4",
+                "r4",
+                "r4",
+                "r4",
+                "",
+                "",
+                ""
+              ]
+            ]
+          },
+          "points": "1.5 pt",
+          "level": "Conceptual"
+        },
+        {
+          "id": "2",
+          "question_text": "2. Simulez le calcul d'un analyseur ascendant LR(0) sur la chaîne : ecaebd",
+          "input_string": "ecaebd",
+          "solution_table": {
+            "type": "table",
+            "headers": [
+              "Pile",
+              "Chaine",
+              "Action"
+            ],
+            "rows": [
+              [
+                "$0",
+                "ecaebd$",
+                "d2"
+              ],
+              [
+                "$0e2",
+                "caebd$",
+                "r: A→e"
+              ],
+              [
+                "$0A",
+                "caebd$",
+                "Aller à 3"
+              ],
+              [
+                "$0A3",
+                "caebd$",
+                "d7"
+              ],
+              [
+                "$0A3c7",
+                "aebd$",
+                "d4"
+              ],
+              [
+                "$0A3c7a4",
+                "ebd$",
+                "d5"
+              ],
+              [
+                "$0A3c7a4e5",
+                "bd$",
+                "r: B→e"
+              ],
+              [
+                "$0A3c7a4B",
+                "bd$",
+                "Aller à 8"
+              ],
+              [
+                "$0A3c7a4B8",
+                "bd$",
+                "d10"
+              ],
+              [
+                "$0A3c7a4B8b10",
+                "d$",
+                "r: A→aBb"
+              ],
+              [
+                "$0A3c7A",
+                "d$",
+                "Aller à 9"
+              ],
+              [
+                "$0A3c7A9",
+                "d$",
+                "d11"
+              ],
+              [
+                "$0A3c7A9d11",
+                "$",
+                "r: B→cAd"
+              ],
+              [
+                "$0A3B",
+                "$",
+                "Aller à 6"
+              ],
+              [
+                "$0A3B6",
+                "$",
+                "r: S→AB"
+              ],
+              [
+                "$0S",
+                "$",
+                "Aller à 1"
+              ],
+              [
+                "$0S1",
+                "$",
+                "Accepter"
+              ]
+            ]
+          },
+          "points": "02 pt",
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_04",
+      "title": "Exercice 04 (04 pts)",
+      "total_exercise_points": "4",
+      "introduction_context": "Soit Gb la grammaire des expressions booléennes : B → B∨B | B∧B | ¬B | (B) | 0 | 1",
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "1. A l'aide d'un exemple concret montrer que cette grammaire est ambigüe.",
+          "Solution": "",
+          "note": "L'exemple concret n'est pas fourni dans le corrigé du document original.",
+          "points": "0.5 pt",
+          "level": "Conceptual"
+        },
+        {
+          "id": "2",
+          "question_text": "2. Ecrire un programme (non ambigu) en yacc permettant d'analyser et évaluer une expression booléenne.",
+          "solution_yacc_code": [
+            "%token b",
+            "%left '∨'",
+            "%left '∧'",
+            "%right '¬'",
+            "%%",
+            "L : B '\\n' { printf(\"résultat=%d\", $1); }",
+            "  ;",
+            "B : B '∨' B { if ($1 == 0 && $3 == 0) $$ = 0; else $$ = 1; }",
+            "  | B '∧' B { $$ = $1 * $3; }",
+            "  | '¬' B   { if ($2 == 1) $$ = 0; else $$ = 1; }",
+            "  | '(' B ')' { $$ = $2; }",
+            "  | '0'     { $$ = 0; }",
+            "  | '1'     { $$ = 1; }",
+            "  ;",
+            "%%",
+            "void main()",
+            "{",
+            "  yyparse();",
+            "}"
+          ],
+          "points": "3.5 pt",
+          "level": "Procedural"
+        }
+      ]
+    }
+  ]
+}

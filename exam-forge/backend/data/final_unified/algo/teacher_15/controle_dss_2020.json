@@ -1,0 +1,72 @@
+{
+  "metadata": {
+    "module": "Examen",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "title": "Questions",
+      "introduction_context": "",
+      "Question": [
+        {
+          "question_text": "Faire une comparaison entre XML et HTML.",
+          "Solution": "XML décrit la structure de données alors que HTML permet l'affichage de données. Les balises HTML sont prédéfinies (limitées) alors que les balises XML sont extensibles selon le besoin de l'utilisateur. XML ne remplace pas HTML mais ils se complètent car dans la plus part des application web, XML est utilisé pour le stockage et transfert de données alors que HTML est utilisé pour l'affichage (XML+XSLTHTML).",
+          "level": "Conceptual"
+        },
+        {
+          "question_text": "C'est quoi les entités dans les documents XML ou les DTDs, Quels sont leurs types ?",
+          "Solution": "Mécanisme qui permet de déclarer un alias vers une information qui va être réutilisé dans un XML ou une DTD\na. entité générale : utilisé dans le document XML b. entité paramètre : utilisé dans une DTD\nc. entité externe : même rôle que l'entité générale, sauf que les informations sont stockés dans un fichier externe",
+          "level": "Factual"
+        },
+        {
+          "question_text": "Qu'est-ce que ça veut dire un document XML valide ?",
+          "Solution": "bien formé + conforme à la DTD ou au schéma qui lui est associé",
+          "level": "Factual"
+        },
+        {
+          "question_text": "Faire une étude comparative entre SAX et DOM, en précisant les avantages et les inconvénients de chaque modèle.",
+          "Solution": "SAX: Rapide, Peu gourmand en mémoire, Accès séquentiel, Unidirectionnel au document\nDOM: Accès aléatoire au document, Vue hiérarchique du document, Permet de construire/modifier un document",
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "title": "Exercice 1",
+      "introduction_context": "",
+      "Question": [
+        {
+          "question_text": "Parmi les documents suivants, lesquels sont valides (conformes à leur DTD), lesquels ne le sont pas. Pour chaque document non valide, expliquez pourquoi il ne l'est pas.",
+          "Solution": "Doc A : Valide.\nDoc B : n'est pas valide. Selon la DTD, puisque l'élément <publisher> contient un élément fils <name> par contre selon le Doc B l'élément <publisher> est de type (#PCDATA)\nDoc C : n'est pas valide, manque de l'attribut id dans l'élément <title>\nDoc D : n'est pas valide, deux occurrences de la balise <title> et il y a une erreur dans la déclaration d'un élément mixte <document>",
+          "level": "Conceptual"
+        },
+        {
+          "question_text": "Modifier les DTDs pour que les documents deviennent valides (sans utiliser de ANY)",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "title": "Exercice 2",
+      "introduction_context": "Ecrire une feuille de style XSLT permettant de passer du document carte1.xml à card1.xml",
+      "Question": [
+        {
+          "question_text": "Ecrire une feuille de style XSLT permettant de passer du document carte1.xml à card1.xml",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "title": "Exercice 3",
+      "introduction_context": "Nous voulons définir une grammaire pour le document XML donné ci-dessous, en utilisant le Schéma XML.\n\n<?xml version=\"1.0\" encoding=\"utf-8\"?> <book isbn=\"0836217462\"> <title> Being a Dog Is a Full-Time Job </title> <author>Charles M. Schulz</author> <character> <name>Snoopy</name> <friend-of>Peppermint Patty</friend-of> <since>1950-10-04</since> <qualification> extroverted beagle </qualification> </character> <character> <name>Peppermint Patty</name> <since>1966-08-22</since> <qualification>bold, brash and tomboyish</qualification> </character> </book>",
+      "Question": [
+        {
+          "question_text": "Donner la grammaire du schéma XML utilisée pour instancier le document XML donné tout en tenant en compte les contraintes suivantes :\n- Le titre (title), l'auteur (author), le nom du personne (name) ne doivent pas dépasser 40 caractères;\n- Un personnage (Character) peut avoir plus d'un ami (friend-of), les descriptions de amis ne doivent pas dépasser 40 caractères;\n- La balise (since) est de type date;\n- L'ISBN de livre est composé de 10 chiffres (chiffres).",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    }
+  ]
+}

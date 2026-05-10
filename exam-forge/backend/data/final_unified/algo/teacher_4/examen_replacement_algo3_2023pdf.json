@@ -1,0 +1,93 @@
+{
+  "metadata": {
+    "module": "Algorithmique et Structures de données",
+    "duration": "",
+    "language": "french"
+  },
+  "exam_header": {
+    "raw_text": "Examen de Remplacement (26-01-2023) Dans les deux premiers exercices, on suppose l’existence des opérations standards définie sur une file d’attente Fi d’entiers comme suit: Initi() ; qui initialise la file, Enfileri (e :entier) qui enfile l’élément e dans la file, Défileri() qui défile l’élément de la tête, FileVidei() :Bool qui teste si la file est vide,ValTetei() :Entier, qui consulte l’élément de la tête, et ValQueuei() :Entier qui consulte l’élément de la queue. On suppose aussi l’existence des opérations standards sur une pile d’entiers Pi comme suit: Initi() ; qui initialise la pile, Empileri(e :entier) qui empile l’élément e dans la pile, Dépileri() qui dépile l’élément du sommet, PileVidei() :Bool qui teste si la file est vide,ValSommeti() :Entier, qui consulte l’élément du sommet.",
+    "language": "French"
+  },
+  "exercises": [
+    {
+      "exercise_title": "Exercice 1",
+      "points": null,
+      "introduction_context": "",
+      "Question": [
+        {
+          "id": "1",
+          "introduction_context": " Dans les deux premiers exercices, on suppose l’existence des opérations standards définie sur une file d’attente Fi d’entiers comme suit: Initi() ; qui initialise la file, Enfileri (e :entier) qui enfile l’élément e dans la file, Défileri() qui défile l’élément de la tête, FileVidei() :Bool qui teste si la file est vide,ValTetei() :Entier, qui consulte l’élément de la tête, et ValQueuei() :Entier qui consulte l’élément de la queue. On suppose aussi l’existence des opérations standards sur une pile d’entiers Pi comme suit: Initi() ; qui initialise la pile, Empileri(e :entier) qui empile l’élément e dans la pile, Dépileri() qui dépile l’élément du sommet, PileVidei() :Bool qui teste si la pile est vide,ValSommeti() :Entier, qui consulte l’élément du sommet.",
+          "question_text": "Soit P1 et P2 deux piles. Proposer une procédure récursive qui superpose la pile P2 à P1 (qui met P2 sur P1, en gardant l’ordre des éléments dans les deux piles). La procédure doit utiliser uniquement les opérations standards sur les piles déjà mentionnées. Si des piles temporaires sont à utiliser alors il faut utiliser le minimum possible de ces piles à nommer Pj(j>=2). L’entête doit être comme suit: Procedure ConcaténerPile;",
+          "subquestions": [],
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "Soit la liste suivante de valeurs 6, 2, 7 et 8, on veut générer le TAS qui contient cette liste de valeurs. Montrer tous les états par lesquels passe le TAS.",
+          "subquestions": [],
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "exercise_title": "Exercice 2",
+      "points": null,
+      "introduction_context": "1. Dans la suite, les algorithmes demandés ne peuvent utiliser que les operations standards déjà mentionnées et donc n’ont pas accès à la représentation interne de la file (les pointeurs).",
+      "Question": [
+        {
+          "id": "1.1",
+          "question_text": "Proposer une Fonction « Max1() :Entier ; » qui permet de trouver le maximum de la file non triée F1. A la fin de l’exécution de Max1(), la file F1doit rester inchangée. Si des files temporaires sont à utilise alors il faut utiliser le minimum possible de ces files à nommer Fj(j>=2).",
+          "subquestions": [],
+          "level": "Procedural"
+        },
+        {
+          "id": "1.2",
+          "question_text": "En exploitant seulement les opérations standards sur F1 déjà mentionnées et en supposant, cette fois ci, que la fonction Max1() :Entier retrouve et supprime à chaque fois l’élément max de la file F1, proposer une procédure itérative « TrierDecFile1() ; » qui permet de trier par ordre décroissant la file F1. Si des files temporaires sont à utilise alors il faut utiliser le minimum possible de ces files à nommer Fj(j>=2).",
+          "subquestions": [],
+          "level": "Procedural"
+        },
+        {
+          "id": "2",
+          "question_text": "Soit la structure arbre A binaire équilibré, dont l’exemple est présenté ci-dessous :",
+          "content_blocks": [
+            {
+              "type": "image",
+              "description": "Un arbre binaire équilibré A. La racine contient la valeur (7). Elle possède deux fils : à gauche le nœud (8) et à droite le nœud (6). Le nœud (8) possède deux fils : (9) à gauche et (20) à droite. Le nœud (6) possède deux fils : (0) à gauche et (3) à droite.",
+              "extracted_text": "7, 8, 6, 9, 20, 0, 3"
+            }
+          ],
+          "subquestions": [
+            {
+              "id": "2.1",
+              "question_text": "En supposant que le type de pointeur de la racine de cet arbre est nommé TPointeur. Proposer la déclaration nécessaire de cette structure en utilisant les pointeurs.",
+              "level": "Procedural"
+            },
+            {
+              "id": "2.2",
+              "question_text": "Ecrire une procédure qui parcourt l’arbre binaire complet en largeur et récupère les valeurs dans une file d’entiers F1. Le parcours en largeur peut utiliser une file d’attente F0. L’entête doit être comme suit: Procédure ArbreToFile(R: TPointeur);",
+              "level": "Procedural"
+            },
+            {
+              "id": "2.3",
+              "question_text": "On considère qu’un arbre binaire est trié en ordre décroissant si son parcours en largeur génère une suite de valeurs triées en ordre décroissant, comme l’arbre ci-dessous.",
+              "content_blocks": [
+                {
+                  "type": "image",
+                  "description": "Un arbre binaire équilibré trié par parcours en largeur (ordre décroissant). La racine est (20). Le niveau 1 contient (9) à gauche et (8) à droite. Le niveau 2 contient les fils de (9) : (7) à gauche et (6) à droite, et les fils de (8) : (3) à gauche et (0) à droite. La suite de valeurs en largeur est : 20, 9, 8, 7, 6, 3, 0.",
+                  "extracted_text": "20, 9, 8, 7, 6, 3, 0"
+                }
+              ],
+              "level": "Factual"
+            },
+            {
+              "id": "2.4",
+              "question_text": "Si on suppose qu’on dispose d’une opération ConstArbrei(R: TPointeur) qui crée un arbre binaire équilibré de racine R depuis une file d’attente d’entiers Fi(tel que l’élément de la tête de Fi sera mis dans la racine et ainsi de suite), proposer un algorithme permettant de trier un arbre binaire dont la racine est R en exploitant une file d’entiers F1. L’entête doit être comme suit: Procédure TrierArbre(R: TPointeur);",
+              "level": "Procedural"
+            }
+          ],
+          "level": "Factual"
+        }
+      ]
+    }
+  ]
+}

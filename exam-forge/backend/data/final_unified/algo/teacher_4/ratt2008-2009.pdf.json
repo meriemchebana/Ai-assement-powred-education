@@ -1,0 +1,248 @@
+{
+  "metadata": {
+    "module": "Algorithmique et Structures de données",
+    "duration": "14h50-16h20",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Exercice_1",
+      "title": "Exercice 1",
+      "total_exercise_points": "12 Pts",
+      "introduction_context": "On convient de représenter les polynômes par des listes linéaires chaînées triées dans l'ordre décroissant des puissances où chaque maillon contient un exposant et le cœfficient correspondant.",
+      "diagram": {
+        "preceding_text": "Exemple: Le polynôme P(x) = 3x⁵ + 2x³ – 6x² + x + 8 est représenté par la liste P suivante :",
+        "description": "A horizontal linked list labeled 'P'. It consists of 5 rectangular nodes. Each node is divided into three parts: Coefficient, Exponent, and a Pointer field. Node 1: [3 | 5 | ->], Node 2: [2 | 3 | ->], Node 3: [-6 | 2 | ->], Node 4: [1 | 1 | ->], Node 5: [8 | 0 | /].",
+        "precise_location": "Page 1 - Middle left column"
+      },
+      "primitives_note": "N.B : Utiliser les primitives suivantes: Aff_ValC(P,c) pour changer le coefficient d’un maillon, Aff_ValE(P,e) pour changer l’exposant d’un maillon, ValC(P) pour lire le coefficient d’un maillon, ValE(P) pour lire l’exposant d’un maillon.",
+      "Question": [
+        {
+          "id": "1.1",
+          "points": "1",
+          "level": "Procedural",
+          "question_text": "1. fonction Degré(P :Pointeur(TMaillon)) :entier qui retourne le degré du polynôme P donné.",
+          "Solution": [
+            "fonction Degré(P :Pointeur(TMaillon)) :entier ;",
+            "Debut",
+            " Si P=Nil alors Degré ← 0",
+            " Sinon Degré ← ValE(P)",
+            "FSi",
+            "Fin ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.2",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "2. fonction PValeur(P :Pointeur(TMaillon), x : reel) :reel qui retourne la valeur du polynôme P pour x donné. (utiliser x ^ y = xʸ)",
+          "Solution": [
+            "fonction PValeur(P :Pointeur(TMaillon), x : reel) :reel",
+            "Var S : reel ;",
+            "Debut",
+            " S←0 ;",
+            " TQ P ≠ Nil Faire",
+            "  S ← S + ValC(P)*(x ^ ValE(P));",
+            "  P ← Suivant(P);",
+            " FTQ",
+            " PValeur ← S ;",
+            "Fin ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.3",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "3. fonction Somme(P1,P2 :Pointeur(TMaillon)): Pointeur(TMaillon)) qui retourne la somme des deux polynômes P1 et P2.",
+          "Solution": [
+            "fonction Somme(P1,P2 :Pointeur(TMaillon)): Pointeur(TMaillon) ;",
+            "Var Tete_Sm, Q, P, P12 : Pointeur(TMaillon);",
+            "Debut",
+            " Tete_Sm ← Nil ; // tête de la liste somme",
+            " Q ← Nil ; // dernier élément de la liste somme ",
+            " TQ P1 ≠ Nil et P2 ≠ Nil Faire",
+            "  Allouer (P) ; Aff_Adr(P,Nil) ;",
+            "  Si Tete_Sm=Nil alors Tete_Sm ← P ;",
+            "  Sinon Aff_Adr(Q,P) ;",
+            "  FSi",
+            "  Q ← P;",
+            "  Si ValE(P1) = ValE(P2) alors",
+            "   Aff_ValE(P, ValE(P1)) ; Aff_ValC(P, ValC(P1) + ValC(P2)) ;",
+            "   P1 ← Suivant(P1); P2 ← Suivant(P2);",
+            "  Sinon",
+            "   Si ValE(P1) > ValE(P2) alors",
+            "    Aff_ValE(P, ValE(P1)) ; Aff_ValC(P, ValC(P1)) ;",
+            "    P1 ← Suivant(P1);",
+            "   Sinon",
+            "    Aff_ValE(P, ValE(P2)) ; Aff_ValC(P, ValC(P2)) ;",
+            "    P2 ← Suivant(P2);",
+            "   FSi",
+            "  FSi",
+            " FTQ ;",
+            " Si P1 ≠ Nil alors P12 ← P1 // P12 pointe l’éventuel reste de l’une des",
+            " Sinon P12 ← P2 ; // deux listes",
+            " FSi",
+            " TQ P12 ≠ Nil Faire // recopier le reste de la liste",
+            "  Allouer (P) ; Aff_Adr(P,Nil) ;",
+            "  Si Tete_Sm=Nil alors Tete_Sm ← P ;",
+            "  Sinon Aff_Adr(S,P) ;",
+            "  FSi",
+            "  Q ← P;",
+            "  Aff_ValE(P, ValE(P12)) ; Aff_ValC(P, ValC(P12)) ;",
+            "  P12 ← Suivant(P12);",
+            " FTQ",
+            " Somme ← Tete_Sm ;",
+            "Fin ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.4",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "4. fonction Dérivé(P:Pointeur(TMaillon)): Pointeur(TMaillon)) qui retourne le polynôme égal à la dérivée du polynôme P.",
+          "Solution": [
+            "fonction Dérivé(P:Pointeur(TMaillon)): Pointeur(TMaillon))",
+            "Var Tete_D, Q, P1: Pointeur(TMaillon);",
+            "Debut",
+            "Tete_D ← Nil ;// tête de la liste dérivée",
+            "Q ← Nil ; // dernier élément de la liste dérivé",
+            "TQ P ≠ Nil et ValE(P) ≠ 0 Faire",
+            "Allouer (P1) ; Aff_Adr(P1,Nil) ;",
+            "Si Tete_D = Nil alors Tete_D ← P1 ;",
+            "Sinon Aff_Adr(Q,P1) ;",
+            "FSi",
+            "Q ← P1;",
+            "Aff_ValC(P1, ValC(P) * ValE(P)) ;",
+            "Aff_ValE(P1, ValE(P) - 1) ;",
+            "P ← Suivant(P);",
+            "FTQ ;",
+            "Dérivé ← Tete_D ;",
+            "Fin ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "1.5",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "5. fonction Intégrale(P:Pointeur(TMaillon)): Pointeur(TMaillon)) qui retourne le polynôme égal à l’intégrale du polynôme P.",
+          "Solution": [
+            "fonction Intégrale(P:Pointeur(TMaillon)): Pointeur(TMaillon))",
+            "Var Tete_Int, Q, P1: Pointeur(TMaillon);",
+            "Debut",
+            "Tete_Int ← Nil ;  // tête de la liste intégrale",
+            "Q ← Nil ; // dernier élément de la liste intégrale",
+            "TQ P ≠ Nil Faire",
+            "Allouer (P1) ; Aff_Adr(P1,Nil) ;",
+            "Si Tete_Int = Nil alors Tete_Int ← P1 ;",
+            "Sinon Aff_Adr(Q,P1) ;",
+            "FSi",
+            "Q ← P1;",
+            "Aff_ValC(P1, ValC(P) / (ValE(P) + 1)) ;",
+            "Aff_ValE(P1, ValE(P) + 1) ;",
+            "P ← Suivant(P);",
+            "FTQ ;",
+            " // Ajouter une constante C (supposons 1) Allouer (P1) ; Aff_Adr(P1,Nil) ;",
+            "Si Tete_Int = Nil alors Tete_Int← P1 ;",
+            "Sinon Aff_Adr(Q,P1) ;",
+            "FSi",
+            "Aff_ValC(P1, 1) ; Aff_ValE(P1, 0) ;",
+            "Intégrale ← Tete_Int;",
+            "Fin ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        }
+      ]
+    },
+    {
+      "id": "Exercice_2",
+      "title": "Exercice 2",
+      "total_exercise_points": "3 Pts",
+      "Question": [
+        {
+          "id": "2.1",
+          "points": "1.5",
+          "level": "Procedural",
+          "question_text": "1. Dessiner le tas obtenu en insérant les éléments de la liste suivante dans l’ordre d’arrivée: 10, 5, 12, 8, 7, 1, 2, 4, 6.",
+          "Solution": {
+            "description": "A Max-Heap binary tree. Level 0 (root): 12. Level 1: Left child 8, Right child 10. Level 2: Node 8 has children 6 (left) and 7 (right); Node 10 has children 1 (left) and 2 (right). Level 3: Node 6 has children 4 (left) and 5 (right).",
+            "precise_location": "Page 3 - Right column"
+          },
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "2.2",
+          "points": "1",
+          "level": "Procedural",
+          "question_text": "2. Donner le tableau représentant le tas statique correspondant.",
+          "Solution": "Représentation dans un tableau: 12 | 8 | 10 | 6 | 7 | 1 | 2 | 4 | 5",
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "2.3",
+          "points": "0.5",
+          "level": "Procedural",
+          "question_text": "3. Dessiner le tas après un retrait.",
+          "Solution": {
+            "description": "Max-Heap after deletion of root 12. Level 0 (root): 10. Level 1: Left child 8, Right child 5. Level 2: Node 8 has children 6 (left) and 7 (right); Node 5 has children 1 (left) and 2 (right). Level 3: Node 6 has child 4 (left).",
+            "precise_location": "Page 3 - Bottom right"
+          },
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        }
+      ]
+    },
+    {
+      "id": "Exercice_3",
+      "title": "Exercice 3",
+      "total_exercise_points": "5 Pts",
+      "introduction_context": "On dit qu’un arbre de recherche binaire est équilibré si pour tout nœud de l’arbre, la différence entre la hauteur du sous-arbre gauche et du sous-arbre droit est d’au plus égale à 1.",
+      "Question": [
+        {
+          "id": "3.1",
+          "points": "2",
+          "level": "Procedural",
+          "question_text": "1. Ecrite la fonction Hauteur(R: Pointeur(TNoeud)): Entier qui retourne la hauteur de l’arbre de recherche binaire de racine R.",
+          "Solution": [
+            "fonction Hauteur(R: Pointeur(TNoeud)): Entier",
+            "Debut",
+            "Si R = Nil alors Hauteur ← 0",
+            "Sinon Hauteur ← 1 + Max ( Hauteur (FG(R)) , Hauteur(FD(R)) )",
+            "FSi",
+            "Fin ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        },
+        {
+          "id": "3.2",
+          "points": "3",
+          "level": "Procedural",
+          "question_text": "2. Ecrire la fonction Equilibré(R : Pointeur(TNoeud)) : Booleen qui retourne vrai si l’arbre de recherche binaire de racine R est équilibré et faux sinon.",
+          "Solution": [
+            "fonction Equilibré(R : Pointeur(TNoeud)) : Booleen",
+            "Debut",
+            "Si R = Nil alors Equilibré ← Vrai",
+            "Sinon",
+            "    Equilibré ← (Abs(Hauteur (FG(R)) - Hauteur(FD(R)) ) ≤ 1) et",
+            "    Equilibré(FG(R)) et Equilibré(FD(R)) ;",
+            "FSi",
+            "Fin ;"
+          ],
+          "model_evaluation_score": "",
+          "model_feedback_comments": ""
+        }
+      ]
+    }
+  ]
+}

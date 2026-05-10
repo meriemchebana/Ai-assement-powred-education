@@ -1,0 +1,167 @@
+{
+  "metadata": {
+    "module": "Système d'exploitation II",
+    "duration": "",
+    "language": "french"
+  },
+  "exercises": [
+    {
+      "id": "Questions_de_cours",
+      "title": "Questions de cours (4 points)",
+      "total_exercise_points": "4",
+      "introduction_context": null,
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "Citer les conditions de l'exclusion mutuelle.",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "2",
+          "question_text": "Donnez la structure d'un moniteur de synchronisation et dit qu'est-ce qu'un moniteur offre comme garantie ?",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "3",
+          "question_text": "Donner les différences entre les méthodes de détection et de prévention d'interblocage.",
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_01",
+      "title": "Exercice 1 (8 points)",
+      "total_exercise_points": "8",
+      "introduction_context": null,
+      "Question": [
+        {
+          "id": "A",
+          "question_text": "On considère un ensemble de six tâches séquentielles {A, B, C, D, E, F}. La tâche A doit précéder les tâches B, C, D. Les tâches B et C doivent précéder la tâche E. Les tâches D et E doivent précéder la tâche F.",
+          "sub_questions": [
+            {
+              "id": "A.1",
+              "question_text": "Donner le graphe de précédence de ces tâches.",
+              "Solution": null,
+              "level": "Procedural"
+            },
+            {
+              "id": "A.2",
+              "question_text": "Réaliser la synchronisation de ces tâches en utilisant les sémaphores.",
+              "Solution": null,
+              "level": "Procedural"
+            }
+          ],
+          "Solution": null,
+          "level": "Procedural"
+        },
+        {
+          "id": "B",
+          "question_text": "Soit N processus Pi (i=1..N) et un processus Ps. Les processus Pi (i=1..N) remplissent une zone tampon pouvant contenir M messages, un seul à la fois étant autorisé à déposer son message. Le processus Pi qui remplit la dernière case du tampon active le processus Ps qui fait alors l'impression de tous les messages déposés dans le tampon. Durant cette impression, les processus Pi (i=1..N) ne sont pas autorisés à accéder au tampon.",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "*B.1",
+          "question_text": "-Ecrire les algorithmes des processus Pi (i=1..N) et Ps.",
+          "Solution": null,
+          "level": "Procedural"
+        }
+      ]
+    },
+    {
+      "id": "Exercice_02",
+      "title": "Exercice 2 (8 points)",
+      "total_exercise_points": "8",
+      "introduction_context": "Considérons un système où nous avons trois processus en cours et qui dispose de 4 types de ressources : 4 dérouleurs de bandes, 2 tables traçantes, 3 imprimantes et un lecteur de CD ROM. Les ressources détenues et demandées au MAX par les processus sont indiquées par les matrices A et C.",
+      "banker_table": {
+        "allocation": {
+          "headers": [
+            "",
+            "RA",
+            "RB",
+            "RC",
+            "RD"
+          ],
+          "rows": [
+            [
+              "P1",
+              "0",
+              "0",
+              "1",
+              "0"
+            ],
+            [
+              "P2",
+              "2",
+              "0",
+              "0",
+              "1"
+            ],
+            [
+              "P3",
+              "0",
+              "1",
+              "2",
+              "0"
+            ]
+          ]
+        },
+        "max": {
+          "headers": [
+            "",
+            "RA",
+            "RB",
+            "RC",
+            "RD"
+          ],
+          "rows": [
+            [
+              "P1",
+              "2",
+              "0",
+              "1",
+              "1"
+            ],
+            [
+              "P2",
+              "3",
+              "0",
+              "1",
+              "1"
+            ],
+            [
+              "P3",
+              "2",
+              "2",
+              "2",
+              "0"
+            ]
+          ]
+        }
+      },
+      "Question": [
+        {
+          "id": "1",
+          "question_text": "Donner le contenu de la matrice distance ?",
+          "Solution": null,
+          "level": "Factual"
+        },
+        {
+          "id": "2",
+          "question_text": "Montrer que cet état est un état sain ?",
+          "Solution": null,
+          "level": "Conceptual"
+        },
+        {
+          "id": "3",
+          "question_text": "Si une demande du processus p1 (2,0,0,0) arrive, doit on la satisfaire immédiatement ?",
+          "Solution": null,
+          "level": "Conceptual"
+        }
+      ]
+    }
+  ]
+}
