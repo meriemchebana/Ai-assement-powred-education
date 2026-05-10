@@ -1,6 +1,0 @@
-\babel@toc {english}{}\relax 
-\contentsline {figure}{\numberline {1}{\ignorespaces UML Component Diagram: four-layer architecture of ExamGen. Data flows top-to-bottom during parsing and bottom-to-top during generation.}}{10}{figure.caption.1}%
-\contentsline {figure}{\numberline {2}{\ignorespaces SD1: PDF upload and \texttt {docParser} five-stage IDP pipeline.}}{12}{figure.caption.2}%
-\contentsline {figure}{\numberline {3}{\ignorespaces SD2: Exam generation with hybrid RAG retrieval and independent post-generation evaluation.}}{13}{figure.caption.3}%
-\contentsline {figure}{\numberline {4}{\ignorespaces CD1: \texttt {docParser} data schema hierarchy (\texttt {Exam} $\supset $ \texttt {Exercise} $\supset $ \texttt {Question}).}}{14}{figure.caption.4}%
-\contentsline {figure}{\numberline {5}{\ignorespaces CD2: Main system components and their dependencies.}}{15}{figure.caption.5}%

@@ -1,7 +1,0 @@
-\babel@toc {english}{}\relax 
-\contentsline {table}{\numberline {1}{\ignorespaces Comparison of ExamGen with reference systems.}}{7}{table.1}%
-\contentsline {table}{\numberline {2}{\ignorespaces Dataset statistics after \texttt {docParser} processing.}}{16}{table.2}%
-\contentsline {table}{\numberline {3}{\ignorespaces \texttt {docParser} processing results (137 input documents).}}{22}{table.3}%
-\contentsline {table}{\numberline {4}{\ignorespaces Bloom's level distribution (704 questions).}}{22}{table.4}%
-\contentsline {table}{\numberline {5}{\ignorespaces Post-generation evaluator results (120 sampled questions).}}{23}{table.5}%
-\contentsline {table}{\numberline {6}{\ignorespaces Retrieval configuration comparison on 50 held-out queries.}}{24}{table.6}%
